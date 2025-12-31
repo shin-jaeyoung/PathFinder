@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+
     private StateMachine<Player> stateMachine;
 
 
@@ -40,5 +41,14 @@ public class Player : MonoBehaviour
 
     private void Update() => stateMachine.Update();
     private void FixedUpdate() => stateMachine.FixedUpdate();
+
+    public void FlipSprite(float xInput)
+    {
+        if (xInput == 0) return;
+
+        float yRotation = (xInput > 0) ? 180f : 0f;
+
+        transform.rotation = Quaternion.Euler(0, yRotation, 0);
+    }
 
 }

@@ -13,12 +13,16 @@ public class PlayerController : MonoBehaviour
     {
         if (player == null) return;
         if (player.StateMachine == null)return;
-        Debug.Log("여기도 못오나?");
+        
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
         player.InputVec = input.normalized;
         
- 
+        if(input.x !=0)
+        {
+            player.FlipSprite(input.x);
+        }
+
         if (input.x != 0 || input.y != 0)
         {
             player.StateMachine.ChangeState(player.MoveState);
