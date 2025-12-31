@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class PlayerStatusSystem
 {
     private Dictionary<PlayerStatType, float> stat;
@@ -27,6 +28,7 @@ public class PlayerStatusSystem
         stat.Add(PlayerStatType.Armor, 0);
         stat.Add(PlayerStatType.SPEED, 2.5f);
         stat.Add(PlayerStatType.MaxHp, 100);
+
     }
     public void AddStat(PlayerStatType type, int value)
     {
