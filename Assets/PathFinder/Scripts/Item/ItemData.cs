@@ -8,6 +8,8 @@ public struct ItemData
     [SerializeField]
     private int id;
     [SerializeField]
+    private ItemType type;
+    [SerializeField]
     private Sprite sprite;
     [SerializeField]
     private string name;
@@ -19,14 +21,21 @@ public struct ItemData
 
     //property
     public Sprite Sprite => sprite;
+    public ItemType Type => type;
     public string Name => name;
     public string Description => description;
     public int Price => price;
 }
 
-public abstract class Item : ScriptableObject
+public abstract class Item : ScriptableObject ,ISellable
 {
     [SerializeField]
     private ItemData data;
     
+    public ItemData Data => data;
+
+    public int GetPrice()
+    {
+        return data.Price;
+    }
 }
