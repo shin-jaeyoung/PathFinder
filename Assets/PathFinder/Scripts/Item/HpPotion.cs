@@ -3,14 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HpPotion :MonoBehaviour ,IUseable
+public class HpPotion : MonoBehaviour, IUseable
 {
     [SerializeField]
     private ItemData data;
 
-    // value는 %로 생각 
+    [Header("Initial")]
     [SerializeField]
-    private float value = 0.2f;
+    float initialHealMount = 0.2f;
+    [Header("Real")]
+    [SerializeField]
+    private float healMount = 0.2f;
     [SerializeField]
     private float generateTime;
     [SerializeField]
@@ -21,50 +24,80 @@ public class HpPotion :MonoBehaviour ,IUseable
     private int curCount;
     private int maxCount;
 
+    //property
+    public ItemData Data => data;
+    public float HealMount => healMount;
+    public int CurCount => curCount;
+    public bool IsCoolTime => isCoolTime;
+
+    //deligate
     public Action OnChanged;
 
+    private void Start()
+    {
+        maxCount = 5;
+        curCount = maxCount;
+        StartCoroutine(PotionGenerate());
+    }
+    private void OnEnable()
+    {
+        if (GameManager.instance!= null && GameManager.instance.Player != null)
+        {
+            GameManager.instance.Player.LevelSystem.OnLevelChanged += Upgrade;
+        }
+    }
+    private void OnDisable()
+    {
+        if (GameManager.instance!= null && GameManager.instance.Player != null)
+        {
+            GameManager.instance.Player.LevelSystem.OnLevelChanged -= Upgrade;
+        }
+    }
     public void Use()
     {
-        if(curCount>0)
+        if (curCount > 0 && !isCoolTime)
         {
-            if (!isCoolTime)
-            {
-                curCount--;
-                Effect();
-                isCoolTime = true;
-                OnChanged?.Invoke();
-            }
-            else
-            {
-                Debug.Log("포션쿨타임");
-            }
+            curCount--;
+            Effect();
+            isCoolTime = true;
+            StartCoroutine(PotionCooltime());
+            OnChanged?.Invoke();
         }
         else
         {
-            Debug.Log("포션부족");
+            Debug.Log(isCoolTime? "포션쿨타임" : "포션부족");
         }
     }
     public void Effect()
     {
-        GameManager.instance.Player.StatusSystem.Heal(value * GameManager.instance.Player.StatusSystem.Stat[PlayerStatType.MaxHp]);
+        GameManager.instance.Player.StatusSystem.Heal(healMount * GameManager.instance.Player.StatusSystem.Stat[PlayerStatType.MaxHp]);
     }
-
+    public void Upgrade()
+    {
+        float addValue = 0.01f * GameManager.instance.Player.LevelSystem.Level;
+        healMount = initialHealMount + addValue;
+    }
     public IEnumerator PotionGenerate()
     {
         WaitForSeconds time = new WaitForSeconds(generateTime);
-        while(curCount<maxCount)
+        while (true)
         {
-            yield return time;
-            curCount++;
+            if (curCount < maxCount)
+            {
+                yield return time;
+                curCount++;
+                OnChanged?.Invoke();
+            }
+            else
+            {
+                yield return null;
+            }
         }
+
     }
     public IEnumerator PotionCooltime()
     {
-        while (isCoolTime)
-        { 
-            yield return new WaitForSeconds(coolTime);
-            isCoolTime = false;
-        }
-
+        yield return new WaitForSeconds(coolTime);
+        isCoolTime = false;
     }
 }
