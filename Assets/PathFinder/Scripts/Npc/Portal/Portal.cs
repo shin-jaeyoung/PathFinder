@@ -1,0 +1,27 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public abstract class Portal : MonoBehaviour , IInteractable
+{
+    [SerializeField]
+    protected Transform arrival;
+
+
+
+    public void Interact(Player player)
+    {
+        Teleport(player);
+    }
+
+    public abstract void Teleport(Player player);
+    protected void ChangeScene(SceneType sceneType)
+    {
+        if (GameManager.instance != null && GameManager.instance.Player != null)
+        {
+            SceneManager.LoadScene((int)sceneType);
+            GameManager.instance.SetScene(sceneType);
+        }
+    }
+}

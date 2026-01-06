@@ -9,7 +9,6 @@ public class PlayerMoveState : PlayerStateBase
 {
     public override void Enter() 
     { 
-        Debug.Log("Move상태 진입");
         owner.Animator.SetBool("Move", true);
     }
     public override void Exit()
@@ -19,7 +18,9 @@ public class PlayerMoveState : PlayerStateBase
 
     public override void FixedUpdate()
     {
-        owner.Rb.velocity = owner.InputVec * owner.Speed;
+     
+        if (!owner.StatusSystem.Stat.ContainsKey(PlayerStatType.SPEED)) return;
+        owner.Rb.velocity = owner.InputVec * owner.StatusSystem.Stat[PlayerStatType.SPEED];
     }
 }
 
@@ -28,7 +29,6 @@ public class PlayerIdleState : PlayerStateBase
 {
     public override void Enter()
     {
-        Debug.Log("Idle상태 진입");
         owner.Rb.velocity = Vector2.zero;
     }
 

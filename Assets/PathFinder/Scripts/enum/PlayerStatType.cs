@@ -13,4 +13,5 @@ public enum PlayerStatType
     Armor,
     SPEED,
     MaxHp,
+    CurHp,
 }
