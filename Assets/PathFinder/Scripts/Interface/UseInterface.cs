@@ -13,8 +13,17 @@ public interface IUseable
 {
     public void Use();
 }
+public interface ISellable
+{
+    public int GetPrice();
+}
+public interface IMultiSellable :ISellable
+{
+    public int GetTotalPrice(int count);
+}
 //NPC
 public interface IInteractable
 {
     public void Interact(Player player);
 }
+

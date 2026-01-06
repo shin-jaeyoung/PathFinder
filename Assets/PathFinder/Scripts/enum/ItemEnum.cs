@@ -8,3 +8,12 @@ public enum ArmorType
     Armor,
     Shoes,
 }
+
+public enum ItemType
+{
+    Weapon,
+    Armor,
+    Consumable,
+    Extra,
+    Hidden,
+}
