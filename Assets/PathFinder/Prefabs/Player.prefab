@@ -429,6 +429,7 @@ GameObject:
   - component: {fileID: 7327293282767061968}
   - component: {fileID: 2593350674547944379}
   - component: {fileID: 3561832410165255505}
+  - component: {fileID: 2779743018895666401}
   - component: {fileID: 6770090569558333613}
   - component: {fileID: 8045792580080694468}
   m_Layer: 5
@@ -477,7 +478,7 @@ MonoBehaviour:
     maxExp: 100
     levelPoint: 0
   statusSystem:
-    stats: {fileID: 0}
+    currenStats: []
   animator: {fileID: 2571286699308495456}
 --- !u!114 &2593350674547944379
 MonoBehaviour:
@@ -3563,6 +3564,29 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 4c70df3312bb83346a1bf065b30d3467, type: 2}
   - {fileID: 7400000, guid: 1ef525d53ae254f7d82ef364ced85490, type: 2}
   - {fileID: 7400000, guid: fabe4f140fdb9cb448bc941c7c93e8b6, type: 2}
+--- !u!114 &2779743018895666401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951564703607287117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c3a430ec5d17da4588fdc5ba3ce53f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    id: 0
+    sprite: {fileID: 0}
+    name: "\uCDA9\uC804\uC2DD HP\uD3EC\uC158"
+    description: 
+    price: 0
+  initialHealMount: 0.2
+  healMount: 0.2
+  generateTime: 15
+  coolTime: 8
+  isCoolTime: 0
 --- !u!50 &6770090569558333613
 Rigidbody2D:
   serializedVersion: 4

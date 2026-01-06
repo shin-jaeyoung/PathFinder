@@ -21,6 +21,7 @@ public class HpPotion : MonoBehaviour, IUseable
     [SerializeField]
     private bool isCoolTime;
 
+    [SerializeField]
     private int curCount;
     private int maxCount;
 

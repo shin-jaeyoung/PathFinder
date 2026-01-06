@@ -20,8 +20,16 @@ public class PlayerController : MonoBehaviour
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
         player.InputVec = input.normalized;
-        
-        if(input.x !=0)
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (player.StatusSystem.Stat[PlayerStatType.CurHp] > 0)
+            {
+                player.Potion.Use();
+            }
+        }
+
+        if (input.x !=0)
         {
             player.FlipSprite(input.x);
         }

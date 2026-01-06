@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -19,7 +20,7 @@ public class Player : MonoBehaviour
 
 
     private StateMachine<Player> stateMachine;
-
+    private HpPotion potion;
 
 
     public Vector2 InputVec { get; set; }
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
     public PlayerLevelSystem LevelSystem => levelSystem;
     public PlayerStatusSystem StatusSystem => statusSystem;
     public StateMachine<Player> StateMachine => stateMachine;
+    public HpPotion Potion => potion;
 
     public PlayerIdleState IdleState = new PlayerIdleState();
     public PlayerMoveState MoveState = new PlayerMoveState();
@@ -46,7 +48,7 @@ public class Player : MonoBehaviour
         dieState.Setup(this, StateMachine);
         AttackState.Setup(this, StateMachine);
         StateMachine.ChangeState(IdleState);
-
+        potion = GetComponent<HpPotion>();
         statusSystem.OnDead += Die;
     }
 
@@ -65,4 +67,7 @@ public class Player : MonoBehaviour
     {
         stateMachine.ChangeState(dieState);
     }
+    
+
+    
 }
