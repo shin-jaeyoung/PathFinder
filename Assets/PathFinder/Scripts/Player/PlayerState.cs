@@ -19,7 +19,9 @@ public class PlayerMoveState : PlayerStateBase
 
     public override void FixedUpdate()
     {
-        owner.Rb.velocity = owner.InputVec * owner.Speed;
+     
+        if (!owner.StatusSystem.Stat.ContainsKey(PlayerStatType.SPEED)) return;
+        owner.Rb.velocity = owner.InputVec * owner.StatusSystem.Stat[PlayerStatType.SPEED];
     }
 }
 

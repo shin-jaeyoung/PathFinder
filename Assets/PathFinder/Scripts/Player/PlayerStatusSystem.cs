@@ -1,53 +1,108 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 [System.Serializable]
-public class PlayerStatusSystem
+public struct PlayerStats
 {
+    [SerializeField]
+    private PlayerStatType type;
+    [SerializeField]
+    private float statValue;
+
+    public PlayerStats(PlayerStatType type, float statValue)
+    {
+        this.type = type;
+        this.statValue = statValue;
+    }
+    //property
+    public PlayerStatType Type => type;
+    public float StatValue => statValue;
+}
+
+[System.Serializable]
+public class PlayerStatusSystem 
+{
+    private PlayerStatList initStats;
+    [SerializeField]
+    private List<PlayerStats> currenStats;
     private Dictionary<PlayerStatType, float> stat;
+
+    //property
     public Dictionary<PlayerStatType, float> Stat => stat;
 
+    //deligate
     public Action OnStatChanged;
+    public Action OnDead;
 
     public PlayerStatusSystem()
     {
         stat = new Dictionary<PlayerStatType, float>();
-        Init();
+        currenStats = new List<PlayerStats>();
     }
 
-    public void Init()
+    public void Init(PlayerStatList initData)
     {
-        stat.Add(PlayerStatType.STR, 0);
-        stat.Add(PlayerStatType.DEX, 0);
-        stat.Add(PlayerStatType.CON, 0);
-        stat.Add(PlayerStatType.Power, 10);
-        stat.Add(PlayerStatType.CriRate, 5);
-        stat.Add(PlayerStatType.CriDamage, 20);
-        stat.Add(PlayerStatType.Armor, 0);
-        stat.Add(PlayerStatType.SPEED, 2.5f);
-        stat.Add(PlayerStatType.MaxHp, 100);
-
+        if (initData == null) return;
+        initStats = initData;
+        for (int i =0; i < initStats.StatsList.Count; i++)
+        {
+            stat.Add(initStats.StatsList[i].Type, initStats.StatsList[i].StatValue);
+        }
+        UpdateStat();
+        OnStatChanged += UpdateStat;
+    }
+    public void UpdateStat()
+    {
+        currenStats.Clear();
+        foreach (KeyValuePair<PlayerStatType, float> pair in stat)
+        {
+            currenStats.Add(new PlayerStats(pair.Key, pair.Value));
+        }
     }
     public void AddStat(PlayerStatType type, int value)
     {
         if(stat.ContainsKey(type))
         {
             stat[type] += value;
+            if (type == PlayerStatType.CurHp)
+            {
+                float maxHp = stat[PlayerStatType.MaxHp];
+                if (stat[type] > maxHp)
+                {
+                    stat[type] = maxHp;
+                }
+            }
             OnStatChanged?.Invoke();
         }
     }
-    public void Reduce(PlayerStatType type , int value)
+    public void ReduceStat(PlayerStatType type , int value)
     {
         if (stat.ContainsKey(type))
         {
             stat[type] -= value;
-            if(stat[type] < 0)
+            if(stat[type] <= 0)
             {
                 stat[type] = 0;
+                if (type == PlayerStatType.CurHp)
+                {
+                    OnDead?.Invoke();
+                }
             }
+
             OnStatChanged?.Invoke();
         }
+    }
+    public void TakeDamage(float value)
+    {
+        ReduceStat(PlayerStatType.CurHp, (int)value);
+    }
+    
+    public void Heal(float value)
+    {
+        AddStat(PlayerStatType.CurHp, (int)value);
     }
 }

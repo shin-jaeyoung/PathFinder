@@ -470,11 +470,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6300674c8847b42821ea3aaa82c0db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initStat: {fileID: 11400000, guid: 30fa5660279691f478d2f451cda272c3, type: 2}
   levelSystem:
     level: 1
     curExp: 0
     maxExp: 100
     levelPoint: 0
+  statusSystem:
+    stats: {fileID: 0}
   animator: {fileID: 2571286699308495456}
 --- !u!114 &2593350674547944379
 MonoBehaviour:
