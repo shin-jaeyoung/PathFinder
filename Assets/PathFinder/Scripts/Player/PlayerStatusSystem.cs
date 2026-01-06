@@ -26,9 +26,12 @@ public struct PlayerStats
 [System.Serializable]
 public class PlayerStatusSystem 
 {
+    //초기설정 스텟
     private PlayerStatList initStats;
+    //스펙을 인스펙터에서 보기 위한 리스트 (이값은 딕셔너리를 복사한것)
     [SerializeField]
     private List<PlayerStats> currenStats;
+    //실제 사용될 내부 스텟
     private Dictionary<PlayerStatType, float> stat;
 
     //property

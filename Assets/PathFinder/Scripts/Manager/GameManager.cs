@@ -5,10 +5,16 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [Header("Player Settings")]
-    [SerializeField] private GameObject playerPrefab;
-    private Player player; 
+    [SerializeField] 
+    private GameObject playerPrefab;
+    private Player player;
 
-    // 외부에서 Player에 접근할 때 사용할 프로퍼티
+    [Header("Scene")]
+    private SceneType curScene;
+    private SceneType preScene;
+
+    // property
+
     public Player Player
     {
         get
@@ -20,6 +26,9 @@ public class GameManager : MonoBehaviour
             return player;
         }
     }
+    public SceneType CurScene => curScene;
+    public SceneType PreScene => preScene;
+
 
     private void Awake()
     {
@@ -28,13 +37,18 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
             InitializePlayer();
+            InitialSceneSetting();
         }
         else
         {
             Destroy(gameObject);
         }
     }
-
+    private void InitialSceneSetting()
+    {
+        curScene = SceneType.GameStart;
+        preScene = SceneType.GameStart;
+    }
     private void InitializePlayer()
     {
         player = Object.FindAnyObjectByType<Player>();
@@ -45,5 +59,10 @@ public class GameManager : MonoBehaviour
             player = go.GetComponent<Player>();
             Debug.Log("플레이어를 새로 생성했습니다.");
         }
+    }
+    public void SetScene(SceneType scene)
+    {
+        preScene = curScene;
+        curScene = scene;
     }
 }
