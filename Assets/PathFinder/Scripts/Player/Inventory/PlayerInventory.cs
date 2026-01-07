@@ -5,10 +5,15 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
+    [Header("Item Inventory")]
     [SerializeField]
     private List<InventorySlot> inventory;
     [SerializeField]
     private int capacity;
+    [Header("Equipment Inventory")]
+    [SerializeField]
+    private List<InventorySlot> equipments;
+
 
 
     public List<InventorySlot> Inventory => inventory;
@@ -18,6 +23,7 @@ public class PlayerInventory : MonoBehaviour
     {
 
         inventory = new List<InventorySlot>(capacity);
+        equipments = new List<InventorySlot>(equipments);
         for (int i = 0; i < capacity; i++)
         {
             inventory.Add(new InventorySlot());

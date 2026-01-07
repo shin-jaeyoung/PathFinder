@@ -27,3 +27,10 @@ public interface IInteractable
     public void Interact(Player player);
 }
 
+//Player
+
+public interface ISkillActive<T> where T :Player 
+{
+    public void Active(T caster);
+}
+
