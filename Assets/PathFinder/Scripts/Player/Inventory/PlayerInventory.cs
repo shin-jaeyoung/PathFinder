@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
-public class PlayerInventory : MonoBehaviour
+[System.Serializable]
+public class PlayerInventory
 {
     [Header("Item Inventory")]
     [SerializeField]
@@ -14,7 +15,8 @@ public class PlayerInventory : MonoBehaviour
     [Header("Equipment Inventory")]
     [SerializeField]
     private List<InventorySlot> equipments;
-
+    [SerializeField]
+    private int equipmentsCapacity;
 
     //property
     public List<InventorySlot> Inventory => inventory;
@@ -24,16 +26,16 @@ public class PlayerInventory : MonoBehaviour
     //deligate
     public Action OnInventoryChaneged;
     public Action OnEquipmentChanged;
-    private void Awake()
+    public void Init()
     {
-
+        if (inventory != null && inventory.Count > 0) return;
         inventory = new List<InventorySlot>(capacity);
-        equipments = new List<InventorySlot>(4);
+        equipments = new List<InventorySlot>(equipmentsCapacity);
         for (int i = 0; i < capacity; i++)
         {
             inventory.Add(new InventorySlot());
         }
-        for (int i = 0; i <4; i++)
+        for (int i = 0; i < equipmentsCapacity; i++)
         {
             equipments.Add(new InventorySlot());
         }
@@ -98,15 +100,16 @@ public class PlayerInventory : MonoBehaviour
         {
             equipments[index].item = slot.item;
             equipments[index].count = 1;
-            slot.Clear();
         }
         else
         {
             AddItem(equipments[index].item);
             equipments[index].item = slot.item;
             equipments[index].count = 1;
-            slot.Clear();
         }
+        slot.Clear();
+        OnInventoryChaneged?.Invoke();
+        OnEquipmentChanged?.Invoke();
         return false;
     }
     public bool RemoveEquipment( int index)
@@ -115,7 +118,8 @@ public class PlayerInventory : MonoBehaviour
 
         AddItem(equipments[index].item);
         equipments[index].Clear();
-
+        OnInventoryChaneged?.Invoke();
+        OnEquipmentChanged?.Invoke();
         return true;
     }
 }
