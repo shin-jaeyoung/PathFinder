@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
@@ -15,21 +16,29 @@ public class PlayerInventory : MonoBehaviour
     private List<InventorySlot> equipments;
 
 
-
+    //property
     public List<InventorySlot> Inventory => inventory;
     public int Capacity => capacity;
+    public List<InventorySlot> Equipments => equipments;
 
+    //deligate
+    public Action OnInventoryChaneged;
+    public Action OnEquipmentChanged;
     private void Awake()
     {
 
         inventory = new List<InventorySlot>(capacity);
-        equipments = new List<InventorySlot>(equipments);
+        equipments = new List<InventorySlot>(4);
         for (int i = 0; i < capacity; i++)
         {
             inventory.Add(new InventorySlot());
         }
+        for (int i = 0; i <4; i++)
+        {
+            equipments.Add(new InventorySlot());
+        }
     }
-
+    
 
     public bool AddItem(Item item, int amount = 1)
     {
@@ -40,6 +49,7 @@ public class PlayerInventory : MonoBehaviour
             if (existingSlot != null)
             {
                 existingSlot.count += amount;
+                OnInventoryChaneged?.Invoke();
                 return true;
             }
         }
@@ -48,6 +58,7 @@ public class PlayerInventory : MonoBehaviour
         {
             emptySlot.item = item;
             emptySlot.count = amount;
+            OnInventoryChaneged?.Invoke();
             return true;
         }
 
@@ -66,6 +77,7 @@ public class PlayerInventory : MonoBehaviour
                 {
                     slot.Clear();
                 }
+                OnInventoryChaneged?.Invoke();
                 return true;
             }
             Debug.Log("수량이 충분 x");
@@ -74,7 +86,36 @@ public class PlayerInventory : MonoBehaviour
         else
         {
             slot.Clear();
+
+            OnInventoryChaneged?.Invoke();
             return true;
         }
+    }
+    public bool AddEquipment(InventorySlot slot, int index)
+    {
+        if(slot.IsEmpty()) return false;
+        if (equipments[index].IsEmpty())
+        {
+            equipments[index].item = slot.item;
+            equipments[index].count = 1;
+            slot.Clear();
+        }
+        else
+        {
+            AddItem(equipments[index].item);
+            equipments[index].item = slot.item;
+            equipments[index].count = 1;
+            slot.Clear();
+        }
+        return false;
+    }
+    public bool RemoveEquipment( int index)
+    {
+        if (equipments[index].IsEmpty()) return false;
+
+        AddItem(equipments[index].item);
+        equipments[index].Clear();
+
+        return true;
     }
 }

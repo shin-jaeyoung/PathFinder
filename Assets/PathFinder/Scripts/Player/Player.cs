@@ -14,6 +14,10 @@ public class Player : MonoBehaviour
     [Header("Status System")]
     [SerializeField]
     private PlayerStatusSystem statusSystem;
+    [Header("Inventory")]
+    private PlayerInventory inventory;
+
+
 
     [SerializeField]
     private Animator animator;
@@ -29,6 +33,7 @@ public class Player : MonoBehaviour
     public Animator Animator => animator;
     public PlayerLevelSystem LevelSystem => levelSystem;
     public PlayerStatusSystem StatusSystem => statusSystem;
+    public PlayerInventory Inventory => inventory;
     public StateMachine<Player> StateMachine => stateMachine;
     public HpPotion Potion => potion;
 

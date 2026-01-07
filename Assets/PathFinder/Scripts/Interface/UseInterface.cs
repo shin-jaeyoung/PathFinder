@@ -5,8 +5,8 @@ using UnityEngine;
 //아이템
 public interface IEquipable
 {
-    public void Equip();
-    public void UnEquip();
+    public void Equip(Player player, int index);
+    public void UnEquip(Player player);
 }
 
 public interface IUseable
