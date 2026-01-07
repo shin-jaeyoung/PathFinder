@@ -479,6 +479,27 @@ MonoBehaviour:
     levelPoint: 0
   statusSystem:
     currenStats: []
+  inventory:
+    inventory: []
+    capacity: 40
+    equipments:
+    - item: {fileID: 0}
+      count: 0
+    - item: {fileID: 0}
+      count: 0
+    - item: {fileID: 0}
+      count: 0
+    - item: {fileID: 0}
+      count: 0
+    equipmentsCapacity: 4
+  skills:
+    skills: []
+    capacity: 20
+    skillequip:
+    - skill: {fileID: 0}
+    - skill: {fileID: 0}
+    - skill: {fileID: 0}
+    - skill: {fileID: 0}
   animator: {fileID: 2571286699308495456}
 --- !u!114 &2593350674547944379
 MonoBehaviour:
@@ -3582,6 +3603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     id: 0
+    type: 0
     sprite: {fileID: 0}
     name: "\uCDA9\uC804\uC2DD HP\uD3EC\uC158"
     description: 

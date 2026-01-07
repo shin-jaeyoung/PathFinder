@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
-public class InventorySlot
+[System.Serializable]
+public class SkillSlot
 {
-    public Item item;
-    public int count;
+    public Skill skill;
 
     public bool IsEmpty()
     {
-        if(item ==null  || count <=0)
+        if (skill == null)
         {
             return true;
         }
@@ -17,7 +18,6 @@ public class InventorySlot
     }
     public void Clear()
     {
-        item = null;
-        count = 0;
+        skill = null;
     }
 }

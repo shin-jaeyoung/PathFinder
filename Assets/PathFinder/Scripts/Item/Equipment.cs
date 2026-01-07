@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,19 +19,21 @@ public struct EquipmentStatData
 public abstract class Equipment : Item, IEquipable
 {
     [SerializeField]
-    private List<EquipmentStatData> statDatas;
-
+    protected List<EquipmentStatData> statDatas;
+    [SerializeField]
+    protected EquipmentType type;
     //property
     public List<EquipmentStatData> StatData => statDatas;
+    public EquipmentType Type => type;
 
-    public void Equip()
+    public void Equip(Player player, int index)
     {
-        UseEquipment();
+        UseEquipment(player, index);
     }
-    public void UnEquip()
+    public void UnEquip(Player player)
     {
-        UnUseEquipment();
+        UnUseEquipment(player );
     }
-    protected abstract void UseEquipment();
-    protected abstract void UnUseEquipment();
+    protected abstract void UseEquipment(Player player, int index);
+    protected abstract void UnUseEquipment(Player player);
 }

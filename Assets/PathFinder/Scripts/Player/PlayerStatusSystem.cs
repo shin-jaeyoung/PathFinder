@@ -41,14 +41,12 @@ public class PlayerStatusSystem
     public Action OnStatChanged;
     public Action OnDead;
 
-    public PlayerStatusSystem()
-    {
-        stat = new Dictionary<PlayerStatType, float>();
-        currenStats = new List<PlayerStats>();
-    }
+ 
 
     public void Init(PlayerStatList initData)
     {
+        stat = new Dictionary<PlayerStatType, float>();
+        currenStats = new List<PlayerStats>();
         if (initData == null) return;
         initStats = initData;
         for (int i =0; i < initStats.StatsList.Count; i++)

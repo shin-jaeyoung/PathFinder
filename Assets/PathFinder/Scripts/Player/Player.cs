@@ -14,6 +14,14 @@ public class Player : MonoBehaviour
     [Header("Status System")]
     [SerializeField]
     private PlayerStatusSystem statusSystem;
+    [Header("Inventory")]
+    [SerializeField]
+    private PlayerInventory inventory;
+    [Header("Skill")]
+    [SerializeField]
+    private PlayerSkillInventory skills;
+    
+
 
     [SerializeField]
     private Animator animator;
@@ -29,6 +37,8 @@ public class Player : MonoBehaviour
     public Animator Animator => animator;
     public PlayerLevelSystem LevelSystem => levelSystem;
     public PlayerStatusSystem StatusSystem => statusSystem;
+    public PlayerInventory Inventory => inventory;
+    public PlayerSkillInventory Skills => skills;
     public StateMachine<Player> StateMachine => stateMachine;
     public HpPotion Potion => potion;
 
@@ -40,15 +50,21 @@ public class Player : MonoBehaviour
     {
         Rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
-        statusSystem = new PlayerStatusSystem();
+
+
         statusSystem.Init(initStat);
+        inventory.Init();
+        skills.Init();
+
         stateMachine = new StateMachine<Player>(this);
         IdleState.Setup(this, StateMachine);
         MoveState.Setup(this, StateMachine);
         dieState.Setup(this, StateMachine);
         AttackState.Setup(this, StateMachine);
         StateMachine.ChangeState(IdleState);
+
         potion = GetComponent<HpPotion>();
+
         statusSystem.OnDead += Die;
     }
 

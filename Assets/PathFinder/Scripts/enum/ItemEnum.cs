@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ArmorType
+public enum EquipmentType
 {
+    Weapon,
     Helmet,
     Armor,
     Shoes,
