@@ -1,17 +1,21 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : MonoBehaviour
+public class Monster : Entity
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private MonsterData data;
+    [SerializeField]
+    private List<Skill> skills;
+
+
+    public override void Active()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Hit(DamageInfo info)
     {
         
     }

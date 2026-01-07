@@ -29,8 +29,15 @@ public interface IInteractable
 
 //Player
 
-public interface ISkillActive<T> where T :Player 
+public interface ISkillActive
 {
-    public void Active(T caster);
+    public void Active();
 }
+//Monster
 
+
+//공통
+public interface IHittable
+{
+    public void Hit(DamageInfo info);
+}
