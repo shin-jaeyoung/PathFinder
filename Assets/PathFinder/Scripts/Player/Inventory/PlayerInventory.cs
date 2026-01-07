@@ -29,6 +29,7 @@ public class PlayerInventory
     public void Init()
     {
         if (inventory != null && inventory.Count > 0) return;
+
         inventory = new List<InventorySlot>(capacity);
         equipments = new List<InventorySlot>(equipmentsCapacity);
         for (int i = 0; i < capacity; i++)
