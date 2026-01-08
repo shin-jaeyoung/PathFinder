@@ -483,23 +483,31 @@ MonoBehaviour:
     inventory: []
     capacity: 40
     equipments:
-    - item: {fileID: 0}
-      count: 0
-    - item: {fileID: 0}
-      count: 0
-    - item: {fileID: 0}
-      count: 0
-    - item: {fileID: 0}
-      count: 0
+    - item: {fileID: 11400000, guid: fb00f7eb0152a4e488ca741cdc7eb1c1, type: 2}
+      count: 1
+    - item: {fileID: 11400000, guid: 15452eff3846b7d4a8763e4081b246d5, type: 2}
+      count: 1
+    - item: {fileID: 11400000, guid: ce75807f8b836e94d9f3ab307c875283, type: 2}
+      count: 1
+    - item: {fileID: 11400000, guid: f78c028919d5f9642be15ade4fec135f, type: 2}
+      count: 1
     equipmentsCapacity: 4
   skills:
     skills: []
     capacity: 20
     skillequip:
     - skill: {fileID: 0}
+      isCooltime: 0
+      currentCooltime: 0
     - skill: {fileID: 0}
+      isCooltime: 0
+      currentCooltime: 0
     - skill: {fileID: 0}
+      isCooltime: 0
+      currentCooltime: 0
     - skill: {fileID: 0}
+      isCooltime: 0
+      currentCooltime: 0
   animator: {fileID: 2571286699308495456}
 --- !u!114 &2593350674547944379
 MonoBehaviour:

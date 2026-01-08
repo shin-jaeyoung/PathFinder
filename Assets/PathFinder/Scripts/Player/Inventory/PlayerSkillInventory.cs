@@ -17,6 +17,10 @@ public class PlayerSkillInventory
     private List<SkillSlot> skillequip;
     private int equipCapacity = 4;
 
+    //property
+    public List<SkillSlot> Skills => skills;
+    public List<SkillSlot> Skillequip => skillequip;
+
 
     //delitgate
     public Action OnChangedSkill;
