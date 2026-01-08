@@ -7,11 +7,13 @@ public abstract class Skill : ScriptableObject
     [SerializeField]
     protected SkillData data;
 
-    protected bool isCooltime;
     
+    //property
+
+    public SkillData Data => data;
+
     public void Use(ISkillActive caster)
     {
-        if (isCooltime) return;
         Execute(caster);
     }
 
