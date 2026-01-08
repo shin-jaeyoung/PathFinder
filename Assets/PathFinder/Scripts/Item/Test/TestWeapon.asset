@@ -15,7 +15,7 @@ MonoBehaviour:
   data:
     id: 0
     type: 0
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 27428f826bad840f9bdbc88d5dcbfa6c, type: 3}
     name: testWeapon
     description: weaponttt
     price: 333

@@ -15,11 +15,12 @@ MonoBehaviour:
   data:
     id: 0
     type: 1
-    sprite: {fileID: 0}
-    name: TestHelmet
-    description: testHelmet
-    price: 500
+    sprite: {fileID: 4207501386822081471, guid: ad98517497e964b00add5977d2257a7a,
+      type: 3}
+    name: TestArmor
+    description: aaaaaaaaaaaaaaaaaaaaa
+    price: 600
   statDatas:
   - type: 6
-    statValue: 5
-  type: 1
+    statValue: 10
+  type: 2

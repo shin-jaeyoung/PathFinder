@@ -15,7 +15,7 @@ MonoBehaviour:
   data:
     id: 0
     type: 1
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 1ac949e421d9e24498dfbdb21574f46e, type: 3}
     name: TestHelmet
     description: testHelmet
     price: 500
