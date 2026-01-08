@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5160211670164462702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8129922863757248673}
+  - component: {fileID: 1776664687642008904}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8129922863757248673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5160211670164462702}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1006.356, y: 578.9256, z: -7.129296}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1776664687642008904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5160211670164462702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdd9c81c34efaa6488d81a8722986bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasList:
+  - {fileID: 4104904220791688428, guid: 8177cba951a7d1f4f8d266a60bf54fd6, type: 3}
+  - {fileID: 7076485010797026759, guid: 09f6f46f74fd1fb479d7f9f418e583b7, type: 3}
+  uiPanels:
+  - type: 7
+    uiprefab: {fileID: 7707677704762597440, guid: a75764c86aaf7a342b72bde0457a4868,
+      type: 3}
+  - type: 0
+    uiprefab: {fileID: 3507954400078095388, guid: a0043dacca9791347a85cd138fe313d1,
+      type: 3}
+  - type: 2
+    uiprefab: {fileID: 4042740603850107356, guid: a057e710173bc8e42a87dca7723cce73,
+      type: 3}
+  - type: 3
+    uiprefab: {fileID: 2403148807781565908, guid: 51711f3be8aaba3498b92d99558cdb56,
+      type: 3}
+  - type: 1
+    uiprefab: {fileID: 6424581884179528706, guid: f01a305710e32f245b10192fcece5742,
+      type: 3}
+  - type: 4
+    uiprefab: {fileID: 7406705003903801359, guid: ed896d5976ecc3d48b6dae852eea1367,
+      type: 3}
+  - type: 6
+    uiprefab: {fileID: 8475768708949827096, guid: 248af0fd174dede428dc941f0c7c4b34,
+      type: 3}
+  - type: 5
+    uiprefab: {fileID: 6464240396808845816, guid: 6b94f9590bbbb06498e2c2aa1fe23e1b,
+      type: 3}

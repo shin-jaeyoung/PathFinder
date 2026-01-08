@@ -21,7 +21,7 @@ public class HUDUI : MonoBehaviour
     private Player player;
 
 
-    public void Init()
+    private void OnEnable()
     {
         if(GameManager.instance.Player!=null)
         {
