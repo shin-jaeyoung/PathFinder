@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
         if (player == null && playerPrefab != null)
         {
             GameObject go = Instantiate(playerPrefab);
+
             player = go.GetComponent<Player>();
             Debug.Log("플레이어를 새로 생성했습니다.");
         }
