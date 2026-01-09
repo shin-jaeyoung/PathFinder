@@ -78,15 +78,36 @@ public class UIManager : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.I))
         {
-            Showonly(UIType.Inventory);
+            if (currenUIType == UIType.Inventory)
+            {
+                HideUI(UIType.Inventory);
+            }
+            else
+            {
+                Showonly(UIType.Inventory);
+            }
         }
         if(Input.GetKeyDown (KeyCode.U))
         {
-            Showonly(UIType.Status);
+            if (currenUIType == UIType.Status)
+            {
+                HideUI(UIType.Status);
+            }
+            else
+            {
+                Showonly(UIType.Status);
+            }
         }
         if(Input.GetKeyDown(KeyCode.K))
         {
-            Showonly(UIType.Skill);
+            if (currenUIType == UIType.Skill)
+            {
+                HideUI(UIType.Skill);
+            }
+            else
+            {
+                Showonly(UIType.Skill);
+            }
         }
     }
     private IEnumerator WaitGM()
