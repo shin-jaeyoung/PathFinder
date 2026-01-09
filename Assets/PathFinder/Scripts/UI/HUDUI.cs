@@ -28,7 +28,7 @@ public class HUDUI : MonoBehaviour
             player = GameManager.instance.Player;
             player.LevelSystem.OnExpChanged += UpdateLevel;
             player.StatusSystem.OnStatChanged += UpdateHp;
-            player.Skills.OnChangedSkill += UpdateSkillUI;
+            player.Skills.OnChangedActiveSkill += UpdateSkillUI;
 
             UpdateLevel();
             UpdateHp();
@@ -41,7 +41,7 @@ public class HUDUI : MonoBehaviour
         {
             player.LevelSystem.OnExpChanged -= UpdateLevel;
             player.StatusSystem.OnStatChanged -= UpdateHp;
-            player.Skills.OnChangedSkill -= UpdateSkillUI;
+            player.Skills.OnChangedActiveSkill -= UpdateSkillUI;
         }
     }
     public void UpdateLevel()
