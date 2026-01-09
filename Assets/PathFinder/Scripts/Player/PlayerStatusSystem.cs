@@ -33,9 +33,14 @@ public class PlayerStatusSystem
     private List<PlayerStats> currenStats;
     //실제 사용될 내부 스텟
     private Dictionary<PlayerStatType, float> stat;
+    //추가스펙스텟을 더해준 스탯 (패시브스킬, 장비)
+    private Dictionary<PlayerStatType, float> finalStat;
+
+    Player player;
 
     //property
     public Dictionary<PlayerStatType, float> Stat => stat;
+    public Dictionary<PlayerStatType, float> FinalStat => finalStat;
 
     //deligate
     public Action OnStatChanged;
@@ -47,37 +52,44 @@ public class PlayerStatusSystem
     {
         stat = new Dictionary<PlayerStatType, float>();
         currenStats = new List<PlayerStats>();
+        finalStat = new Dictionary<PlayerStatType, float>();
+        player = GameManager.instance.Player;
         if (initData == null) return;
         initStats = initData;
         for (int i =0; i < initStats.StatsList.Count; i++)
         {
             stat.Add(initStats.StatsList[i].Type, initStats.StatsList[i].StatValue);
         }
-        UpdateStat();
+        
+        player.Skills.OnChangedPassiveSkill += UpdateFinalStat;
+        player.Inventory.OnEquipmentChanged += UpdateFinalStat;
         OnStatChanged += UpdateStat;
+
+        UpdateFinalStat();
     }
     public void UpdateStat()
     {
         currenStats.Clear();
-        foreach (KeyValuePair<PlayerStatType, float> pair in stat)
+        foreach (KeyValuePair<PlayerStatType, float> pair in finalStat)
         {
             currenStats.Add(new PlayerStats(pair.Key, pair.Value));
         }
     }
     public void AddStat(PlayerStatType type, int value)
     {
-        if(stat.ContainsKey(type))
+        if (stat.ContainsKey(type))
         {
             stat[type] += value;
+
             if (type == PlayerStatType.CurHp)
             {
-                float maxHp = stat[PlayerStatType.MaxHp];
-                if (stat[type] > maxHp)
-                {
-                    stat[type] = maxHp;
-                }
+                float maxHp = finalStat.ContainsKey(PlayerStatType.MaxHp) ?
+                              finalStat[PlayerStatType.MaxHp] : stat[PlayerStatType.MaxHp];
+
+                if (stat[type] > maxHp) stat[type] = maxHp;
             }
-            OnStatChanged?.Invoke();
+
+            UpdateFinalStat();
         }
     }
     public void ReduceStat(PlayerStatType type , int value)
@@ -95,6 +107,31 @@ public class PlayerStatusSystem
             }
 
             OnStatChanged?.Invoke();
+        }
+    }
+    public void UpdateFinalStat()
+    {
+        finalStat.Clear();
+        foreach (var p in stat)
+        {
+            finalStat[p.Key] = p.Value;
+        }
+
+        AddStatsFromSource(player.Skills.AddStatus);
+        AddStatsFromSource(player.Inventory.EquipmentStat);
+        OnStatChanged?.Invoke();
+    }
+
+    private void AddStatsFromSource(Dictionary<PlayerStatType, float> source)
+    {
+        if (source == null) return;
+
+        foreach (var pair in source)
+        {
+            if (finalStat.ContainsKey(pair.Key))
+                finalStat[pair.Key] += pair.Value;
+            else
+                finalStat[pair.Key] = pair.Value;
         }
     }
     public void TakeDamage(float value)

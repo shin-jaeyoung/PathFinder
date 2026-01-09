@@ -25,6 +25,7 @@ public class HpPotion : MonoBehaviour, IUseable
     private int curCount;
     private int maxCount;
 
+    private Player player;
     //property
     public ItemData Data => data;
     public float HealMount => healMount;
@@ -36,22 +37,24 @@ public class HpPotion : MonoBehaviour, IUseable
 
     private void Start()
     {
-        maxCount = 5;
-        curCount = maxCount;
-        StartCoroutine(PotionGenerate());
+        Init();
     }
-    private void OnEnable()
+    private void Init()
     {
-        if (GameManager.instance!= null && GameManager.instance.Player != null)
+        if (GameManager.instance.Player != null)
         {
-            GameManager.instance.Player.LevelSystem.OnLevelChanged += Upgrade;
+            player = GameManager.instance.Player;
+            maxCount = 5;
+            curCount = maxCount;
+            player.LevelSystem.OnLevelChanged += Upgrade;
+            StartCoroutine(PotionGenerate());
         }
     }
-    private void OnDisable()
+    private void OnDestroy()
     {
-        if (GameManager.instance!= null && GameManager.instance.Player != null)
+        if (player != null)
         {
-            GameManager.instance.Player.LevelSystem.OnLevelChanged -= Upgrade;
+            player.LevelSystem.OnLevelChanged -= Upgrade;
         }
     }
     public void Use()
@@ -71,7 +74,7 @@ public class HpPotion : MonoBehaviour, IUseable
     }
     public void Effect()
     {
-        GameManager.instance.Player.StatusSystem.Heal(healMount * GameManager.instance.Player.StatusSystem.Stat[PlayerStatType.MaxHp]);
+        player.StatusSystem.Heal(healMount * player.StatusSystem.FinalStat[PlayerStatType.MaxHp]);
     }
     public void Upgrade()
     {
@@ -100,5 +103,6 @@ public class HpPotion : MonoBehaviour, IUseable
     {
         yield return new WaitForSeconds(coolTime);
         isCoolTime = false;
+        OnChanged?.Invoke();
     }
 }

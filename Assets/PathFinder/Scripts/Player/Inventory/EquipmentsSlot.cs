@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class InventorySlot : Slot
+public class EquipmentsSlot : Slot
 {
-    public Item item;
+    public Equipment item;
 
-    public override bool IsEmpty()
-    {
-        if(item ==null  || count <= 0)
-        {
-            return true;
-        }
-        return false;
-    }
     public override void Clear()
     {
         item = null;
         count = 0;
+    }
+
+    public override bool IsEmpty()
+    {
+        if (item == null || count <= 0)
+        {
+            return true;
+        }
+        return false;
     }
 }

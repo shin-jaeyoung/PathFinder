@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using static UnityEditor.Progress;
 
@@ -30,4 +31,22 @@ public class SkillSlot
         skill.Use(caster);
         return true;
     }
+}
+public class PassiveSlot
+{
+    public PassiveSkill passiveSkill;
+
+    public bool IsEmpty()
+    {
+        if (passiveSkill == null)
+        {
+            return true;
+        }
+        return false;
+    }
+    public void Clear()
+    {
+        passiveSkill = null;
+    }
+
 }

@@ -2,72 +2,107 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [System.Serializable]
 public class PlayerSkillInventory
 {
     [Header("Skill Inventory")]
     [SerializeField]
-    private List<SkillSlot> skills;
+    private List<SkillSlot> activeSkills;
     [SerializeField]
-    private int capacity;
+    private int activeCapacity;
+    [SerializeField]
+    private List<PassiveSlot> passiveSkills;
+    [SerializeField]
+    private int passiveCapacity;
+
 
     [Header("Skill Equip")]
     [SerializeField]
     private List<SkillSlot> skillequip;
     private int equipCapacity = 4;
 
+    //계산용
+    private Dictionary<PlayerStatType, float> addStatus;
+
     //property
-    public List<SkillSlot> Skills => skills;
+    public List<SkillSlot> ActiveSkills => activeSkills;
+    public int ActiveCapacity => activeCapacity;
+    public List<PassiveSlot> PassiveSkills => passiveSkills;
+    public int PassiveCapacity => passiveCapacity;
     public List<SkillSlot> Skillequip => skillequip;
-
-
+    public int EquipCapacity => equipCapacity;
+    public Dictionary<PlayerStatType, float> AddStatus => addStatus;
     //delitgate
-    public Action OnChangedSkill;
-
+    public Action OnChangedActiveSkill;
+    public Action OnChangedPassiveSkill;
 
     public void Init()
     {
-        if (skills != null && skills.Count > 0) return;
+        if (activeSkills != null && activeSkills.Count > 0) return;
 
-        skills = new List<SkillSlot>(capacity);
+        activeSkills = new List<SkillSlot>(activeCapacity);
         skillequip = new List<SkillSlot>(equipCapacity);
-        for (int i = 0; i < capacity; i++)
+        passiveSkills = new List<PassiveSlot>(passiveCapacity);
+        addStatus = new Dictionary<PlayerStatType, float>();
+        for (int i = 0; i < activeCapacity; i++)
         {
-            skills.Add(new SkillSlot());
+            activeSkills.Add(new SkillSlot());
         }
+        for (int i = 0; i < passiveCapacity; i++)
+        {
+            passiveSkills.Add(new PassiveSlot());
+        }
+
         for (int i = 0; i < equipCapacity; i++)
         {
             skillequip.Add(new SkillSlot());
         }
+        OnChangedPassiveSkill += CalculatePassiveStat;
     }
-
-    public bool AddSkill(Skill skill)
+    public bool AddPassiveSkill(PassiveSkill passiveSkill)
     {
-        SkillSlot emptySlot = skills.Find(s => s.IsEmpty());
+        PassiveSlot emptySlot = passiveSkills.Find(s => s.IsEmpty());
+        if(emptySlot !=null)
+        {
+            emptySlot.passiveSkill = passiveSkill;
+            OnChangedPassiveSkill.Invoke();
+            return true;
+        }
+        return false;
+    }
+    public bool AddActiveSkill(Skill skill)
+    {
+        SkillSlot emptySlot = activeSkills.Find(s => s.IsEmpty());
         if (emptySlot != null)
         {
             emptySlot.skill = skill;
-            OnChangedSkill?.Invoke();
+            OnChangedActiveSkill?.Invoke();
             return true;
         }
         return false;
     }
     public void Clear()
     {
-        for (int i = 0; i < capacity; i++)
+        for (int i = 0; i < activeCapacity; i++)
         {
-            skills[i].Clear();
+            activeSkills[i].Clear();
         }
-        OnChangedSkill?.Invoke();
+        for (int i =0; i<passiveCapacity; i++)
+        {
+            passiveSkills[i].Clear();
+        }
+        OnChangedActiveSkill?.Invoke();
+        OnChangedPassiveSkill?.Invoke();
     }
-    public void RegistSkill(SkillSlot slot, int index)
+    public void RegistActiveSkill(SkillSlot slot, int index)
     {
         if (slot.IsEmpty()) return;
         if (CheckDuplication(slot)) return;
         skillequip[index].Clear();
         skillequip[index].skill = slot.skill;
-        OnChangedSkill?.Invoke();
+        OnChangedActiveSkill?.Invoke();
     }
     public bool CheckDuplication(SkillSlot slot)
     {
@@ -85,6 +120,27 @@ public class PlayerSkillInventory
     public void UnregistSkill(int index)
     {
         skillequip[index].Clear();
-        OnChangedSkill?.Invoke();
+        OnChangedActiveSkill?.Invoke();
+    }
+
+    public void CalculatePassiveStat()
+    {
+        //Passive에만 스탯이 달려있으니 계산해서 넘겨주자
+        addStatus.Clear();
+        foreach (var s in passiveSkills)
+        {
+            foreach ( var stat in s.passiveSkill.PassiveEffect)
+            {
+                if (addStatus.ContainsKey(stat.Type))
+                {
+                    addStatus[stat.Type] += stat.StatValue;
+                }
+                else
+                {
+                    addStatus.Add(stat.Type, stat.StatValue);
+                }
+            }
+        }
+        
     }
 }

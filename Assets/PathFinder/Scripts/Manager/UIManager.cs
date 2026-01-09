@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum UIType
 {
+    GameStart,
     Menu,
     KeyGuide,
     Option,
@@ -11,6 +12,12 @@ public enum UIType
     Status,
     Skill,
     HUD,
+    Dialogue,
+
+
+
+
+    Off,
 }
 [System.Serializable]
 public struct UIData
@@ -32,7 +39,12 @@ public class UIManager : MonoBehaviour
     //내부에서 사용할 애들
     private Dictionary<UIType, GameObject> uiPanelDic;
     private List<GameObject> instantiatedCanvases;
-    private UIType currenUItype;
+    //밑에스택으로 한번 해보자
+    private UIType currenUIType;
+    private UIType preUIType;
+
+    private Stack<UIType> UIStack;
+
     private void Awake()
     {
         if(Instance == null)
@@ -53,13 +65,15 @@ public class UIManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(currenUItype == UIType.HUD)
+            if(currenUIType == UIType.HUD)
             {
                 ShowUI(UIType.Menu);
             }
             else
             {
-                Showonly(UIType.HUD);
+                CheckCurUI();
+                if (currenUIType == UIType.HUD) return;
+                HideUI(currenUIType);
             }
         }
         if(Input.GetKeyDown(KeyCode.I))
@@ -106,18 +120,42 @@ public class UIManager : MonoBehaviour
             if (!uiPanelDic.ContainsKey(data.type))
             {
                 uiPanelDic.Add(data.type, panelGo);
+                //이게 초기설정인데 GameStart씬부터 시작한다고하면 바꿔야함
                 if (data.type != UIType.HUD) panelGo.SetActive(false);
             }
         }
         //나중엔 GameStart넣을듯?
-        currenUItype = UIType.HUD;
+        UIStack = new Stack<UIType>();
+        UIStack.Push(UIType.HUD);
+
+        //preUIType = UIType.HUD;
+        currenUIType = UIType.HUD;
+    }
+    private UIType CheckCurUI()
+    {
+        currenUIType = UIStack.Pop();
+        UIStack.Push(currenUIType);
+
+        return currenUIType;
     }
     public void ShowUI(UIType type)
     {
         if (uiPanelDic.TryGetValue(type, out GameObject ui))
         {
             ui.SetActive(true);
-            currenUItype = type;
+            //preUIType = currenUIType;
+            currenUIType = type;
+            UIStack.Push(type);
+        }
+    }
+    public void HideUI(UIType type)
+    {
+        if(uiPanelDic.TryGetValue(type,out GameObject ui))
+        {
+            ui.SetActive(false);
+            //currenUIType = preUIType;
+            UIStack.Pop();
+            CheckCurUI();
         }
     }
     public void Showonly(UIType targetType)
@@ -128,7 +166,13 @@ public class UIManager : MonoBehaviour
             if(t.Key==targetType)
             {
                 t.Value.SetActive(true);
-                currenUItype = targetType;
+                preUIType = currenUIType;
+                currenUIType = targetType;
+
+                UIStack.Clear();
+                UIStack.Push(UIType.HUD);
+                UIStack.Push(targetType);
+                CheckCurUI();
             }
             else
             {
