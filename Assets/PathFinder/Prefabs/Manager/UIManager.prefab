@@ -48,27 +48,27 @@ MonoBehaviour:
   - {fileID: 4104904220791688428, guid: 8177cba951a7d1f4f8d266a60bf54fd6, type: 3}
   - {fileID: 7076485010797026759, guid: 09f6f46f74fd1fb479d7f9f418e583b7, type: 3}
   uiPanels:
-  - type: 7
+  - type: 8
     uiprefab: {fileID: 7707677704762597440, guid: a75764c86aaf7a342b72bde0457a4868,
       type: 3}
-  - type: 0
+  - type: 1
     uiprefab: {fileID: 3507954400078095388, guid: a0043dacca9791347a85cd138fe313d1,
       type: 3}
-  - type: 2
+  - type: 3
     uiprefab: {fileID: 4042740603850107356, guid: a057e710173bc8e42a87dca7723cce73,
       type: 3}
-  - type: 3
+  - type: 4
     uiprefab: {fileID: 2403148807781565908, guid: 51711f3be8aaba3498b92d99558cdb56,
       type: 3}
-  - type: 1
+  - type: 2
     uiprefab: {fileID: 6424581884179528706, guid: f01a305710e32f245b10192fcece5742,
       type: 3}
-  - type: 4
+  - type: 5
     uiprefab: {fileID: 7406705003903801359, guid: ed896d5976ecc3d48b6dae852eea1367,
       type: 3}
-  - type: 6
+  - type: 7
     uiprefab: {fileID: 8475768708949827096, guid: 248af0fd174dede428dc941f0c7c4b34,
       type: 3}
-  - type: 5
+  - type: 6
     uiprefab: {fileID: 6464240396808845816, guid: 6b94f9590bbbb06498e2c2aa1fe23e1b,
       type: 3}
