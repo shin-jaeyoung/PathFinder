@@ -40,6 +40,7 @@ public class PlayerStatusSystem
 
     //property
     public Dictionary<PlayerStatType, float> Stat => stat;
+    public Dictionary<PlayerStatType, float> FinalStat => finalStat;
 
     //deligate
     public Action OnStatChanged;
@@ -59,10 +60,12 @@ public class PlayerStatusSystem
         {
             stat.Add(initStats.StatsList[i].Type, initStats.StatsList[i].StatValue);
         }
-        UpdateStat();
+        
         player.Skills.OnChangedPassiveSkill += UpdateFinalStat;
         player.Inventory.OnEquipmentChanged += UpdateFinalStat;
         OnStatChanged += UpdateStat;
+
+        UpdateFinalStat();
     }
     public void UpdateStat()
     {

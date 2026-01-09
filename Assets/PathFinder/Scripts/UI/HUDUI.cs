@@ -17,11 +17,17 @@ public class HUDUI : MonoBehaviour
     [Header("Skill")]
     [SerializeField]
     private List<Image> skillList;
+    [Header("HpPotion")]
+    [SerializeField]
+    private Image hpPotion;
+    [SerializeField]
+    private TextMeshProUGUI potionCount;
+
 
     private Player player;
 
 
-    private void OnEnable()
+    private void Init()
     {
         if(GameManager.instance.Player!=null)
         {
@@ -29,19 +35,25 @@ public class HUDUI : MonoBehaviour
             player.LevelSystem.OnExpChanged += UpdateLevel;
             player.StatusSystem.OnStatChanged += UpdateHp;
             player.Skills.OnChangedActiveSkill += UpdateSkillUI;
-
+            player.Potion.OnChanged += UpdatePotionUI;
             UpdateLevel();
             UpdateHp();
             UpdateSkillUI();
+            UpdatePotionUI();
         }
     }
-    private void OnDisable()
+    private void Start()
+    {
+        Init();
+    }
+    private void OnDestroy()
     {
         if (GameManager.instance.Player != null)
         {
             player.LevelSystem.OnExpChanged -= UpdateLevel;
             player.StatusSystem.OnStatChanged -= UpdateHp;
             player.Skills.OnChangedActiveSkill -= UpdateSkillUI;
+            player.Potion.OnChanged -= UpdatePotionUI;
         }
     }
     public void UpdateLevel()
@@ -61,8 +73,6 @@ public class HUDUI : MonoBehaviour
     {
         if (GameManager.instance.Player == null) return;
 
-
-
         for(int i = 0; i<skillList.Count; i++)
         {
             if(player.Skills.Skillequip[i].IsEmpty())
@@ -76,5 +86,11 @@ public class HUDUI : MonoBehaviour
                 skillList[i].color = new Color(1, 1, 1, 1);
             }
         }
+    }
+    public void UpdatePotionUI()
+    {
+        hpPotion.color = player.Potion.IsCoolTime ?
+                        new Color(1, 1, 1, 0.5f) : new Color(1, 1, 1, 1);
+        potionCount.text = player.Potion.CurCount.ToString();
     }
 }

@@ -733,7 +733,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300094, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1687,6 +1687,8 @@ MonoBehaviour:
   - {fileID: 8144347846043995927}
   - {fileID: 8275705310960486285}
   - {fileID: 5574913991248374271}
+  hpPotion: {fileID: 50676299154719909}
+  potionCount: {fileID: 1271365215252116384}
 --- !u!1 &7825168075608558376
 GameObject:
   m_ObjectHideFlags: 0
