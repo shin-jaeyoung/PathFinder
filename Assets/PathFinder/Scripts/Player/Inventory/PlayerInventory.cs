@@ -14,18 +14,21 @@ public class PlayerInventory
     private int capacity;
     [Header("Equipment Inventory")]
     [SerializeField]
-    private List<InventorySlot> equipments;
+    private List<EquipmentsSlot> equipments;
     [SerializeField]
     private int equipmentsCapacity;
     [Header("Gold")]
     [SerializeField]
     private int gold;
 
+    private Dictionary<PlayerStatType, float> equipmentStat;
+
     //property
     public List<InventorySlot> Inventory => inventory;
     public int Capacity => capacity;
-    public List<InventorySlot> Equipments => equipments;
+    public List<EquipmentsSlot> Equipments => equipments;
     public int Gold => gold;
+    public Dictionary<PlayerStatType,float> EquipmentStat => equipmentStat;
 
     //deligate
     public Action OnInventoryChaneged;
@@ -36,15 +39,17 @@ public class PlayerInventory
         if (inventory != null && inventory.Count > 0) return;
 
         inventory = new List<InventorySlot>(capacity);
-        equipments = new List<InventorySlot>(equipmentsCapacity);
+        equipments = new List<EquipmentsSlot>(equipmentsCapacity);
+        equipmentStat = new Dictionary<PlayerStatType, float>();
         for (int i = 0; i < capacity; i++)
         {
             inventory.Add(new InventorySlot());
         }
         for (int i = 0; i < equipmentsCapacity; i++)
         {
-            equipments.Add(new InventorySlot());
+            equipments.Add(new EquipmentsSlot());
         }
+        OnEquipmentChanged += CalculateEquipmentStat;
     }
     
 
@@ -102,21 +107,19 @@ public class PlayerInventory
     public bool AddEquipment(InventorySlot slot, int index)
     {
         if(slot.IsEmpty()) return false;
-        if (equipments[index].IsEmpty())
-        {
-            equipments[index].item = slot.item;
-            equipments[index].count = 1;
-        }
-        else
+        if (!(slot.item is Equipment newEquipment)) return false;
+
+        if (!equipments[index].IsEmpty())
         {
             AddItem(equipments[index].item);
-            equipments[index].item = slot.item;
-            equipments[index].count = 1;
         }
+        equipments[index].item = newEquipment;
+        equipments[index].count = 1;
+
         slot.Clear();
         OnInventoryChaneged?.Invoke();
         OnEquipmentChanged?.Invoke();
-        return false;
+        return true ;
     }
     public bool RemoveEquipment( int index)
     {
@@ -127,5 +130,25 @@ public class PlayerInventory
         OnInventoryChaneged?.Invoke();
         OnEquipmentChanged?.Invoke();
         return true;
+    }
+
+    public void CalculateEquipmentStat()
+    {
+        equipmentStat.Clear();
+        foreach( var slot in  equipments )
+        {
+            if (slot.IsEmpty() || slot.item == null || slot.item.StatData == null) continue;
+            foreach ( var stat in slot.item.StatData)
+            {
+                if (equipmentStat.ContainsKey(stat.Type))
+                {
+                    equipmentStat[stat.Type] += stat.StatValue;
+                }
+                else
+                {
+                    equipmentStat.Add(stat.Type, stat.StatValue);
+                }
+            }
+        }
     }
 }

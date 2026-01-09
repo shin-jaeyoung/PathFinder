@@ -23,6 +23,9 @@ public class PlayerSkillInventory
     private List<SkillSlot> skillequip;
     private int equipCapacity = 4;
 
+    //계산용
+    private Dictionary<PlayerStatType, float> addStatus;
+
     //property
     public List<SkillSlot> ActiveSkills => activeSkills;
     public int ActiveCapacity => activeCapacity;
@@ -30,7 +33,7 @@ public class PlayerSkillInventory
     public int PassiveCapacity => passiveCapacity;
     public List<SkillSlot> Skillequip => skillequip;
     public int EquipCapacity => equipCapacity;
-
+    public Dictionary<PlayerStatType, float> AddStatus => addStatus;
     //delitgate
     public Action OnChangedActiveSkill;
     public Action OnChangedPassiveSkill;
@@ -42,6 +45,7 @@ public class PlayerSkillInventory
         activeSkills = new List<SkillSlot>(activeCapacity);
         skillequip = new List<SkillSlot>(equipCapacity);
         passiveSkills = new List<PassiveSlot>(passiveCapacity);
+        addStatus = new Dictionary<PlayerStatType, float>();
         for (int i = 0; i < activeCapacity; i++)
         {
             activeSkills.Add(new SkillSlot());
@@ -55,6 +59,7 @@ public class PlayerSkillInventory
         {
             skillequip.Add(new SkillSlot());
         }
+        OnChangedPassiveSkill += CalculatePassiveStat;
     }
     public bool AddPassiveSkill(PassiveSkill passiveSkill)
     {
@@ -116,5 +121,26 @@ public class PlayerSkillInventory
     {
         skillequip[index].Clear();
         OnChangedActiveSkill?.Invoke();
+    }
+
+    public void CalculatePassiveStat()
+    {
+        //Passive에만 스탯이 달려있으니 계산해서 넘겨주자
+        addStatus.Clear();
+        foreach (var s in passiveSkills)
+        {
+            foreach ( var stat in s.passiveSkill.PassiveEffect)
+            {
+                if (addStatus.ContainsKey(stat.Type))
+                {
+                    addStatus[stat.Type] += stat.StatValue;
+                }
+                else
+                {
+                    addStatus.Add(stat.Type, stat.StatValue);
+                }
+            }
+        }
+        
     }
 }
