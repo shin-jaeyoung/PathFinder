@@ -9,7 +9,7 @@ public class InventoryUI : MonoBehaviour
 {
     [Header("Equipments")]
     [SerializeField]
-    private List<Image> equipments;
+    private List<EquipmentSlotUI> equipmentSlots;
 
     [Header("Inventory")]
     [SerializeField]
@@ -27,76 +27,63 @@ public class InventoryUI : MonoBehaviour
 
 
     private Player player;
-    private List<Image> inven;
+    private List<InventorySlotUI> invenSlotUIs = new List<InventorySlotUI>();
 
     public void Init()
     {
         if (GameManager.instance.Player != null)
         {
             player = GameManager.instance.Player;
-            inven = new List<Image>(player.Inventory.Capacity);
-            for(int i = 0; i < player.Inventory.Capacity; i++)
+
+            invenSlotUIs.Clear();
+            for (int i = 0; i < content.transform.childCount; i++)
             {
-                Image icon = content.transform.GetChild(i).GetChild(0)?.GetComponent<Image>();
-                inven.Add(icon);
+                InventorySlotUI slotUI = content.transform.GetChild(i).GetComponent<InventorySlotUI>();
+                if (slotUI != null)
+                {
+                    slotUI.SetIndex(i); 
+                    invenSlotUIs.Add(slotUI);
+                }
             }
-            player.Inventory.OnInventoryChaneged += UpdateInven;
-            player.Inventory.OnEquipmentChanged += UpdateEquipment;
+
+            
             player.Inventory.OnGoldChanged += UpdateGold;
-            UpdateInven();
-            UpdateEquipment();
-            UpdateGold();
+
+            RefreshAll();
         }
     }
     private void Start()
     {
         Init();
     }
+
     private void OnEnable()
     {
         if (player == null) return;
-        UpdateInven();
-        UpdateEquipment();
-        UpdateGold();
+        RefreshAll();
     }
+
     private void OnDestroy()
     {
-        player.Inventory.OnInventoryChaneged -= UpdateInven;
-        player.Inventory.OnEquipmentChanged -= UpdateEquipment;
+        if (player == null) return;
         player.Inventory.OnGoldChanged -= UpdateGold;
     }
- 
-    public void UpdateInven()
+
+    public void RefreshAll()
     {
-        for(int i = 0;i < player.Inventory.Capacity; i++)
+        // 인벤토리 슬롯들 갱신
+        foreach (var slot in invenSlotUIs)
         {
-            if(player.Inventory.Inventory[i].IsEmpty() || player.Inventory.Inventory[i].item.Data.Sprite ==null)
-            {
-                inven[i].sprite = null;
-                inven[i].color = new Color(1, 1, 1, 0);
-            }
-            else
-            {
-                inven[i].sprite = player.Inventory.Inventory[i].item.Data.Sprite;
-                inven[i].color = new Color(1, 1, 1, 1);
-            }
+            slot.UpdateUI();
         }
-    }
-    public void UpdateEquipment()
-    {
-        for(int i = 0;i < player.Inventory.Equipments.Count;i++)
+
+        // 장비 슬롯들 갱신
+        foreach (var equipSlot in equipmentSlots)
         {
-            if (player.Inventory.Equipments[i].IsEmpty() || player.Inventory.Equipments[i].item.Data.Sprite == null)
-            {
-                equipments[i].sprite = null;
-                equipments[i].color = new Color(1, 1, 1, 0);
-            }
-            else
-            {
-                equipments[i].sprite = player.Inventory.Equipments[i].item.Data.Sprite;
-                equipments[i].color = new Color(1, 1, 1, 1);
-            }
+            equipSlot.UpdateUI();
         }
+
+        UpdateGold();
     }
 
     public void UpdateGold()

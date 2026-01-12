@@ -33,6 +33,7 @@ public class PlayerInventory
     //deligate
     public Action OnInventoryChaneged;
     public Action OnEquipmentChanged;
+    public Action OnEquipValueChanged;
     public Action OnGoldChanged;
     public void Init()
     {
@@ -119,6 +120,7 @@ public class PlayerInventory
         slot.Clear();
         OnInventoryChaneged?.Invoke();
         OnEquipmentChanged?.Invoke();
+        OnEquipValueChanged?.Invoke();
         return true ;
     }
     public bool RemoveEquipment( int index)
@@ -129,6 +131,7 @@ public class PlayerInventory
         equipments[index].Clear();
         OnInventoryChaneged?.Invoke();
         OnEquipmentChanged?.Invoke();
+        OnEquipValueChanged?.Invoke();
         return true;
     }
 

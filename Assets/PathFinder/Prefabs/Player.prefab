@@ -432,6 +432,7 @@ GameObject:
   - component: {fileID: 2779743018895666401}
   - component: {fileID: 6770090569558333613}
   - component: {fileID: 8045792580080694468}
+  - component: {fileID: 4289031933225192751}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -482,19 +483,13 @@ MonoBehaviour:
   inventory:
     inventory: []
     capacity: 40
-    equipments:
-    - item: {fileID: 11400000, guid: fb00f7eb0152a4e488ca741cdc7eb1c1, type: 2}
-      count: 1
-    - item: {fileID: 11400000, guid: 15452eff3846b7d4a8763e4081b246d5, type: 2}
-      count: 1
-    - item: {fileID: 11400000, guid: ce75807f8b836e94d9f3ab307c875283, type: 2}
-      count: 1
-    - item: {fileID: 11400000, guid: f78c028919d5f9642be15ade4fec135f, type: 2}
-      count: 1
+    equipments: []
     equipmentsCapacity: 4
+    gold: 1000
   skills:
-    skills: []
-    capacity: 20
+    activeSkills: []
+    activeCapacity: 0
+    passiveCapacity: 0
     skillequip:
     - skill: {fileID: 0}
       isCooltime: 0
@@ -3684,6 +3679,23 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.35}
   m_Size: {x: 0.5, y: 0.8}
   m_Direction: 0
+--- !u!114 &4289031933225192751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951564703607287117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8ca95a7850763744a9765f0edcf37a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 11400000, guid: fb00f7eb0152a4e488ca741cdc7eb1c1, type: 2}
+  helmet: {fileID: 11400000, guid: 15452eff3846b7d4a8763e4081b246d5, type: 2}
+  armor: {fileID: 11400000, guid: ce75807f8b836e94d9f3ab307c875283, type: 2}
+  shoes: {fileID: 11400000, guid: f78c028919d5f9642be15ade4fec135f, type: 2}
+  player: {fileID: 0}
 --- !u!1 &1048546200697678757
 GameObject:
   m_ObjectHideFlags: 0
