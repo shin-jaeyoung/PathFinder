@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Slash 1
   m_EditorClassIdentifier: 
   data:
-    skillName: 
+    skillName: testSwap
     prefab: {fileID: 0}
-    icon: {fileID: 0}
+    icon: {fileID: 5902650331669622779, guid: b04621f87db561d42b5d13d577608ac9, type: 3}
     skillType: 0
-    description: 
+    description: 55112233
     cooltime: 0
     damageMultiplier: 0
     duration: 0
