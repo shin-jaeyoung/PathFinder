@@ -62,7 +62,7 @@ public class PlayerStatusSystem
         }
         
         player.Skills.OnChangedPassiveSkill += UpdateFinalStat;
-        player.Inventory.OnEquipmentChanged += UpdateFinalStat;
+        player.Inventory.OnEquipValueChanged += UpdateFinalStat;
         OnStatChanged += UpdateStat;
 
         UpdateFinalStat();

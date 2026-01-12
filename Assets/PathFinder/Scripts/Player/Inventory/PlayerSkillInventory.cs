@@ -74,6 +74,11 @@ public class PlayerSkillInventory
     }
     public bool AddActiveSkill(Skill skill)
     {
+        SkillSlot slot = activeSkills.Find(s => !s.IsEmpty());
+        if(slot != null)
+        {
+            if (CheckDuplication(slot)) return false;
+        }
         SkillSlot emptySlot = activeSkills.Find(s => s.IsEmpty());
         if (emptySlot != null)
         {
@@ -112,7 +117,8 @@ public class PlayerSkillInventory
         {
             if (skillequip[i].skill == slot.skill)
             {
-                check = true; break;
+                check = true; 
+                break;
             }
         }
         return check;
