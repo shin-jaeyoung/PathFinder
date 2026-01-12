@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ public class SkillManager : MonoBehaviour
 {
     public static SkillManager instance;
 
+
+    public Action OnCooltimeReduced;
     private void Awake()
     {
         if(instance == null)
@@ -32,10 +35,11 @@ public class SkillManager : MonoBehaviour
         slot.isCooltime = true;
         float cooltime = slot.skill.Data.Cooltime;
         slot.currentCooltime = cooltime;
-        while(cooltime > 0)
+        while(slot.currentCooltime > 0)
         {
             if (slot.IsEmpty()) yield break;
             slot.currentCooltime -= Time.deltaTime;
+            OnCooltimeReduced?.Invoke();
             yield return null;
         }
         slot.currentCooltime = 0;

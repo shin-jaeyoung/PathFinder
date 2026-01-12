@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     [Header("Initial Stat")]
     [SerializeField]
@@ -83,7 +83,16 @@ public class Player : MonoBehaviour
     {
         stateMachine.ChangeState(dieState);
     }
-    
 
-    
+    public override void Active()
+    {
+        //나중에 인덱스를 받아서 쓰든 여기좀 바꿔봐야할듯
+        //skills.Skillequip[0].skill.Execute(this);
+        //바꾸면 컨트롤러쪽도 바꿔주기 이함수쓰게
+    }
+
+    public override void Hit(DamageInfo info)
+    {
+        
+    }
 }
