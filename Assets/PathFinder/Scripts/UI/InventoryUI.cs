@@ -113,4 +113,17 @@ public class InventoryUI : MonoBehaviour
             .Append(slot.item.Data.Description);
         explain.text = sb.ToString();
     }
+    public void UpdateExplain(EquipmentsSlot slot)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append(slot.item.Data.Name)
+            .AppendLine()
+            .AppendLine()
+            .Append(slot.item.Data.Description);
+        explain.text = sb.ToString();
+    }
+    public void ExplainReomote(bool onoff)
+    {
+        explainPanel.SetActive(onoff);
+    }
 }

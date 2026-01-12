@@ -2,19 +2,25 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class EquipmentSlotUI : SlotUI
+public class EquipmentSlotUI : SlotUI , IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] 
     private EquipmentType type;
     private int index;
 
+    InventoryUI ui;
 
     public int SlotIndex => index;
     private void Start()
     {
         index = (int)type;
+        ui = GetComponentInParent<InventoryUI>();
         player.Inventory.OnEquipmentChanged += UpdateUI;
         UpdateUI();
+    }
+    public EquipmentsSlot GetSlotData()
+    {
+        return player.Inventory.Equipments[index];
     }
 
     public override void UpdateUI()
@@ -24,13 +30,13 @@ public class EquipmentSlotUI : SlotUI
         {
             icon.sprite = slotData.item.Data.Sprite;
             icon.color = Color.white;
-            icon.gameObject.SetActive(true);
+            group.alpha = 1;
         }
         else
         {
             icon.sprite = null;
             icon.color = new Color(1, 1, 1, 0);
-            icon.gameObject.SetActive(false);
+            group.alpha = 0;
         }
     }
 
@@ -46,5 +52,18 @@ public class EquipmentSlotUI : SlotUI
             }
         }
         iconRect.anchoredPosition = Vector2.zero;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (GetSlotData().IsEmpty()) return;
+        ui?.ExplainReomote(true);
+        ui?.UpdateExplain(GetSlotData());
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (GetSlotData().IsEmpty()) return;
+        ui?.ExplainReomote(false);
     }
 }

@@ -3,13 +3,15 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class InventorySlotUI : SlotUI
+public class InventorySlotUI : SlotUI ,IPointerEnterHandler,IPointerExitHandler
 {
     [Header("Inventory Specific")]
     [SerializeField] 
     private TextMeshProUGUI countText;
 
-    private int slotIndex; 
+    private int slotIndex;
+    private InventoryUI ui;
+
 
     public int SlotIndex => slotIndex;
     public TextMeshProUGUI CountText => countText;
@@ -27,6 +29,7 @@ public class InventorySlotUI : SlotUI
 
     private void Start()
     {
+        ui = GetComponentInParent<InventoryUI>();
         player.Inventory.OnInventoryChaneged += UpdateUI;
         UpdateUI();
     }
@@ -98,5 +101,20 @@ public class InventorySlotUI : SlotUI
 
 
         player.Inventory.OnInventoryChaneged?.Invoke();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (GetSlotData().IsEmpty()) return;
+
+        ui?.ExplainReomote(true);
+        ui?.UpdateExplain(GetSlotData());
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (GetSlotData().IsEmpty()) return;
+
+        ui?.ExplainReomote(false);
     }
 }

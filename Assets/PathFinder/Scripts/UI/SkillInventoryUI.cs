@@ -21,7 +21,7 @@ public class SkillInventoryUI : MonoBehaviour
 
     [Header("Equipments")]
     [SerializeField]
-    private List<Image> equipSkill;
+    private GameObject equipContent;
 
     [Header("Inventory")]
     [SerializeField]
@@ -38,29 +38,52 @@ public class SkillInventoryUI : MonoBehaviour
     private TextMeshProUGUI explainDescription;
 
     private Player player;
-    private List<Image> activeSkillInven;
-    private List<Image> passiveSkillInven;
+    private List<SkillSlotUI> activeSkillInven;
+    private List<SkillSlotUI> passiveSkillInven;
 
+    private List<SkillSlotUI> equipSkill;
     public void Init()
     {
         if(GameManager.instance.Player!=null)
         {
             player = GameManager.instance.Player;
-            activeSkillInven = new List<Image>(player.Skills.ActiveCapacity);
-            passiveSkillInven = new List<Image>(player.Skills.PassiveCapacity);
+            activeSkillInven = new List<SkillSlotUI>(player.Skills.ActiveCapacity);
+            passiveSkillInven = new List<SkillSlotUI>(player.Skills.PassiveCapacity);
+            equipSkill = new List<SkillSlotUI> (player.Skills.EquipCapacity);
 
-            for (int i = 0; i < player.Skills.ActiveCapacity; i++)
+            for (int i = 0; i < activeContent.transform.childCount; i++)
             {
-                Image icon = activeContent.transform.GetChild(i).GetChild(0)?.GetComponent<Image>();
-                activeSkillInven.Add(icon);
+                SkillSlotUI slotUI = activeContent.transform.GetChild(i).GetComponent<SkillSlotUI>();
+                if(slotUI != null)
+                {
+                    slotUI.SetIndex(i);
+                    slotUI.GetSlotData();
+                    activeSkillInven.Add(slotUI);
+                }
             }
-            for(int i = 0; i <player.Skills.PassiveCapacity; i++)
+            for(int i = 0; i < passiveContent.transform.childCount; i++)
             {
-                Image icon = passiveContent.transform.GetChild(i).GetChild(0)?.GetComponent<Image>();
-                passiveSkillInven.Add(icon);
+                SkillSlotUI slotUI = passiveContent.transform.GetChild(i).GetComponent<SkillSlotUI>();
+                if (slotUI != null)
+                {
+                    slotUI.SetIndex(i);
+                    slotUI.GetSlotData();
+                    passiveSkillInven.Add(slotUI);
+                }
+            }
+            for (int i = 0; i< equipContent.transform.childCount; i++)
+            {
+                SkillSlotUI slotUI = equipContent.transform.GetChild(i).GetComponent<SkillSlotUI>();
+                if (slotUI != null)
+                {
+                    slotUI.SetIndex(i);
+                    slotUI.GetSlotData();
+                    equipSkill.Add(slotUI);
+                }
             }
             explainName.text = "";
             explainDescription.text = "IF click Skill Icon, you can see the skill's description";
+            UpdateAll();
         }
     }
     private void Start()
@@ -70,51 +93,37 @@ public class SkillInventoryUI : MonoBehaviour
         passiveButton.onClick.RemoveAllListeners();
         activeButton.onClick.AddListener(() => SwichTab(true));
         passiveButton.onClick.AddListener(()=>SwichTab(false));
-        player.Skills.OnChangedActiveSkill += UpdateActiveSkillInven;
-        player.Skills.OnChangedPassiveSkill += UpdatePassiveSkillInven;
+        
+    }
+    private void OnEnable()
+    {
+        if (player == null) return;
+        UpdateAll();
     }
     private void OnDestroy()
     {
         activeButton.onClick.RemoveAllListeners();
         passiveButton.onClick.RemoveAllListeners();
-        player.Skills.OnChangedActiveSkill -= UpdateActiveSkillInven;
-        player.Skills.OnChangedPassiveSkill -= UpdatePassiveSkillInven;
     }
     public void SwichTab(bool isActive)
     {
         activePanel.SetActive(isActive);
         passivePanel.SetActive(!isActive);
     }
-    public void UpdateActiveSkillInven()
+    
+    public void UpdateAll()
     {
-        for (int i = 0; i < player.Skills.ActiveCapacity; i++)
+        foreach(var slot in equipSkill)
         {
-            if (player.Skills.ActiveSkills[i].IsEmpty() || player.Skills.ActiveSkills[i].skill.Data.Icon == null)
-            {
-                activeSkillInven[i].sprite = null;
-                activeSkillInven[i].color = new Color(1, 1, 1, 0);
-            }
-            else
-            {
-                activeSkillInven[i].sprite = player.Skills.ActiveSkills[i].skill.Data.Icon;
-                activeSkillInven[i].color = new Color(1, 1, 1, 1);
-            }
+            slot.UpdateUI();
         }
-    }
-    public void UpdatePassiveSkillInven()
-    {
-        for (int i = 0; i < player.Skills.PassiveCapacity; i++)
+        foreach(var slot in activeSkillInven)
         {
-            if (player.Skills.PassiveSkills[i].IsEmpty() || player.Skills.PassiveSkills[i].passiveSkill.Data.Icon == null)
-            {
-                passiveSkillInven[i].sprite = null;
-                passiveSkillInven[i].color = new Color(1, 1, 1, 0);
-            }
-            else
-            {
-                passiveSkillInven[i].sprite = player.Skills.PassiveSkills[i].passiveSkill.Data.Icon;
-                passiveSkillInven[i].color = new Color(1, 1, 1, 1);
-            }
+            slot.UpdateUI();
+        }
+        foreach(var slot in passiveSkillInven)
+        {
+            slot.UpdateUI();
         }
     }
     public void UpdateExplain(SkillSlot activeSlot)

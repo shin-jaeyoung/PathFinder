@@ -8,6 +8,8 @@ public class TestScript : MonoBehaviour
     public Item helmet;
     public Item armor;
     public Item shoes;
+    public Skill testSkill;
+    public Skill testSwap;
 
     public Player player;
     void Start()
@@ -33,6 +35,14 @@ public class TestScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             player.Inventory.AddItem(shoes);
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            player.Skills.AddActiveSkill(testSkill);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            player.Skills.AddActiveSkill(testSwap);
         }
     }
 }

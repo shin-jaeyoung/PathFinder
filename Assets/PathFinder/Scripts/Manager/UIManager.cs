@@ -134,7 +134,7 @@ public class UIManager : MonoBehaviour
             if (data.uiprefab == null) continue;
 
             Transform targetCanvas = (data.type == UIType.HUD) ?
-                instantiatedCanvases[0].transform : instantiatedCanvases[1].transform;
+                instantiatedCanvases[1].transform : instantiatedCanvases[0].transform;
 
             GameObject panelGo = Instantiate(data.uiprefab, targetCanvas);
 
