@@ -36,6 +36,7 @@ public class HUDUI : MonoBehaviour
             player.StatusSystem.OnStatChanged += UpdateHp;
             player.Skills.OnChangedActiveSkill += UpdateSkillUI;
             player.Potion.OnChanged += UpdatePotionUI;
+            SkillManager.instance.OnCooltimeReduced += UpdateSkillUI;
             UpdateLevel();
             UpdateHp();
             UpdateSkillUI();
@@ -53,6 +54,7 @@ public class HUDUI : MonoBehaviour
             player.LevelSystem.OnExpChanged -= UpdateLevel;
             player.StatusSystem.OnStatChanged -= UpdateHp;
             player.Skills.OnChangedActiveSkill -= UpdateSkillUI;
+            SkillManager.instance.OnCooltimeReduced -= UpdateSkillUI;
             player.Potion.OnChanged -= UpdatePotionUI;
         }
     }
@@ -84,6 +86,14 @@ public class HUDUI : MonoBehaviour
             {
                 skillList[i].sprite = player.Skills.Skillequip[i].skill.Data.Icon;
                 skillList[i].color = new Color(1, 1, 1, 1);
+                var equipSkill = player.Skills.Skillequip[i];
+                if (equipSkill.isCooltime)
+                {
+                    skillList[i].type = Image.Type.Filled;
+                    skillList[i].fillMethod = Image.FillMethod.Radial360;
+                    skillList[i].fillClockwise = false;
+                    skillList[i].fillAmount = 1 - equipSkill.currentCooltime / equipSkill.skill.Data.Cooltime;
+                }
             }
         }
     }

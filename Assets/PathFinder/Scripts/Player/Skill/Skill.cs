@@ -18,5 +18,12 @@ public abstract class Skill : ScriptableObject
     }
 
     public abstract void Execute(ISkillActive caster);
+    
+    public IEnumerator SkillCooltime()
+    {
+        WaitForSeconds wait = new WaitForSeconds(data.Cooltime);
 
+        //while()
+        yield return wait;
+    }
 }

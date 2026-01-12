@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
         input.y = Input.GetAxisRaw("Vertical");
         player.InputVec = input.normalized;
 
+        //포션
         if (Input.GetKeyDown(KeyCode.C))
         {
             if (player.StatusSystem.Stat[PlayerStatType.CurHp] > 0)
@@ -35,15 +36,35 @@ public class PlayerController : MonoBehaviour
                 player.Potion.Use();
             }
         }
+
+        //상호작용
         if (Input.GetKeyDown(KeyCode.F))
         {
             Interaction();
         }
+        //스킬
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SkillManager.instance.UseSkill(player, player.Skills.Skillequip[0]);
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            SkillManager.instance.UseSkill(player, player.Skills.Skillequip[1]);
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SkillManager.instance.UseSkill(player, player.Skills.Skillequip[2]);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            SkillManager.instance.UseSkill(player, player.Skills.Skillequip[3]);
+        }
+
+        //이동관련
         if (input.x !=0)
         {
             player.FlipSprite(input.x);
         }
-
         if (input.x != 0 || input.y != 0)
         {
             player.StateMachine.ChangeState(player.MoveState);
