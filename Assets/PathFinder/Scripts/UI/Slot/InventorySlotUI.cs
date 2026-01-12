@@ -12,7 +12,7 @@ public class InventorySlotUI : SlotUI
     private int slotIndex; 
 
     public int SlotIndex => slotIndex;
-
+    public TextMeshProUGUI CountText => countText;
 
     public void SetIndex(int index)
     {

@@ -4,6 +4,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -41,7 +42,17 @@ public class InventoryUI : MonoBehaviour
                 InventorySlotUI slotUI = content.transform.GetChild(i).GetComponent<InventorySlotUI>();
                 if (slotUI != null)
                 {
-                    slotUI.SetIndex(i); 
+                    slotUI.SetIndex(i);
+                    InventorySlot data = slotUI.GetSlotData();
+                    if (data.count > 1)
+                    {
+                        slotUI.CountText.text = data.count.ToString();
+                        slotUI.CountText.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        slotUI.CountText.gameObject.SetActive(false);
+                    }
                     invenSlotUIs.Add(slotUI);
                 }
             }
