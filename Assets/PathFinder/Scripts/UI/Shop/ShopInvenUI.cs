@@ -17,7 +17,7 @@ public class ShopInvenUI : MonoBehaviour
     {
         for(int i = 0; i<inventory.Count; i++)
         {
-            if (inventory[i] == null)
+            if (inventory[i].IsEmpty())
             {
                 shopinvenSlots[i].RefreshUI(null, 0);
             }
