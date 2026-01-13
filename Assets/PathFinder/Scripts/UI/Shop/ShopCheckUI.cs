@@ -18,12 +18,14 @@ public class ShopCheckUI : MonoBehaviour
 
     private void Start()
     {
+        
         yes.onClick.RemoveAllListeners();
         no.onClick.RemoveAllListeners();
         yes.onClick.AddListener(() =>
         {
             //판매로직
             //ShopManager.instance.Sell((int)inputText) 이렇게?
+            inputField.gameObject.SetActive(false);
         });
         no.onClick.AddListener(() =>
         {
@@ -31,7 +33,11 @@ public class ShopCheckUI : MonoBehaviour
             gameObject.SetActive(false);
         });
     }
-
+    private void OnEnable()
+    {
+        
+        inputField.gameObject.SetActive(false);
+    }
     public void RefreshBuyUI()
     {
 

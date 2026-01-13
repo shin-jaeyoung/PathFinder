@@ -20,32 +20,36 @@ public class ShopPresenter : MonoBehaviour
     StringBuilder sb = new StringBuilder();
 
     private Player player;
-
+    private void OnEnable()
+    {
+        checkUI.gameObject.SetActive(false);
+        explainUI.gameObject.SetActive(false);
+    }
     private void Start()
     {
         player = GameManager.instance.Player;
         player.Inventory.OnInventoryChaneged += RefreshShopInvenUI;
         player.Inventory.OnGoldChanged += RefreshGold;
-        checkUI.gameObject.SetActive(false);
-        explainUI.gameObject.SetActive(false);
 
         for (int i = 0; i<shopInvenUI.shopinvenSlots.Count; i++)
         {
-            var item = player.Inventory.Inventory[i].item;
+            int currentIndex = i;
+            
             shopInvenUI.shopinvenSlots[i].OnPointerEntered += () =>
             {
-                sb.Clear();
-                if (item == null)
+
+                if (player.Inventory.Inventory[currentIndex].IsEmpty())
                 {
                     explainUI.gameObject.SetActive(false);
                     return;
                 }
-                sb.Append("Name : ").Append(item.Data.Name)
-                    .AppendLine().Append("Price : ").Append(item.Data.Price)
-                    .AppendLine().Append(item.Data.Description);
+                sb.Clear();
+                sb.Append("Name : ").Append(player.Inventory.Inventory[currentIndex].item.Data.Name)
+                    .AppendLine().Append("Price : ").Append(player.Inventory.Inventory[currentIndex].item.Data.Price)
+                    .AppendLine().Append(player.Inventory.Inventory[currentIndex].item.Data.Description);
 
                 explainUI.RefreshUI(sb.ToString());
-                explainUI.transform.position = shopInvenUI.shopinvenSlots[i].transform.position;
+                explainUI.transform.position = shopInvenUI.shopinvenSlots[currentIndex].transform.position;
                 explainUI.gameObject.SetActive(true);
             };
             shopInvenUI.shopinvenSlots[i].OnPointerExitted += () =>
@@ -54,8 +58,11 @@ public class ShopPresenter : MonoBehaviour
             };
             shopInvenUI.shopinvenSlots[i].OnPointerClicked += () =>
             {
-                //TODO : Shopmanager의 커런트아이템(셀렉아이템)을 할당해주고
-                checkUI.gameObject.SetActive(true);
+                if (!player.Inventory.Inventory[currentIndex].IsEmpty())
+                {
+                    //TODO : Shopmanager의 커런트아이템(셀렉아이템)을 할당해주고
+                    checkUI.gameObject.SetActive(true);
+                }
             };
         }
         RefreshShopInvenUI();
