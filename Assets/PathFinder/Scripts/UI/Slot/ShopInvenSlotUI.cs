@@ -19,8 +19,16 @@ public class ShopInvenSlotUI : MonoBehaviour , IPointerEnterHandler,IPointerExit
     public void RefreshUI(Sprite sprite,int count)
     {
         image.gameObject.SetActive(sprite != null);
+
         this.image.sprite = sprite;
-        this.count.text = count.ToString();
+        if(count > 1)
+        {
+            this.count.text = count.ToString();
+        }
+        else
+        {
+            this.count.gameObject.SetActive(false);
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)

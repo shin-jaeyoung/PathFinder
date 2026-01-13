@@ -72,3 +72,6 @@ MonoBehaviour:
   - type: 6
     uiprefab: {fileID: 6464240396808845816, guid: 6b94f9590bbbb06498e2c2aa1fe23e1b,
       type: 3}
+  - type: 10
+    uiprefab: {fileID: 1210009006432414531, guid: 65ced5a35a2e97641abbb6471e213d40,
+      type: 3}

@@ -17,7 +17,14 @@ public class ShopInvenUI : MonoBehaviour
     {
         for(int i = 0; i<inventory.Count; i++)
         {
-            shopinvenSlots[i].RefreshUI(inventory[i].item.Data.Sprite, inventory[i].count);
+            if (inventory[i] == null)
+            {
+                shopinvenSlots[i].RefreshUI(null, 0);
+            }
+            else
+            {
+                shopinvenSlots[i].RefreshUI(inventory[i].item.Data.Sprite, inventory[i].count);
+            }
         }
     }
 

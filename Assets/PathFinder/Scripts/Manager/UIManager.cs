@@ -13,7 +13,7 @@ public enum UIType
     Skill,
     HUD,
     Dialogue,
-
+    Shop,
 
 
 

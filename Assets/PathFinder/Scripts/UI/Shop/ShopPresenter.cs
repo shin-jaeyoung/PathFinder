@@ -26,6 +26,8 @@ public class ShopPresenter : MonoBehaviour
         player = GameManager.instance.Player;
         player.Inventory.OnInventoryChaneged += RefreshShopInvenUI;
         player.Inventory.OnGoldChanged += RefreshGold;
+        checkUI.gameObject.SetActive(false);
+        explainUI.gameObject.SetActive(false);
 
         for (int i = 0; i<shopInvenUI.shopinvenSlots.Count; i++)
         {
@@ -33,7 +35,11 @@ public class ShopPresenter : MonoBehaviour
             shopInvenUI.shopinvenSlots[i].OnPointerEntered += () =>
             {
                 sb.Clear();
-
+                if (item == null)
+                {
+                    explainUI.gameObject.SetActive(false);
+                    return;
+                }
                 sb.Append("Name : ").Append(item.Data.Name)
                     .AppendLine().Append("Price : ").Append(item.Data.Price)
                     .AppendLine().Append(item.Data.Description);
@@ -52,6 +58,8 @@ public class ShopPresenter : MonoBehaviour
                 checkUI.gameObject.SetActive(true);
             };
         }
+        RefreshShopInvenUI();
+        RefreshGold();
     }
     private void OnDestroy()
     {
