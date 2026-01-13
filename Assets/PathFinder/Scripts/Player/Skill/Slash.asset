@@ -18,6 +18,6 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 85ecb2f1dc34e22468a7dc7ac5d23071, type: 3}
     skillType: 0
     description: 12341234
-    cooltime: 0
+    cooltime: 3
     damageMultiplier: 0
     duration: 0
