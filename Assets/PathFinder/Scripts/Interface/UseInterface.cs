@@ -26,7 +26,10 @@ public interface IInteractable
 {
     public void Interact(Player player);
 }
-
+public interface ISpecialInteractable
+{
+    public void SpecialInteract();
+}
 //Player
 
 public interface ISkillActive
