@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab7918c1aee5ee47bc6c7d8a80e9d12, type: 3}
   m_Name: TestDialogue
   m_EditorClassIdentifier: 
-  dialogues: []
+  dialogues:
+  - Hi
+  - Bye

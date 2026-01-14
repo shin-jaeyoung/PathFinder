@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffe99ea846f5c5e4d9a7afaa0d552e8a, type: 3}
   m_Name: NpcSOTest
   m_EditorClassIdentifier: 
-  npcName: 
-  npcID: 0
+  npcName: TestNpc
+  npcID: 999
