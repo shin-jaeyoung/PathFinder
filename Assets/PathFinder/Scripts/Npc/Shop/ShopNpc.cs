@@ -2,17 +2,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopNpc : MonoBehaviour, IInteractable
+[System.Serializable]
+public class ShopNpc : SpecialNpc, ISpecialInteractable
 {
-    //상점 데이터
+    public ShopSO shopSO;
+    public bool isShopOpen = false;
 
-    public void Interact(Player player)
+    public override void SpecialInteract()
     {
-        //상점매니저에 데이터 전송
-        //여기에 대화가 끝나면 상점열기도 가능 델리게이트에 넣어서
-        //매니저는 데이터로 상점 리빌딩
-        //그다음 상점 열기
+        if (isShopOpen)
+        {
+            CloseShop();
+        }
+        else
+        {
+            OpenShop();
+        }
+    }
+    public void OpenShop()
+    {
         Debug.Log("상점오픈");
+        //Shopmanager한테 본인 정보 넘겨줘야함
         UIManager.Instance.Showonly(UIType.Shop);
+        isShopOpen = true;
+    }
+    public void CloseShop()
+    {
+        UIManager.Instance.HideUI(UIType.Shop);
+        isShopOpen = false;
+        isInteractFinish = true;
+    }
+    public void Init()
+    {
+        UIManager.Instance.Showonly(UIType.HUD);
+        isShopOpen = false;
+        isInteractFinish = false;
+    }
+    public void NoticeData(ShopSO shopSO)
+    {
+
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision != null)
+        {
+            if(collision.GetComponent<Player>()!=null)
+            {
+                Init();
+            }
+        }
     }
 }
