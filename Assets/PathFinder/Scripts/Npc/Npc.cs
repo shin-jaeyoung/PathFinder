@@ -11,6 +11,9 @@ public enum NpcType
 }
 public class Npc : MonoBehaviour ,IInteractable
 {
+    [Header("NpcData")]
+    [SerializeField]
+    private NpcSO data;
     [Header("Npc's specialActions")]
     [SerializeField]
     private List<NpcType> npcTypes;
@@ -27,11 +30,13 @@ public class Npc : MonoBehaviour ,IInteractable
             if(type == NpcType.Dialogue)
             {
                 DialogueNpc npc = GetComponent<DialogueNpc>();
+                npc.SetNpc(this);
                 specialNpcs.Add(npc);
             }
             if(type == NpcType.Shop)
             {
                 ShopNpc npc = GetComponent<ShopNpc>();
+                npc.SetNpc(this);
                 specialNpcs.Add(npc);
             }
             if(type == NpcType.Healer)
@@ -45,14 +50,15 @@ public class Npc : MonoBehaviour ,IInteractable
     {
         if(specialNpcs.Count>0)
         {
-            if(curNpcIndex >= specialNpcs.Count)
-            {
-                curNpcIndex = 0;
-            }
+            
             if (specialNpcs[curNpcIndex].isInteractFinish)
             {
                 specialNpcs[curNpcIndex].isInteractFinish = false;
                 curNpcIndex++;
+                if (curNpcIndex >= specialNpcs.Count)
+                {
+                    curNpcIndex = 0;
+                }
             }
             specialNpcs[curNpcIndex].SpecialInteract();
             

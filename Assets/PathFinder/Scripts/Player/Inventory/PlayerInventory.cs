@@ -154,4 +154,20 @@ public class PlayerInventory
             }
         }
     }
+    public void AddGold(int amount)
+    {
+        gold += amount;
+        OnGoldChanged?.Invoke();
+    }
+    public bool ReduceGold(int amount)
+    {
+        if(gold < amount)
+        {
+            Debug.Log("소지금이 부족합니다");
+            return false;
+        }
+        gold -= amount;
+        OnGoldChanged?.Invoke();
+        return true;
+    }
 }

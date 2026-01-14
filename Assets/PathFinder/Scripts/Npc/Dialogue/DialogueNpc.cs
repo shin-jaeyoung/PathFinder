@@ -5,11 +5,16 @@ using UnityEngine;
 [System.Serializable]
 public class DialogueNpc : SpecialNpc, ISpecialInteractable
 {
+    public Npc npc;
     public DialogueSO dialogueSO;
     public string curDialogueText;
     private int curIndex = 0;
     public bool isTalk = false;
 
+    public void SetNpc(Npc npc)
+    {
+        this.npc = npc;
+    }
     public override void SpecialInteract()
     {
         if (!isTalk)
