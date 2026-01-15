@@ -84,7 +84,7 @@ public class PlayerInventory
         if(slot.IsEmpty()) return false;
         if(slot.item is ExtraItem extra)
         {
-            if(slot.count>amount)
+            if(slot.count>=amount)
             {
                 slot.count -= amount;
                 if(slot.count ==0)
@@ -167,6 +167,8 @@ public class PlayerInventory
             return false;
         }
         gold -= amount;
+        Debug.Log($"{amount} G 사용");
+        Debug.Log($"현재 골드 : {gold}");
         OnGoldChanged?.Invoke();
         return true;
     }

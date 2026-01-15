@@ -10,7 +10,7 @@ public class TestScript : MonoBehaviour
     public Item shoes;
     public Skill testSkill;
     public Skill testSwap;
-
+    public Item extraItem;
     public Player player;
     void Start()
     {
@@ -43,6 +43,10 @@ public class TestScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
             player.Skills.AddActiveSkill(testSwap);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            player.Inventory.AddItem(extraItem);
         }
     }
 }
