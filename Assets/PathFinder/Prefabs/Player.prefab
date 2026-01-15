@@ -5999,6 +5999,7 @@ MonoBehaviour:
   shoes: {fileID: 11400000, guid: f78c028919d5f9642be15ade4fec135f, type: 2}
   testSkill: {fileID: 11400000, guid: f4896f47762bc574fa9b013680b9be6a, type: 2}
   testSwap: {fileID: 11400000, guid: 9310227b09568064a8e8f6a6e22dd5d6, type: 2}
+  extraItem: {fileID: 11400000, guid: e2e1d54367eefa94e974bf7001020193, type: 2}
   player: {fileID: 0}
 --- !u!1 &5626902304530670762
 GameObject:

@@ -22,6 +22,7 @@ public class ShopInvenSlotUI : MonoBehaviour , IPointerEnterHandler,IPointerExit
         this.image.sprite = sprite;
         if(count > 1)
         {
+            this.count.gameObject.SetActive(true);
             this.count.text = count.ToString();
         }
         else

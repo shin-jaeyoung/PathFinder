@@ -84,7 +84,7 @@ public class PlayerInventory
         if(slot.IsEmpty()) return false;
         if(slot.item is ExtraItem extra)
         {
-            if(slot.count>amount)
+            if(slot.count>=amount)
             {
                 slot.count -= amount;
                 if(slot.count ==0)
