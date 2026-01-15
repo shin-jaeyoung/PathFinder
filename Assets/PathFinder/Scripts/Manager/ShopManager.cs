@@ -66,6 +66,7 @@ public class ShopManager : MonoBehaviour
     public void Buy()
     {
         int gold = selectedItem.Data.Price;
+        Debug.Log($"구매가격 : {gold}");
         if (player.Inventory.ReduceGold(gold * count))
         {
             player.Inventory.AddItem(selectedItem);

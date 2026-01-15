@@ -44,5 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d82f34af8ac12c348bde02e9a26c9905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curShopNpc: {fileID: 0}
+  isSell: 0
   selectedItem: {fileID: 0}
-  count: 0
+  playerinvenIndex: 0
+  count: 1

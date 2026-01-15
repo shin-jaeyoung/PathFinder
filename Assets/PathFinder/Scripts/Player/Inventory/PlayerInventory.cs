@@ -167,6 +167,8 @@ public class PlayerInventory
             return false;
         }
         gold -= amount;
+        Debug.Log($"{amount} G 사용");
+        Debug.Log($"현재 골드 : {gold}");
         OnGoldChanged?.Invoke();
         return true;
     }
