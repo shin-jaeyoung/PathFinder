@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static SoonsoonData;
 
 public class SkillSlotUI : SlotUI ,IPointerClickHandler
 {
