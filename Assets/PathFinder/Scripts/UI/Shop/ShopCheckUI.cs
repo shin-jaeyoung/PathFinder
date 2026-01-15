@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,8 @@ public class ShopCheckUI : MonoBehaviour
     [Header("Input")]
     public TMP_InputField inputField;
     public TextMeshProUGUI inputText;
+
+    private int count;
     [Header("Button")]
     public Button yes;
     public Button no;
@@ -24,8 +27,31 @@ public class ShopCheckUI : MonoBehaviour
         yes.onClick.AddListener(() =>
         {
             //판매로직
+            string input = inputText.text;
+            if(inputField.gameObject.activeSelf)
+            {
+                if (int.TryParse(input, out count))
+                {
+                    Debug.Log("저장 성공: " + count);
+                    ShopManager.instance.count = count;
+                }
+                else
+                {
+                        Debug.LogError("숫자만 입력해주세요!");
+                }
+            }
+            if (ShopManager.instance.isSell)
+            {
+                ShopManager.instance.Sell();
+            }
+            else
+            {
+                ShopManager.instance.Buy();
+            }
             //ShopManager.instance.Sell((int)inputText) 이렇게?
+            
             inputField.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         });
         no.onClick.AddListener(() =>
         {
@@ -40,7 +66,7 @@ public class ShopCheckUI : MonoBehaviour
     }
     public void RefreshBuyUI()
     {
-
+        checkText.text = "Buy?";
     }
     public void RefreshSellUI(int count =1)
     {

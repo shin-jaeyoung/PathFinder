@@ -60,7 +60,10 @@ public class ShopPresenter : MonoBehaviour
                 {
                     if (!shopUI.shopSlots[currentIndex].IsEmpty())
                     {
-                        //TODO : Shopmanager의 커런트아이템(셀렉아이템)을 할당해주고
+                        //TODO : Shopmanager의 커런트아이템(셀렉아이템)을 할당해주고 구매라는거 알려줘야함
+                        ShopManager.instance.isSell = false; //사용자가 구매하는것
+                        ShopManager.instance.selectedItem = shopUI.shopSlots[currentIndex].item;
+                        checkUI.RefreshBuyUI();
                         checkUI.gameObject.SetActive(true);
                     }
                 };
@@ -114,6 +117,10 @@ public class ShopPresenter : MonoBehaviour
                 if (!player.Inventory.Inventory[currentIndex].IsEmpty())
                 {
                     //TODO : Shopmanager의 커런트아이템(셀렉아이템)을 할당해주고
+                    ShopManager.instance.isSell = true; //사용자가 판매하는것
+                    ShopManager.instance.selectedItem = player.Inventory.Inventory[currentIndex].item;
+                    ShopManager.instance.playerinvenIndex = currentIndex;
+                    checkUI.RefreshSellUI(player.Inventory.Inventory[currentIndex].count);
                     checkUI.gameObject.SetActive(true);
                 }
             };
@@ -127,7 +134,6 @@ public class ShopPresenter : MonoBehaviour
     {
         player.Inventory.OnInventoryChaneged -= RefreshShopInvenUI;
         player.Inventory.OnGoldChanged -= RefreshGold;
-        //람다식은 해제를 어떻게 하지?
     }
     public void RefreshShopInvenUI()
     {

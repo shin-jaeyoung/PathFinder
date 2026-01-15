@@ -15,7 +15,6 @@ public class ShopInvenSlotUI : MonoBehaviour , IPointerEnterHandler,IPointerExit
     public event Action OnPointerExitted;
     public event Action OnPointerClicked;
 
-
     public void RefreshUI(Sprite sprite,int count)
     {
         image.gameObject.SetActive(sprite != null);

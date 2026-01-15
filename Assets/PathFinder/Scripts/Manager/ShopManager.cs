@@ -8,8 +8,9 @@ public class ShopManager : MonoBehaviour
 
     private Npc curNpc;
     public ShopNpc curShopNpc;
-
+    public bool isSell;
     public Item selectedItem;
+    public int playerinvenIndex;
     public int count;
 
     private Player player;
@@ -21,7 +22,7 @@ public class ShopManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
@@ -33,7 +34,7 @@ public class ShopManager : MonoBehaviour
     }
     private void Start()
     {
-        if(GameManager.instance.Player !=null)
+        if (GameManager.instance.Player != null)
         {
             player = GameManager.instance.Player;
         }
@@ -48,20 +49,28 @@ public class ShopManager : MonoBehaviour
         curNpc = null;
         curShopNpc = null;
     }
-    public void Sell(int index, int count = 1)
+    public void ClearItemInfo()
+    {
+        selectedItem = null;
+        playerinvenIndex = -1;
+        count = 1;
+    }
+    public void Sell()
     {
         int gold = selectedItem.Data.Price;
         player.Inventory.AddGold(gold * count);
-        player.Inventory.Inventory[index].Clear();
-        selectedItem = null;
+        player.Inventory.RemoveItem(player.Inventory.Inventory[playerinvenIndex], count);
+        Debug.Log("판매성공");
+        ClearItemInfo();
     }
-    public void Buy(int count = 1)
+    public void Buy()
     {
         int gold = selectedItem.Data.Price;
-        if(player.Inventory.ReduceGold(gold * count))
+        if (player.Inventory.ReduceGold(gold * count))
         {
             player.Inventory.AddItem(selectedItem);
+            Debug.Log("구매성공");
         }
-        selectedItem = null;
+        ClearItemInfo();
     }
 }
