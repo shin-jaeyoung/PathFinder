@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static SoonsoonData;
 
 public class PassiveSkillSlotUI : SlotUI
 {
