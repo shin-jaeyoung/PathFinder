@@ -45,6 +45,7 @@ public class Player : Entity
     public PlayerIdleState IdleState = new PlayerIdleState();
     public PlayerMoveState MoveState = new PlayerMoveState();
     public PlayerDieState dieState = new PlayerDieState();
+    public PlayerHitState hitState = new PlayerHitState();
     public PlayerAttackState AttackState = new PlayerAttackState();
     private void Awake()
     {
@@ -60,6 +61,7 @@ public class Player : Entity
         stateMachine.AddState(StateType.Idle, IdleState);
         stateMachine.AddState(StateType.Move, MoveState);
         stateMachine.AddState(StateType.Attack, AttackState);
+        stateMachine.AddState(StateType.Hit, hitState);
         stateMachine.AddState(StateType.Die, dieState);
 
         StateMachine.ChangeState(StateType.Idle);

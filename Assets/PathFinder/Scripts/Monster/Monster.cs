@@ -10,7 +10,7 @@ public class Monster : Entity
     private List<Skill> skills;
 
 
-    public override void Active()
+    public override void Active(int index)
     {
         
     }

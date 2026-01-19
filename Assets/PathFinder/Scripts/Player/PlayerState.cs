@@ -15,7 +15,10 @@ public class PlayerMoveState : PlayerStateBase
     {
         owner.Animator.SetBool("Move", false);
     }
-
+    public override void Update()
+    {
+        
+    }
     public override void FixedUpdate()
     {
      
@@ -32,6 +35,15 @@ public class PlayerIdleState : PlayerStateBase
         owner.Rb.velocity = Vector2.zero;
     }
 
+    public override void Exit()
+    {
+        
+    }
+
+    public override void Update()
+    {
+        
+    }
 }
 public class PlayerAttackState : PlayerStateBase
 {
