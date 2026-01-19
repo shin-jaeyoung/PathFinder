@@ -34,7 +34,7 @@ public interface ISpecialInteractable
 
 public interface ISkillActive
 {
-    public void Active();
+    public void Active(int index);
 }
 //Monster
 

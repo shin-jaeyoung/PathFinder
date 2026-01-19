@@ -57,11 +57,12 @@ public class Player : Entity
         skills.Init();
 
         stateMachine = new StateMachine<Player>(this);
-        IdleState.Setup(this, StateMachine);
-        MoveState.Setup(this, StateMachine);
-        dieState.Setup(this, StateMachine);
-        AttackState.Setup(this, StateMachine);
-        StateMachine.ChangeState(IdleState);
+        stateMachine.AddState(StateType.Idle, IdleState);
+        stateMachine.AddState(StateType.Move, MoveState);
+        stateMachine.AddState(StateType.Attack, AttackState);
+        stateMachine.AddState(StateType.Die, dieState);
+
+        StateMachine.ChangeState(StateType.Idle);
 
         potion = GetComponent<HpPotion>();
 
@@ -81,14 +82,12 @@ public class Player : Entity
     }
     public void Die()
     {
-        stateMachine.ChangeState(dieState);
+        stateMachine.ChangeState(StateType.Die);
     }
 
-    public override void Active()
+    public override void Active(int index)
     {
-        //나중에 인덱스를 받아서 쓰든 여기좀 바꿔봐야할듯
-        //skills.Skillequip[0].skill.Execute(this);
-        //바꾸면 컨트롤러쪽도 바꿔주기 이함수쓰게
+        SkillManager.instance.UseSkill(this, skills.Skillequip[index]);
     }
 
     public override void Hit(DamageInfo info)
