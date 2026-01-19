@@ -23,7 +23,10 @@ public class PlayerController : MonoBehaviour
     {
         if (player == null) return;
         if (player.StateMachine == null)return;
-        
+
+        //죽으면 키 꺼버리기
+        if (player.StateMachine.CurState == player.StateMachine.stateDic[StateType.Die]) return;
+
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
         player.InputVec = input.normalized;
@@ -45,19 +48,19 @@ public class PlayerController : MonoBehaviour
         //스킬
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            SkillManager.instance.UseSkill(player, player.Skills.Skillequip[0]);
+            player.Active(0);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            SkillManager.instance.UseSkill(player, player.Skills.Skillequip[1]);
+            player.Active(1);
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SkillManager.instance.UseSkill(player, player.Skills.Skillequip[2]);
+            player.Active(2);
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            SkillManager.instance.UseSkill(player, player.Skills.Skillequip[3]);
+            player.Active(3);
         }
 
         //이동관련
@@ -67,11 +70,11 @@ public class PlayerController : MonoBehaviour
         }
         if (input.x != 0 || input.y != 0)
         {
-            player.StateMachine.ChangeState(player.MoveState);
+            player.StateMachine.ChangeState(StateType.Move);
         }
         else
         {
-            player.StateMachine.ChangeState(player.IdleState);
+            player.StateMachine.ChangeState(StateType.Idle);
         }
     }
     public void Interaction()

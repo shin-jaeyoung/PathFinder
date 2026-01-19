@@ -12,7 +12,6 @@ public abstract class Monster : Entity
     protected List<Skill> skills;
 
     protected StateMachine<Monster> stateMachine;
-
     protected float curHp;
 
     public float CurHp
@@ -41,9 +40,9 @@ public abstract class Monster : Entity
         InitStart();
     }
     protected abstract void InitStart();
-    public override void Active()
+    public override void Active(int index)
     {
-        //스킬 랜덤 발동
+        //스킬 랜덤 발동 함수 따로 만들기
         int randomNum = UnityEngine.Random.Range(0, skills.Count);
         skills[randomNum].Execute(this);
     }
