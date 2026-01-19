@@ -50,7 +50,7 @@ public class PlayerAttackState : PlayerStateBase
     
     public override void Enter()
     {
-        
+        owner.Animator.SetTrigger("Attack");
     }
 
     public override void Exit()
@@ -68,7 +68,7 @@ public class PlayerHitState : PlayerStateBase
 
     public override void Enter()
     {
-        
+        owner.Animator.SetTrigger("Damaged");
     }
 
     public override void Exit()
@@ -86,12 +86,13 @@ public class PlayerDieState : PlayerStateBase
 
     public override void Enter()
     {
-        
+        owner.Animator.SetTrigger("Death");
+        owner.Animator.SetBool("isDeath", true);
     }
 
     public override void Exit()
     {
-
+        owner.Animator.SetBool("isDeath", false);
     }
 
     public override void Update()

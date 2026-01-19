@@ -23,7 +23,10 @@ public class PlayerController : MonoBehaviour
     {
         if (player == null) return;
         if (player.StateMachine == null)return;
-        
+
+        //죽으면 키 꺼버리기
+        if (player.StateMachine.CurState == player.StateMachine.stateDic[StateType.Die]) return;
+
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
         player.InputVec = input.normalized;

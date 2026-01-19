@@ -94,6 +94,6 @@ public class Player : Entity
 
     public override void Hit(DamageInfo info)
     {
-        
+        stateMachine.ChangeState(StateType.Hit);
     }
 }
