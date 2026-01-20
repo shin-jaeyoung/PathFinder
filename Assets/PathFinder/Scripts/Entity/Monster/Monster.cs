@@ -9,7 +9,10 @@ public abstract class Monster : Entity
     [SerializeField]
     protected MonsterData data;
     [SerializeField]
-    protected List<Skill> skills;
+    protected List<SkillSlot> skills;
+    [Header("Combat")]
+    [SerializeField]
+    protected  CombatSystem combatSystem;
 
     protected StateMachine<Monster> stateMachine;
     protected float curHp;
@@ -37,19 +40,33 @@ public abstract class Monster : Entity
 
     private void Start()
     {
+        BaseInit();
         InitStart();
+    }
+    public void BaseInit()
+    {
+        combatSystem.Init(this);
+        stateMachine = new StateMachine<Monster>(this);
+        curHp = data.MaxHp;
     }
     protected abstract void InitStart();
     public override void Active(int index)
     {
-        //스킬 랜덤 발동 함수 따로 만들기
-        int randomNum = UnityEngine.Random.Range(0, skills.Count);
-        skills[randomNum].Execute(this);
+        combatSystem.PerformSkill(skills[index]);
+        stateMachine.ChangeState(StateType.Attack);
     }
 
     public override void Hit(DamageInfo info)
     {
-        //나중에 세부 계산식이 들어가야함
-        CurHp -= info.damage;
+        float finalDamage = combatSystem.Hit(info.damage, data.Defence);
+        CurHp -= finalDamage;
+    }
+    public override float GetAttackPower()
+    {
+        return data.Atk;
+    }
+    public override EntityType GetEntityType()
+    {
+        return EntityType.Monster;
     }
 }
