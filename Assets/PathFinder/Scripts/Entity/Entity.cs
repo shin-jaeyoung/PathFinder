@@ -12,4 +12,5 @@ public abstract class Entity : MonoBehaviour, ISkillActive, IHittable
     public abstract EntityType GetEntityType();
     public abstract void Active(int index);
     public abstract void Hit(DamageInfo info);
+    public abstract Vector2 LookForward();
 }

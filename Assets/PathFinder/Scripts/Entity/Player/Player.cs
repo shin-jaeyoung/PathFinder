@@ -110,4 +110,8 @@ public class Player : Entity
     {
         return EntityType.Player;
     }
+    public override Vector2 LookForward()
+    {
+        return Vector2.zero;
+    }
 }

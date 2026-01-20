@@ -69,4 +69,8 @@ public abstract class Monster : Entity
     {
         return EntityType.Monster;
     }
+    public override Vector2 LookForward()
+    {
+        return transform.right;
+    }
 }
