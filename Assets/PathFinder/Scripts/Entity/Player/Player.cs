@@ -20,8 +20,10 @@ public class Player : Entity
     [Header("Skill")]
     [SerializeField]
     private PlayerSkillInventory skills;
-    
 
+    [Header("Combat")]
+    [SerializeField]
+    private CombatSystem combatSystem;
 
     [SerializeField]
     private Animator animator;
@@ -56,6 +58,7 @@ public class Player : Entity
         statusSystem.Init(initStat);
         inventory.Init();
         skills.Init();
+        combatSystem.Init(this);
 
         stateMachine = new StateMachine<Player>(this);
         stateMachine.AddState(StateType.Idle, IdleState);
@@ -89,11 +92,22 @@ public class Player : Entity
 
     public override void Active(int index)
     {
-        SkillManager.instance.UseSkill(this, skills.Skillequip[index]);
+        combatSystem.PerformSkill(skills.Skillequip[index]);
+        stateMachine.ChangeState(StateType.Attack);
     }
 
     public override void Hit(DamageInfo info)
     {
+        float finalDamage = combatSystem.Hit(info.damage, statusSystem.Stat[PlayerStatType.Armor]);
+        statusSystem.ReduceStat(PlayerStatType.CurHp, (int)finalDamage);
         stateMachine.ChangeState(StateType.Hit);
+    }
+    public override float GetAttackPower()
+    {
+        return statusSystem.Stat[PlayerStatType.Power];
+    }
+    public override EntityType GetEntityType()
+    {
+        return EntityType.Player;
     }
 }
