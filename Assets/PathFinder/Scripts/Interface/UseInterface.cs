@@ -35,6 +35,7 @@ public interface ISpecialInteractable
 public interface ISkillActive
 {
     public void Active(int index);
+    public Vector2 LookForward();
 }
 //Monster
 
