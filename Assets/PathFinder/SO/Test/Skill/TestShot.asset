@@ -21,8 +21,9 @@ MonoBehaviour:
     description: testShot please
     cooltime: 3
     damageMultiplier: 1
-    duration: 0
+    duration: 3
+    spriteRotation: -90
   shotSpeed: 3
-  count: 2
-  shotDelay: 0.3
-  spawnDistance: 1
+  count: 3
+  shotDelay: 0.2
+  spawnDistance: 0.3

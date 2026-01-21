@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: TestSlash
   m_EditorClassIdentifier: 
   data:
-    skillName: 
+    skillName: TestSlash
     prefab: {fileID: 0}
-    icon: {fileID: 0}
+    icon: {fileID: -2407324949086632672, guid: 0d7d0bf8307514eaf81aa72f558d3fb4, type: 3}
     skillType: 0
     description: 
     cooltime: 0
