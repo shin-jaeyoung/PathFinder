@@ -34,8 +34,13 @@ public interface ISpecialInteractable
 
 public interface ISkillActive
 {
+    public Entity GetEntity();
     public void Active(int index);
-    public Vector2 LookForward();
+    public Vector2 LookDir();
+    public Vector2 SkillSpawnPos();
+    public Vector3 CasterTrasform();
+    public abstract float GetAttackPower();
+    public abstract EntityType GetEntityType();
 }
 //Monster
 

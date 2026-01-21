@@ -6,7 +6,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Player player;
+    //key
+    
     public Vector2 input;
+    //mouse
+    [Header("Mouse")]
+    public Camera mainCamera;
+    public Vector2 mousePos;
+    public Vector2 mouseDir;
 
     [Header("Interact")]
     [SerializeField] 
@@ -48,18 +55,22 @@ public class PlayerController : MonoBehaviour
         //스킬
         if (Input.GetKeyDown(KeyCode.Q))
         {
+            GetMouseTransform();
             player.Active(0);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
+            GetMouseTransform();
             player.Active(1);
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
+            GetMouseTransform();
             player.Active(2);
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            GetMouseTransform();
             player.Active(3);
         }
 
@@ -99,6 +110,18 @@ public class PlayerController : MonoBehaviour
 
         closest?.Interact(player);
     }
+    public void GetMouseTransform()
+    {
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if(Physics.Raycast(ray,out hit,Mathf.Infinity))
+        {
+            Vector3 targetPos = new Vector3(hit.point.x,hit.point.y,hit.point.z);
+            mousePos = targetPos;
+            mouseDir = (targetPos - transform.position).normalized;
+        }
+    }
+
 
     private void OnDrawGizmosSelected()
     {

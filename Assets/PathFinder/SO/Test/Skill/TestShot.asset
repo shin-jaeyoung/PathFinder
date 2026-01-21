@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1464f46f97cdf86458144c07b9b1e5c0, type: 3}
+  m_Name: TestShot
+  m_EditorClassIdentifier: 
+  data:
+    skillName: testShot
+    prefab: {fileID: 1098043156858512034, guid: 304fcf6ca036b2446b9f1536f6e9f7c9,
+      type: 3}
+    icon: {fileID: 21300000, guid: c5a09b04d89c6f542a83d34ebafd647a, type: 3}
+    skillType: 1
+    description: testShot please
+    cooltime: 3
+    damageMultiplier: 1
+    duration: 0
+  shotSpeed: 3
+  count: 2
+  shotDelay: 0.3
+  spawnDistance: 1

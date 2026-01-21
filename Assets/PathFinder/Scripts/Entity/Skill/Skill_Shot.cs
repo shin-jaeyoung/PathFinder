@@ -8,19 +8,47 @@ public class Skill_Shot : Skill
     [SerializeField]
     private float shotSpeed;
     [SerializeField]
-    private float count;
+    private int count;
     [SerializeField]
-    private float deltaShot;
+    private float shotDelay;
+    [SerializeField]
+    private float spawnDistance;
     public override void Execute(ISkillActive caster)
     {
-        //풀링
+        //코루틴을 컴포넌트만 쓸수있어서
+        SkillManager.instance.StartCoroutine(ShotDelayCo(caster));
     }
-    public void Shot(GameObject prefab)
+    private IEnumerator ShotDelayCo(ISkillActive caster)
     {
-        if(prefab.TryGetComponent(out Rigidbody2D rb))
+        WaitForSeconds wait = new WaitForSeconds(shotDelay);
+        int curcount = count;
+        while (curcount > 0)
         {
-            //시전자가 바라보는 곳 or 플레이어 경우 마우스 포인트방향으로 발사 => 이거 전체 적용해야 할듯
-            //rb.transform.forward = 
+            Shot(caster);
+            curcount--;
+            yield return wait;
         }
+    }
+    
+    private void Shot(ISkillActive caster)
+    {
+        if (caster == null || caster.GetEntity() == null) return;
+        Vector2 dir = caster.LookDir();
+        Vector2 spawnPos = caster.CasterTrasform();
+        spawnPos = spawnPos + dir * spawnDistance;
+
+        //나중에 풀링으로 바꾸기
+        //테스트용
+
+        GameObject go = Instantiate(data.Prefab, spawnPos, Quaternion.identity);
+        if (go.TryGetComponent(out Projectile pj))
+        {
+            pj.Init(caster.GetAttackPower(), caster.GetEntity(), caster.GetEntityType());
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            pj.rb.rotation = angle + data.SpriteRotation;
+            pj.rb.velocity = dir * shotSpeed;
+            pj.StartCoroutine(SkillReturnCo(go));
+        }
+
     }
 }

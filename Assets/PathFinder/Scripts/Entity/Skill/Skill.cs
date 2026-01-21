@@ -26,4 +26,9 @@ public abstract class Skill : ScriptableObject
         //while()
         yield return wait;
     }
+    public IEnumerator SkillReturnCo(GameObject spawnPrefab)
+    {
+        yield return new WaitForSeconds(data.Duration);
+        Destroy(spawnPrefab);
+    }
 }

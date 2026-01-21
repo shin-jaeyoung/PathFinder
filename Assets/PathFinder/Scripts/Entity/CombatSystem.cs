@@ -11,10 +11,11 @@ public class CombatSystem
     {
         this.owner = owner;
     }
-    public void PerformSkill(SkillSlot slot)
+    public bool PerformSkill(SkillSlot slot)
     {
-        if (slot.IsEmpty() || slot.isCooltime) return;
+        if (slot.IsEmpty() || slot.isCooltime) return false;
         SkillManager.instance.UseSkill(owner, slot);
+        return true;
     }
 
     public float Hit(float damage,float def)

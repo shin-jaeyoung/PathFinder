@@ -28,7 +28,9 @@ public struct SkillData
     private float damageMultiplier;
     [SerializeField]
     private float duration;
-
+    [Header("Detail")]
+    [SerializeField]
+    private float spriteRotation;
     //property
     public string SkillName => skillName;
     public GameObject Prefab => prefab;
@@ -38,5 +40,6 @@ public struct SkillData
     public float Cooltime => cooltime;
     public float DamageMultiplier => damageMultiplier;
     public float Duration => duration;
+    public float SpriteRotation => spriteRotation;
 
 }
