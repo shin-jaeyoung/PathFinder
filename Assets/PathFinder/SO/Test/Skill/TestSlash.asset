@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     skillName: TestSlash
-    prefab: {fileID: 0}
+    prefab: {fileID: 9180995225039333714, guid: 7d30ed515ddab5c439f6281256e8b506,
+      type: 3}
     icon: {fileID: -2407324949086632672, guid: 0d7d0bf8307514eaf81aa72f558d3fb4, type: 3}
     skillType: 0
-    description: 
-    cooltime: 0
-    damageMultiplier: 0
-    duration: 0
-    spriteRotation: 0
-  spawnDistance: 0
+    description: testSlash~
+    cooltime: 3
+    damageMultiplier: 1
+    duration: 0.5
+    spriteRotation: 45
+  spawnDistance: 1
