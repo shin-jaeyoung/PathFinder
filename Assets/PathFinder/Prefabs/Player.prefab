@@ -6002,7 +6002,7 @@ MonoBehaviour:
   armor: {fileID: 11400000, guid: ce75807f8b836e94d9f3ab307c875283, type: 2}
   shoes: {fileID: 11400000, guid: f78c028919d5f9642be15ade4fec135f, type: 2}
   testSkill: {fileID: 11400000, guid: ccc8d3608796998478839f8c02a80378, type: 2}
-  testSwap: {fileID: 11400000, guid: 78fa93b5f6464904082d7b29574d60d8, type: 2}
+  testSwap: {fileID: 11400000, guid: 9a2236d244fca844684137447e2f0f57, type: 2}
   extraItem: {fileID: 11400000, guid: e2e1d54367eefa94e974bf7001020193, type: 2}
   player: {fileID: 0}
 --- !u!1 &5626902304530670762

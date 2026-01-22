@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02300439883dce4459f1ee5e87d9ee28, type: 3}
+  m_Name: TestMagic
+  m_EditorClassIdentifier: 
+  data:
+    skillName: testMagic
+    prefab: {fileID: 6652885229962706474, guid: 3c54bef22b9e5ae4985648aa4126ea6f,
+      type: 3}
+    icon: {fileID: 21300126, guid: c3a40e1c46727b94e959990527f8e7fa, type: 3}
+    skillType: 2
+    description: 'test Magic
+
+      if is Explosion, ExplosionEffect instantiate
+      when origin prefab is destroy'
+    cooltime: 3
+    damageMultiplier: 1
+    duration: 2
+    spriteRotation: 0
+  spawnDelay: 1
+  isExplosion: 1
+  explosionEffectPrefab: {fileID: 6652885229962706474, guid: 98816ae1f6a3445479d82e44d3ab9b0c,
+    type: 3}
+  damageMultiplier: 1
