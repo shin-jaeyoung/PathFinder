@@ -106,7 +106,7 @@ public class Player : Entity
     }
     public override float GetAttackPower()
     {
-        return statusSystem.Stat[PlayerStatType.Power];
+        return statusSystem.FinalStat[PlayerStatType.Power];
     }
     public override EntityType GetEntityType()
     {

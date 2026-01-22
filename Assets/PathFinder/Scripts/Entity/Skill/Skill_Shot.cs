@@ -43,7 +43,8 @@ public class Skill_Shot : Skill
         GameObject go = Instantiate(data.Prefab, spawnPos, Quaternion.identity);
         if (go.TryGetComponent(out Projectile pj))
         {
-            pj.Init(caster.GetAttackPower() * data.DamageMultiplier, caster.GetEntity(), caster.GetEntityType());
+            pj.Init(caster.GetAttackPower() * data.DamageMultiplier, caster.GetEntity(), caster.GetEntityType(),true);
+            Debug.Log(caster.GetAttackPower());
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             pj.rb.rotation = angle + data.SpriteRotation;
             pj.rb.velocity = dir * shotSpeed;

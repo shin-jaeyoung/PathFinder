@@ -5,6 +5,9 @@ using UnityEngine;
 
 public abstract class Monster : Entity
 {
+    [Header("Hp")]
+    [SerializeField]
+    protected float curHp;
     [Header("Data")]
     [SerializeField]
     protected MonsterData data;
@@ -15,7 +18,6 @@ public abstract class Monster : Entity
     protected  CombatSystem combatSystem;
 
     protected StateMachine<Monster> stateMachine;
-    protected float curHp;
 
     public float CurHp
     {
@@ -25,7 +27,7 @@ public abstract class Monster : Entity
             curHp = value; 
             if(curHp <=0)
             {
-                
+                curHp = 0;
             }
             if( curHp > data.MaxHp)
             {
@@ -60,6 +62,7 @@ public abstract class Monster : Entity
     {
         float finalDamage = combatSystem.Hit(info.damage, data.Defence);
         CurHp -= finalDamage;
+        Debug.Log("몬스터맞음");
     }
     public override float GetAttackPower()
     {
