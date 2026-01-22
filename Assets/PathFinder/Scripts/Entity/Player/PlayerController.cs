@@ -112,18 +112,12 @@ public class PlayerController : MonoBehaviour
     }
     public void GetMouseTransform()
     {
-        // 1. 마우스의 화면 좌표(Pixel)를 가져옴
         Vector3 mouseScreenPos = Input.mousePosition;
-
-        // 2. 직교 카메라에서는 Z값에 카메라와 캐릭터 사이의 거리를 넣어줘야 정확한 월드 좌표가 나옵니다.
-        // 보통 카메라의 Z가 -10이고 캐릭터가 0이라면 거리는 10입니다.
         mouseScreenPos.z = Mathf.Abs(mainCamera.transform.position.z - transform.position.z);
-
-        // 3. 화면 좌표를 월드 좌표로 변환
+        
         Vector3 worldPos = mainCamera.ScreenToWorldPoint(mouseScreenPos);
-
-        // 4. 좌표 저장 및 방향 계산
-        // Z값은 혹시 모를 오차를 위해 캐릭터와 동일하게 맞춤
+        //이거 카메라 프로젝션이 orthor면 size값이랑 transform의 z값이랑 거리 맞춰줘야함 그래야 오차 안생김
+        
         mousePos = new Vector3(worldPos.x, worldPos.y, transform.position.z);
         mouseDir = (mousePos - (Vector2)transform.position).normalized;
     }
