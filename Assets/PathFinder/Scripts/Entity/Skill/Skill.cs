@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,8 +23,12 @@ public abstract class Skill : ScriptableObject
     public IEnumerator SkillCooltime()
     {
         WaitForSeconds wait = new WaitForSeconds(data.Cooltime);
-
-        //while()
         yield return wait;
+    }
+    public IEnumerator SkillReturnCo(GameObject spawnPrefab)
+    {
+        yield return new WaitForSeconds(data.Duration);
+        //리턴풀해야겠지
+        Destroy(spawnPrefab);
     }
 }

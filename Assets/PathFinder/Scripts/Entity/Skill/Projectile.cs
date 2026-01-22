@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private EntityType attackerType;
     private float damage;
     private Entity attacker;
 
-    public void Init(float damage, Entity attacker, EntityType type)
+    public void Init(float damage, Entity attacker, EntityType attackerType)
     {
         this.damage = damage;
         this.attacker = attacker;
-        attackerType = type;
+        this.attackerType = attackerType;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -27,7 +28,7 @@ public class Projectile : MonoBehaviour
                 targetEntity.Hit(finalInfo);
             }
 
-            //리턴풀
+            //리턴풀로 바꾸기
         }
     }
 }

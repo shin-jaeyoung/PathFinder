@@ -31,7 +31,7 @@ public class Player : Entity
 
     private StateMachine<Player> stateMachine;
     private HpPotion potion;
-
+    private PlayerController playerController;
 
     public Vector2 InputVec { get; set; }
     public Rigidbody2D Rb { get; private set; }
@@ -53,7 +53,7 @@ public class Player : Entity
     {
         Rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
-
+        playerController = GetComponent<PlayerController>();
 
         statusSystem.Init(initStat);
         inventory.Init();
@@ -92,8 +92,10 @@ public class Player : Entity
 
     public override void Active(int index)
     {
-        combatSystem.PerformSkill(skills.Skillequip[index]);
-        stateMachine.ChangeState(StateType.Attack);
+        if(combatSystem.PerformSkill(skills.Skillequip[index]))
+        {
+            stateMachine.ChangeState(StateType.Attack);
+        }
     }
 
     public override void Hit(DamageInfo info)
@@ -109,5 +111,21 @@ public class Player : Entity
     public override EntityType GetEntityType()
     {
         return EntityType.Player;
+    }
+    public override Vector2 LookDir()
+    {
+        return playerController.mouseDir;
+    }
+    public override Vector2 SkillSpawnPos()
+    {
+        return playerController.mousePos;
+    }
+    public override Vector3 CasterTrasform()
+    {
+        return transform.position;
+    }
+    public override Entity GetEntity()
+    {
+        return this;
     }
 }

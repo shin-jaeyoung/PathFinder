@@ -6,7 +6,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Player player;
+    //key
+    
     public Vector2 input;
+    //mouse
+    [Header("Mouse")]
+    public Camera mainCamera;
+    public Vector2 mousePos;
+    public Vector2 mouseDir;
 
     [Header("Interact")]
     [SerializeField] 
@@ -48,18 +55,22 @@ public class PlayerController : MonoBehaviour
         //스킬
         if (Input.GetKeyDown(KeyCode.Q))
         {
+            GetMouseTransform();
             player.Active(0);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
+            GetMouseTransform();
             player.Active(1);
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
+            GetMouseTransform();
             player.Active(2);
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            GetMouseTransform();
             player.Active(3);
         }
 
@@ -99,6 +110,18 @@ public class PlayerController : MonoBehaviour
 
         closest?.Interact(player);
     }
+    public void GetMouseTransform()
+    {
+        Vector3 mouseScreenPos = Input.mousePosition;
+        mouseScreenPos.z = Mathf.Abs(mainCamera.transform.position.z - transform.position.z);
+        
+        Vector3 worldPos = mainCamera.ScreenToWorldPoint(mouseScreenPos);
+        //이거 카메라 프로젝션이 orthor면 size값이랑 transform의 z값이랑 거리 맞춰줘야함 그래야 오차 안생김
+        
+        mousePos = new Vector3(worldPos.x, worldPos.y, transform.position.z);
+        mouseDir = (mousePos - (Vector2)transform.position).normalized;
+    }
+
 
     private void OnDrawGizmosSelected()
     {

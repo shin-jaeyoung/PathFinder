@@ -8,8 +8,13 @@ public enum EntityType
 }
 public abstract class Entity : MonoBehaviour, ISkillActive, IHittable
 {
+
     public abstract float GetAttackPower();
     public abstract EntityType GetEntityType();
     public abstract void Active(int index);
     public abstract void Hit(DamageInfo info);
+    public abstract Vector2 LookDir();
+    public abstract Vector2 SkillSpawnPos();
+    public abstract Vector3 CasterTrasform();
+    public abstract Entity GetEntity();
 }

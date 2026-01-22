@@ -69,4 +69,20 @@ public abstract class Monster : Entity
     {
         return EntityType.Monster;
     }
+    public override Vector2 LookDir()
+    {
+        return transform.right;
+    }
+    public override Vector2 SkillSpawnPos()
+    {
+        return Vector2.zero;
+    }
+    public override Vector3 CasterTrasform()
+    {
+        return transform.position;
+    }
+    public override Entity GetEntity()
+    {
+        return this;
+    }
 }
