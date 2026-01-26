@@ -88,7 +88,7 @@ public abstract class Monster : Entity
     public void FlipSprite(float xInput)
     {
         if (xInput == 0) return;
-        float yRotation = (xInput > 0) ? 180f : 0f;
+        float yRotation = (xInput > 0) ? 0f : 180f;
         transform.rotation = Quaternion.Euler(0, yRotation, 0);
     }
     public override float GetAttackPower()
