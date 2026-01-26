@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public enum StateType
     Hit,
     Die,
 
+    Goback,
 }
 public abstract class State<T> 
 {
@@ -26,6 +28,13 @@ public abstract class State<T>
     public abstract void Update();
     public virtual void FixedUpdate() { } // 물리 이동용
     public abstract void Exit();
+
+    public IEnumerator WaitAnimCo(float lengh, Action action = null)
+    {
+        WaitForSeconds animLengh = new WaitForSeconds(lengh);
+        yield return animLengh;
+        action?.Invoke();
+    }
 }
 
 public class StateMachine<T>

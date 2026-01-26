@@ -29,6 +29,9 @@ public abstract class Skill : ScriptableObject
     {
         yield return new WaitForSeconds(data.Duration);
         //리턴풀해야겠지
-        Destroy(spawnPrefab);
+        if (spawnPrefab != null)
+        {
+            Destroy(spawnPrefab);
+        }
     }
 }

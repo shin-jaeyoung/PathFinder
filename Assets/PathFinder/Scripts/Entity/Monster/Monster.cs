@@ -5,6 +5,9 @@ using UnityEngine;
 
 public abstract class Monster : Entity
 {
+    [Header("Hp")]
+    [SerializeField]
+    protected float curHp;
     [Header("Data")]
     [SerializeField]
     protected MonsterData data;
@@ -13,10 +16,14 @@ public abstract class Monster : Entity
     [Header("Combat")]
     [SerializeField]
     protected  CombatSystem combatSystem;
+    [Header("Detection")]
+    [SerializeField]
+    protected Detection detection;
 
+    protected Rigidbody2D rb;
     protected StateMachine<Monster> stateMachine;
-    protected float curHp;
 
+    //property
     public float CurHp
     {
         get { return curHp; }
@@ -25,7 +32,7 @@ public abstract class Monster : Entity
             curHp = value; 
             if(curHp <=0)
             {
-                
+                curHp = 0;
             }
             if( curHp > data.MaxHp)
             {
@@ -34,6 +41,10 @@ public abstract class Monster : Entity
             OnChangeHp?.Invoke();
         }
     }
+    public MonsterData Data => data;
+    public Detection Detection => detection;
+    public Rigidbody2D Rb => rb;
+
     //deligate
     public event Action OnChangeHp;
 
@@ -45,11 +56,23 @@ public abstract class Monster : Entity
     }
     public void BaseInit()
     {
+        detection = GetComponent<Detection>();
+        rb = GetComponent<Rigidbody2D>();
         combatSystem.Init(this);
         stateMachine = new StateMachine<Monster>(this);
         curHp = data.MaxHp;
     }
     protected abstract void InitStart();
+
+    private void Update()
+    {
+        stateMachine?.Update();
+    }
+    private void FixedUpdate()
+    {
+        stateMachine?.FixedUpdate();
+    }
+
     public override void Active(int index)
     {
         combatSystem.PerformSkill(skills[index]);
@@ -60,6 +83,13 @@ public abstract class Monster : Entity
     {
         float finalDamage = combatSystem.Hit(info.damage, data.Defence);
         CurHp -= finalDamage;
+        Debug.Log("몬스터맞음");
+    }
+    public void FlipSprite(float xInput)
+    {
+        if (xInput == 0) return;
+        float yRotation = (xInput > 0) ? 0f : 180f;
+        transform.rotation = Quaternion.Euler(0, yRotation, 0);
     }
     public override float GetAttackPower()
     {

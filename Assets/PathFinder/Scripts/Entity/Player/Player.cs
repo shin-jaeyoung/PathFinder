@@ -74,8 +74,15 @@ public class Player : Entity
         statusSystem.OnDead += Die;
     }
 
-    private void Update() => stateMachine.Update();
-    private void FixedUpdate() => stateMachine.FixedUpdate();
+    private void Update() 
+    { 
+        stateMachine.Update(); 
+    }
+    private void FixedUpdate()
+    { 
+        stateMachine.FixedUpdate(); 
+    }
+
 
     public void FlipSprite(float xInput)
     {
@@ -106,7 +113,7 @@ public class Player : Entity
     }
     public override float GetAttackPower()
     {
-        return statusSystem.Stat[PlayerStatType.Power];
+        return statusSystem.FinalStat[PlayerStatType.Power];
     }
     public override EntityType GetEntityType()
     {
