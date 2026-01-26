@@ -27,7 +27,7 @@ public class Detection : MonoBehaviour
     [Header("RayDistance")]
     [SerializeField]
     private float rayDistance;
-    private float[] checkAngles = { 20f,  40f,  60f, 80f };
+    private float[] checkAngles = { 15f,  30f, 45f , 60f,75f };
     private float avoidanceSide = 1f;
     private bool isAvoidanceMode = false;
     private Vector2 fixedAvoidDir;
@@ -152,46 +152,51 @@ public class Detection : MonoBehaviour
         Vector2 currentPos = transform.position;
         Vector2 targetDir = ((Vector2)targetPos - currentPos).normalized;
 
-        // 1. 이미 회피 중이라면?
+        //장애물 회피중?
         if (isAvoidanceMode)
         {
-            // 원래 가려던 방향(타겟 방향)에 장애물이 사라졌는지 체크
-            RaycastHit2D targetCheck = Physics2D.Raycast(currentPos, targetDir, rayDistance + 0.5f, obstacleMask);
-
+            RaycastHit2D targetCheck = Physics2D.Raycast(currentPos, targetDir, rayDistance , obstacleMask);
             if (targetCheck.collider == null)
             {
-                // 이제 앞이 비었으니 회피 모드 종료!
                 isAvoidanceMode = false;
                 return targetDir;
             }
-
-            // 아직 장애물이 있다면, 이전에 정해둔 회피 방향으로 계속 전진
             return fixedAvoidDir;
         }
-
-        // 2. 회피 중이 아닐 때 장애물을 만난다면?
         RaycastHit2D hit = Physics2D.Raycast(currentPos, targetDir, rayDistance, obstacleMask);
         if (hit.collider != null)
         {
-            // 좌우 탐색해서 한 방향을 '고정 회피 방향'으로 설정
             foreach (float angle in checkAngles)
             {
-                Vector2 rotatedDir = Quaternion.Euler(0, 0, angle) * targetDir;
-                RaycastHit2D checkHit = Physics2D.Raycast(currentPos, rotatedDir, rayDistance + 0.3f, obstacleMask);
+                // avoidanceSide 방향을 먼저 검사 (-1이면 오른쪽, 1이면 왼쪽)
+                float selectAngle = angle * avoidanceSide;
+                Vector2 rotatedDir = Quaternion.Euler(0, 0, selectAngle) * targetDir;
 
-                if (checkHit.collider == null)
+                if (Physics2D.Raycast(currentPos, rotatedDir, rayDistance , obstacleMask).collider == null)
                 {
-                    isAvoidanceMode = true;
-                    fixedAvoidDir = rotatedDir; // 방향 고정!
+                    SetAvoidance(rotatedDir);
+                    return fixedAvoidDir;
+                }
+
+                selectAngle = angle * -avoidanceSide;
+                rotatedDir = Quaternion.Euler(0, 0, selectAngle) * targetDir;
+
+                if (Physics2D.Raycast(currentPos, rotatedDir, rayDistance , obstacleMask).collider == null)
+                {
+                    // 반대 방향이 비었다면 우선순위 방향을 교체
+                    avoidanceSide *= -1f;
+                    SetAvoidance(rotatedDir);
                     return fixedAvoidDir;
                 }
             }
         }
-
-        // 3. 아무 일 없으면 그냥 타겟 방향으로
         return targetDir;
     }
-
+    private void SetAvoidance(Vector2 dir)
+    {
+        isAvoidanceMode = true;
+        fixedAvoidDir = dir;
+    }
     private void OnDrawGizmosSelected()
     {
         // 탐지 범위 
