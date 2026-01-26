@@ -74,8 +74,15 @@ public class Player : Entity
         statusSystem.OnDead += Die;
     }
 
-    private void Update() => stateMachine.Update();
-    private void FixedUpdate() => stateMachine.FixedUpdate();
+    private void Update() 
+    { 
+        stateMachine.Update(); 
+    }
+    private void FixedUpdate()
+    { 
+        stateMachine.FixedUpdate(); 
+    }
+
 
     public void FlipSprite(float xInput)
     {

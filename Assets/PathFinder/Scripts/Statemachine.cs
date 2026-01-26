@@ -10,6 +10,7 @@ public enum StateType
     Hit,
     Die,
 
+    Goback,
 }
 public abstract class State<T> 
 {
