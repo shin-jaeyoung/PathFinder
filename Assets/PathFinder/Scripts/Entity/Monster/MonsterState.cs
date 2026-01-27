@@ -32,6 +32,7 @@ public class MonsterMoveState : MonsterState
     public override void Enter()
     {
         Debug.Log("monster Move");
+        owner.Detection.StartTrackingWatch();
     }
     public override void Update()
     {
@@ -64,6 +65,7 @@ public class MonsterMoveState : MonsterState
     }
     public override void Exit()
     {
+        owner.Detection.StopTrackingWatch();
         owner.Rb.velocity = Vector2.zero;
     }
 }
