@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 687164530013776951}
   - component: {fileID: 8427772205304001868}
   - component: {fileID: 7072744502639607361}
+  - component: {fileID: 2359791063972681615}
   - component: {fileID: 3311634576480251582}
   - component: {fileID: 2630864039371971072}
-  - component: {fileID: 2359791063972681615}
   m_Layer: 7
   m_Name: NormalMonsterBase
   m_TagString: Untagged
@@ -112,6 +112,35 @@ MonoBehaviour:
     speed: 1
   skills: []
   detection: {fileID: 2359791063972681615}
+--- !u!114 &2359791063972681615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7271114388976837514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b204710833d7ea47ae71ec00c47c6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectRange: 5
+  attackRange: 1.5
+  trackRange: 7
+  attackCooltime: 1.5
+  moveRange: 9
+  rayDistance: 1.5
+  detectMask:
+    serializedVersion: 2
+    m_Bits: 320
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 64
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 256
+  target: {fileID: 0}
+  viewLostThreshold: 4
 --- !u!70 &3311634576480251582
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -174,32 +203,3 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2359791063972681615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7271114388976837514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b204710833d7ea47ae71ec00c47c6ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectRange: 5
-  attackRange: 1.5
-  trackRange: 7
-  attackCooltime: 1.5
-  moveRange: 9
-  rayDistance: 1.5
-  detectMask:
-    serializedVersion: 2
-    m_Bits: 320
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 64
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 256
-  target: {fileID: 0}
-  viewLostThreshold: 4

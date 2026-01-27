@@ -11,6 +11,9 @@ public abstract class Monster : Entity
     [Header("Data")]
     [SerializeField]
     protected MonsterData data;
+    [Header("SKill")]
+    [SerializeField]
+    protected SkillSlot basicAttack;
     [SerializeField]
     protected List<SkillSlot> skills;
     [Header("Combat")]
@@ -44,6 +47,8 @@ public abstract class Monster : Entity
     public MonsterData Data => data;
     public Detection Detection => detection;
     public Rigidbody2D Rb => rb;
+    public SkillSlot BasicAttack => basicAttack;
+    public List<SkillSlot> Skills => skills;
 
     //deligate
     public event Action OnChangeHp;
