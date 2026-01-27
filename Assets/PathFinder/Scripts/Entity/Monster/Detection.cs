@@ -71,8 +71,7 @@ public class Detection : MonoBehaviour
         Collider2D hit = Physics2D.OverlapCircle(transform.position, detectRange, targetMask);
         if (hit == null)
         {
-            isDetect = false;
-            target = null;
+            TargetReset();
             return;
         }
         //벽뒤는 감지 못하게
@@ -87,8 +86,7 @@ public class Detection : MonoBehaviour
         }
         else
         {
-            isDetect = false;
-            target = null;
+            TargetReset();
         }
 
     }
@@ -171,27 +169,22 @@ public class Detection : MonoBehaviour
             float longestDistance = -1f;
             Vector2 bestDir = targetDir;
 
-            // 모든 각도를 전수 조사 (최대 사거리로 발사)
             foreach (float angle in checkAngles)
             {
                 float[] sides = { angle, -angle };
                 foreach (float s in sides)
                 {
                     Vector2 scanDir = Quaternion.Euler(0, 0, s) * targetDir;
-
-                    // 레이를 아주 멀리(예: 100f 혹은 float.MaxValue) 쏩니다.
                     RaycastHit2D scanHit = Physics2D.Raycast(currentPos, scanDir, 10f, obstacleMask);
 
                     float currentDist;
                     if (scanHit.collider == null)
                     {
-                        // 아무것도 안 맞았다면 그 방향이 최고의 탈출구
                         SetAvoidance(scanDir);
                         return scanDir;
                     }
                     else
                     {
-                        // 부딪힌 지점까지의 거리를 계산
                         currentDist = Vector2.Distance(currentPos, scanHit.point);
                     }
 
@@ -204,8 +197,6 @@ public class Detection : MonoBehaviour
                     }
                 }
             }
-
-            // 최적의 방향으로 모드 설정
             SetAvoidance(bestDir);
             return bestDir;
         }
@@ -214,11 +205,9 @@ public class Detection : MonoBehaviour
 
     public void StartTrackingWatch()
     {
-        StopTrackingWatch(); // 중복 실행 방지
+        StopTrackingWatch(); 
         trackWatchCoroutine = StartCoroutine(TrackWatchCo());
     }
-
-    // 추적 중단 시 호출 (MonsterMoveState의 Exit 등에서 실행)
     public void StopTrackingWatch()
     {
         if (trackWatchCoroutine != null)
@@ -228,6 +217,8 @@ public class Detection : MonoBehaviour
         }
     }
 
+    //추적중 레이로 벽뒤로 숨었는지 체크
+    //일정시간동안 플레이어 감지 실패시 복귀
     private IEnumerator TrackWatchCo()
     {
         float hiddenTimer = 0f;
