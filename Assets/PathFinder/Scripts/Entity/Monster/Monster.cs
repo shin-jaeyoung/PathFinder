@@ -18,7 +18,7 @@ public abstract class Monster : Entity
     protected List<SkillSlot> skills;
     [Header("Combat")]
     [SerializeField]
-    protected  CombatSystem combatSystem;
+    protected CombatSystem combatSystem;
     [Header("Detection")]
     [SerializeField]
     protected Detection detection;
@@ -26,18 +26,19 @@ public abstract class Monster : Entity
     protected Rigidbody2D rb;
     protected StateMachine<Monster> stateMachine;
 
+    private int useSkillIndex;
     //property
     public float CurHp
     {
         get { return curHp; }
-        protected set 
-        { 
-            curHp = value; 
-            if(curHp <=0)
+        protected set
+        {
+            curHp = value;
+            if (curHp <= 0)
             {
                 curHp = 0;
             }
-            if( curHp > data.MaxHp)
+            if (curHp > data.MaxHp)
             {
                 curHp = data.MaxHp;
             }
@@ -80,10 +81,39 @@ public abstract class Monster : Entity
 
     public override void Active(int index)
     {
-        combatSystem.PerformSkill(skills[index]);
-        stateMachine.ChangeState(StateType.Attack);
+        if (skills.Count > 0 && CheckSkillCool())
+        {
+            combatSystem.PerformSkill(ActiveNextSkill());
+        }
+        else
+        {
+            combatSystem.PerformSkill(basicAttack);
+        }
     }
+    public bool CheckSkillCool()
+    {
+        foreach (var skill in skills)
+        {
+            if (!skill.isCooltime)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public SkillSlot ActiveNextSkill()
+    {
 
+        while (skills[useSkillIndex].isCooltime)
+        {
+            ++useSkillIndex;
+            if (useSkillIndex >= skills.Count)
+            {
+                useSkillIndex = 0;
+            }
+        }
+        return skills[useSkillIndex];
+    }
     public override void Hit(DamageInfo info)
     {
         float finalDamage = combatSystem.Hit(info.damage, data.Defence);
@@ -106,7 +136,8 @@ public abstract class Monster : Entity
     }
     public override Vector2 LookDir()
     {
-        return transform.right;
+        Vector2 targetDir = (detection.Target.position - transform.position).normalized;
+        return targetDir;
     }
     public override Vector2 SkillSpawnPos()
     {
@@ -119,5 +150,9 @@ public abstract class Monster : Entity
     public override Entity GetEntity()
     {
         return this;
+    }
+    public GameObject GetGO()
+    {
+        return gameObject;
     }
 }

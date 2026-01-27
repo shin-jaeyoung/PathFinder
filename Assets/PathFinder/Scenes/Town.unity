@@ -31282,6 +31282,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2359791063972681615, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: viewLostThreshold
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: basicAttack.skill
+      value: 
+      objectReference: {fileID: 11400000, guid: 78fa93b5f6464904082d7b29574d60d8,
+        type: 2}
     - target: {fileID: 7271114388976837514, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: m_Name

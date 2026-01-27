@@ -8,7 +8,7 @@ public class MonsterIdleState : MonsterState
 {
     public override void Enter()
     {
-        Debug.Log("monster Idle");
+        //Debug.Log("monster Idle");
     }
     public override void Update()
     {
@@ -31,7 +31,7 @@ public class MonsterMoveState : MonsterState
 {
     public override void Enter()
     {
-        Debug.Log("monster Move");
+        //Debug.Log("monster Move");
     }
     public override void Update()
     {
@@ -97,7 +97,7 @@ public class MonsterSearchState : MonsterState
     {
 
         owner.Rb.velocity = Vector2.zero;
-        Debug.Log("수색 시작");
+        //Debug.Log("수색 시작");
         owner.Detection.StartTrackingWatch();
     }
 
@@ -125,7 +125,7 @@ public class MonsterGobackState : MonsterState
 {
     public override void Enter()
     {
-        Debug.Log("monster Goback");
+        //Debug.Log("monster Goback");
     }
     public override void Update()
     {
@@ -179,7 +179,9 @@ public class MonsterAttackState : MonsterState
     {
         Debug.Log("몬스터 공격");
         isAttack = true;
-        //애니메이션 종료체크로직이후 isAttack = false;
+        //발동
+        owner.Active(0);
+        //애니메이션 종료체크로직이후 isAttack = false; 1f대신 애니메이션 길이가 들어가야함
         owner.StartCoroutine(WaitAnimCo(1.5f, AttackFalse));
     }
 
@@ -208,7 +210,8 @@ public class MonsterDieState : MonsterState
 {
     public override void Enter()
     {
-
+        //애니메이션
+        //리턴풀? + 애니메이션 끝나면 idle상태로 만들어주기
     }
     public override void Update()
     {
@@ -216,10 +219,10 @@ public class MonsterDieState : MonsterState
     }
     public override void FixedUpdate()
     {
-
+        //속도 고정 zero
     }
     public override void Exit()
     {
-
+        //여기에 상태부터 이거저거 초기화해줘야해
     }
 }

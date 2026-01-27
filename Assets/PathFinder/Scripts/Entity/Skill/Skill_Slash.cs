@@ -7,10 +7,18 @@ public class Skill_Slash : Skill
 {
     [SerializeField]
     private float spawnDistance;
+    [SerializeField]
+    private float spawnDelay;
     public override void Execute(ISkillActive caster)
     {
+        caster.GetEntity().StartCoroutine(SpawnDelayCo(caster));
+    }
+    public IEnumerator SpawnDelayCo(ISkillActive caster)
+    {
+        yield return new WaitForSeconds(spawnDelay);
         Slash(caster);
     }
+
     public void Slash(ISkillActive caster)
     {
         if (caster == null || caster.GetEntity() == null) return;

@@ -72,7 +72,14 @@ public class PlayerStatusSystem
         currenStats.Clear();
         foreach (KeyValuePair<PlayerStatType, float> pair in finalStat)
         {
-            currenStats.Add(new PlayerStats(pair.Key, pair.Value));
+            if (pair.Key == PlayerStatType.CurHp)
+            {
+                currenStats.Add(new PlayerStats(pair.Key, stat[pair.Key]));
+            }
+            else 
+            { 
+                currenStats.Add(new PlayerStats(pair.Key, pair.Value)); 
+            }
         }
     }
     public void AddStat(PlayerStatType type, int value)
