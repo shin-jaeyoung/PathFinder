@@ -6,66 +6,69 @@ using UnityEngine.EventSystems;
 public class Detection : MonoBehaviour
 {
     [Header("Perform Value")]
-    [SerializeField]
+    [SerializeField] 
     private float detectRange;
-    [SerializeField]
+    [SerializeField] 
     private float attackRange;
-    [SerializeField]
+    [SerializeField] 
     private float trackRange;
     private bool isDetect;
 
     [Header("Attack Cooltime")]
-    [SerializeField]
+    [SerializeField] 
     private float attackCooltime;
     private bool canAttack = true;
 
     [Header("Move Range")]
-    [SerializeField]
-    private float moveRange;
+    [SerializeField] private float moveRange;
 
     private Vector2 originVec;
+
     [Header("RayDistance")]
-    [SerializeField]
-    private float rayDistance;
-    private float[] checkAngles = { 15f ,25f,35f ,45f,55f ,60f,65f,75f,80f };
+    [SerializeField] private float rayDistance;
+    private float[] checkAngles = { 15f, 25f, 35f, 45f, 55f, 60f, 65f, 75f, 80f };
     private float avoidanceSide = 1f;
     private bool isAvoidanceMode = false;
     private Vector2 fixedAvoidDir;
 
     [Header("Mask")]
-    [SerializeField]
+    [SerializeField] 
     private LayerMask detectMask;
-    [SerializeField]
+    [SerializeField] 
     private LayerMask targetMask;
-    [SerializeField]
+    [SerializeField] 
     private LayerMask obstacleMask;
 
-    [Header("Target")]
-    [SerializeField]
+    [Header("Target & Visibility")]
+    [SerializeField] 
     private Transform target;
+    private Vector2 lastKnownPos;
+    private bool isTargetVisible;
 
     [Header("Tracking Settings")]
-    [SerializeField] private float viewLostThreshold;
+    [SerializeField] 
+    private float viewLostThreshold; // 수색 지속 시간
     private Coroutine trackWatchCoroutine;
+    private bool isSearching = false;
 
-    //property
-
+    // Properties
     public Vector2 OriginVec => originVec;
     public Transform Target => target;
     public bool IsDetect => isDetect;
     public bool CanAttack => canAttack;
     public LayerMask ObstacleMask => obstacleMask;
+    public Vector2 LastKnownPos => lastKnownPos;
+    public bool IsTargetVisible => isTargetVisible;
+    public bool IsSearching => isSearching;
+
     private void Awake()
     {
         originVec = transform.position;
     }
-
     private void OnEnable()
     {
         StartCoroutine(DectCo());
     }
-
-
     public void Detect()
     {
         Collider2D hit = Physics2D.OverlapCircle(transform.position, detectRange, targetMask);
@@ -74,7 +77,7 @@ public class Detection : MonoBehaviour
             TargetReset();
             return;
         }
-        //벽뒤는 감지 못하게
+
         Vector2 dir = (hit.transform.position - transform.position).normalized;
         float distance = Vector2.Distance(hit.transform.position, transform.position);
         RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, dir, distance, detectMask);
@@ -83,12 +86,12 @@ public class Detection : MonoBehaviour
         {
             isDetect = true;
             target = raycastHit.transform;
+            lastKnownPos = target.position;
         }
         else
         {
             TargetReset();
         }
-
     }
 
     public IEnumerator DectCo()
@@ -115,44 +118,73 @@ public class Detection : MonoBehaviour
             TargetReset();
             return;
         }
+
         float distToTarget = Vector2.Distance(transform.position, target.position);
         float distFromOrigin = Vector2.Distance(originVec, transform.position);
+
+        // 추적 거리나 이동 범위를 벗어나면 리셋
         if (distToTarget > trackRange || distFromOrigin > moveRange)
         {
             TargetReset();
         }
-
     }
 
     public void TargetReset()
     {
         isDetect = false;
         target = null;
+        isTargetVisible = false;
+        isSearching = false;
+        StopTrackingWatch();
     }
 
     public bool IsInAttackRange()
     {
-        if (target == null) return false;
-        if (canAttack == false) return false;
-        StartCoroutine(AttackCooltimeCo());
+        if (target == null || !canAttack) return false;
+        // 공격은 타겟이 실제로 보일 때만 가능하게 설정
+        if (!isTargetVisible) return false;
 
+        StartCoroutine(AttackCooltimeCo());
         return Vector2.Distance(transform.position, target.position) <= attackRange;
     }
+
     public IEnumerator AttackCooltimeCo()
     {
-        WaitForSeconds cooltime = new WaitForSeconds(attackCooltime);
         canAttack = false;
-        yield return cooltime;
+        yield return new WaitForSeconds(attackCooltime);
         canAttack = true;
     }
 
+    // 매 프레임 타겟이 벽 뒤에 있는지 체크하고 마지막 위치 업데이트
+    public void UpdateVisibility()
+    {
+        if (target == null)
+        {
+            isTargetVisible = false;
+            return;
+        }
+
+        Vector2 dir = (target.position - (Vector3)transform.position).normalized;
+        float dist = Vector2.Distance(transform.position, target.position);
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, dist, obstacleMask);
+
+        if (hit.collider == null)
+        {
+            isTargetVisible = true;
+            lastKnownPos = target.position; 
+        }
+        else
+        {
+            isTargetVisible = false;
+        }
+    }
 
     public Vector2 GetAdjustedDirection(Vector3 targetPos)
     {
         Vector2 currentPos = transform.position;
         Vector2 targetDir = ((Vector2)targetPos - currentPos).normalized;
 
-        //장애물 회피중?
         if (isAvoidanceMode)
         {
             RaycastHit2D targetCheck = Physics2D.Raycast(currentPos, targetDir, rayDistance, obstacleMask);
@@ -163,6 +195,7 @@ public class Detection : MonoBehaviour
             }
             return fixedAvoidDir;
         }
+
         RaycastHit2D hit = Physics2D.Raycast(currentPos, targetDir, rayDistance, obstacleMask);
         if (hit.collider != null)
         {
@@ -188,7 +221,6 @@ public class Detection : MonoBehaviour
                         currentDist = Vector2.Distance(currentPos, scanHit.point);
                     }
 
-                    // 현재까지 본 방향 중 가장 멀리 뚫린 방향 업데이트
                     if (currentDist > longestDistance)
                     {
                         longestDistance = currentDist;
@@ -205,9 +237,11 @@ public class Detection : MonoBehaviour
 
     public void StartTrackingWatch()
     {
-        StopTrackingWatch(); 
+        if (isSearching) return;
+        StopTrackingWatch();
         trackWatchCoroutine = StartCoroutine(TrackWatchCo());
     }
+
     public void StopTrackingWatch()
     {
         if (trackWatchCoroutine != null)
@@ -215,54 +249,34 @@ public class Detection : MonoBehaviour
             StopCoroutine(trackWatchCoroutine);
             trackWatchCoroutine = null;
         }
+        isSearching = false;
     }
 
-    //추적중 레이로 벽뒤로 숨었는지 체크
-    //일정시간동안 플레이어 감지 실패시 복귀
+    // 마지막 위치에 도착했을 때 실행할 수색 코루틴
     private IEnumerator TrackWatchCo()
     {
-        float hiddenTimer = 0f;
+        isSearching = true;
+        float timer = 0f;
+        WaitForSeconds checkInterval = new WaitForSeconds(0.2f);
 
-        WaitForSeconds checkInterval = new WaitForSeconds(0.5f);
-
-        while (isDetect && target != null)
+        while (timer < viewLostThreshold)
         {
-            if (IsTargetHiddenByWall())
+            UpdateVisibility();
+
+            // 수색 도중 타겟이 다시 보이면 즉시 중단
+            if (isTargetVisible)
             {
-                hiddenTimer += 0.5f; 
-                Debug.Log($"플레이어 은폐 중... ({hiddenTimer}s)");
-                
-                if (hiddenTimer >= viewLostThreshold)
-                {
-                    Debug.Log("놓쳤음 복귀 ㄱ.");
-                    TargetReset();
-                    yield break; // 코루틴 종료
-                }
-            }
-            else
-            {
-                hiddenTimer = 0f; // 다시 보이면 타이머 초기화
+                Debug.Log("수색 중 재발견!");
+                isSearching = false;
+                yield break;
             }
 
+            timer += 0.2f;
             yield return checkInterval;
         }
-    }
 
-    private bool IsTargetHiddenByWall()
-    {
-        if (target == null) return true;
-
-        Vector2 dir = (target.position - transform.position).normalized;
-        float dist = Vector2.Distance(transform.position, target.position);
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, dist, obstacleMask);
-
-        if (hit.collider != null)
-        {
-            return true;
-        }
-
-        return false;
+        Debug.Log("수색 실패: 타겟을 놓쳤습니다.");
+        TargetReset();
     }
 
     private void SetAvoidance(Vector2 dir)
@@ -270,29 +284,28 @@ public class Detection : MonoBehaviour
         isAvoidanceMode = true;
         fixedAvoidDir = dir;
     }
+
     private void OnDrawGizmosSelected()
     {
-        // 탐지 범위 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectRange);
-
-        // 공격 범위
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
-
-        //추적 범위
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, trackRange);
-
-        //이동가능 범위
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(originVec, moveRange);
 
-        //타겟에 쏘는 레이
         if (target != null)
         {
-            Gizmos.color = Color.green;
+            Gizmos.color = isTargetVisible ? Color.green : Color.red;
             Gizmos.DrawLine(transform.position, target.position);
+
+            if (!isTargetVisible)
+            {
+                Gizmos.color = Color.cyan;
+                Gizmos.DrawWireCube(lastKnownPos, Vector3.one * 0.5f);
+            }
         }
     }
 }

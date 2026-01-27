@@ -32,7 +32,6 @@ public class MonsterMoveState : MonsterState
     public override void Enter()
     {
         Debug.Log("monster Move");
-        owner.Detection.StartTrackingWatch();
     }
     public override void Update()
     {
@@ -51,6 +50,28 @@ public class MonsterMoveState : MonsterState
     {
         if (owner.Detection.Target == null) return;
 
+        owner.Detection.UpdateVisibility();
+
+        Vector2 moveTargetPos;
+
+        if (owner.Detection.IsTargetVisible)
+        {
+            moveTargetPos = owner.Detection.Target.position;
+        }
+        else
+        {
+            moveTargetPos = owner.Detection.LastKnownPos;
+
+            // 마지막 위치 도착 확인
+            float distToLastPos = Vector2.Distance(owner.transform.position, moveTargetPos);
+            if (distToLastPos < 0.1f)
+            {
+                // 수색 상태로 전환!
+                stateMachine.ChangeState(StateType.Search);
+                return;
+            }
+        }
+
         //너무 붙으면 속도 멈추게
         float dist = Vector2.Distance(owner.transform.position, owner.Detection.Target.position);
         if(dist < 0.8f)
@@ -59,14 +80,45 @@ public class MonsterMoveState : MonsterState
             return;
         }
         // 플레이어 방향으로 이동
-        Vector2 dir = owner.Detection.GetAdjustedDirection(owner.Detection.Target.position);
+        Vector2 dir = owner.Detection.GetAdjustedDirection(moveTargetPos);
         owner.Rb.velocity = dir * owner.Data.Speed;
         owner.FlipSprite(dir.x);
     }
     public override void Exit()
     {
-        owner.Detection.StopTrackingWatch();
         owner.Rb.velocity = Vector2.zero;
+    }
+}
+public class MonsterSearchState : MonsterState
+{
+
+
+    public override void Enter()
+    {
+
+        owner.Rb.velocity = Vector2.zero;
+        Debug.Log("수색 시작");
+        owner.Detection.StartTrackingWatch();
+    }
+
+    public override void Update()
+    {
+        owner.Detection.UpdateVisibility();
+        if (owner.Detection.IsTargetVisible)
+        {
+            stateMachine.ChangeState(StateType.Move);
+            return;
+        }
+        if (owner.Detection.IsDetect==false)
+        {
+            stateMachine.ChangeState(StateType.Goback);
+            return;
+        }
+    }
+
+    public override void Exit()
+    {
+        owner.Detection.StopTrackingWatch();
     }
 }
 public class MonsterGobackState : MonsterState
