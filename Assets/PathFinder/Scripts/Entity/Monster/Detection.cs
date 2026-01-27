@@ -27,7 +27,7 @@ public class Detection : MonoBehaviour
     [Header("RayDistance")]
     [SerializeField]
     private float rayDistance;
-    private float[] checkAngles = { 5f, 15 ,25f,35f ,45f,55f ,60f,65f };
+    private float[] checkAngles = { 15f ,25f,35f ,45f,55f ,60f,65f,75f,80f };
     private float avoidanceSide = 1f;
     private bool isAvoidanceMode = false;
     private Vector2 fixedAvoidDir;
