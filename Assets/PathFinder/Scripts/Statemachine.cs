@@ -12,6 +12,7 @@ public enum StateType
     Die,
 
     Goback,
+    Search,
 }
 public abstract class State<T> 
 {

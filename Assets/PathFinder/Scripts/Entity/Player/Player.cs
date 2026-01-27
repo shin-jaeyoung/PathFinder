@@ -109,7 +109,11 @@ public class Player : Entity
     {
         float finalDamage = combatSystem.Hit(info.damage, statusSystem.Stat[PlayerStatType.Armor]);
         statusSystem.ReduceStat(PlayerStatType.CurHp, (int)finalDamage);
-        stateMachine.ChangeState(StateType.Hit);
+        Debug.Log(statusSystem.FinalStat[PlayerStatType.CurHp]);
+        if(stateMachine.CurState != stateMachine.stateDic[StateType.Hit])
+        {
+            stateMachine.ChangeState(StateType.Hit);
+        }
     }
     public override float GetAttackPower()
     {

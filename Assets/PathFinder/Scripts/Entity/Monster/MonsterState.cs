@@ -8,7 +8,7 @@ public class MonsterIdleState : MonsterState
 {
     public override void Enter()
     {
-        Debug.Log("monster Idle");
+        //Debug.Log("monster Idle");
     }
     public override void Update()
     {
@@ -31,7 +31,7 @@ public class MonsterMoveState : MonsterState
 {
     public override void Enter()
     {
-        Debug.Log("monster Move");
+        //Debug.Log("monster Move");
     }
     public override void Update()
     {
@@ -50,6 +50,28 @@ public class MonsterMoveState : MonsterState
     {
         if (owner.Detection.Target == null) return;
 
+        owner.Detection.UpdateVisibility();
+
+        Vector2 moveTargetPos;
+
+        if (owner.Detection.IsTargetVisible)
+        {
+            moveTargetPos = owner.Detection.Target.position;
+        }
+        else
+        {
+            moveTargetPos = owner.Detection.LastKnownPos;
+
+            // 마지막 위치 도착 확인
+            float distToLastPos = Vector2.Distance(owner.transform.position, moveTargetPos);
+            if (distToLastPos < 0.1f)
+            {
+                // 수색 상태로 전환!
+                stateMachine.ChangeState(StateType.Search);
+                return;
+            }
+        }
+
         //너무 붙으면 속도 멈추게
         float dist = Vector2.Distance(owner.transform.position, owner.Detection.Target.position);
         if(dist < 0.8f)
@@ -58,7 +80,7 @@ public class MonsterMoveState : MonsterState
             return;
         }
         // 플레이어 방향으로 이동
-        Vector2 dir = owner.Detection.GetAdjustedDirection(owner.Detection.Target.position);
+        Vector2 dir = owner.Detection.GetAdjustedDirection(moveTargetPos);
         owner.Rb.velocity = dir * owner.Data.Speed;
         owner.FlipSprite(dir.x);
     }
@@ -67,11 +89,43 @@ public class MonsterMoveState : MonsterState
         owner.Rb.velocity = Vector2.zero;
     }
 }
+public class MonsterSearchState : MonsterState
+{
+
+
+    public override void Enter()
+    {
+
+        owner.Rb.velocity = Vector2.zero;
+        //Debug.Log("수색 시작");
+        owner.Detection.StartTrackingWatch();
+    }
+
+    public override void Update()
+    {
+        owner.Detection.UpdateVisibility();
+        if (owner.Detection.IsTargetVisible)
+        {
+            stateMachine.ChangeState(StateType.Move);
+            return;
+        }
+        if (owner.Detection.IsDetect==false)
+        {
+            stateMachine.ChangeState(StateType.Goback);
+            return;
+        }
+    }
+
+    public override void Exit()
+    {
+        owner.Detection.StopTrackingWatch();
+    }
+}
 public class MonsterGobackState : MonsterState
 {
     public override void Enter()
     {
-        Debug.Log("monster Goback");
+        //Debug.Log("monster Goback");
     }
     public override void Update()
     {
@@ -125,7 +179,9 @@ public class MonsterAttackState : MonsterState
     {
         Debug.Log("몬스터 공격");
         isAttack = true;
-        //애니메이션 종료체크로직이후 isAttack = false;
+        //발동
+        owner.Active(0);
+        //애니메이션 종료체크로직이후 isAttack = false; 1f대신 애니메이션 길이가 들어가야함
         owner.StartCoroutine(WaitAnimCo(1.5f, AttackFalse));
     }
 
@@ -154,7 +210,8 @@ public class MonsterDieState : MonsterState
 {
     public override void Enter()
     {
-
+        //애니메이션
+        //리턴풀? + 애니메이션 끝나면 idle상태로 만들어주기
     }
     public override void Update()
     {
@@ -162,10 +219,10 @@ public class MonsterDieState : MonsterState
     }
     public override void FixedUpdate()
     {
-
+        //속도 고정 zero
     }
     public override void Exit()
     {
-
+        //여기에 상태부터 이거저거 초기화해줘야해
     }
 }

@@ -11,6 +11,8 @@ public enum SkillType
 public struct SkillData 
 {
     [SerializeField]
+    private int id;
+    [SerializeField]
     private string skillName;
     [SerializeField]
     private GameObject prefab;
@@ -32,6 +34,7 @@ public struct SkillData
     [SerializeField]
     private float spriteRotation;
     //property
+    public int ID => id;
     public string SkillName => skillName;
     public GameObject Prefab => prefab;
     public Sprite Icon => icon;

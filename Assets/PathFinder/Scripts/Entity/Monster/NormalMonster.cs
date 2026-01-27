@@ -10,10 +10,10 @@ public class NormalMonster : Monster
         stateMachine.AddState(StateType.Idle, new MonsterIdleState());
         stateMachine.AddState(StateType.Move, new MonsterMoveState());
         stateMachine.AddState(StateType.Goback, new MonsterGobackState());
+        stateMachine.AddState(StateType.Search, new MonsterSearchState());
         stateMachine.AddState(StateType.Attack, new MonsterAttackState());
         stateMachine.AddState(StateType.Hit, new MonsterHitState());
         stateMachine.AddState(StateType.Die, new MonsterDieState());
-
 
         stateMachine.ChangeState(StateType.Idle);
     }
