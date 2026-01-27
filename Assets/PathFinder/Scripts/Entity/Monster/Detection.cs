@@ -288,6 +288,7 @@ public class Detection : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(originVec, moveRange);
 
+        //타겟에 쏘는 레이
         if (target != null)
         {
             Gizmos.color = Color.green;
