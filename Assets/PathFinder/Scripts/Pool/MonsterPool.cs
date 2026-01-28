@@ -37,8 +37,11 @@ public class MonsterPool : Pool
 
     public override GameObject Pop(int id, Vector2 position, Quaternion rotation)
     {
-        if (!prefabDic.ContainsKey(id)) return null;
-
+        if (!prefabDic.ContainsKey(id))
+        {
+            Debug.Log("해당 몬스터 MonsterPool에 등록해");
+            return null;
+        }
         GameObject obj = null;
 
         if (poolDic[id].Count > 0)

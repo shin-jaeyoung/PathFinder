@@ -40,8 +40,11 @@ public class SkillPool : Pool
 
     public override GameObject Pop(int id, Vector2 position, Quaternion rotation)
     {
-        if (!prefabDic.ContainsKey(id)) return null;
-
+        if (!prefabDic.ContainsKey(id))
+        {
+            Debug.Log("해당 스킬 SkillPool에 등록해");
+            return null;
+        }
         GameObject obj = null;
 
         if (poolDic[id].Count > 0)
