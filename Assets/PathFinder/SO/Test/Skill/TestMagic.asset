@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TestMagic
   m_EditorClassIdentifier: 
   data:
+    id: 3
     skillName: testMagic
     prefab: {fileID: 6652885229962706474, guid: 3c54bef22b9e5ae4985648aa4126ea6f,
       type: 3}

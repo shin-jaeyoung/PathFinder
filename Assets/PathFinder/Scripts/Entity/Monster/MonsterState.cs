@@ -210,8 +210,9 @@ public class MonsterDieState : MonsterState
 {
     public override void Enter()
     {
-        //애니메이션
+        //애니메이션 작동 + action에 초기화부터 리턴풀까지 넣어주기
         //리턴풀? + 애니메이션 끝나면 idle상태로 만들어주기
+        owner.StartCoroutine(WaitAnimCo(2f, ReturnPool));
     }
     public override void Update()
     {
@@ -219,10 +220,16 @@ public class MonsterDieState : MonsterState
     }
     public override void FixedUpdate()
     {
-        //속도 고정 zero
+        owner.Rb.velocity = Vector2.zero;
     }
     public override void Exit()
     {
         //여기에 상태부터 이거저거 초기화해줘야해
+        //밑에서 다함
+    }
+    public void ReturnPool()
+    {
+        owner.Refresh();
+        stateMachine.ChangeState(StateType.Idle);
     }
 }

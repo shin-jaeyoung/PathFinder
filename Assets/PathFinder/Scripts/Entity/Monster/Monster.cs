@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
-public abstract class Monster : Entity
+public abstract class Monster : Entity , IPoolable
 {
     [Header("Hp")]
     [SerializeField]
@@ -37,6 +38,7 @@ public abstract class Monster : Entity
             if (curHp <= 0)
             {
                 curHp = 0;
+                Die();
             }
             if (curHp > data.MaxHp)
             {
@@ -120,6 +122,15 @@ public abstract class Monster : Entity
         CurHp -= finalDamage;
         Debug.Log("몬스터맞음");
     }
+    public void Die()
+    {
+        stateMachine.ChangeState(StateType.Die);
+    }
+    public void Refresh()
+    {
+        CurHp = data.MaxHp;
+        PoolManager.instance.PoolDic[PoolType.Monster].ReturnPool(gameObject);
+    }
     public void FlipSprite(float xInput)
     {
         if (xInput == 0) return;
@@ -154,5 +165,10 @@ public abstract class Monster : Entity
     public GameObject GetGO()
     {
         return gameObject;
+    }
+
+    public int GetID()
+    {
+        return data.Id;
     }
 }

@@ -18341,12 +18341,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbee633b3aa0ab24ea15ae6a3c835df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPool:
-    type: 0
-    monsters: []
-  skillPool:
-    type: 1
-    skills: []
+  pools:
+  - {fileID: 11400000, guid: 9d68ebaa27bab1d47a84400f8c072ad0, type: 2}
+  - {fileID: 11400000, guid: 8a8393e3a7976f049bd23c77671deb24, type: 2}
+  parentPrefab: {fileID: 5407988756748410930, guid: 16cb3cfa17c570f4d885e0ad160dcb4c,
+    type: 3}
 --- !u!4 &1145754552
 Transform:
   m_ObjectHideFlags: 0
@@ -31332,17 +31331,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2359791063972681615, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
-        type: 3}
-      propertyPath: viewLostThreshold
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
-        type: 3}
-      propertyPath: basicAttack.skill
-      value: 
-      objectReference: {fileID: 11400000, guid: 78fa93b5f6464904082d7b29574d60d8,
-        type: 2}
     - target: {fileID: 7271114388976837514, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: m_Name

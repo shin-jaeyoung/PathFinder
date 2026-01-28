@@ -29,10 +29,10 @@ public class Skill_Magic : Skill
         Vector2 spawnPos = caster.SkillSpawnPos();
 
         //풀링해야할곳
-        GameObject go = Instantiate(data.Prefab, spawnPos, Quaternion.identity);
+        GameObject go = PoolManager.instance.PoolDic[PoolType.Skill].Pop(data.ID, spawnPos, Quaternion.identity);
         if (go.TryGetComponent(out Projectile pj))
         {
-            pj.Init(caster.GetAttackPower() * data.DamageMultiplier, caster.GetEntity(), caster.GetEntityType());
+            pj.Init(caster.GetAttackPower() * data.DamageMultiplier, caster.GetEntity(), caster.GetEntityType(), this);
             if(isExplosion)
             {
                 pj.StartCoroutine(ExplosionDelayCo(caster));
@@ -45,6 +45,7 @@ public class Skill_Magic : Skill
         yield return new WaitForSeconds(data.Duration);
         Explosion(caster);
     }
+    //이거는 풀링 못했음 ㅋㅋ
     public void Explosion(ISkillActive caster)
     {
         if (caster == null || caster.GetEntity() == null) return;
@@ -54,9 +55,9 @@ public class Skill_Magic : Skill
         GameObject go = Instantiate(explosionEffectPrefab, spawnPos, Quaternion.identity);
         if (go.TryGetComponent(out Projectile pj))
         {
-            pj.Init(caster.GetAttackPower() * damageMultiplier, caster.GetEntity(), caster.GetEntityType());
+            pj.Init(caster.GetAttackPower() * damageMultiplier, caster.GetEntity(), caster.GetEntityType(),this);
 
-            pj.StartCoroutine(SkillReturnCo(go));
+            pj.StartCoroutine(SkillDestroyCo(go));
         }
     }
 }

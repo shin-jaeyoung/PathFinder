@@ -50,3 +50,7 @@ public interface IHittable
 {
     public void Hit(DamageInfo info);
 }
+public interface IPoolable
+{
+    public int GetID();
+}

@@ -2,36 +2,75 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+
+[CreateAssetMenu (fileName ="MonsterPool",menuName = "Pool/Monster")]
 public class MonsterPool : Pool
 {
     [SerializeField]
     private List<Monster> monsters;
-    private Dictionary<int, Monster> monsterDic = new Dictionary<int, Monster>();
-
+    private Dictionary<int, Monster> prefabDic = new Dictionary<int, Monster>();
+    private Dictionary<int,Queue<GameObject>> poolDic = new Dictionary<int, Queue<GameObject>>();
     public override void Init()
     {
-        if (monsters.Count < 1) return;
+        prefabDic.Clear();
+        poolDic.Clear();
+
         foreach (var mon in monsters)
         {
-            if (!monsterDic.ContainsKey(mon.Data.Id))
+            if (mon == null) continue;
+            int id = mon.Data.Id;
+
+            if (!prefabDic.ContainsKey(id))
             {
-                monsterDic.Add(mon.Data.Id,mon);
+                prefabDic.Add(id, mon);
+                poolDic.Add(id, new Queue<GameObject>());
+                GameObject obj = Instantiate(prefabDic[id].gameObject, PoolManager.instance.PoolParentDic[type].transform);
+                obj.SetActive(false);
+                poolDic[id].Enqueue(obj);
             }
             else
             {
-                Debug.Log("몬스터 아이디중복, 체크좀 해줘");
+                Debug.Log($"{id}번 몬스터 ID 중복!");
             }
         }
     }
 
-    public override GameObject ID2GameObj(int id)
+    public override GameObject Pop(int id, Vector2 position, Quaternion rotation)
     {
-        if (!monsterDic.ContainsKey(id))
+        if (!prefabDic.ContainsKey(id)) return null;
+
+        GameObject obj = null;
+
+        if (poolDic[id].Count > 0)
         {
-            Debug.Log("리스트에 없는 아이디");
-            return null;
+            obj = poolDic[id].Dequeue();
+            obj.transform.SetPositionAndRotation(position, rotation);
+            obj.transform.SetParent(PoolManager.instance.PoolParentDic[type].transform);
+            obj.SetActive(true);
         }
-        return monsterDic[id].gameObject;
+        else
+        {
+            obj = Instantiate(prefabDic[id].gameObject, position, rotation, PoolManager.instance.PoolParentDic[type].transform);
+        }
+
+        return obj;
+    }
+    public override void ReturnPool(GameObject obj)
+    {
+        if(obj.TryGetComponent<IPoolable>(out IPoolable poolable))
+        {
+            int id = poolable.GetID();
+
+            if (poolDic.ContainsKey(id))
+            {
+                obj.SetActive(false);
+                obj.transform.SetParent(PoolManager.instance.PoolParentDic[type].transform);
+                poolDic[id].Enqueue(obj);
+            }
+            else
+            {
+                Destroy(obj);
+            }
+        }
     }
 }
