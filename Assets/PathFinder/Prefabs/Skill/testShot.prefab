@@ -13,6 +13,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: testShot
       objectReference: {fileID: 0}
+    - target: {fileID: 3519990233136014668, guid: 2474177baad37cf48a6b00d8adbba5c7,
+        type: 3}
+      propertyPath: obstacle.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 4690908989947376594, guid: 2474177baad37cf48a6b00d8adbba5c7,
         type: 3}
       propertyPath: m_Size.x

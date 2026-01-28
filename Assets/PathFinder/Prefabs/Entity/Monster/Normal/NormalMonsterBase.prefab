@@ -103,13 +103,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curHp: 0
   data:
-    id: 0
+    id: 1
     mName: TestMon
     type: 0
     maxHp: 100
     atk: 10
     defence: 5
     speed: 1
+  basicAttack:
+    skill: {fileID: 11400000, guid: 78fa93b5f6464904082d7b29574d60d8, type: 2}
+    isCooltime: 0
+    currentCooltime: 0
   skills: []
   detection: {fileID: 2359791063972681615}
 --- !u!114 &2359791063972681615
@@ -140,7 +144,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   target: {fileID: 0}
-  viewLostThreshold: 4
+  viewLostThreshold: 3
 --- !u!70 &3311634576480251582
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

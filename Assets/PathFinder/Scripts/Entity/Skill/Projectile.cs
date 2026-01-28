@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public Skill owner;
+    public LayerMask obstacle;
     public Rigidbody2D rb;
     private EntityType attackerType;
     private float damage;
     private Entity attacker;
     private bool isHavetoDisapear;
-    public void Init(float damage, Entity attacker, EntityType attackerType, bool isShot = false)
+    public void Init(float damage, Entity attacker, EntityType attackerType, Skill owner, bool isShot = false)
     {
+        this.owner = owner;
         this.damage = damage;
         this.attacker = attacker;
         this.attackerType = attackerType;
@@ -20,6 +23,17 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(isHavetoDisapear)
+        {
+            if(((1<< collision.gameObject.layer)&obstacle.value) !=0)
+            {
+                if (gameObject != null)
+                {
+                    PoolManager.instance.PoolDic[PoolType.Skill].ReturnPool(gameObject);
+                }
+            }
+        }
+
         if(collision.TryGetComponent(out IHittable target))
         {
             Debug.Log("Hittable");
@@ -34,7 +48,7 @@ public class Projectile : MonoBehaviour
                     //리턴풀해야함
                     if (gameObject != null)
                     {
-                        Destroy(gameObject);
+                        PoolManager.instance.PoolDic[PoolType.Skill].ReturnPool(gameObject);
                     }
                 }
             }

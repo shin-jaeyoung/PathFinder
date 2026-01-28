@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-
+﻿using Cinemachine;
+using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     private SceneType curScene;
     private SceneType preScene;
 
+    [Header("Camera Settings")]
+    [SerializeField] private GameObject cameraGroupPrefab; 
+    private CinemachineVirtualCamera virtualCamera; 
     // property
 
     public Player Player
@@ -37,6 +40,7 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
             InitializePlayer();
+            InitializeCamera();
             InitialSceneSetting();
         }
         else
@@ -56,9 +60,29 @@ public class GameManager : MonoBehaviour
         if (player == null && playerPrefab != null)
         {
             GameObject go = Instantiate(playerPrefab);
-
+            go.name = "Player";
             player = go.GetComponent<Player>();
+            DontDestroyOnLoad(player);
             Debug.Log("플레이어를 새로 생성했습니다.");
+        }
+    }
+    private void InitializeCamera()
+    {
+        virtualCamera = Object.FindAnyObjectByType<CinemachineVirtualCamera>();
+
+        if (virtualCamera == null && cameraGroupPrefab != null)
+        {
+            GameObject camGo = Instantiate(cameraGroupPrefab);
+            camGo.name = "CameraGroup";
+            virtualCamera = camGo.GetComponentInChildren<CinemachineVirtualCamera>();
+
+            DontDestroyOnLoad(camGo);
+        }
+
+        if (virtualCamera != null && player != null)
+        {
+            virtualCamera.Follow = player.transform;
+            virtualCamera.LookAt = player.transform;
         }
     }
     public void SetScene(SceneType scene)
