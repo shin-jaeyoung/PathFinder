@@ -63,10 +63,11 @@ public class Detection : MonoBehaviour
 
     private void Awake()
     {
-        originVec = transform.position;
+        
     }
     private void OnEnable()
     {
+        originVec = transform.position;
         StartCoroutine(DectCo());
     }
     public void Detect()
