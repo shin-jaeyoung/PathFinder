@@ -84,14 +84,22 @@ public class PlayerController : MonoBehaviour
         {
             player.FlipSprite(input.x);
         }
-        if (input.x != 0 || input.y != 0)
+        if (player.Skills.CheckDashSkill() && Input.GetKeyDown(KeyCode.Space)) 
         {
-            player.StateMachine.ChangeState(StateType.Move);
+            GetMouseTransform();
+            float diff = mousePos.x - transform.position.x;
+
+            if (Mathf.Abs(diff) > 0.01f) 
+            {
+                float lookDirX = diff < 0 ? -1f : 1f;
+                
+                if(player.Dash())
+                {
+                    player.FlipSprite(lookDirX);
+                }
+            }
         }
-        else
-        {
-            player.StateMachine.ChangeState(StateType.Idle);
-        }
+
     }
     public void Interaction()
     {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public abstract class PlayerStateBase : State<Player> { }
 
@@ -17,7 +18,10 @@ public class PlayerMoveState : PlayerStateBase
     }
     public override void Update()
     {
-        
+        if (owner.PlayerController.input.x == 0 && owner.PlayerController.input.y == 0)
+        {
+            owner.StateMachine.ChangeState(StateType.Idle);
+        }
     }
     public override void FixedUpdate()
     {
@@ -42,20 +46,32 @@ public class PlayerIdleState : PlayerStateBase
 
     public override void Update()
     {
-        
+        if (owner.PlayerController.input.x != 0 || owner.PlayerController.input.y != 0)
+        {
+            owner.StateMachine.ChangeState(StateType.Move);
+        }
     }
 }
 public class PlayerAttackState : PlayerStateBase
 {
-    
+    private Coroutine attackRoutine;
     public override void Enter()
     {
+        owner.Rb.velocity = Vector2.zero;
         owner.Animator.SetTrigger("Attack");
+        float animLengh = owner.Animator.GetCurrentAnimatorStateInfo(0).length;
+        attackRoutine = owner.StartCoroutine(WaitAnimCo(animLengh, () => {
+            stateMachine.ChangeState(StateType.Idle);
+        }));
     }
 
     public override void Exit()
     {
-
+        if (attackRoutine != null)
+        {
+            owner.StopCoroutine(attackRoutine);
+            attackRoutine = null;
+        }
     }
 
     public override void Update()
@@ -65,20 +81,60 @@ public class PlayerAttackState : PlayerStateBase
 }
 public class PlayerHitState : PlayerStateBase
 {
-
+    private Coroutine hitRoutine;
     public override void Enter()
     {
         owner.Animator.SetTrigger("Damaged");
+        float animLengh = owner.Animator.GetCurrentAnimatorStateInfo(0).length;
+        hitRoutine = owner.StartCoroutine(WaitAnimCo(animLengh, () => {
+            stateMachine.ChangeState(StateType.Idle);
+        }));
     }
 
     public override void Exit()
     {
-
+        if (hitRoutine != null)
+        {
+            owner.StopCoroutine(hitRoutine);
+            hitRoutine = null;
+        }
     }
 
     public override void Update()
     {
 
+    }
+}
+public class PlayerDashState : PlayerStateBase
+{
+    private float duration = 0.2f;
+    private float dashSpeed = 12f;
+    private Coroutine dashRoutine;
+    private Vector2 dir;
+    public override void Enter()
+    {
+        owner.Rb.velocity = Vector2.zero;
+        dir = owner.LookDir();
+        dashRoutine = owner.StartCoroutine(WaitAnimCo(duration, () => { stateMachine.ChangeState(StateType.Idle); }));
+    }
+
+    public override void Exit()
+    {
+        owner.Rb.velocity = Vector2.zero;
+        if (dashRoutine != null)
+        {
+            owner.StopCoroutine(dashRoutine);
+            dashRoutine = null;
+        }
+    }
+
+    public override void Update()
+    {
+
+    }
+    public override void FixedUpdate()
+    {
+        owner.Rb.velocity = dir * dashSpeed;
     }
 }
 public class PlayerDieState : PlayerStateBase

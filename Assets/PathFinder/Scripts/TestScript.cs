@@ -11,6 +11,9 @@ public class TestScript : MonoBehaviour
     public Skill testSkill;
     public Skill testSwap;
     public Item extraItem;
+    public Skill testDash;
+
+
     public Player player;
     void Start()
     {
@@ -47,6 +50,10 @@ public class TestScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
             player.Inventory.AddItem(extraItem);
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            player.Skills.AddDashSkill(testDash);
         }
     }
 }

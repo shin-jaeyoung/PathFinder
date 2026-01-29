@@ -5862,6 +5862,10 @@ MonoBehaviour:
     activeSkills: []
     activeCapacity: 20
     passiveCapacity: 20
+    dashSkill:
+      skill: {fileID: 0}
+      isCooltime: 0
+      currentCooltime: 0
     skillequip:
     - skill: {fileID: 0}
       isCooltime: 0
@@ -5875,8 +5879,7 @@ MonoBehaviour:
     - skill: {fileID: 0}
       isCooltime: 0
       currentCooltime: 0
-  animator: {fileID: 2571286699308495456, guid: a3fc8edb4abec0046a9b5353e6927abb,
-    type: 3}
+  animator: {fileID: 4885573051993887343}
 --- !u!114 &-8642947656750848642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6003,6 +6006,7 @@ MonoBehaviour:
   testSkill: {fileID: 11400000, guid: ccc8d3608796998478839f8c02a80378, type: 2}
   testSwap: {fileID: 11400000, guid: 9a2236d244fca844684137447e2f0f57, type: 2}
   extraItem: {fileID: 11400000, guid: e2e1d54367eefa94e974bf7001020193, type: 2}
+  testDash: {fileID: 11400000, guid: 65d712f31a4c64044b21e5ff6d33e5d9, type: 2}
   player: {fileID: 0}
 --- !u!1 &5626902304530670762
 GameObject:
