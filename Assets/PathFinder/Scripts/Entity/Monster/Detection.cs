@@ -26,7 +26,7 @@ public class Detection : MonoBehaviour
 
     [Header("RayDistance")]
     [SerializeField] private float rayDistance;
-    private float[] checkAngles = { 15f, 25f, 35f, 45f, 55f, 60f, 65f, 75f, 80f };
+    private float[] checkAngles = { 15f, 25f, 35f, 45f, 55f, 60f, 65f ,70f };
     private float avoidanceSide = 1f;
     private bool isAvoidanceMode = false;
     private Vector2 fixedAvoidDir;
@@ -87,7 +87,7 @@ public class Detection : MonoBehaviour
         {
             isDetect = true;
             target = raycastHit.transform;
-            lastKnownPos = target.position;
+            lastKnownPos = target.position+ new Vector3(0,0.5f,0);
         }
         else
         {
