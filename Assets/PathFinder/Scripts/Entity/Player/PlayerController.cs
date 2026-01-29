@@ -24,6 +24,11 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         player = GameManager.instance.Player;
+        // 씬에 하나뿐인 MainCamera를 자동으로 찾아 할당
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
     }
 
     private void Update()
