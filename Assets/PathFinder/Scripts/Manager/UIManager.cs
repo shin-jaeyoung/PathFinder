@@ -160,6 +160,11 @@ public class UIManager : MonoBehaviour
 
         return currenUIType;
     }
+    public bool CheckCurUIType(UIType type)
+    {
+        if(currenUIType == type) return true;
+        return false;
+    }
     public void ShowUI(UIType type)
     {
         if (uiPanelDic.TryGetValue(type, out GameObject ui))
@@ -180,6 +185,7 @@ public class UIManager : MonoBehaviour
             CheckCurUI();
         }
     }
+    
     public void Showonly(UIType targetType)
     {
         foreach(var t in uiPanelDic)

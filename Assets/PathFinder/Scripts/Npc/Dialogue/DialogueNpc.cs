@@ -23,6 +23,11 @@ public class DialogueNpc : SpecialNpc, ISpecialInteractable
         }
         if(isTalk)
         {
+            //DialogueUI만들고 넣자
+            //if(!UIManager.Instance.CheckCurUIType(UIType.Dialogue))
+            //{
+            //    CancleAct();
+            //}
             if (dialogueSO.dialogues.Count > curIndex)
             {
                 NextDialogue();
@@ -55,5 +60,11 @@ public class DialogueNpc : SpecialNpc, ISpecialInteractable
         //대화가 끝났음을 알려줘야함 Npc에게 그래야 다음 스페셜 액션이 실행되도록할 수 있을듯
 
         isInteractFinish = true;
+    }
+    public void CancleAct()
+    {
+        curIndex = 0;
+        isTalk = false;
+        isInteractFinish = false;
     }
 }
