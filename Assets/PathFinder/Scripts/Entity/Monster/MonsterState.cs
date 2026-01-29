@@ -229,6 +229,7 @@ public class MonsterDieState : MonsterState
     }
     public void ReturnPool()
     {
+        RewardManager.instance.Reward(owner.RewardData, owner.transform.position);
         owner.Refresh();
         stateMachine.ChangeState(StateType.Idle);
     }

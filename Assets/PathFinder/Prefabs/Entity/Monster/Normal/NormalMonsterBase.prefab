@@ -110,6 +110,15 @@ MonoBehaviour:
     atk: 10
     defence: 5
     speed: 1
+  rewardData:
+    items:
+    - {fileID: 11400000, guid: 15452eff3846b7d4a8763e4081b246d5, type: 2}
+    - {fileID: 11400000, guid: f78c028919d5f9642be15ade4fec135f, type: 2}
+    - {fileID: 11400000, guid: fb00f7eb0152a4e488ca741cdc7eb1c1, type: 2}
+    activeSkill: {fileID: 0}
+    passiveSkill: {fileID: 0}
+    gold: 100
+    exp: 50
   basicAttack:
     skill: {fileID: 11400000, guid: 78fa93b5f6464904082d7b29574d60d8, type: 2}
     isCooltime: 0

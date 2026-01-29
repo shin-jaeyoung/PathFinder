@@ -16,7 +16,8 @@ public class PlayerSkillInventory
     private List<PassiveSlot> passiveSkills;
     [SerializeField]
     private int passiveCapacity;
-
+    [SerializeField]
+    private SkillSlot dashSkill;
 
     [Header("Skill Equip")]
     [SerializeField]
@@ -34,6 +35,7 @@ public class PlayerSkillInventory
     public List<SkillSlot> Skillequip => skillequip;
     public int EquipCapacity => equipCapacity;
     public Dictionary<PlayerStatType, float> AddStatus => addStatus;
+    public SkillSlot DashSkill => dashSkill;
     //delitgate
     public Action OnChangedActiveSkill;
     public Action OnChangedPassiveSkill;
@@ -46,6 +48,8 @@ public class PlayerSkillInventory
         skillequip = new List<SkillSlot>(equipCapacity);
         passiveSkills = new List<PassiveSlot>(passiveCapacity);
         addStatus = new Dictionary<PlayerStatType, float>();
+        dashSkill = new SkillSlot();
+
         for (int i = 0; i < activeCapacity; i++)
         {
             activeSkills.Add(new SkillSlot());
@@ -87,6 +91,24 @@ public class PlayerSkillInventory
             return true;
         }
         return false;
+    }
+    public bool AddDashSkill(Skill skill)
+    {
+        if(dashSkill.IsEmpty())
+        {
+            dashSkill.skill = skill;
+            return true;
+        }
+        Debug.Log("이미있음");
+        return false;
+    }
+    public bool CheckDashSkill()
+    {
+        if(dashSkill.IsEmpty())
+        {
+            return false;
+        }
+        return true;
     }
     public void Clear()
     {

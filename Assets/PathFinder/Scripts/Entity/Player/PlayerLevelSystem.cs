@@ -52,4 +52,18 @@ public class PlayerLevelSystem
         UpdateMaxExp();
         OnLevelChanged?.Invoke();
     }
+
+    public bool UseLevelPoint()
+    {
+        if(levelPoint>0)
+        {
+            levelPoint--;
+            return true;
+        }
+        else
+        {
+            Debug.Log("LevelPoint가 부족");
+            return false;
+        }
+    }
 }

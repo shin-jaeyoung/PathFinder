@@ -13,6 +13,7 @@ public enum StateType
 
     Goback,
     Search,
+    Dash,
 }
 public abstract class State<T> 
 {

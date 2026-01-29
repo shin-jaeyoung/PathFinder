@@ -35,8 +35,9 @@ public class PlayerStatusSystem
     private Dictionary<PlayerStatType, float> stat;
     //추가스펙스텟을 더해준 스탯 (패시브스킬, 장비)
     private Dictionary<PlayerStatType, float> finalStat;
-
-    Player player;
+    //STR,DEX,CON을 기본능력치로 치환
+    private Dictionary<PlayerStatType, float> substitution;
+    private Player player;
 
     //property
     public Dictionary<PlayerStatType, float> Stat => stat;
@@ -53,6 +54,7 @@ public class PlayerStatusSystem
         stat = new Dictionary<PlayerStatType, float>();
         currenStats = new List<PlayerStats>();
         finalStat = new Dictionary<PlayerStatType, float>();
+        substitution = new Dictionary<PlayerStatType, float>();
         player = GameManager.instance.Player;
         if (initData == null) return;
         initStats = initData;
@@ -86,6 +88,10 @@ public class PlayerStatusSystem
     {
         if (stat.ContainsKey(type))
         {
+            if( type == PlayerStatType.STR || type == PlayerStatType.DEX || type == PlayerStatType.CON)
+            {
+                if (!player.LevelSystem.UseLevelPoint()) return;
+            }
             stat[type] += value;
 
             if (type == PlayerStatType.CurHp)
@@ -95,7 +101,6 @@ public class PlayerStatusSystem
 
                 if (stat[type] > maxHp) stat[type] = maxHp;
             }
-
             UpdateFinalStat();
         }
     }
@@ -126,9 +131,11 @@ public class PlayerStatusSystem
 
         AddStatsFromSource(player.Skills.AddStatus);
         AddStatsFromSource(player.Inventory.EquipmentStat);
+        AddStatsFromSource(SubstitutionStat(finalStat));
+
         OnStatChanged?.Invoke();
     }
-
+    //내부요인 말고 외부요인(장비,스킬)
     private void AddStatsFromSource(Dictionary<PlayerStatType, float> source)
     {
         if (source == null) return;
@@ -140,6 +147,21 @@ public class PlayerStatusSystem
             else
                 finalStat[pair.Key] = pair.Value;
         }
+    }
+    private Dictionary<PlayerStatType, float> SubstitutionStat(Dictionary<PlayerStatType, float> source)
+    {
+        substitution.Clear();
+        float str = source[PlayerStatType.STR]; // str 1당 power 1 maxhp10
+        float dex = source[PlayerStatType.DEX]; // dex 1당 crirate 0.5 , cridmg 1
+        float con = source[PlayerStatType.CON]; // con 1당 def 1 , maxhp 20
+
+        substitution.Add(PlayerStatType.Power, str);
+        substitution.Add(PlayerStatType.Armor, con);
+        substitution.Add(PlayerStatType.CriRate, dex * 0.5f);
+        substitution.Add(PlayerStatType.CriDamage, dex);
+        substitution.Add(PlayerStatType.MaxHp, str * 10f + con * 20f);
+
+        return substitution;
     }
     public void TakeDamage(float value)
     {

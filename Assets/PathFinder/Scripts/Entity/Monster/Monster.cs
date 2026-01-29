@@ -12,6 +12,9 @@ public abstract class Monster : Entity , IPoolable
     [Header("Data")]
     [SerializeField]
     protected MonsterData data;
+    [Header("RewardData")]
+    [SerializeField]
+    private RewardData rewardData;
     [Header("SKill")]
     [SerializeField]
     protected SkillSlot basicAttack;
@@ -52,6 +55,7 @@ public abstract class Monster : Entity , IPoolable
     public Rigidbody2D Rb => rb;
     public SkillSlot BasicAttack => basicAttack;
     public List<SkillSlot> Skills => skills;
+    public RewardData RewardData => rewardData;
 
     //deligate
     public event Action OnChangeHp;

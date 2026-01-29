@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -33,6 +34,7 @@ public class Player : Entity
     private HpPotion potion;
     private PlayerController playerController;
 
+    //property
     public Vector2 InputVec { get; set; }
     public Rigidbody2D Rb { get; private set; }
     public PlayerStatList InitStat => initStat;
@@ -43,12 +45,14 @@ public class Player : Entity
     public PlayerSkillInventory Skills => skills;
     public StateMachine<Player> StateMachine => stateMachine;
     public HpPotion Potion => potion;
-
+    public PlayerController PlayerController => playerController;
+    //state
     public PlayerIdleState IdleState = new PlayerIdleState();
     public PlayerMoveState MoveState = new PlayerMoveState();
     public PlayerDieState dieState = new PlayerDieState();
     public PlayerHitState hitState = new PlayerHitState();
     public PlayerAttackState AttackState = new PlayerAttackState();
+    public PlayerDashState DashState = new PlayerDashState();
     private void Awake()
     {
         Rb = GetComponent<Rigidbody2D>();
@@ -66,6 +70,7 @@ public class Player : Entity
         stateMachine.AddState(StateType.Attack, AttackState);
         stateMachine.AddState(StateType.Hit, hitState);
         stateMachine.AddState(StateType.Die, dieState);
+        stateMachine.AddState(StateType.Dash, DashState);
 
         StateMachine.ChangeState(StateType.Idle);
 
@@ -104,13 +109,21 @@ public class Player : Entity
             stateMachine.ChangeState(StateType.Attack);
         }
     }
-
+    public bool Dash()
+    {
+        if (combatSystem.PerformSkill(skills.DashSkill))
+        {
+            stateMachine.ChangeState(StateType.Dash);
+            return true;
+        }
+        return false;
+    }
     public override void Hit(DamageInfo info)
     {
         float finalDamage = combatSystem.Hit(info.damage, statusSystem.Stat[PlayerStatType.Armor]);
         statusSystem.ReduceStat(PlayerStatType.CurHp, (int)finalDamage);
         Debug.Log(statusSystem.FinalStat[PlayerStatType.CurHp]);
-        if(stateMachine.CurState != stateMachine.stateDic[StateType.Hit])
+        if(stateMachine.CurState != stateMachine.stateDic[StateType.Hit]||stateMachine.CurState != stateMachine.stateDic[StateType.Dash])
         {
             stateMachine.ChangeState(StateType.Hit);
         }

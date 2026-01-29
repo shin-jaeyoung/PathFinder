@@ -11,3 +11,4 @@ public abstract class Pool : ScriptableObject
     public abstract GameObject Pop(int id, Vector2 position, Quaternion rotation);
     public abstract void ReturnPool(GameObject obj);
 }
+//나중에 이거 제네릭으로 하면 편해질것같은데
