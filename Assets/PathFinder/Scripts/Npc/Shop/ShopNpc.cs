@@ -36,7 +36,10 @@ public class ShopNpc : SpecialNpc, ISpecialInteractable
     public void CloseShop()
     {
         ShopManager.instance.ClearNpc();
-        UIManager.Instance.HideUI(UIType.Shop);
+        if(UIManager.Instance.CurUI == UIType.Shop)
+        {
+            UIManager.Instance.HideUI(UIType.Shop);
+        }
         isShopOpen = false;
         isInteractFinish = true;
     }

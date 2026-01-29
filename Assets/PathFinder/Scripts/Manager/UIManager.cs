@@ -44,7 +44,8 @@ public class UIManager : MonoBehaviour
     private UIType preUIType;
 
     private Stack<UIType> UIStack;
-
+    //property
+    public UIType CurUI => currenUIType;
     private void Awake()
     {
         if(Instance == null)
