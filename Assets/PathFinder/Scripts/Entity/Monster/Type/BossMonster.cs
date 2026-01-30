@@ -25,8 +25,10 @@ public class BossMonster : Monster
     protected override void InitStart()
     {
         //보스몹의 추가 상태
+        //Immortal은 무적,고정용 상태임
         stateMachine.AddState(StateType.Immortal, new MonsterImmortalState());
 
+        //기믹쿨타임용 코루틴
         StartCoroutine(GimmickTimerCo());
     }
 
@@ -56,6 +58,7 @@ public class BossMonster : Monster
         isGimmickActive = false;
         stateMachine.ChangeState(StateType.Move);
     }
+    //패턴매서드
     private IEnumerator SelectRandomGimmickCo()
     {
         
@@ -64,7 +67,6 @@ public class BossMonster : Monster
         GimmickEnd();
     }
 
-    //패턴매서드
     private IEnumerator Pattern_ZoneMixture()
     {
         Debug.Log("기믹 발동: 진짜 안전지대를 찾아라ㅋ");
@@ -91,7 +93,6 @@ public class BossMonster : Monster
         alertTime = tmp;
         ExecuteUltimateAttack();
 
-        // 4. 장판 정리
         foreach (var zone in spawnedZones) Destroy(zone);
         yield return new WaitForSeconds(1f);
     }
