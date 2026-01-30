@@ -46,7 +46,11 @@ public class HiddenManager : MonoBehaviour
             bool success = hidden.VerifyCondition(objId, player);
             if (success)
             {
-                Debug.Log($"{hiddenId}번 기믹 통과");
+                if(hidden.State == HiddenState.Progress)
+                {
+                    Debug.Log($"{hiddenId}번 기믹 통과");
+                    //연출넣으면 될듯?
+                }
             }
         }
     }

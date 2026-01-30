@@ -30,6 +30,7 @@ public class Hidden
 
     //property
     public HiddenData Data => data;
+    public HiddenState State => curState;
 
 
     public bool VerifyCondition(int targetId, Player player)
@@ -64,6 +65,7 @@ public class Hidden
     }
     private void GiveReward(Player player)
     {
+        //여기도 연출 넣으면 될듯
         Debug.Log($"{data.hiddenName} 클리어! 보상을 지급합니다.");
         RewardManager.instance.Reward(data.rewardData, player.transform.position);
     }
