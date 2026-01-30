@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
             Interaction();
         }
         //스프라이트 반전
-        if (input.x !=0)
+        if (input.x !=0 && player.StateMachine.CurState == player.MoveState)
         {
             player.FlipSprite(input.x);
         }
