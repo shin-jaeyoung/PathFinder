@@ -44,7 +44,8 @@ public class UIManager : MonoBehaviour
     private UIType preUIType;
 
     private Stack<UIType> UIStack;
-
+    //property
+    public UIType CurUI => currenUIType;
     private void Awake()
     {
         if(Instance == null)
@@ -159,6 +160,11 @@ public class UIManager : MonoBehaviour
 
         return currenUIType;
     }
+    public bool CheckCurUIType(UIType type)
+    {
+        if(currenUIType == type) return true;
+        return false;
+    }
     public void ShowUI(UIType type)
     {
         if (uiPanelDic.TryGetValue(type, out GameObject ui))
@@ -179,6 +185,7 @@ public class UIManager : MonoBehaviour
             CheckCurUI();
         }
     }
+    
     public void Showonly(UIType targetType)
     {
         foreach(var t in uiPanelDic)

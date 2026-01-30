@@ -64,9 +64,9 @@ public class MonsterMoveState : MonsterState
 
             // 마지막 위치 도착 확인
             float distToLastPos = Vector2.Distance(owner.transform.position, moveTargetPos);
-            if (distToLastPos < 0.1f)
+            if (distToLastPos < 0.3f)
             {
-                // 수색 상태로 전환!
+                // 수색 상태로 전환
                 stateMachine.ChangeState(StateType.Search);
                 return;
             }

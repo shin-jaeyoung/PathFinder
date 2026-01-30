@@ -43,6 +43,24 @@ public class PlayerController : MonoBehaviour
         input.y = Input.GetAxisRaw("Vertical");
         player.InputVec = input.normalized;
 
+        //상호작용
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Interaction();
+        }
+        //스프라이트 반전
+        if (input.x !=0)
+        {
+            player.FlipSprite(input.x);
+        }
+        //이 밑에는 UI가 HUD or 보스 Hp일때만
+        //추가가능
+        if(UIManager.Instance.CurUI != UIType.HUD)
+        {
+            return;
+        }
+
+
         //포션
         if (Input.GetKeyDown(KeyCode.C))
         {
@@ -52,11 +70,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //상호작용
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Interaction();
-        }
         //스킬
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -80,10 +93,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //이동관련
-        if (input.x !=0)
-        {
-            player.FlipSprite(input.x);
-        }
+        //대쉬
         if (player.Skills.CheckDashSkill() && Input.GetKeyDown(KeyCode.Space)) 
         {
             GetMouseTransform();

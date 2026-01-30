@@ -8,6 +8,7 @@ public class MonsterPool : Pool
 {
     [SerializeField]
     private List<Monster> monsters;
+
     private Dictionary<int, Monster> prefabDic = new Dictionary<int, Monster>();
     private Dictionary<int,Queue<GameObject>> poolDic = new Dictionary<int, Queue<GameObject>>();
     public override void Init()
