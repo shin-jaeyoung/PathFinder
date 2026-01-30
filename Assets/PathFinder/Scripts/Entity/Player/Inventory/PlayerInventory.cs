@@ -172,4 +172,13 @@ public class PlayerInventory
         OnGoldChanged?.Invoke();
         return true;
     }
+    public bool HasItem(Item item)
+    {
+        foreach( InventorySlot slot in inventory)
+        {
+            if(slot.item == item) return true;
+        }
+        Debug.Log("해당 아이템 없음");
+        return false;
+    }
 }

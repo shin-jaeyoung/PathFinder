@@ -15,6 +15,10 @@ public enum StateType
     Search,
     Dash,
 }
+//히든
+//시작전(조건검출)
+//진행중(단계)
+//완료(Reward)
 public abstract class State<T> 
 {
     public T owner;
