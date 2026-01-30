@@ -30,7 +30,10 @@ public abstract class Monster : Entity , IPoolable
     protected Rigidbody2D rb;
     protected StateMachine<Monster> stateMachine;
 
+    [SerializeField]
+    protected bool isBerserkerMode;
     private int useSkillIndex;
+    
     //property
     public float CurHp
     {
@@ -38,6 +41,10 @@ public abstract class Monster : Entity , IPoolable
         protected set
         {
             curHp = value;
+            if ((curHp / data.MaxHp) <0.3f)
+            {
+                
+            }
             if (curHp <= 0)
             {
                 curHp = 0;
@@ -73,6 +80,17 @@ public abstract class Monster : Entity , IPoolable
         combatSystem.Init(this);
         stateMachine = new StateMachine<Monster>(this);
         curHp = data.MaxHp;
+
+        //base상태들
+        stateMachine.AddState(StateType.Idle, new MonsterIdleState());
+        stateMachine.AddState(StateType.Move, new MonsterMoveState());
+        stateMachine.AddState(StateType.Goback, new MonsterGobackState());
+        stateMachine.AddState(StateType.Search, new MonsterSearchState());
+        stateMachine.AddState(StateType.Attack, new MonsterAttackState());
+        stateMachine.AddState(StateType.Hit, new MonsterHitState());
+        stateMachine.AddState(StateType.Die, new MonsterDieState());
+
+        stateMachine.ChangeState(StateType.Idle);
     }
     protected abstract void InitStart();
 
@@ -122,11 +140,15 @@ public abstract class Monster : Entity , IPoolable
     }
     public override void Hit(DamageInfo info)
     {
+        if (stateMachine.CurState == stateMachine.stateDic[StateType.Hit]) return;
+        if (stateMachine.CurState == stateMachine.stateDic[StateType.Die]) return;
+        if (stateMachine.CurState == stateMachine.stateDic[StateType.Immortal]) return;
+        stateMachine.ChangeState(StateType.Hit);
         float finalDamage = combatSystem.Hit(info.damage, data.Defence);
         CurHp -= finalDamage;
         Debug.Log("몬스터맞음");
     }
-    public void Die()
+    public virtual void Die()
     {
         stateMachine.ChangeState(StateType.Die);
     }

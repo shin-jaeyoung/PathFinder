@@ -154,9 +154,13 @@ public class MonsterGobackState : MonsterState
 }
 public class MonsterHitState : MonsterState
 {
+    private Coroutine hitRoutine;
     public override void Enter()
     {
-
+        float animLengh = 0.5f; //owner.Animator.GetCurrentAnimatorStateInfo(0).length;
+        hitRoutine = owner.StartCoroutine(WaitAnimCo(animLengh, () => {
+            stateMachine.ChangeState(StateType.Idle);
+        }));
     }
     public override void Update()
     {
@@ -224,8 +228,6 @@ public class MonsterDieState : MonsterState
     }
     public override void Exit()
     {
-        //여기에 상태부터 이거저거 초기화해줘야해
-        //밑에서 다함
     }
     public void ReturnPool()
     {
@@ -233,4 +235,27 @@ public class MonsterDieState : MonsterState
         owner.Refresh();
         stateMachine.ChangeState(StateType.Idle);
     }
+}
+
+//Boss용
+public class MonsterImmortalState : MonsterState
+{
+    private BossMonster boss;
+    public override void Enter()
+    {
+        Debug.Log("보스무적상태");
+    }
+    public override void Update()
+    {
+
+    }
+    public override void FixedUpdate()
+    {
+        
+    }
+    public override void Exit()
+    {
+        Debug.Log("보스무적끝");
+    }
+    
 }

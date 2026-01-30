@@ -14,6 +14,8 @@ public enum StateType
     Goback,
     Search,
     Dash,
+    Immortal,
+    Berserker
 }
 //히든
 //시작전(조건검출)
