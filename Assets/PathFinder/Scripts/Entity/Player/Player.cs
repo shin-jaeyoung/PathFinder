@@ -33,6 +33,8 @@ public class Player : Entity
     private StateMachine<Player> stateMachine;
     private HpPotion potion;
     private PlayerController playerController;
+    public bool IsInvincible;
+    private bool isDead;
 
     //property
     public Vector2 InputVec { get; set; }
@@ -46,6 +48,7 @@ public class Player : Entity
     public StateMachine<Player> StateMachine => stateMachine;
     public HpPotion Potion => potion;
     public PlayerController PlayerController => playerController;
+    public bool IsDead => isDead;
     //state
     public PlayerIdleState IdleState = new PlayerIdleState();
     public PlayerMoveState MoveState = new PlayerMoveState();
@@ -99,9 +102,18 @@ public class Player : Entity
     }
     public void Die()
     {
+        isDead = true;
         stateMachine.ChangeState(StateType.Die);
     }
-
+    public void Revive()
+    {
+        isDead = false;
+        statusSystem.Heal(statusSystem.FinalStat[PlayerStatType.MaxHp]);
+        //마을씬으로 이동
+        //마을씬 리스폰 위치로 이동
+        transform.position = Vector3.zero;//임시
+        stateMachine.ChangeState(StateType.Idle);
+    }
     public override void Active(int index)
     {
         if(combatSystem.PerformSkill(skills.Skillequip[index]))
@@ -120,10 +132,24 @@ public class Player : Entity
     }
     public override void Hit(DamageInfo info)
     {
+        if (IsInvincible) return;
         float finalDamage = combatSystem.Hit(info.damage, statusSystem.Stat[PlayerStatType.Armor]);
         statusSystem.ReduceStat(PlayerStatType.CurHp, (int)finalDamage);
         Debug.Log(statusSystem.FinalStat[PlayerStatType.CurHp]);
-        if(stateMachine.CurState != stateMachine.stateDic[StateType.Hit]||stateMachine.CurState != stateMachine.stateDic[StateType.Dash])
+        if (!IsDead)
+        {
+            stateMachine.ChangeState(StateType.Hit);
+        }
+    }
+    //퍼센트 처리 함수
+    public void Hit(int percent)
+    {
+        if (IsInvincible) return;
+        float finalDamage = statusSystem.FinalStat[PlayerStatType.MaxHp] * percent / 100;
+
+        statusSystem.ReduceStat(PlayerStatType.CurHp, (int)finalDamage);
+        Debug.Log(statusSystem.FinalStat[PlayerStatType.CurHp]);
+        if (!IsDead)
         {
             stateMachine.ChangeState(StateType.Hit);
         }

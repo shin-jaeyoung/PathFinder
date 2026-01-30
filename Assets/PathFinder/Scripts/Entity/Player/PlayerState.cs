@@ -84,6 +84,7 @@ public class PlayerHitState : PlayerStateBase
     private Coroutine hitRoutine;
     public override void Enter()
     {
+        owner.IsInvincible = true;
         owner.Animator.SetTrigger("Damaged");
         float animLengh = owner.Animator.GetCurrentAnimatorStateInfo(0).length;
         hitRoutine = owner.StartCoroutine(WaitAnimCo(animLengh, () => {
@@ -98,21 +99,23 @@ public class PlayerHitState : PlayerStateBase
             owner.StopCoroutine(hitRoutine);
             hitRoutine = null;
         }
+        owner.IsInvincible = false;
     }
 
     public override void Update()
     {
-
+        
     }
 }
 public class PlayerDashState : PlayerStateBase
 {
-    private float duration = 0.2f;
-    private float dashSpeed = 12f;
+    private float duration = 0.3f;
+    private float dashSpeed = 7f;
     private Coroutine dashRoutine;
     private Vector2 dir;
     public override void Enter()
     {
+        owner.IsInvincible = true;
         owner.Rb.velocity = Vector2.zero;
         dir = owner.LookDir();
         dashRoutine = owner.StartCoroutine(WaitAnimCo(duration, () => { stateMachine.ChangeState(StateType.Idle); }));
@@ -126,6 +129,7 @@ public class PlayerDashState : PlayerStateBase
             owner.StopCoroutine(dashRoutine);
             dashRoutine = null;
         }
+        owner.IsInvincible = false;
     }
 
     public override void Update()
@@ -139,11 +143,12 @@ public class PlayerDashState : PlayerStateBase
 }
 public class PlayerDieState : PlayerStateBase
 {
-
+    private float reviveDelay = 4f;
     public override void Enter()
     {
         owner.Animator.SetTrigger("Death");
         owner.Animator.SetBool("isDeath", true);
+        owner.StartCoroutine(WaitAnimCo(reviveDelay, owner.Revive));
     }
 
     public override void Exit()

@@ -53,7 +53,14 @@ public class RewardManager : MonoBehaviour
         //나중에 HUD창에 알림Text하나 만들어서 뭐 얻었는지 뜨게 하는것도 좋을듯
         if(data.activeSkill != null)
         {
-            player.Skills.AddActiveSkill(data.activeSkill);
+            if (data.activeSkill is Skill_Dash)
+            {
+                player.Skills.AddDashSkill(data.activeSkill);
+            }
+            else
+            {
+                player.Skills.AddActiveSkill(data.activeSkill);
+            }
         }
         if(data.passiveSkill != null)
         {
