@@ -16,7 +16,7 @@ MonoBehaviour:
   hiddenName: Test
   rewardData:
     items: []
-    activeSkill: {fileID: 0}
+    activeSkill: {fileID: 11400000, guid: 65d712f31a4c64044b21e5ff6d33e5d9, type: 2}
     passiveSkill: {fileID: 0}
     gold: 1000
     exp: 0
@@ -24,9 +24,9 @@ MonoBehaviour:
   - conditionType: 1
     targetId: 1
     needItem: {fileID: 0}
-  - conditionType: 0
+  - conditionType: 1
     targetId: 2
-    needItem: {fileID: 11400000, guid: f78c028919d5f9642be15ade4fec135f, type: 2}
+    needItem: {fileID: 0}
   - conditionType: 1
     targetId: 1
     needItem: {fileID: 0}
