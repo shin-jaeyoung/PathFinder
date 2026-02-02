@@ -1,39 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-[CreateAssetMenu (fileName ="SkillPool",menuName ="Pool/Skill")]
-public class SkillPool : Pool
+
+public class MonsterPool : Pool
 {
     [SerializeField]
-    private List<Skill> skills;
+    private List<Monster> monsters;
 
-    private Dictionary<int, Skill> prefabDic = new Dictionary<int, Skill>();
-    private Dictionary<int, Queue<GameObject>> poolDic = new Dictionary<int, Queue<GameObject>>();
-
+    private Dictionary<int, Monster> prefabDic = new Dictionary<int, Monster>();
+    private Dictionary<int,Queue<GameObject>> poolDic = new Dictionary<int, Queue<GameObject>>();
     public override void Init()
     {
         prefabDic.Clear();
         poolDic.Clear();
 
-        foreach (var skill in skills)
+        foreach (var mon in monsters)
         {
-            if (skill == null) continue;
-            int id = skill.Data.ID;
+            if (mon == null) continue;
+            int id = mon.Data.Id;
 
             if (!prefabDic.ContainsKey(id))
             {
-                prefabDic.Add(id, skill);
+                prefabDic.Add(id, mon);
                 poolDic.Add(id, new Queue<GameObject>());
-                GameObject obj = Instantiate(prefabDic[id].Data.Prefab,PoolManager.instance.PoolParentDic[type].transform);
+                GameObject obj = Instantiate(prefabDic[id].gameObject, PoolManager.instance.PoolParentDic[type].transform);
                 obj.SetActive(false);
                 poolDic[id].Enqueue(obj);
             }
             else
             {
-                Debug.Log($"{id}번 스킬 ID 중복");
+                Debug.Log($"{id}번 몬스터 ID 중복!");
             }
         }
     }
@@ -42,7 +39,7 @@ public class SkillPool : Pool
     {
         if (!prefabDic.ContainsKey(id))
         {
-            Debug.Log("해당 스킬 SkillPool에 등록해");
+            Debug.Log("해당 몬스터 MonsterPool에 등록해");
             return null;
         }
         GameObject obj = null;
@@ -56,16 +53,16 @@ public class SkillPool : Pool
         }
         else
         {
-            obj = Instantiate(prefabDic[id].Data.Prefab, position, rotation, PoolManager.instance.PoolParentDic[type].transform);
+            obj = Instantiate(prefabDic[id].gameObject, position, rotation, PoolManager.instance.PoolParentDic[type].transform);
         }
 
         return obj;
     }
-    public override void ReturnPool(GameObject obj)
+    public void ReturnPool(GameObject obj)
     {
-        if(obj.TryGetComponent<Projectile>(out Projectile pj))
+        if(obj.TryGetComponent<IPoolable>(out IPoolable poolable))
         {
-            int id = pj.owner.GetID();
+            int id = poolable.GetID();
 
             if (poolDic.ContainsKey(id))
             {
@@ -78,5 +75,11 @@ public class SkillPool : Pool
                 Destroy(obj);
             }
         }
+    }
+
+    //오류방지용 원래는 위 리턴풀임
+    public override void ReturnPool(IPoolable obj)
+    {
+        
     }
 }
