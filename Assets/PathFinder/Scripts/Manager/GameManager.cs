@@ -1,4 +1,5 @@
 ﻿using Cinemachine;
+using System;
 using UnityEngine;
 public class GameManager : MonoBehaviour
 {
@@ -15,7 +16,10 @@ public class GameManager : MonoBehaviour
 
     [Header("Camera Settings")]
     [SerializeField] private GameObject cameraGroupPrefab; 
-    private CinemachineVirtualCamera virtualCamera; 
+    private CinemachineVirtualCamera virtualCamera;
+
+    public Action OnClearMainBoss;
+
     // property
 
     public Player Player
@@ -55,7 +59,7 @@ public class GameManager : MonoBehaviour
     }
     private void InitializePlayer()
     {
-        player = Object.FindAnyObjectByType<Player>();
+        player = UnityEngine.Object.FindAnyObjectByType<Player>();
 
         if (player == null && playerPrefab != null)
         {
@@ -68,7 +72,7 @@ public class GameManager : MonoBehaviour
     }
     private void InitializeCamera()
     {
-        virtualCamera = Object.FindAnyObjectByType<CinemachineVirtualCamera>();
+        virtualCamera = UnityEngine.Object.FindAnyObjectByType<CinemachineVirtualCamera>();
 
         if (virtualCamera == null && cameraGroupPrefab != null)
         {

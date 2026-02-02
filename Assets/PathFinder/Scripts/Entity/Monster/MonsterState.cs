@@ -214,6 +214,7 @@ public class MonsterDieState : MonsterState
 {
     public override void Enter()
     {
+        owner.Rb.velocity = Vector2.zero;
         //애니메이션 작동 + action에 초기화부터 리턴풀까지 넣어주기
         //리턴풀? + 애니메이션 끝나면 idle상태로 만들어주기
         owner.StartCoroutine(WaitAnimCo(2f, ReturnPool));
