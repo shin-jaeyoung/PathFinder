@@ -142,11 +142,14 @@ public abstract class Monster : Entity , IPoolable
     {
         if (stateMachine.CurState == stateMachine.stateDic[StateType.Hit]) return;
         if (stateMachine.CurState == stateMachine.stateDic[StateType.Die]) return;
-        if (stateMachine.CurState == stateMachine.stateDic[StateType.Immortal]) return;
+        if(this is BossMonster)
+        {
+            if (stateMachine.CurState == stateMachine.stateDic[StateType.Immortal]) return;
+        }
         stateMachine.ChangeState(StateType.Hit);
         float finalDamage = combatSystem.Hit(info.damage, data.Defence);
         CurHp -= finalDamage;
-        Debug.Log("몬스터맞음");
+        GlobalEvents.PrintDamage(finalDamage.ToString(), transform.position);
     }
     public virtual void Die()
     {

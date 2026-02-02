@@ -7,7 +7,8 @@ public enum PoolType
     Monster,
     Skill,
     BossPattern,
-
+    UI,
+    DamageText,
 }
 
 public class PoolManager : MonoBehaviour
