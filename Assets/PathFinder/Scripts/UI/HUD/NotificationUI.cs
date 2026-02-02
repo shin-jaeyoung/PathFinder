@@ -2,8 +2,10 @@
 
 public class NotificationUI : MonoBehaviour
 {
-    [SerializeField] private Transform container; 
-    [SerializeField] private int textID;
+    [SerializeField] 
+    private Transform container; 
+    [SerializeField] 
+    private int textID;
 
     private void OnEnable()
     {

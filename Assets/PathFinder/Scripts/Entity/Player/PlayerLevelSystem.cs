@@ -41,6 +41,7 @@ public class PlayerLevelSystem
                 curExp -= maxExp;
                 LevelUP();
             }
+            GlobalEvents.Notify($"{mount}만큼 경험치 획득",1f);
             OnExpChanged?.Invoke();
         }
         return false;
@@ -50,6 +51,7 @@ public class PlayerLevelSystem
         level++;
         levelPoint++;
         UpdateMaxExp();
+        GlobalEvents.Notify($"레벨 업! {level}레벨 이 되었습니다", 2f);
         OnLevelChanged?.Invoke();
     }
 

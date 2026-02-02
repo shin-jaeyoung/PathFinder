@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 [System.Serializable]
 public class PlayerInventory
@@ -160,6 +161,7 @@ public class PlayerInventory
     {
         gold += amount;
         OnGoldChanged?.Invoke();
+        GlobalEvents.Notify($"{amount}골드 획득",1f);
     }
     public bool ReduceGold(int amount)
     {
