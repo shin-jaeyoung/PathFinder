@@ -49,4 +49,9 @@ public abstract class Skill : ScriptableObject ,IPoolable
     {
         return data.ID;
     }
+
+    public GameObject GetGameObject()
+    {
+        return data.Prefab;
+    }
 }

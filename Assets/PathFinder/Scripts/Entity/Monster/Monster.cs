@@ -197,4 +197,9 @@ public abstract class Monster : Entity , IPoolable
     {
         return data.Id;
     }
+
+    public GameObject GetGameObject()
+    {
+        return gameObject;
+    }
 }

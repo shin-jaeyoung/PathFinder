@@ -53,4 +53,5 @@ public interface IHittable
 public interface IPoolable
 {
     public int GetID();
+    public GameObject GetGameObject();
 }
