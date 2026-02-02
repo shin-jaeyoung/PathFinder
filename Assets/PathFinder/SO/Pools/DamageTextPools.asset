@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f57e4d45aa2aeac41b38bb4173792a7e, type: 3}
   m_Name: DamageTextPools
   m_EditorClassIdentifier: 
-  type: 3
+  type: 4
   prefabs:
-  - {fileID: 0}
+  - {fileID: 6526462858956794688, guid: c7d8ee867af539647bf7c045d36f977b, type: 3}
