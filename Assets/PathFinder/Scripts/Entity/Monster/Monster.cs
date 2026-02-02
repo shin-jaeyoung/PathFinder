@@ -155,7 +155,7 @@ public abstract class Monster : Entity , IPoolable
     public void Refresh()
     {
         CurHp = data.MaxHp;
-        PoolManager.instance.PoolDic[PoolType.Monster].ReturnPool(gameObject);
+        PoolManager.instance.PoolDic[PoolType.Monster].ReturnPool(this);
     }
     public void FlipSprite(float xInput)
     {
@@ -196,5 +196,10 @@ public abstract class Monster : Entity , IPoolable
     public int GetID()
     {
         return data.Id;
+    }
+
+    public GameObject GetGameObject()
+    {
+        return gameObject;
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SafetyZone : MonoBehaviour
+public class SafetyZone : BossPattern
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {

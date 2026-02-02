@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pools:
-  - {fileID: 11400000, guid: 9d68ebaa27bab1d47a84400f8c072ad0, type: 2}
-  - {fileID: 11400000, guid: 8a8393e3a7976f049bd23c77671deb24, type: 2}
+  - {fileID: 11400000, guid: 88a9ef79bb934114e9a53319727116d0, type: 2}
+  - {fileID: 11400000, guid: f5014da4372dbd340bdf8c1a679fa02e, type: 2}
+  - {fileID: 11400000, guid: 57f768245320ef14b97b62a50d12ee52, type: 2}
   parentPrefab: {fileID: 5407988756748410930, guid: 16cb3cfa17c570f4d885e0ad160dcb4c,
     type: 3}

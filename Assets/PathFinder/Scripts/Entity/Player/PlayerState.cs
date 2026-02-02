@@ -117,8 +117,15 @@ public class PlayerDashState : PlayerStateBase
     {
         owner.IsInvincible = true;
         owner.Rb.velocity = Vector2.zero;
-        dir = owner.LookDir();
-        dashRoutine = owner.StartCoroutine(WaitAnimCo(duration, () => { stateMachine.ChangeState(StateType.Idle); }));
+        dir = owner.GetMoveDir();
+        if (dir.x != 0)
+        {
+            owner.FlipSprite(dir.x);
+        }
+        dashRoutine = owner.StartCoroutine(WaitAnimCo(duration, () => 
+        {
+            stateMachine.ChangeState(StateType.Idle);
+        }));
     }
 
     public override void Exit()

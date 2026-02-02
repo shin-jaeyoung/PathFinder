@@ -59,9 +59,12 @@ public class MonsterSpawner : MonoBehaviour
         // 대기 시간 이후에도 여전히 카메라 밖에 있다면 반납
         if (!isOnCamera && isSpawn)
         {
-            PoolManager.instance.PoolDic[PoolType.Monster].ReturnPool(spawnObj);
-            spawnObj = null;
-            isSpawn = false;
+            if(spawnObj.TryGetComponent<IPoolable>(out IPoolable go))
+            {
+                PoolManager.instance.PoolDic[PoolType.Monster].ReturnPool(go);
+                spawnObj = null;
+                isSpawn = false;
+            }
         }
 
         returnCoroutine = null;

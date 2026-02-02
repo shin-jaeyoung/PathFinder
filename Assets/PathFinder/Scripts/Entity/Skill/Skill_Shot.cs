@@ -15,40 +15,40 @@ public class Skill_Shot : Skill
     private float spawnDistance;
     public override void Execute(ISkillActive caster)
     {
-        //코루틴을 컴포넌트만 쓸수있어서
-        SkillManager.instance.StartCoroutine(ShotDelayCo(caster));
+        Vector2 fixedDir = caster.LookDir();
+        Vector2 fixedOriginPos = caster.CasterTrasform();
+
+
+        SkillManager.instance.StartCoroutine(ShotDelayCo(caster, fixedDir,fixedOriginPos));
     }
-    private IEnumerator ShotDelayCo(ISkillActive caster)
+    private IEnumerator ShotDelayCo(ISkillActive caster, Vector2 dir, Vector2 origin)
     {
         WaitForSeconds wait = new WaitForSeconds(shotDelay);
         int curcount = count;
         while (curcount > 0)
         {
-            Shot(caster);
+            Shot(caster,dir,origin);
             curcount--;
             yield return wait;
         }
     }
-    
-    private void Shot(ISkillActive caster)
+
+    private void Shot(ISkillActive caster, Vector2 dir, Vector2 spawnPos)
     {
         if (caster == null || caster.GetEntity() == null) return;
-        Vector2 dir = caster.LookDir();
-        Vector2 spawnPos = caster.CasterTrasform();
+
         spawnPos = spawnPos + dir * spawnDistance;
 
-        //나중에 풀링으로 바꾸기
-        //테스트용
 
         GameObject go = PoolManager.instance.PoolDic[PoolType.Skill].Pop(data.ID, spawnPos, Quaternion.identity);
         if (go.TryGetComponent(out Projectile pj))
         {
-            pj.Init(caster.GetAttackPower() * data.DamageMultiplier, caster.GetEntity(), caster.GetEntityType(),this,true);
+            pj.Init(caster.GetAttackPower() * data.DamageMultiplier, caster.GetEntity(), caster.GetEntityType(),true);
             Debug.Log(caster.GetAttackPower());
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             pj.rb.rotation = angle + data.SpriteRotation;
             pj.rb.velocity = dir * shotSpeed;
-            pj.StartCoroutine(SkillReturnCo(go));
+            pj.StartCoroutine(SkillReturnCo(pj));
         }
 
     }

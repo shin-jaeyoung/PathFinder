@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageZone : MonoBehaviour
+public class DamageZone : BossPattern
 {
     public float coolTime;
     [Header("Reduce Hp")]

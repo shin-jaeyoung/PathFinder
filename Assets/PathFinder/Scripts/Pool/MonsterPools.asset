@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3646063d6e677604dba1cfc114a82852, type: 3}
-  m_Name: MonsterPool
+  m_Script: {fileID: 11500000, guid: 9175dd76e9a598e4d821db5c67856ff8, type: 3}
+  m_Name: MonsterPools
   m_EditorClassIdentifier: 
   type: 0
-  monsters:
+  prefabs:
   - {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a, type: 3}

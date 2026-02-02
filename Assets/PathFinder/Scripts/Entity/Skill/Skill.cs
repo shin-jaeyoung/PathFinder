@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Skill : ScriptableObject ,IPoolable
+public abstract class Skill : ScriptableObject  
 {
     [SerializeField]
     protected SkillData data;
@@ -25,7 +25,7 @@ public abstract class Skill : ScriptableObject ,IPoolable
         WaitForSeconds wait = new WaitForSeconds(data.Cooltime);
         yield return wait;
     }
-    public IEnumerator SkillReturnCo(GameObject spawnPrefab)
+    public IEnumerator SkillReturnCo(IPoolable spawnPrefab)
     {
         yield return new WaitForSeconds(data.Duration);
         //리턴풀해야겠지
@@ -48,5 +48,10 @@ public abstract class Skill : ScriptableObject ,IPoolable
     public int GetID()
     {
         return data.ID;
+    }
+
+    public GameObject GetGameObject()
+    {
+        return data.Prefab;
     }
 }

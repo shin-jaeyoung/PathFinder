@@ -11,19 +11,20 @@ public class Skill_Slash : Skill
     private float spawnDelay;
     public override void Execute(ISkillActive caster)
     {
-        caster.GetEntity().StartCoroutine(SpawnDelayCo(caster));
-    }
-    public IEnumerator SpawnDelayCo(ISkillActive caster)
-    {
-        yield return new WaitForSeconds(spawnDelay);
-        Slash(caster);
-    }
-
-    public void Slash(ISkillActive caster)
-    {
-        if (caster == null || caster.GetEntity() == null) return;
         Vector2 dir = caster.LookDir();
         Vector2 spawnPos = caster.CasterTrasform();
+        caster.GetEntity().StartCoroutine(SpawnDelayCo(caster,dir,spawnPos));
+    }
+    public IEnumerator SpawnDelayCo(ISkillActive caster,Vector2 dir, Vector2 spawnPos)
+    {
+        yield return new WaitForSeconds(spawnDelay);
+        Slash(caster,dir,spawnPos );
+    }
+
+    public void Slash(ISkillActive caster,Vector2 dir, Vector2 spawnPos)
+    {
+        if (caster == null || caster.GetEntity() == null) return;
+
         spawnPos = spawnPos + dir * spawnDistance;
 
 
@@ -31,11 +32,11 @@ public class Skill_Slash : Skill
         GameObject go = PoolManager.instance.PoolDic[PoolType.Skill].Pop(data.ID, spawnPos, Quaternion.identity);
         if (go.TryGetComponent(out Projectile pj))
         {
-            pj.Init(caster.GetAttackPower() * data.DamageMultiplier, caster.GetEntity(), caster.GetEntityType(),this);
+            pj.Init(caster.GetAttackPower() * data.DamageMultiplier, caster.GetEntity(), caster.GetEntityType());
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             pj.rb.rotation = angle + data.SpriteRotation;
 
-            pj.StartCoroutine(SkillReturnCo(go));
+            pj.StartCoroutine(SkillReturnCo(pj));
         }
     }
 }

@@ -166,6 +166,16 @@ public class Player : Entity
     {
         return playerController.mouseDir;
     }
+    public Vector2 GetMoveDir()
+    {
+        if (InputVec.sqrMagnitude > 0)
+        {
+            return InputVec;
+        }
+        float facingDirX = transform.right.x;
+
+        return new Vector2(-facingDirX, 0).normalized;
+    }
     public override Vector2 SkillSpawnPos()
     {
         return playerController.mousePos;

@@ -2,23 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour , IPoolable
 {
-    public Skill owner;
+    [Header("Skill ID")]
+    [SerializeField]
+    private int skillID;
     public LayerMask obstacle;
     public Rigidbody2D rb;
     private EntityType attackerType;
     private float damage;
     private Entity attacker;
     private bool isHavetoDisapear;
-    public void Init(float damage, Entity attacker, EntityType attackerType, Skill owner, bool isShot = false)
+
+    public GameObject GetGameObject()
     {
-        this.owner = owner;
+        return gameObject;
+    }
+
+    public int GetID()
+    {
+        return skillID;
+    }
+    private void Awake()
+    {
+        if(rb == null)
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
+    }
+    public void Init(float damage, Entity attacker, EntityType attackerType, bool isShot = false)
+    {
         this.damage = damage;
         this.attacker = attacker;
         this.attackerType = attackerType;
-        rb = GetComponent<Rigidbody2D>();
         isHavetoDisapear = isShot;
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -29,7 +50,7 @@ public class Projectile : MonoBehaviour
             {
                 if (gameObject != null)
                 {
-                    PoolManager.instance.PoolDic[PoolType.Skill].ReturnPool(gameObject);
+                    PoolManager.instance.PoolDic[PoolType.Skill].ReturnPool(this);
                 }
             }
         }
@@ -43,17 +64,20 @@ public class Projectile : MonoBehaviour
                 if (targetEntity.GetEntityType() == attackerType) return;
                 DamageInfo finalInfo = new DamageInfo(damage, attacker, targetEntity);
                 targetEntity.Hit(finalInfo);
-                if(isHavetoDisapear)
+            }
+            else
+            {
+                DamageInfo finalInfo = new DamageInfo(damage, attacker, null);
+                target.Hit(finalInfo);
+            }
+            if (isHavetoDisapear)
+            {
+                
+                if (gameObject != null)
                 {
-                    //리턴풀해야함
-                    if (gameObject != null)
-                    {
-                        PoolManager.instance.PoolDic[PoolType.Skill].ReturnPool(gameObject);
-                    }
+                    PoolManager.instance.PoolDic[PoolType.Skill].ReturnPool(this);
                 }
             }
-
-            //리턴풀로 바꾸기
         }
     }
 }
