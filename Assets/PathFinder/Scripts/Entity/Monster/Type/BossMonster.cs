@@ -8,6 +8,8 @@ public class BossMonster : Monster
 
     [Header("Gimmick Settings")]
     [SerializeField]
+    private Vector2 bossPosduringGimmick;
+    [SerializeField]
     private float gimmickInterval;
     private bool isGimmickActive = false;
     [Header("Pattern_FindSafetyZone")]
@@ -16,11 +18,23 @@ public class BossMonster : Monster
     [SerializeField]
     private int totalZones;
     [SerializeField]
-    private GameObject safetyZonePrefab;
+    private float spawnZoneDistance;
     [SerializeField]
-    private GameObject damageZonePrefab;
-    List<GameObject> spawnedZones = new List<GameObject>();
+    private int safetyZoneID;
+    [SerializeField]
+    private int damageZoneID;
+    List<BossPattern> spawnedZones = new List<BossPattern>();
 
+    [Header("Pattern_Totem")]
+    [SerializeField]
+    private int totemID;
+    [SerializeField]
+    private float spawnTotemDistance;
+    [SerializeField]
+    private float alertTime_perTotems;
+    [SerializeField]
+    private int aliveTotemCount;
+    private List<Totem> totemSpawnList = new List<Totem>();
 
 
     //property
@@ -54,6 +68,7 @@ public class BossMonster : Monster
     {
         Debug.Log("기믹시작");
         isGimmickActive = true;
+        transform.position = bossPosduringGimmick;
         stateMachine.ChangeState(StateType.Immortal);
         yield return StartCoroutine(SelectRandomGimmickCo());
         GimmickEnd();
@@ -87,11 +102,14 @@ public class BossMonster : Monster
         int safeIndex = Random.Range(0, totalZones);
         for (int i = 0; i < totalZones; i++)
         {
-            Vector2 spawnPos = (Vector2)transform.position + Random.insideUnitCircle * 6f;
-            //풀링하게 되면 여기가 패턴 ID라던가 그럴듯
-            GameObject prefab = (i == safeIndex) ? safetyZonePrefab : damageZonePrefab;
-            GameObject zone = Instantiate(prefab, spawnPos, Quaternion.identity);
-            spawnedZones.Add(zone);
+            Vector2 spawnPos = (Vector2)transform.position + Random.insideUnitCircle * spawnZoneDistance;
+            int id = (i == safeIndex) ? safetyZoneID : damageZoneID;
+
+            GameObject zone = PoolManager.instance.PoolDic[PoolType.BossPattern].Pop(id, spawnPos, Quaternion.identity);
+            if (zone.TryGetComponent<BossPattern>(out BossPattern bossPattern))
+            {
+                spawnedZones.Add(bossPattern);
+            }
 
         }
         float curTimer = alertTime;
@@ -103,7 +121,12 @@ public class BossMonster : Monster
         }
         ExecuteUltimateAttack();
 
-        foreach (var zone in spawnedZones) Destroy(zone);
+        foreach (var zone in spawnedZones)
+        {
+            if (zone == null) continue;
+            PoolManager.instance.PoolDic[PoolType.BossPattern].ReturnPool(zone);
+        }
+        
         yield return new WaitForSeconds(1f);
     }
 
@@ -121,14 +144,6 @@ public class BossMonster : Monster
     }
     //보스패턴 2 : 토템을 부숴야 패턴이 끝날때 받는 체력 %데미지를 줄일 수 있음
     //총 1~4개 소환 남아있는 토템 당 전체체력 25%의 데미지
-    [Header("Pattern_Totem")]
-    [SerializeField]
-    private Totem totemPrefab;
-    [SerializeField]
-    private float spawnDistance;
-    [SerializeField]
-    private float alertTime_perTotems;
-    private List<Totem> totemSpawnList = new List<Totem>();
     
     private IEnumerator Pattern_Totem()
     {
@@ -137,27 +152,20 @@ public class BossMonster : Monster
         int randomCount = Random.Range(1, 5);
         for (int i = 0; i < randomCount; i++)
         {
-            Vector2 spawnPos = (Vector2)transform.position + Random.insideUnitCircle * spawnDistance;
-            //풀링으로 만들때 ID로 가져와볼까 패턴 ID?
-            //풀링은 나중에 다만들고 나서 바꾸자
-            Totem zone = Instantiate(totemPrefab, spawnPos, Quaternion.identity);
-            totemSpawnList.Add(zone);
+            Vector2 spawnPos = (Vector2)transform.position + Random.insideUnitCircle * spawnTotemDistance;
+            
+            GameObject go = PoolManager.instance.PoolDic[PoolType.BossPattern].Pop(totemID, spawnPos, Quaternion.identity);
+            if(go.TryGetComponent<Totem>(out Totem totem))
+            {
+                totem.Init(OnTotemDie);
+                totemSpawnList.Add(totem);
+            }
         }
-        int aliveTotemCount = randomCount;
+        aliveTotemCount = randomCount;
         float curTimer = alertTime_perTotems * randomCount;
-        while (curTimer > 0 )
+        while (curTimer > 0 && aliveTotemCount >0)
         {
             curTimer -= Time.deltaTime;
-            int tmpNum = 0; 
-            foreach( Totem totem in  totemSpawnList )
-            {
-                if(totem != null && !totem.isDead)
-                {
-                    tmpNum++;
-                }
-            }
-            aliveTotemCount = tmpNum;
-            if (aliveTotemCount <= 0) break;
             yield return null;
         }
         ExcuteTotemAttack(aliveTotemCount);
@@ -166,13 +174,16 @@ public class BossMonster : Monster
         {
             if (totem != null)
             {
-                Destroy(totem.gameObject);
+                PoolManager.instance.PoolDic[PoolType.BossPattern].ReturnPool(totem);
             }
         }
 
         yield return new WaitForSeconds(1f);
     }
-
+    private void OnTotemDie()
+    {
+        aliveTotemCount--;
+    }
     private void ExcuteTotemAttack(int aliveTotemCount)
     {
         Debug.Log($"남아있는 토템의 개수 : {aliveTotemCount}");

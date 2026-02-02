@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a561177ab29e2f544a855734f7941f6d, type: 3}
+  m_Name: BossPatternPools
+  m_EditorClassIdentifier: 
+  type: 2
+  prefabs:
+  - {fileID: 2746413373940531592, guid: 5a5659742af1a3b43a7758ffa6e0205c, type: 3}
+  - {fileID: 4462523976097366677, guid: a26a3e6db4832f549b345b15f6fc46dd, type: 3}
+  - {fileID: 4540588311793945118, guid: 9adfaebd388835f4eb927f2eba806315, type: 3}

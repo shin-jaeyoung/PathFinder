@@ -6,6 +6,7 @@ public enum PoolType
 {
     Monster,
     Skill,
+    BossPattern,
 
 }
 

@@ -1,18 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Totem : MonoBehaviour, IHittable ,IPoolable
+public class Totem : BossPattern, IHittable
 {
     [Header("Totem Hp")]
+    [SerializeField]
     private float curHp;
     [SerializeField]
     private float maxHp;
 
     public bool isDead;
-    [Header("PoolData")]
-    [SerializeField]
-    private int id;
+    private Action OnDead;
     public float CurHp
     {
         get
@@ -33,10 +33,15 @@ public class Totem : MonoBehaviour, IHittable ,IPoolable
         }
     }
 
-    private void Awake()
+    private void OnEnable()
     {
         curHp = maxHp;
         isDead = false;
+        OnDead = null;
+    }
+    public void Init(Action deathCallback)
+    {
+        OnDead = deathCallback;
     }
     public void Hit(DamageInfo info)
     {
@@ -47,15 +52,10 @@ public class Totem : MonoBehaviour, IHittable ,IPoolable
     {
         isDead= true;
         //리턴해야겠지
-        Destroy(gameObject);
+        OnDead?.Invoke();
+        OnDead = null;
+        PoolManager.instance.PoolDic[PoolType.BossPattern].ReturnPool(this);
     }
 
-    public int GetID()
-    {
-        return id;
-    }
-    public GameObject GetGameObject()
-    {
-        return gameObject;
-    }
+
 }

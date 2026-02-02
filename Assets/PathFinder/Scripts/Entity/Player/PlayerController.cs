@@ -94,20 +94,9 @@ public class PlayerController : MonoBehaviour
 
         //이동관련
         //대쉬
-        if (player.Skills.CheckDashSkill() && Input.GetKeyDown(KeyCode.Space)) 
+        if (player.Skills.CheckDashSkill() && Input.GetKeyDown(KeyCode.Space))
         {
-            GetMouseTransform();
-            float diff = mousePos.x - transform.position.x;
-
-            if (Mathf.Abs(diff) > 0.01f) 
-            {
-                float lookDirX = diff < 0 ? -1f : 1f;
-                
-                if(player.Dash())
-                {
-                    player.FlipSprite(lookDirX);
-                }
-            }
+            player.Dash();
         }
 
     }

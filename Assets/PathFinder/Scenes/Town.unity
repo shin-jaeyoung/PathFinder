@@ -18008,12 +18008,12 @@ PrefabInstance:
     - target: {fileID: 687164530013776951, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.924692
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 687164530013776951, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.4389732
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 687164530013776951, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
@@ -18293,18 +18293,17 @@ MonoBehaviour:
   skills: []
   detection: {fileID: 0}
   isBerserkerMode: 0
+  bossPosduringGimmick: {x: -12, y: -4}
   gimmickInterval: 30
   alertTime: 5
   totalZones: 4
-  safetyZonePrefab: {fileID: 7196475903105554904, guid: a26a3e6db4832f549b345b15f6fc46dd,
-    type: 3}
-  damageZonePrefab: {fileID: 2712238048570322359, guid: 5a5659742af1a3b43a7758ffa6e0205c,
-    type: 3}
-  totemPrefab: {fileID: 4540588311793945118, guid: 9adfaebd388835f4eb927f2eba806315,
-    type: 3}
-  spawnDistance: 6
-  alertTime_Totem: 8
-  totemSpawnList: []
+  spawnZoneDistance: 5
+  safetyZoneID: 2
+  damageZoneID: 1
+  totemID: 3
+  spawnTotemDistance: 4
+  alertTime_perTotems: 7
+  aliveTotemCount: 0
 --- !u!1 &1126235477
 GameObject:
   m_ObjectHideFlags: 0

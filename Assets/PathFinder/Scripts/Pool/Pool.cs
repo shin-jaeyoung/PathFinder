@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public abstract class Pool : ScriptableObject
+public abstract class Pool  : ScriptableObject
 {
     public PoolType type;
 
     public abstract void Init();
     public abstract GameObject Pop(int id, Vector2 position, Quaternion rotation);
-    public abstract void ReturnPool(GameObject obj);
+    public abstract void ReturnPool(IPoolable obj);
 }
 //나중에 이거 제네릭으로 하면 편해질것같은데
