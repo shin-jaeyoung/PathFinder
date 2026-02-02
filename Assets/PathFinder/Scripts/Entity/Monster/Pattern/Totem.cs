@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Totem : MonoBehaviour, IHittable
+public class Totem : MonoBehaviour, IHittable ,IPoolable
 {
     [Header("Totem Hp")]
     private float curHp;
@@ -48,5 +48,14 @@ public class Totem : MonoBehaviour, IHittable
         isDead= true;
         //리턴해야겠지
         Destroy(gameObject);
+    }
+
+    public int GetID()
+    {
+        return id;
+    }
+    public GameObject GetGameObject()
+    {
+        return gameObject;
     }
 }

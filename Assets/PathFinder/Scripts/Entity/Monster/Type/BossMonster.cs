@@ -45,29 +45,31 @@ public class BossMonster : Monster
 
             if (curHp > 0 && !isGimmickActive)
             {
-                GimmickStart();
+                yield return StartCoroutine(GimmickStart());
             }
         }
     }
 
-    public void GimmickStart()
+    public IEnumerator GimmickStart()
     {
         Debug.Log("기믹시작");
         isGimmickActive = true;
         stateMachine.ChangeState(StateType.Immortal);
-        StartCoroutine(SelectRandomGimmickCo());
+        yield return StartCoroutine(SelectRandomGimmickCo());
+        GimmickEnd();
     }
     public void GimmickEnd()
     {
         isGimmickActive = false;
         stateMachine.ChangeState(StateType.Move);
+        //여기에 플레이어에게 기믹이 끝났음을 알리는 효과가 있으면 좋을듯
     }
     
     private IEnumerator SelectRandomGimmickCo()
     {
         int randomChoice = Random.Range(0, 2);
         //토템 테스트용
-        if(randomChoice == 3)
+        if(randomChoice == 0)
         {
             yield return StartCoroutine(Pattern_ZoneMixture());
         }
@@ -75,7 +77,6 @@ public class BossMonster : Monster
         {
             yield return StartCoroutine(Pattern_Totem());
         }
-        GimmickEnd();
     }
     //보스패턴 1 : 생존장판을 찾아서 들어가야 전체 즉사기를 피할 수 있음
     private IEnumerator Pattern_ZoneMixture()
@@ -93,14 +94,13 @@ public class BossMonster : Monster
             spawnedZones.Add(zone);
 
         }
-        float tmp = alertTime;
+        float curTimer = alertTime;
 
-        while (alertTime > 0)
+        while (curTimer > 0)
         {
-            alertTime -= Time.deltaTime;
+            curTimer -= Time.deltaTime;
             yield return null;
         }
-        alertTime = tmp;
         ExecuteUltimateAttack();
 
         foreach (var zone in spawnedZones) Destroy(zone);
@@ -127,7 +127,7 @@ public class BossMonster : Monster
     [SerializeField]
     private float spawnDistance;
     [SerializeField]
-    private float alertTime_Totem;
+    private float alertTime_perTotems;
     private List<Totem> totemSpawnList = new List<Totem>();
     
     private IEnumerator Pattern_Totem()
@@ -144,7 +144,7 @@ public class BossMonster : Monster
             totemSpawnList.Add(zone);
         }
         int aliveTotemCount = randomCount;
-        float curTimer = alertTime_Totem;
+        float curTimer = alertTime_perTotems * randomCount;
         while (curTimer > 0 )
         {
             curTimer -= Time.deltaTime;
