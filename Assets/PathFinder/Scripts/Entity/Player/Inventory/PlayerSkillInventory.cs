@@ -100,6 +100,8 @@ public class PlayerSkillInventory
         if(dashSkill.IsEmpty())
         {
             dashSkill.skill = skill;
+            GlobalEvents.Notify($"대쉬 스킬을 획득했습니다", 4f);
+            Debug.Log("대쉬스킬 획득");
             return true;
         }
         Debug.Log("이미있음");

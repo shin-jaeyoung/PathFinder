@@ -85,7 +85,7 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                Showonly(UIType.Inventory);
+                ShowUI(UIType.Inventory);
             }
         }
         if(Input.GetKeyDown (KeyCode.U))
@@ -96,7 +96,7 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                Showonly(UIType.Status);
+                ShowUI(UIType.Status);
             }
         }
         if(Input.GetKeyDown(KeyCode.K))
@@ -107,7 +107,7 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                Showonly(UIType.Skill);
+                ShowUI(UIType.Skill);
             }
         }
     }
@@ -148,16 +148,23 @@ public class UIManager : MonoBehaviour
         }
         //나중엔 GameStart넣을듯?
         UIStack = new Stack<UIType>();
-        UIStack.Push(UIType.HUD);
-
+        //HUD는 그냥 항상 켜놓는게 좋을것같은데?
+        //Stack.Count가 0이면 HUD인거고 0보다 크면 다른 UI가 켜진거고
         //preUIType = UIType.HUD;
+        uiPanelDic[UIType.HUD].SetActive(true);
         currenUIType = UIType.HUD;
     }
     private UIType CheckCurUI()
     {
-        currenUIType = UIStack.Pop();
-        UIStack.Push(currenUIType);
-
+        if(UIStack.Count>0)
+        {
+            currenUIType = UIStack.Pop();
+            UIStack.Push(currenUIType);
+        }
+        else
+        {
+            currenUIType = UIType.HUD;
+        }
         return currenUIType;
     }
     public bool CheckCurUIType(UIType type)
@@ -190,7 +197,7 @@ public class UIManager : MonoBehaviour
     {
         foreach(var t in uiPanelDic)
         {
-            
+            if (t.Key == UIType.HUD) continue;
             if(t.Key==targetType)
             {
                 t.Value.SetActive(true);
@@ -198,7 +205,7 @@ public class UIManager : MonoBehaviour
                 currenUIType = targetType;
 
                 UIStack.Clear();
-                UIStack.Push(UIType.HUD);
+
                 UIStack.Push(targetType);
                 CheckCurUI();
             }
@@ -206,10 +213,7 @@ public class UIManager : MonoBehaviour
             {
                 t.Value.SetActive(false);
             }
-            if (t.Key == UIType.HUD)
-            {
-                t.Value.SetActive(true);
-            }
+
         }
     }
 }
