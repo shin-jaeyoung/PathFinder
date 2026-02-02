@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 687164530013776951}
+  - component: {fileID: 6252897837667827541}
   - component: {fileID: 8427772205304001868}
   - component: {fileID: 2359791063972681615}
   - component: {fileID: 3311634576480251582}
@@ -35,6 +36,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6252897837667827541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7271114388976837514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1c0f3df8bcacc544afaac11281c7785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curHp: 0
+  data:
+    id: 100
+    mName: TestBoss
+    type: 2
+    maxHp: 500
+    atk: 20
+    defence: 5
+    speed: 1.5
+  rewardData:
+    items: []
+    activeSkill: {fileID: 0}
+    passiveSkill: {fileID: 0}
+    gold: 555
+    exp: 333
+  basicAttack:
+    skill: {fileID: 11400000, guid: 78fa93b5f6464904082d7b29574d60d8, type: 2}
+    isCooltime: 0
+    currentCooltime: 0
+  skills: []
+  detection: {fileID: 0}
+  isBerserkerMode: 0
+  bossPosduringGimmick: {x: -12, y: -4}
+  gimmickInterval: 30
+  alertTime: 5
+  totalZones: 4
+  spawnZoneDistance: 5
+  safetyZoneID: 2
+  damageZoneID: 1
+  totemID: 3
+  spawnTotemDistance: 4
+  alertTime_perTotems: 7
+  aliveTotemCount: 0
 --- !u!212 &8427772205304001868
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -153,6 +153,7 @@ public class PlayerDieState : PlayerStateBase
     private float reviveDelay = 4f;
     public override void Enter()
     {
+        owner.Rb.velocity = Vector2.zero;
         owner.Animator.SetTrigger("Death");
         owner.Animator.SetBool("isDeath", true);
         owner.StartCoroutine(WaitAnimCo(reviveDelay, owner.Revive));

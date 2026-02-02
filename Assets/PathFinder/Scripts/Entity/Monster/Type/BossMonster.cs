@@ -12,6 +12,7 @@ public class BossMonster : Monster
     [SerializeField]
     private float gimmickInterval;
     private bool isGimmickActive = false;
+
     [Header("Pattern_FindSafetyZone")]
     [SerializeField]
     private float alertTime;
@@ -40,6 +41,11 @@ public class BossMonster : Monster
     //property
     public bool IsGimmickActive => isGimmickActive;
     
+    public override void Die()
+    {
+        stateMachine.ChangeState(StateType.Die);
+    }
+
     protected override void InitStart()
     {
         //보스몹의 추가 상태
