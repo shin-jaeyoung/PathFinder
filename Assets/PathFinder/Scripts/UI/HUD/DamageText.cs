@@ -4,51 +4,50 @@ using System.Collections;
 
 public class DamageText : MonoBehaviour, IPoolable
 {
-    [SerializeField] private TextMeshProUGUI textMesh;
-    [SerializeField] private int poolID;
+    [SerializeField] 
+    private TextMeshProUGUI textMesh;
+    [SerializeField] 
+    private int poolID;
+    [SerializeField]
+    float heightOffset;
     private const float duration = 1f;
 
     public int GetID() => poolID;
     public GameObject GetGameObject() => gameObject;
 
-    public void Init(string damage)
+    public void Init(string damage, Transform target)
     {
         textMesh.text = damage;
         textMesh.alpha = 1f;
         transform.localScale = Vector3.one;
 
         StopAllCoroutines();
-        StartCoroutine(DamageRoutine());
+        StartCoroutine(FollowTargetRoutine(target));
     }
 
-    private IEnumerator DamageRoutine()
+    private IEnumerator FollowTargetRoutine(Transform target)
     {
         float elapsed = 0f;
-        Vector3 startPos = transform.position;
-        //데미지 텍스트가 조금 위에 있어야할듯?
-        Vector3 targetPos = startPos + new Vector3(0, 100f, 0);
+        Camera mainCam = Camera.main;
 
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             float t = elapsed / duration;
 
-            transform.position = Vector3.Lerp(startPos, targetPos, t);
+            if (target != null)
+            {
+                // 월드 좌표 + 상승 애니메이션 값을 스크린 좌표로 변환
+                Vector3 worldPos = target.position + new Vector3(0, heightOffset + (t * 1.0f), 0);
+                transform.position = mainCam.WorldToScreenPoint(worldPos);
+            }
 
-            //점점 사라지는 효과
             if (t > 0.5f)
-            {
                 textMesh.alpha = Mathf.Lerp(1f, 0f, (t - 0.5f) * 2f);
-            }
-            //초반엔 좀 크게 만드는 효과 약간 액션성을 부여하는거?
-            if (t < 0.2f)
-            {
-                transform.localScale = Vector3.Lerp(Vector3.one * 0.5f, Vector3.one, t / 0.2f);
-            }
 
             yield return null;
         }
 
-        PoolManager.instance.PoolDic[PoolType.UI].ReturnPool(this);
+        PoolManager.instance.PoolDic[PoolType.DamageText].ReturnPool(this);
     }
 }

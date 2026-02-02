@@ -7,21 +7,25 @@ public class DamageTextUI : MonoBehaviour
 
     private void Awake() => mainCam = Camera.main;
 
-    private void OnEnable() => GlobalEvents.OnDamage += SpawnDamageText;
-    private void OnDisable() => GlobalEvents.OnDamage -= SpawnDamageText;
+    private void OnEnable()
+    {
+        GlobalEvents.OnDamage -= SpawnDamageText;
+        GlobalEvents.OnDamage += SpawnDamageText;
+    }
 
-    private void SpawnDamageText(string damage, Vector2 worldPos)
+    private void OnDisable() 
+    { 
+        GlobalEvents.OnDamage -= SpawnDamageText;
+    }
+
+    private void SpawnDamageText(string damage, Transform target)
     {
         GameObject go = PoolManager.instance.PoolDic[PoolType.DamageText].Pop(damageTextPoolID, Vector3.zero, Quaternion.identity);
 
         go.transform.SetParent(transform, false);
-
-        Vector3 screenPos = mainCam.WorldToScreenPoint(worldPos);
-        go.transform.position = screenPos;
-
         if (go.TryGetComponent(out DamageText textScript))
         {
-            textScript.Init(damage);
+            textScript.Init(damage, target);
         }
     }
 }

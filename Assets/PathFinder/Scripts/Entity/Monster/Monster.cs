@@ -149,7 +149,7 @@ public abstract class Monster : Entity , IPoolable
         stateMachine.ChangeState(StateType.Hit);
         float finalDamage = combatSystem.Hit(info.damage, data.Defence);
         CurHp -= finalDamage;
-        GlobalEvents.PrintDamage(finalDamage.ToString(), transform.position);
+        GlobalEvents.PrintDamage(finalDamage.ToString(), transform);
     }
     public virtual void Die()
     {

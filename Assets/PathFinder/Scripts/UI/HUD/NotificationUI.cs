@@ -3,10 +3,17 @@
 public class NotificationUI : MonoBehaviour
 {
     [SerializeField] private Transform container; 
-    [SerializeField] private int textID;          
+    [SerializeField] private int textID;
 
-    private void OnEnable() => GlobalEvents.OnNotify += SpawnNotification;
-    private void OnDestroy() => GlobalEvents.OnNotify -= SpawnNotification;
+    private void OnEnable()
+    {
+        GlobalEvents.OnNotify -= SpawnNotification;
+        GlobalEvents.OnNotify += SpawnNotification;
+    }
+    private void OnDestroy()
+    {
+        GlobalEvents.OnNotify -= SpawnNotification;
+    }
 
     private void SpawnNotification(string message, float duration)
     {

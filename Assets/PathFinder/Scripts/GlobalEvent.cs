@@ -12,9 +12,9 @@ public static class GlobalEvents
         OnNotify?.Invoke(message, duration);
     }
     // 알림 보낼 때 사용할 이벤트 (데미지, 위치)
-    public static Action<string, Vector2> OnDamage;
-    public static void PrintDamage(string damage, Vector2 pos )
+    public static Action<string, Transform> OnDamage;
+    public static void PrintDamage(string damage, Transform target )
     {
-        OnDamage?.Invoke(damage, pos);
+        OnDamage?.Invoke(damage, target);
     }
 }
