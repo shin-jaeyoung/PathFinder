@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static UnityEditor.Progress;
 
 [System.Serializable]
 public class PlayerSkillInventory
@@ -72,6 +73,7 @@ public class PlayerSkillInventory
         {
             emptySlot.passiveSkill = passiveSkill;
             OnChangedPassiveSkill.Invoke();
+            GlobalEvents.Notify($"패시브 스킬 {passiveSkill.Data.Name}을 획득했습니다",4f);
             return true;
         }
         return false;
@@ -88,6 +90,7 @@ public class PlayerSkillInventory
         {
             emptySlot.skill = skill;
             OnChangedActiveSkill?.Invoke();
+            GlobalEvents.Notify($"액티브 스킬 {skill.Data.SkillName}을 획득했습니다",4f);
             return true;
         }
         return false;
