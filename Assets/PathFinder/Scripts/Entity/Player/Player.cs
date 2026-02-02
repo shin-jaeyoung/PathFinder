@@ -135,7 +135,7 @@ public class Player : Entity
         if (IsInvincible) return;
         float finalDamage = combatSystem.Hit(info.damage, statusSystem.Stat[PlayerStatType.Armor]);
         statusSystem.ReduceStat(PlayerStatType.CurHp, (int)finalDamage);
-        Debug.Log(statusSystem.FinalStat[PlayerStatType.CurHp]);
+        GlobalEvents.PrintDamage(finalDamage.ToString(), transform);
         if (!IsDead)
         {
             stateMachine.ChangeState(StateType.Hit);
@@ -148,7 +148,7 @@ public class Player : Entity
         float finalDamage = statusSystem.FinalStat[PlayerStatType.MaxHp] * percent / 100;
 
         statusSystem.ReduceStat(PlayerStatType.CurHp, (int)finalDamage);
-        Debug.Log(statusSystem.FinalStat[PlayerStatType.CurHp]);
+        GlobalEvents.PrintDamage(finalDamage.ToString(), transform);
         if (!IsDead)
         {
             stateMachine.ChangeState(StateType.Hit);

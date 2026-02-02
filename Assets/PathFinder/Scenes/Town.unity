@@ -18146,6 +18146,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawner (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6647906959371747914, guid: adefdc47da7f77a479c8a52127805c7f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9006018576683312258, guid: adefdc47da7f77a479c8a52127805c7f,
         type: 3}
       propertyPath: m_LocalPosition.x

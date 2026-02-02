@@ -64,6 +64,7 @@ public class PlayerInventory
             {
                 existingSlot.count += amount;
                 OnInventoryChaneged?.Invoke();
+                GlobalEvents.Notify($"{item.Data.Name}을 획득했습니다");
                 return true;
             }
         }
@@ -73,6 +74,7 @@ public class PlayerInventory
             emptySlot.item = item;
             emptySlot.count = amount;
             OnInventoryChaneged?.Invoke();
+            GlobalEvents.Notify($"{item.Data.Name}을 획득했습니다");
             return true;
         }
 
