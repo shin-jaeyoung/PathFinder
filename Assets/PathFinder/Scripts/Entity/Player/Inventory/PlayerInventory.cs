@@ -161,7 +161,7 @@ public class PlayerInventory
     {
         gold += amount;
         OnGoldChanged?.Invoke();
-        GlobalEvents.Notify($"{amount}골드 획득",1f);
+        GlobalEvents.Notify($"{amount}골드 획득",2f);
     }
     public bool ReduceGold(int amount)
     {

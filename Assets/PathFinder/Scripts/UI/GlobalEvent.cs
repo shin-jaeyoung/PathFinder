@@ -17,4 +17,12 @@ public static class GlobalEvents
     {
         OnDamage?.Invoke(damage, target);
     }
+
+    //Dialogue을 Npc머리위에 출력하기 (대화내용, Npc Transform)
+    public static Action<string, Transform> OnDialogue;
+    public static void PrintDialogue(string dialogue, Transform targetNpc )
+    {
+        OnDialogue?.Invoke(dialogue, targetNpc);
+    }
+    public static Action OnDialogueEnd;
 }

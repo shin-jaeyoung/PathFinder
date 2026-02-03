@@ -21,43 +21,42 @@ public class DialogueNpc : SpecialNpc, ISpecialInteractable
         {
             StartDialogue();
         }
-        if(isTalk)
+        else
         {
             //DialogueUI만들고 넣자
             //if(!UIManager.Instance.CheckCurUIType(UIType.Dialogue))
             //{
             //    CancleAct();
             //}
-            if (dialogueSO.dialogues.Count > curIndex)
-            {
-                NextDialogue();
-            }
-            else
-            {
-                EndDialogue();
-            }
+            
+            NextDialogue();
         }
     }
     public void StartDialogue()
     {
-        //DialogueManager에 본인 정보 넘겨주기
         if (dialogueSO.dialogues[curIndex] != null)
         {
             isTalk = true;
+            Debug.Log(dialogueSO.dialogues.Count);
             NextDialogue();
         }
     }
     public void NextDialogue()
     {
-        curDialogueText = dialogueSO.dialogues[curIndex];
+        if(dialogueSO.dialogues.Count -1 < curIndex)
+        {
+            EndDialogue();
+            return;
+        }
+        GlobalEvents.PrintDialogue(dialogueSO.dialogues[curIndex], transform);
         curIndex++;
-        
     }
+    
     public void EndDialogue()
     {
         curIndex = 0;
         isTalk = false;
-        //대화가 끝났음을 알려줘야함 Npc에게 그래야 다음 스페셜 액션이 실행되도록할 수 있을듯
+        GlobalEvents.OnDialogueEnd?.Invoke();
 
         isInteractFinish = true;
     }
@@ -65,6 +64,15 @@ public class DialogueNpc : SpecialNpc, ISpecialInteractable
     {
         curIndex = 0;
         isTalk = false;
+        GlobalEvents.OnDialogueEnd?.Invoke();
         isInteractFinish = false;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.GetComponent<Player>() != null)
+        {
+            CancleAct();
+        }
     }
 }

@@ -36,12 +36,12 @@ public class PlayerLevelSystem
         if( mount >=0)
         {
             curExp += mount;
+            GlobalEvents.Notify($"{mount}만큼 경험치 획득",2f);
             while( curExp >= maxExp )
             {
                 curExp -= maxExp;
                 LevelUP();
             }
-            GlobalEvents.Notify($"{mount}만큼 경험치 획득",1f);
             OnExpChanged?.Invoke();
         }
         return false;

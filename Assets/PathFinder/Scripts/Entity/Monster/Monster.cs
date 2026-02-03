@@ -33,7 +33,8 @@ public abstract class Monster : Entity , IPoolable
     [SerializeField]
     protected bool isBerserkerMode;
     private int useSkillIndex;
-    
+    private bool isDead;
+
     //property
     public float CurHp
     {
@@ -63,7 +64,7 @@ public abstract class Monster : Entity , IPoolable
     public SkillSlot BasicAttack => basicAttack;
     public List<SkillSlot> Skills => skills;
     public RewardData RewardData => rewardData;
-
+    public bool IsDead => isDead;
     //deligate
     public event Action OnChangeHp;
 
@@ -146,13 +147,17 @@ public abstract class Monster : Entity , IPoolable
         {
             if (stateMachine.CurState == stateMachine.stateDic[StateType.Immortal]) return;
         }
-        stateMachine.ChangeState(StateType.Hit);
         float finalDamage = combatSystem.Hit(info.damage, data.Defence);
         CurHp -= finalDamage;
+        if (!isDead)
+        {
+            stateMachine.ChangeState(StateType.Hit);
+        }
         GlobalEvents.PrintDamage(finalDamage.ToString(), transform);
     }
     public virtual void Die()
     {
+        isDead = true;
         stateMachine.ChangeState(StateType.Die);
     }
     public void Refresh()
