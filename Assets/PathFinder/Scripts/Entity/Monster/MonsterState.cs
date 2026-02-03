@@ -157,10 +157,8 @@ public class MonsterHitState : MonsterState
     private Coroutine hitRoutine;
     public override void Enter()
     {
-        float animLengh = 0.5f; //owner.Animator.GetCurrentAnimatorStateInfo(0).length;
-        hitRoutine = owner.StartCoroutine(WaitAnimCo(animLengh, () => {
-            stateMachine.ChangeState(StateType.Idle);
-        }));
+        //애니메이션 연출만 하게하고
+        stateMachine.ChangeState(StateType.Idle);
     }
     public override void Update()
     {

@@ -51,8 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8f74dddbea40144830760db32a1ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMesh: {fileID: 4373262490803752708}
+  damageText: {fileID: 4373262490803752708}
   poolID: 1
+  heightOffset: 0
 --- !u!222 &7627774697866087307
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -91,7 +92,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190080
   m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

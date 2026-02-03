@@ -72,6 +72,7 @@ public class Detection : MonoBehaviour
     }
     public void Detect()
     {
+
         Collider2D hit = Physics2D.OverlapCircle(transform.position, detectRange, targetMask);
         if (hit == null)
         {

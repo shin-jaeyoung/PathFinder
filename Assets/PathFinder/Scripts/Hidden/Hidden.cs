@@ -61,12 +61,17 @@ public class Hidden
         {
             curState = HiddenState.Progress;
         }
-        Debug.Log($"{data.hiddenName} 진행도: {curStep}/{data.conditions.Count}");
+        if(curStep < data.conditions.Count)
+        {
+            Debug.Log($"{data.hiddenName} 진행도: {curStep}/{data.conditions.Count}");
+            GlobalEvents.Notify($"{data.hiddenName} 진행도: {curStep}/{data.conditions.Count}", 8f);
+        }
     }
     private void GiveReward(Player player)
     {
         //여기도 연출 넣으면 될듯
         Debug.Log($"{data.hiddenName} 클리어! 보상을 지급합니다.");
+        GlobalEvents.Notify($"{data.hiddenName} 클리어! 보상을 지급합니다.", 8f);
         RewardManager.instance.Reward(data.rewardData, player.transform.position);
     }
 }

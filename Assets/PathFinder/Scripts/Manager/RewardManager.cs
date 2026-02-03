@@ -56,7 +56,6 @@ public class RewardManager : MonoBehaviour
             if (data.activeSkill is Skill_Dash)
             {
                 player.Skills.AddDashSkill(data.activeSkill);
-                GlobalEvents.Notify($"대쉬 스킬을 획득했습니다", 4f);
             }
             else
             {
