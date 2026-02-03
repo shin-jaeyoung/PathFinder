@@ -5,20 +5,26 @@ using System.Collections;
 public class DamageText : MonoBehaviour, IPoolable
 {
     [SerializeField] 
-    private TextMeshProUGUI textMesh;
+    private TextMeshProUGUI damageText;
     [SerializeField] 
     private int poolID;
     [SerializeField]
     float heightOffset;
     private const float duration = 1f;
 
-    public int GetID() => poolID;
-    public GameObject GetGameObject() => gameObject;
+    public int GetID()
+    {
+        return poolID;
+    }
+    public GameObject GetGameObject()
+    {
+        return gameObject;
+    }
 
     public void Init(string damage, Transform target)
     {
-        textMesh.text = damage;
-        textMesh.alpha = 1f;
+        damageText.text = damage;
+        damageText.alpha = 1f;
         transform.localScale = Vector3.one;
 
         StopAllCoroutines();
@@ -43,7 +49,7 @@ public class DamageText : MonoBehaviour, IPoolable
             }
 
             if (t > 0.5f)
-                textMesh.alpha = Mathf.Lerp(1f, 0f, (t - 0.5f) * 2f);
+                damageText.alpha = Mathf.Lerp(1f, 0f, (t - 0.5f) * 2f);
 
             yield return null;
         }

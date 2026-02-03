@@ -50,5 +50,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 57f768245320ef14b97b62a50d12ee52, type: 2}
   - {fileID: 11400000, guid: 5fb062dc80548a7458dcf158c8603e88, type: 2}
   - {fileID: 11400000, guid: 020897d8938a8ea4dab718ca3f9b00f5, type: 2}
+  - {fileID: 11400000, guid: ca7be3b2482207040baf836fa47285e8, type: 2}
   parentPrefab: {fileID: 5407988756748410930, guid: 16cb3cfa17c570f4d885e0ad160dcb4c,
     type: 3}

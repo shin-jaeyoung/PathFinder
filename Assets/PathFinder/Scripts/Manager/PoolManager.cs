@@ -9,6 +9,7 @@ public enum PoolType
     BossPattern,
     UI,
     DamageText,
+    Dialogue,
 }
 
 public class PoolManager : MonoBehaviour
