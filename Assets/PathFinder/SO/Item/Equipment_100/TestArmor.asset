@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4aad6cf778846564387a09f25bbba9d7, type: 3}
-  m_Name: TestHelmet
+  m_Name: TestArmor
   m_EditorClassIdentifier: 
   data:
-    id: 0
+    id: 1000
     type: 1
-    sprite: {fileID: 21300000, guid: 1ac949e421d9e24498dfbdb21574f46e, type: 3}
-    name: TestHelmet
-    description: testHelmet
-    price: 500
+    sprite: {fileID: 4207501386822081471, guid: ad98517497e964b00add5977d2257a7a,
+      type: 3}
+    name: TestArmor
+    description: aaaaaaaaaaaaaaaaaaaaa
+    price: 600
   statDatas:
   - type: 6
-    statValue: 5
-  type: 1
+    statValue: 10
+  type: 2

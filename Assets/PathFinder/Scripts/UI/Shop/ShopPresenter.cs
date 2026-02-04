@@ -44,10 +44,17 @@ public class ShopPresenter : MonoBehaviour
                         return;
                     }
                     sb.Clear();
-                    sb.Append("Name : ").Append(shopUI.shopSlots[currentIndex].item.Data.Name)
-                        .AppendLine().Append("Price : ").Append(shopUI.shopSlots[currentIndex].item.Data.Price)
-                        .AppendLine().Append(shopUI.shopSlots[currentIndex].item.Data.Description);
-
+                    sb.Append("이름 : ").Append(shopUI.shopSlots[currentIndex].item.Data.Name).AppendLine().AppendLine();
+                    if (shopUI.shopSlots[currentIndex].item is Equipment)
+                    {
+                        Equipment equipment = shopUI.shopSlots[currentIndex].item as Equipment;
+                        sb.Append(equipment.Explain());
+                    }
+                    else
+                    {
+                        sb.Append(shopUI.shopSlots[currentIndex].item.Data.Description);
+                    }
+                    sb.AppendLine().Append("가격 : ").Append(shopUI.shopSlots[currentIndex].item.Data.Price);
                     explainUI.RefreshUI(sb.ToString());
                     explainUI.transform.position = shopUI.shopSlots[currentIndex].transform.position;
                     explainUI.gameObject.SetActive(true);
@@ -100,9 +107,17 @@ public class ShopPresenter : MonoBehaviour
                     return;
                 }
                 sb.Clear();
-                sb.Append("Name : ").Append(player.Inventory.Inventory[currentIndex].item.Data.Name)
-                    .AppendLine().Append("Price : ").Append(player.Inventory.Inventory[currentIndex].item.Data.Price)
-                    .AppendLine().Append(player.Inventory.Inventory[currentIndex].item.Data.Description);
+                sb.Append("이름 : ").Append(player.Inventory.Inventory[currentIndex].item.Data.Name).AppendLine().AppendLine();
+                if (player.Inventory.Inventory[currentIndex].item is Equipment)
+                {
+                    Equipment equipment = player.Inventory.Inventory[currentIndex].item as Equipment;
+                    sb.Append(equipment.Explain());
+                }
+                else
+                {
+                    sb.Append(player.Inventory.Inventory[currentIndex].item.Data.Description);
+                }
+                sb.AppendLine().Append("가격 : ").Append(player.Inventory.Inventory[currentIndex].item.Data.Price);
 
                 explainUI.RefreshUI(sb.ToString());
                 explainUI.transform.position = shopInvenUI.shopinvenSlots[currentIndex].transform.position;

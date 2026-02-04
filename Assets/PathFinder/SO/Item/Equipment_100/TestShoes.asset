@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestShoes
   m_EditorClassIdentifier: 
   data:
-    id: 0
+    id: 1002
     type: 1
     sprite: {fileID: -7657487650210245680, guid: 44caccf8dc342c54987ccaf53653b2c8,
       type: 3}
