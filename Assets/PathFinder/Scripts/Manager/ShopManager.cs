@@ -57,7 +57,9 @@ public class ShopManager : MonoBehaviour
     }
     public void Sell()
     {
-        int gold = selectedItem.Data.Price;
+
+        //판매가는 후려쳐서
+        int gold = (int)(selectedItem.Data.Price * 0.3f);
         if(player.Inventory.RemoveItem(player.Inventory.Inventory[playerinvenIndex], count))
         {
             player.Inventory.AddGold(gold * count);

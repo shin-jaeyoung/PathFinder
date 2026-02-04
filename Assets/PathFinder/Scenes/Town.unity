@@ -809,7 +809,7 @@ PrefabInstance:
     - target: {fileID: 9104875187304265391, guid: ef97072c1a8452147a0b2f2293d00aa5,
         type: 3}
       propertyPath: m_Name
-      value: HiddenObj (1)
+      value: Hidden_001_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1313,7 +1313,7 @@ PrefabInstance:
     - target: {fileID: 9104875187304265391, guid: ef97072c1a8452147a0b2f2293d00aa5,
         type: 3}
       propertyPath: m_Name
-      value: HiddenObj
+      value: Hidden_001_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

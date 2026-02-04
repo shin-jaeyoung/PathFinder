@@ -117,7 +117,7 @@ public class ShopPresenter : MonoBehaviour
                 {
                     sb.Append(player.Inventory.Inventory[currentIndex].item.Data.Description);
                 }
-                sb.AppendLine().Append("가격 : ").Append(player.Inventory.Inventory[currentIndex].item.Data.Price);
+                sb.AppendLine().Append("가격 : ").Append((int)(player.Inventory.Inventory[currentIndex].item.Data.Price*0.3f));
 
                 explainUI.RefreshUI(sb.ToString());
                 explainUI.transform.position = shopInvenUI.shopinvenSlots[currentIndex].transform.position;
