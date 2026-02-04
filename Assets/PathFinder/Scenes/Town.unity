@@ -663,7 +663,7 @@ PrefabInstance:
     - target: {fileID: 2340669038501316915, guid: adec1720b1ee9724e89d83fef11f4fa0,
         type: 3}
       propertyPath: m_Name
-      value: Npc_013_Shooseshop
+      value: Npc_013_Shoseshop
       objectReference: {fileID: 0}
     - target: {fileID: 3916520994709653666, guid: adec1720b1ee9724e89d83fef11f4fa0,
         type: 3}
