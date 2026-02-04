@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aad6cf778846564387a09f25bbba9d7, type: 3}
+  m_Name: Armor_103
+  m_EditorClassIdentifier: 
+  data:
+    id: 103
+    type: 1
+    sprite: {fileID: 21300000, guid: b65f1a6caa5f9844cbcc2cf20413b238, type: 3}
+    name: "\uC5D8\uD504\uC758\uC804\uD22C\uBCF5"
+    description: "\uCC29\uC6A9\uD558\uBA74 \uC57D\uC810\uC744 \uC798 \uB9DE\uCD9C
+      \uC218 \uC788\uC744\uAC83\uAC19\uB2E4."
+    price: 3000
+  statDatas:
+  - type: 4
+    statValue: 3
+  - type: 8
+    statValue: 15
+  type: 2

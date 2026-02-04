@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aad6cf778846564387a09f25bbba9d7, type: 3}
+  m_Name: Shoes_303
+  m_EditorClassIdentifier: 
+  data:
+    id: 303
+    type: 0
+    sprite: {fileID: 21300000, guid: 61ae31d84fbc12544952f6509ebcd7d9, type: 3}
+    name: "\uAE30\uB9C8\uB300\uC2E0\uBC1C"
+    description: 
+    price: 5000
+  statDatas:
+  - type: 1
+    statValue: 2
+  - type: 8
+    statValue: 30
+  type: 0
