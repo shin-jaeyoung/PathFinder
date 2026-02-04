@@ -10,8 +10,6 @@ public class InventoryUI : MonoBehaviour
     [Header("Equipments")]
     [SerializeField]
     private List<EquipmentSlotUI> equipmentSlots;
-    [SerializeField]
-    private SpriteRenderer r_Arm;
 
     [Header("Inventory")]
     [SerializeField]
@@ -94,7 +92,7 @@ public class InventoryUI : MonoBehaviour
         {
             equipSlot.UpdateUI();
         }
-        UpdateWeapon();
+
         UpdateGold();
     }
 
@@ -102,10 +100,7 @@ public class InventoryUI : MonoBehaviour
     {
         goldvalue.text = player.Inventory.Gold.ToString();
     }
-    public void UpdateWeapon()
-    {
-        r_Arm.sprite = equipmentSlots[0].Icon.sprite;
-    }
+
 
     //만들고보니 이거 slot이 써야될것같은데 일단 보류
     public void UpdateExplain(InventorySlot slot)
