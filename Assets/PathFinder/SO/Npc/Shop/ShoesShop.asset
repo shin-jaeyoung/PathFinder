@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b93ef46def6a934680a5654fc29e8be, type: 3}
+  m_Name: ShoesShop
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 11400000, guid: dc31bbe175b5f8a4bba29a1d855134f3, type: 2}
+  - {fileID: 11400000, guid: 63d0b7467b100364095cec23202d993d, type: 2}
+  - {fileID: 11400000, guid: 8774280472caeed4f9fe056eff07c28a, type: 2}
+  - {fileID: 11400000, guid: b2a9e9fffddb2dd428ef3e74692e6658, type: 2}
+  - {fileID: 11400000, guid: 1b75a25bc3006ea4995e65a4701dfd01, type: 2}
+  - {fileID: 11400000, guid: 77b8ce5a8f76e894f8a3479bbd2980b5, type: 2}
+  - {fileID: 11400000, guid: 7f7d9679a589f6044b7b26635bbc756b, type: 2}
+  - {fileID: 11400000, guid: a70fd8593fd942540af986a57d7131a6, type: 2}

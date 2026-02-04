@@ -20,7 +20,7 @@ public class ShopCheckUI : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        inputField.gameObject.SetActive(false);
         yes.onClick.RemoveAllListeners();
         no.onClick.RemoveAllListeners();
         yes.onClick.AddListener(() =>

@@ -108,8 +108,16 @@ public class InventoryUI : MonoBehaviour
         StringBuilder sb = new StringBuilder();
         sb.Append(slot.item.Data.Name)
             .AppendLine()
-            .AppendLine()
-            .Append(slot.item.Data.Description);
+            .AppendLine();
+        if(slot.item is Equipment)
+        {
+            Equipment equipment = slot.item as Equipment;
+            sb.Append(equipment.Explain());
+        }
+        else
+        {
+            sb.Append(slot.item.Data.Description);
+        }
         explain.text = sb.ToString();
     }
     public void UpdateExplain(EquipmentsSlot slot)
@@ -117,8 +125,16 @@ public class InventoryUI : MonoBehaviour
         StringBuilder sb = new StringBuilder();
         sb.Append(slot.item.Data.Name)
             .AppendLine()
-            .AppendLine()
-            .Append(slot.item.Data.Description);
+            .AppendLine();
+        if (slot.item is Equipment)
+        {
+            Equipment equipment = slot.item as Equipment;
+            sb.Append(equipment.Explain());
+        }
+        else
+        {
+            sb.Append(slot.item.Data.Description);
+        }
         explain.text = sb.ToString();
     }
     public void ExplainReomote(bool onoff)

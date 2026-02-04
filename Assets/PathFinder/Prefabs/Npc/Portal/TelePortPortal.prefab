@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7350536507595777339}
-  - component: {fileID: 1162837838347299363}
   - component: {fileID: 3041189417870700905}
+  - component: {fileID: 1162837838347299363}
   - component: {fileID: 3143576323963391655}
   m_Layer: 9
   m_Name: TelePortPortal
@@ -35,6 +35,19 @@ Transform:
   - {fileID: 185815404390506339}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3041189417870700905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2724359973941362112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c443d400b1cd940478acfff38c85bf8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrival: {fileID: 185815404390506339}
 --- !u!212 &1162837838347299363
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -88,19 +101,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3041189417870700905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2724359973941362112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c443d400b1cd940478acfff38c85bf8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arrival: {fileID: 185815404390506339}
 --- !u!58 &3143576323963391655
 CircleCollider2D:
   m_ObjectHideFlags: 0

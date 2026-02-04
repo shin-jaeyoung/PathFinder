@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58462868753b5b14090af743a5a94fdf, type: 3}
+  m_Name: Weapon_402
+  m_EditorClassIdentifier: 
+  data:
+    id: 402
+    type: 0
+    sprite: {fileID: 21300000, guid: 618d4d28de78f8847a42136217de4ca7, type: 3}
+    name: "\uC790\uC8FC\uBE5B \uAC80"
+    description: "\uC790\uC8FC\uC0C9 \uBE5B\uC774 \uB3C4\uB294 \uAC80"
+    price: 500
+  statDatas:
+  - type: 0
+    statValue: 1
+  - type: 3
+    statValue: 2
+  type: 0
