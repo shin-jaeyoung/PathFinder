@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8985223079585336826}
   - component: {fileID: 1897624783294086687}
   m_Layer: 9
-  m_Name: NpcTest
+  m_Name: NpcShopBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

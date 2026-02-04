@@ -13,9 +13,18 @@ MonoBehaviour:
   m_Name: Weapon_408
   m_EditorClassIdentifier: 
   data:
-    id: 0
-    sprite: {fileID: 0}
-    name: 
-    description: 
-    price: 0
-  statDatas: []
+    id: 408
+    type: 0
+    sprite: {fileID: 21300000, guid: 6fcee71a82f0a024f9d886960ed95b39, type: 3}
+    name: "\uC5D1\uC2A4\uCE7C\uB9AC\uBC84 \uBAA8\uC870\uD488"
+    description: "\uC5D1\uC2A4\uCE7C\uB9AC\uBC84\uB97C \uBCF8\uB530 \uB9CC\uB4E0
+      \uBAA8\uC870\uD488"
+    price: 8000
+  statDatas:
+  - type: 0
+    statValue: 4
+  - type: 4
+    statValue: 5
+  - type: 3
+    statValue: 4
+  type: 0

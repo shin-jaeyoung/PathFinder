@@ -10,16 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58462868753b5b14090af743a5a94fdf, type: 3}
-  m_Name: Weapon_400
+  m_Name: Weapon_454
   m_EditorClassIdentifier: 
   data:
-    id: 400
+    id: 454
     type: 0
-    sprite: {fileID: 21300000, guid: 84b093daed70c3245951be130ab34e79, type: 3}
-    name: "\uCD08\uBCF4\uC790\uC758 \uAC80"
-    description: "\uCD08\uBCF4\uC790\uC6A9 \uAC80"
-    price: 100
+    sprite: {fileID: 21300000, guid: ddf2f0e9738b19946b101665b1b96da1, type: 3}
+    name: "\uC0E4\uD06C"
+    description: '!!!'
+    price: 30000
   statDatas:
+  - type: 0
+    statValue: 7
+  - type: 4
+    statValue: 5
+  - type: 5
+    statValue: 15
   - type: 3
-    statValue: 1
+    statValue: 5
   type: 0
