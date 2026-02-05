@@ -118,6 +118,13 @@ public class Player : Entity
         transform.position = Vector3.zero;//임시
         stateMachine.ChangeState(StateType.Idle);
     }
+    public void BasicAttack()
+    {
+        if(combatSystem.PerformSkill(skills.BasicAttack))
+        {
+            stateMachine.ChangeState(StateType.Attack);
+        }
+    }
     public override void Active(int index)
     {
         if(combatSystem.PerformSkill(skills.Skillequip[index]))

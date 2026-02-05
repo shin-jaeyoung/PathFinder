@@ -82,7 +82,7 @@ public class SkillInventoryUI : MonoBehaviour
                 }
             }
             explainName.text = "";
-            explainDescription.text = "IF click Skill Icon, you can see the skill's description";
+            explainDescription.text = "스킬아이콘을 누르면 설명이 나와요";
             UpdateAll();
         }
     }

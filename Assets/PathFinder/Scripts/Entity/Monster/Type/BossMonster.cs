@@ -80,6 +80,7 @@ public class BossMonster : Monster
     public IEnumerator GimmickStart()
     {
         Debug.Log("기믹시작");
+        GlobalEvents.Notify("보스의 기믹이 시작되었습니다.",4f);
         isGimmickActive = true;
         transform.position = bossPosduringGimmick;
         stateMachine.ChangeState(StateType.Immortal);

@@ -23,12 +23,6 @@ public class DialogueNpc : SpecialNpc, ISpecialInteractable
         }
         else
         {
-            //DialogueUI만들고 넣자
-            //if(!UIManager.Instance.CheckCurUIType(UIType.Dialogue))
-            //{
-            //    CancleAct();
-            //}
-            
             NextDialogue();
         }
     }

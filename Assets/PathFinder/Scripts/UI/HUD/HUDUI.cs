@@ -10,10 +10,10 @@ public class HUDUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI levelValue;
     [SerializeField]
-    private Slider expSlider;
+    private Image expImage;
     [Header("Hp")]
     [SerializeField]
-    private Slider hpSlider;
+    private Image hpImage;
     [Header("Skill")]
     [SerializeField]
     private List<Image> skillList;
@@ -62,13 +62,13 @@ public class HUDUI : MonoBehaviour
     {
         if (GameManager.instance.Player == null) return;
         levelValue.text = player.LevelSystem.Level.ToString();
-        expSlider.value = player.LevelSystem.CurExp / player.LevelSystem.MaxExp;
+        expImage.fillAmount = player.LevelSystem.CurExp / player.LevelSystem.MaxExp;
     }
 
     public void UpdateHp()
     {
         if (GameManager.instance.Player == null) return;
-        hpSlider.value = player.StatusSystem.Stat[PlayerStatType.CurHp] / player.StatusSystem.Stat[PlayerStatType.MaxHp];
+        hpImage.fillAmount = player.StatusSystem.Stat[PlayerStatType.CurHp] / player.StatusSystem.Stat[PlayerStatType.MaxHp];
     }
 
     public void UpdateSkillUI()

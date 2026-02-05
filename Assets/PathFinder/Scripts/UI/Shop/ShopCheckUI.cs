@@ -64,7 +64,7 @@ public class ShopCheckUI : MonoBehaviour
     }
     public void RefreshBuyUI()
     {
-        checkText.text = "Buy?";
+        checkText.text = "살건가요?";
     }
     public void RefreshSellUI(int count =1)
     {
@@ -73,6 +73,6 @@ public class ShopCheckUI : MonoBehaviour
         {
             inputField.gameObject.SetActive(true);
         }
-        checkText.text = "Sell?";
+        checkText.text = "팔건가요?";
     }
 }
