@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1162837838347299363}
   - component: {fileID: 3143576323963391655}
   m_Layer: 9
-  m_Name: TelePortPortal
+  m_Name: TelePortPortal_base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,7 +21,7 @@ public abstract class Portal : MonoBehaviour , IInteractable
     {
         if (GameManager.instance != null && GameManager.instance.Player != null)
         {
-            SceneManager.LoadScene((int)sceneType);
+            SceneManager.LoadScene(sceneType.ToString());
             GameManager.instance.SetScene(sceneType);
         }
     }

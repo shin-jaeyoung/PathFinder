@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     id: 307
-    type: 0
+    type: 1
     sprite: {fileID: 21300000, guid: 49440cba7d094ad42ba19be3e4f0428c, type: 3}
     name: "\uACE0\uC218\uC6A9 \uC2E0\uBC1C"
     description: "\uCD5C\uACE0\uC758 \uBC29\uC5B4\uB294 \uACF5\uACA9"
@@ -24,4 +24,4 @@ MonoBehaviour:
     statValue: 5
   - type: 1
     statValue: 5
-  type: 0
+  type: 3

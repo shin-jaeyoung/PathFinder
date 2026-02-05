@@ -37,13 +37,19 @@ public class BossMonster : Monster
     private int aliveTotemCount;
     private List<Totem> totemSpawnList = new List<Totem>();
 
+    [Header("EndPortal")]
+    [SerializeField]
+    private GameObject endPortalPrefab;
+
 
     //property
     public bool IsGimmickActive => isGimmickActive;
     
     public override void Die()
     {
+        if (isDead) return;
         stateMachine.ChangeState(StateType.Die);
+        Instantiate(endPortalPrefab, transform.position, Quaternion.identity);
     }
 
     protected override void InitStart()

@@ -6,6 +6,10 @@ public enum SceneType
 {
     GameStart,
     Town,
-    Field,
+    Field1,
+    Field2,
+    Field3,
+    Field4,
     Boss,
+    End,
 }

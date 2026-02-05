@@ -73,6 +73,12 @@ PrefabInstance:
       propertyPath: detectRange
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: endPortalPrefab
+      value: 
+      objectReference: {fileID: 5075027120058559211, guid: 106ef68d9c6b5534d9282f498a7389db,
+        type: 3}
     - target: {fileID: 7271114388976837514, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
       propertyPath: m_Name

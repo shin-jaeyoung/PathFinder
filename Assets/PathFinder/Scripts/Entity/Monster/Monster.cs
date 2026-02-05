@@ -32,8 +32,8 @@ public abstract class Monster : Entity , IPoolable
 
     [SerializeField]
     protected bool isBerserkerMode;
-    private int useSkillIndex;
-    private bool isDead;
+    protected int useSkillIndex;
+    protected bool isDead;
 
     //property
     public float CurHp

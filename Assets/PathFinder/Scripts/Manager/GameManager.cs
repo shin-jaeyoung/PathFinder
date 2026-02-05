@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject cameraGroupPrefab; 
     private CinemachineVirtualCamera virtualCamera;
 
-    public Action OnClearMainBoss;
 
     // property
 
@@ -94,4 +93,6 @@ public class GameManager : MonoBehaviour
         preScene = curScene;
         curScene = scene;
     }
+
+
 }

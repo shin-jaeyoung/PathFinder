@@ -115,6 +115,7 @@ public class PlayerDashState : PlayerStateBase
     private Vector2 dir;
     public override void Enter()
     {
+        owner.Animator.SetBool("Move", true);
         owner.IsInvincible = true;
         owner.Rb.velocity = Vector2.zero;
         dir = owner.GetMoveDir();
@@ -130,6 +131,7 @@ public class PlayerDashState : PlayerStateBase
 
     public override void Exit()
     {
+        owner.Animator.SetBool("Move", false);
         owner.Rb.velocity = Vector2.zero;
         if (dashRoutine != null)
         {

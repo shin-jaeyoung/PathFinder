@@ -7,7 +7,7 @@ public enum NpcType
 {
     Dialogue,
     Shop,
-    Healer
+    
 }
 public class Npc : MonoBehaviour ,IInteractable
 {
@@ -39,10 +39,7 @@ public class Npc : MonoBehaviour ,IInteractable
                 npc.SetNpc(this);
                 specialNpcs.Add(npc);
             }
-            if(type == NpcType.Healer)
-            {
-                
-            }
+            
         }
     }
 
