@@ -9,7 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b93ef46def6a934680a5654fc29e8be, type: 3}
-  m_Name: HelmetShop
+  m_Script: {fileID: 11500000, guid: 27d763dc27b2219408f5662add1e4c2d, type: 3}
+  m_Name: ExtraItem_000
   m_EditorClassIdentifier: 
-  items: []
+  data:
+    id: 0
+    type: 0
+    sprite: {fileID: 0}
+    name: 
+    description: 
+    price: 0
+  capacityInSlot: 0

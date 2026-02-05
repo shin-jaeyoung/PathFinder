@@ -177,6 +177,7 @@ public class MonsterHitState : MonsterState
 public class MonsterAttackState : MonsterState
 {
     private bool isAttack = false;
+    private Coroutine attackRoutine;
     public override void Enter()
     {
         Debug.Log("몬스터 공격");
@@ -184,7 +185,7 @@ public class MonsterAttackState : MonsterState
         //발동
         owner.Active(0);
         //애니메이션 종료체크로직이후 isAttack = false; 1f대신 애니메이션 길이가 들어가야함
-        owner.StartCoroutine(WaitAnimCo(1.5f, AttackFalse));
+        attackRoutine = owner.StartCoroutine(WaitAnimCo(1.5f, AttackFalse));
     }
 
     public override void Update()
@@ -200,6 +201,11 @@ public class MonsterAttackState : MonsterState
     }
     public override void Exit()
     {
+        if(attackRoutine != null)
+        {
+            owner.StopCoroutine(attackRoutine);
+            attackRoutine = null;
+        }
         AttackFalse();
     }
     public void AttackFalse()

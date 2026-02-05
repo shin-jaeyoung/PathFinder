@@ -1,5 +1,6 @@
 ﻿using Cinemachine;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 public class GameManager : MonoBehaviour
 {
@@ -18,8 +19,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject cameraGroupPrefab; 
     private CinemachineVirtualCamera virtualCamera;
 
-    public Action OnClearMainBoss;
-
+    public Dictionary<int, ResistPortal> resistedPortal = new Dictionary<int, ResistPortal>();
+    public event Action OnResistPortal;
     // property
 
     public Player Player
@@ -93,5 +94,18 @@ public class GameManager : MonoBehaviour
     {
         preScene = curScene;
         curScene = scene;
+    }
+
+    public bool ResistPortal(int id, ResistPortal portal)
+    {
+        if (resistedPortal.ContainsKey(id) || portal == null) return false;
+
+        resistedPortal.Add(id, portal);
+        OnResistPortal?.Invoke();
+        return true;
+    }
+    public void MovePlayer(Vector3 arrival)
+    {
+        player.transform.position = arrival;
     }
 }

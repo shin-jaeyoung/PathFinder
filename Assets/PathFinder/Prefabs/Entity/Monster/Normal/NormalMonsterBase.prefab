@@ -106,15 +106,18 @@ MonoBehaviour:
     id: 1
     mName: TestMon
     type: 0
-    maxHp: 100
+    maxHp: 50
     atk: 10
     defence: 5
     speed: 1
   rewardData:
-    items:
-    - {fileID: 11400000, guid: 15452eff3846b7d4a8763e4081b246d5, type: 2}
-    - {fileID: 11400000, guid: f78c028919d5f9642be15ade4fec135f, type: 2}
-    - {fileID: 11400000, guid: fb00f7eb0152a4e488ca741cdc7eb1c1, type: 2}
+    dropItems:
+    - item: {fileID: 11400000, guid: ab1209aceb833c74caec1764a21f50cb, type: 2}
+      dropRate: 0
+    - item: {fileID: 11400000, guid: e5c0c20a6489223458944b218f1c6e17, type: 2}
+      dropRate: 100
+    - item: {fileID: 11400000, guid: d2f31d577992e8343a0e333eb5a037f9, type: 2}
+      dropRate: 50
     activeSkill: {fileID: 0}
     passiveSkill: {fileID: 0}
     gold: 100
@@ -125,6 +128,7 @@ MonoBehaviour:
     currentCooltime: 0
   skills: []
   detection: {fileID: 2359791063972681615}
+  isBerserkerMode: 0
 --- !u!114 &2359791063972681615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +145,7 @@ MonoBehaviour:
   attackRange: 1.5
   trackRange: 7
   attackCooltime: 1.5
-  moveRange: 9
+  moveRange: 15
   rayDistance: 1.5
   detectMask:
     serializedVersion: 2

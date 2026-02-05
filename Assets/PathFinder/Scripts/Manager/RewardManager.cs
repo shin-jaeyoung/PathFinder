@@ -1,11 +1,17 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
+public struct DropItem
+{
+    public Item item;
+    public int dropRate;
+}
 [System.Serializable]
 public struct RewardData
 {
-    public List<Item> items;
+    public List<DropItem> dropItems;
     public Skill activeSkill;
     public PassiveSkill passiveSkill;
     public int gold;
@@ -78,16 +84,22 @@ public class RewardManager : MonoBehaviour
     //아이템 생성해서 먹게하기
     private void GenerateDropItem(RewardData data,Vector2 pos)
     {
-        foreach (Item item in data.items)
+        foreach (DropItem dropItem in data.dropItems)
         {
-            if (item == null) continue;
-            Vector2 scatterPos = pos + Random.insideUnitCircle * 1.5f;
+            if (dropItem.item == null) continue;
 
-            GameObject go = Instantiate(itemDropPrefab, scatterPos, Quaternion.identity);
-            if(go.TryGetComponent<Reward>(out Reward reward))
+            int randomNum = Random.Range(0, 99);
+            if(dropItem.dropRate>randomNum)
             {
-                reward.Init(item);
+                Vector2 scatterPos = pos + Random.insideUnitCircle * 1.2f;
+
+                GameObject go = Instantiate(itemDropPrefab, scatterPos, Quaternion.identity);
+                if(go.TryGetComponent<Reward>(out Reward reward))
+                {
+                    reward.Init(dropItem.item);
+                }
             }
+
         }
     }
 

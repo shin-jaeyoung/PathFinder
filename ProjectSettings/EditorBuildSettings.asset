@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/PathFinder/Scenes/Field4.unity
     guid: 988178d8126e0224db0d845d7e4dc023
+  - enabled: 1
+    path: Assets/PathFinder/Scenes/Boss.unity
+    guid: ceb09066f028b8b42affebad90c29e90
+  - enabled: 1
+    path: Assets/PathFinder/Scenes/End.unity
+    guid: 2d6ae1580d56c404ba42e6abd36eb395
   m_configObjects: {}
