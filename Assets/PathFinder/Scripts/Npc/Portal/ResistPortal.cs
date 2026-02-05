@@ -11,10 +11,12 @@ public class ResistPortal : Portal
     [SerializeField]
     protected SceneType whereisIt;
 
+    public int PortalID => portalID;
     public string PortalName => portalName;
     public SceneType whereScene => whereisIt;
 
     private bool isResisted;
+
     public override void Teleport(Player player)
     {
         if(isResisted)

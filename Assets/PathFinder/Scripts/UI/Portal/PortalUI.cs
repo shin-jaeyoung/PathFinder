@@ -6,11 +6,12 @@ public class PortalUI : MonoBehaviour
 {
 
     [SerializeField]
-    private int view;
+    private PortalListView view;
 
     private void Start()
     {
         GameManager.instance.OnResistPortal += UpdatePortal;
+        UpdatePortal();
     }
 
     private void OnDestroy()
@@ -19,6 +20,6 @@ public class PortalUI : MonoBehaviour
     }
     public void UpdatePortal()
     {
-
+        view.UpdatePortalList();
     }
 }

@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject cameraGroupPrefab; 
     private CinemachineVirtualCamera virtualCamera;
 
-    private Dictionary<int, ResistPortal> resistedPortal;
+    public Dictionary<int, ResistPortal> resistedPortal = new Dictionary<int, ResistPortal>();
     public event Action OnResistPortal;
     // property
 
@@ -103,5 +103,9 @@ public class GameManager : MonoBehaviour
         resistedPortal.Add(id, portal);
         OnResistPortal?.Invoke();
         return true;
+    }
+    public void MovePlayer(Vector3 arrival)
+    {
+        player.transform.position = arrival;
     }
 }

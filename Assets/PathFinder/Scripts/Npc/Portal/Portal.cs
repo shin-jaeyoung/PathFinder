@@ -17,7 +17,7 @@ public abstract class Portal : MonoBehaviour , IInteractable
     }
 
     public abstract void Teleport(Player player);
-    protected void ChangeScene(SceneType sceneType)
+    public void ChangeScene(SceneType sceneType)
     {
         if (GameManager.instance != null && GameManager.instance.Player != null)
         {

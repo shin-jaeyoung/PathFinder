@@ -93,11 +93,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 383288426684061632}
+  - component: {fileID: 3244612184274040452}
   - component: {fileID: 1014071153009865747}
   - component: {fileID: 5544130932290654332}
   - component: {fileID: 2074442534096565995}
   m_Layer: 9
-  m_Name: TelleportPlace
+  m_Name: ResistPortal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,6 +121,22 @@ Transform:
   - {fileID: 3283779536729259344}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3244612184274040452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4500485092114777792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aaf4907efaed2c4e833f0a42fdb49e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrival: {fileID: 383288426684061632}
+  portalID: 0
+  portalName: "\uB9C8\uC744"
+  whereisIt: 1
 --- !u!212 &1014071153009865747
 SpriteRenderer:
   m_ObjectHideFlags: 0
