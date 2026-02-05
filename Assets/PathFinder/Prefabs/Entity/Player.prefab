@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 268062061831401006}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5859,7 +5859,7 @@ MonoBehaviour:
     equipmentsCapacity: 4
     gold: 300
   skills:
-    basicAttack: {fileID: 11400000, guid: 78fa93b5f6464904082d7b29574d60d8, type: 2}
+    basicAttack: {fileID: 11400000, guid: 549af2eea3b89f348a9589572fa60fce, type: 2}
     activeSkills: []
     activeCapacity: 20
     passiveCapacity: 20
@@ -5986,7 +5986,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.35}
+  m_Offset: {x: 0, y: 0.2}
   m_Size: {x: 0.5, y: 0.8}
   m_Direction: 0
 --- !u!114 &8580137047324702032

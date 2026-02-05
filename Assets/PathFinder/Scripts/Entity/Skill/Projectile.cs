@@ -57,10 +57,10 @@ public class Projectile : MonoBehaviour , IPoolable
 
         if(collision.TryGetComponent(out IHittable target))
         {
-            Debug.Log("Hittable");
+            
             if(collision.TryGetComponent(out Entity targetEntity))
             {
-                Debug.Log("Entity");
+                
                 if (targetEntity.GetEntityType() == attackerType) return;
                 DamageInfo finalInfo = new DamageInfo(damage, attacker, targetEntity);
                 targetEntity.Hit(finalInfo);
