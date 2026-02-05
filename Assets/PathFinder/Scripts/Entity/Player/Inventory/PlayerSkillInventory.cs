@@ -7,6 +7,11 @@ using UnityEngine.Rendering;
 [System.Serializable]
 public class PlayerSkillInventory
 {
+    [Header("BasicAttack")]
+    [SerializeField]
+    private Skill basicAttack;
+    private SkillSlot basicAttackSlot = new SkillSlot();
+
     [Header("Skill Inventory")]
     [SerializeField]
     private List<SkillSlot> activeSkills;
@@ -18,7 +23,6 @@ public class PlayerSkillInventory
     private int passiveCapacity;
     [SerializeField]
     private SkillSlot dashSkill;
-
     [Header("Skill Equip")]
     [SerializeField]
     private List<SkillSlot> skillequip;
@@ -36,6 +40,7 @@ public class PlayerSkillInventory
     public int EquipCapacity => equipCapacity;
     public Dictionary<PlayerStatType, float> AddStatus => addStatus;
     public SkillSlot DashSkill => dashSkill;
+    public SkillSlot BasicAttack => basicAttackSlot;
     //delitgate
     public Action OnChangedActiveSkill;
     public Action OnChangedPassiveSkill;
@@ -49,7 +54,7 @@ public class PlayerSkillInventory
         passiveSkills = new List<PassiveSlot>(passiveCapacity);
         addStatus = new Dictionary<PlayerStatType, float>();
         dashSkill = new SkillSlot();
-
+        basicAttackSlot.skill = basicAttack;
         for (int i = 0; i < activeCapacity; i++)
         {
             activeSkills.Add(new SkillSlot());

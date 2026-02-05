@@ -5857,8 +5857,9 @@ MonoBehaviour:
     capacity: 40
     equipments: []
     equipmentsCapacity: 4
-    gold: 1000
+    gold: 300
   skills:
+    basicAttack: {fileID: 11400000, guid: 78fa93b5f6464904082d7b29574d60d8, type: 2}
     activeSkills: []
     activeCapacity: 20
     passiveCapacity: 20

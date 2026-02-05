@@ -69,7 +69,12 @@ public class PlayerController : MonoBehaviour
                 player.Potion.Use();
             }
         }
-
+        //기본공격
+        if(Input.GetMouseButtonDown(0))
+        {
+            GetMouseTransform();
+            player.BasicAttack();
+        }
         //스킬
         if (Input.GetKeyDown(KeyCode.Q))
         {
