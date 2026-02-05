@@ -1,5 +1,6 @@
 ﻿using Cinemachine;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 public class GameManager : MonoBehaviour
 {
@@ -18,7 +19,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject cameraGroupPrefab; 
     private CinemachineVirtualCamera virtualCamera;
 
-
+    private Dictionary<int, ResistPortal> resistedPortal;
+    public event Action OnResistPortal;
     // property
 
     public Player Player
@@ -94,5 +96,12 @@ public class GameManager : MonoBehaviour
         curScene = scene;
     }
 
+    public bool ResistPortal(int id, ResistPortal portal)
+    {
+        if (resistedPortal.ContainsKey(id) || portal == null) return false;
 
+        resistedPortal.Add(id, portal);
+        OnResistPortal?.Invoke();
+        return true;
+    }
 }

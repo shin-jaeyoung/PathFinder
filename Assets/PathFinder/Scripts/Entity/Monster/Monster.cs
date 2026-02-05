@@ -157,12 +157,14 @@ public abstract class Monster : Entity , IPoolable
     }
     public virtual void Die()
     {
+        if (isDead) return;
         isDead = true;
         stateMachine.ChangeState(StateType.Die);
     }
     public void Refresh()
     {
         CurHp = data.MaxHp;
+        isDead = false;
         PoolManager.instance.PoolDic[PoolType.Monster].ReturnPool(this);
     }
     public void FlipSprite(float xInput)

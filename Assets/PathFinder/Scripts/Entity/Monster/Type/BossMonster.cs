@@ -48,8 +48,9 @@ public class BossMonster : Monster
     public override void Die()
     {
         if (isDead) return;
+        isDead = true;
         stateMachine.ChangeState(StateType.Die);
-        Instantiate(endPortalPrefab, transform.position, Quaternion.identity);
+        Instantiate(endPortalPrefab, bossPosduringGimmick, Quaternion.identity);
     }
 
     protected override void InitStart()

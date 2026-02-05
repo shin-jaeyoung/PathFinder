@@ -9,7 +9,7 @@ public abstract class Portal : MonoBehaviour , IInteractable
     [SerializeField]
     protected Transform arrival;
 
-
+    public Transform arrivalTarget => arrival;
 
     public void Interact(Player player)
     {

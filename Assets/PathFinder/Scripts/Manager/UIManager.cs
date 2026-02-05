@@ -14,7 +14,7 @@ public enum UIType
     HUD,
     Dialogue,
     Shop,
-
+    Portal,
 
 
     Off,
