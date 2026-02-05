@@ -108,7 +108,7 @@ public class InventorySlotUI : SlotUI ,IPointerEnterHandler,IPointerExitHandler
         if (GetSlotData().IsEmpty()) return;
 
         ui?.ExplainReomote(true);
-        ui?.UpdateExplain(GetSlotData());
+        ui?.UpdateExplain(GetSlotData(), transform.position);
     }
 
     public void OnPointerExit(PointerEventData eventData)

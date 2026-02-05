@@ -54,7 +54,7 @@ public class PlayerInventory
     }
     
 
-    public bool AddItem(Item item, int amount = 1)
+    public bool AddItem(Item item, int amount = 1,bool notice = true)
     {
 
         if (item is ExtraItem extra)
@@ -64,7 +64,7 @@ public class PlayerInventory
             {
                 existingSlot.count += amount;
                 OnInventoryChaneged?.Invoke();
-                GlobalEvents.Notify($"{item.Data.Name}을 획득했습니다");
+                if (notice) { GlobalEvents.Notify($"{item.Data.Name}을 획득했습니다"); }
                 return true;
             }
         }
@@ -74,7 +74,7 @@ public class PlayerInventory
             emptySlot.item = item;
             emptySlot.count = amount;
             OnInventoryChaneged?.Invoke();
-            GlobalEvents.Notify($"{item.Data.Name}을 획득했습니다");
+            if (notice) { GlobalEvents.Notify($"{item.Data.Name}을 획득했습니다"); }
             return true;
         }
 
@@ -114,7 +114,7 @@ public class PlayerInventory
 
         if (!equipments[index].IsEmpty())
         {
-            AddItem(equipments[index].item);
+            AddItem(equipments[index].item,1,false);
         }
         equipments[index].item = newEquipment;
         equipments[index].count = 1;
@@ -129,7 +129,7 @@ public class PlayerInventory
     {
         if (equipments[index].IsEmpty()) return false;
 
-        AddItem(equipments[index].item);
+        AddItem(equipments[index].item,1,false);
         equipments[index].Clear();
         OnInventoryChaneged?.Invoke();
         OnEquipmentChanged?.Invoke();

@@ -4,6 +4,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -104,7 +105,7 @@ public class InventoryUI : MonoBehaviour
 
 
     //만들고보니 이거 slot이 써야될것같은데 일단 보류
-    public void UpdateExplain(InventorySlot slot)
+    public void UpdateExplain(InventorySlot slot,Vector3 pos)
     {
         StringBuilder sb = new StringBuilder();
         sb.Append(slot.item.Data.Name)
@@ -120,8 +121,9 @@ public class InventoryUI : MonoBehaviour
             sb.Append(slot.item.Data.Description);
         }
         explain.text = sb.ToString();
+        explainPanel.transform.position = pos;
     }
-    public void UpdateExplain(EquipmentsSlot slot)
+    public void UpdateExplain(EquipmentsSlot slot,Vector3 pos)
     {
         StringBuilder sb = new StringBuilder();
         sb.Append(slot.item.Data.Name)
@@ -137,6 +139,7 @@ public class InventoryUI : MonoBehaviour
             sb.Append(slot.item.Data.Description);
         }
         explain.text = sb.ToString();
+        explainPanel.transform.position = pos;
     }
     public void ExplainReomote(bool onoff)
     {
