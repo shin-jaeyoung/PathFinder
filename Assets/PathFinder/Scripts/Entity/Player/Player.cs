@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : Entity
 {
@@ -110,7 +111,10 @@ public class Player : Entity
         isDead = false;
         statusSystem.Heal(statusSystem.FinalStat[PlayerStatType.MaxHp]);
         //마을씬으로 이동
+        SceneManager.LoadScene(SceneType.Town.ToString());
         //마을씬 리스폰 위치로 이동
+        inventory.ReduceGold((int)(inventory.Gold * 0.3f));
+        GlobalEvents.Notify("사망으로 골드의 30%를 잃었습니다", 4f);
         transform.position = Vector3.zero;//임시
         stateMachine.ChangeState(StateType.Idle);
     }
