@@ -58,7 +58,7 @@ public class InventoryUI : MonoBehaviour
 
             
             player.Inventory.OnGoldChanged += UpdateGold;
-
+            explainPanel.SetActive(false);
             RefreshAll();
         }
     }
@@ -70,6 +70,7 @@ public class InventoryUI : MonoBehaviour
     private void OnEnable()
     {
         if (player == null) return;
+        explainPanel.SetActive(false);
         RefreshAll();
     }
 

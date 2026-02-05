@@ -1621,8 +1621,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelValue: {fileID: 454111621371429506}
-  expImage: {fileID: 0}
-  hpImage: {fileID: 0}
+  expImage: {fileID: 6550747698131806327}
+  hpImage: {fileID: 930003941032328616}
   skillList:
   - {fileID: 4274007407584070008}
   - {fileID: 8144347846043995927}
