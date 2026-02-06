@@ -13,18 +13,19 @@ MonoBehaviour:
   m_Name: Shot_100
   m_EditorClassIdentifier: 
   data:
-    id: 0
-    skillName: 
-    prefab: {fileID: 0}
-    icon: {fileID: 0}
-    skillType: 0
-    description: 
-    cooltime: 0
-    damageMultiplier: 0
-    duration: 0
+    id: 100
+    skillName: "\uAC80\uD48D"
+    prefab: {fileID: 1715084321782570863, guid: b2cdd62623e61d145accef13a9293f12,
+      type: 3}
+    icon: {fileID: 21300000, guid: 8962318f92ed8cd4d994e32f33e9f098, type: 3}
+    skillType: 1
+    description: "\uAC80\uD48D\uC744 \uC55E\uC73C\uB85C \uBC1C\uC0AC\uD55C\uB2E4."
+    cooltime: 7
+    damageMultiplier: 1.4
+    duration: 4
     spriteRotation: 0
-  shotSpeed: 0
-  count: 0
+  shotSpeed: 1
+  count: 1
   shotDelay: 0
-  spawnDistance: 0
-  canPass: 0
+  spawnDistance: 0.5
+  canPass: 1
