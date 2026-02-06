@@ -9,19 +9,40 @@ public class Skill_Slash : Skill
     private float spawnDistance;
     [SerializeField]
     private float spawnDelay;
+    [Header("Multiple Slash Settings")]
+    [SerializeField] 
+    private List<int> otherSlashIDs;
+    [SerializeField]
+    private int spawnCount;
+    [SerializeField]
+    private float spawnDelta;
     public override void Execute(ISkillActive caster)
     {
-        Vector2 dir = caster.LookDir();
-        Vector2 spawnPos = caster.CasterTrasform();
-        caster.GetEntity().StartCoroutine(SpawnDelayCo(caster,dir,spawnPos));
+
+        caster.GetEntity().StartCoroutine(SpawnDelayCo(caster));
     }
-    public IEnumerator SpawnDelayCo(ISkillActive caster,Vector2 dir, Vector2 spawnPos)
+    private IEnumerator SpawnDeltaCo(ISkillActive caster)
+    {
+        WaitForSeconds wait = new WaitForSeconds(spawnDelta);
+        for (int i = 0; i < spawnCount; i++)
+        {
+            // 0번째는 기본 데이터 사용, 1번째부터는 리스트에서 순차적 사용
+            int currentID = (i == 0 || otherSlashIDs.Count == 0)
+                            ? data.ID
+                            : otherSlashIDs[(i - 1) % otherSlashIDs.Count];
+            Vector2 dir = caster.LookDir();
+            Vector2 spawnPos = caster.CasterTrasform();
+            Slash(caster, dir, spawnPos, currentID);
+            yield return wait;
+        }
+    }
+    public IEnumerator SpawnDelayCo(ISkillActive caster)
     {
         yield return new WaitForSeconds(spawnDelay);
-        Slash(caster,dir,spawnPos );
+        caster.GetEntity().StartCoroutine(SpawnDeltaCo(caster));
     }
 
-    public void Slash(ISkillActive caster,Vector2 dir, Vector2 spawnPos)
+    public void Slash(ISkillActive caster,Vector2 dir, Vector2 spawnPos, int projectileID)
     {
         if (caster == null || caster.GetEntity() == null) return;
 
@@ -29,7 +50,7 @@ public class Skill_Slash : Skill
 
 
         //풀링하자 나중에
-        GameObject go = PoolManager.instance.PoolDic[PoolType.Skill].Pop(data.ID, spawnPos, Quaternion.identity);
+        GameObject go = PoolManager.instance.PoolDic[PoolType.Skill].Pop(projectileID, spawnPos, Quaternion.identity);
         if (go.TryGetComponent(out Projectile pj))
         {
             pj.Init(caster.GetAttackPower() * data.DamageMultiplier, caster.GetEntity(), caster.GetEntityType());
