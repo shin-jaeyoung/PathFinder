@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             GetMouseTransform();
+            
             player.BasicAttack();
         }
         //스킬

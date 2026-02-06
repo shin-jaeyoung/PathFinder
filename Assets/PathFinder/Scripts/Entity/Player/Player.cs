@@ -122,6 +122,7 @@ public class Player : Entity
     {
         if(combatSystem.PerformSkill(skills.BasicAttack))
         {
+            FlipSprite(LookDir().x);
             stateMachine.ChangeState(StateType.Attack);
         }
     }
@@ -129,6 +130,7 @@ public class Player : Entity
     {
         if(combatSystem.PerformSkill(skills.Skillequip[index]))
         {
+            FlipSprite(LookDir().x);
             stateMachine.ChangeState(StateType.Attack);
         }
     }
