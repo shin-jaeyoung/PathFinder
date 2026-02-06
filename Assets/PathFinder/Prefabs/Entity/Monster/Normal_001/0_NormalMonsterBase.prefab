@@ -9,13 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 687164530013776951}
-  - component: {fileID: 8427772205304001868}
   - component: {fileID: 7072744502639607361}
   - component: {fileID: 2359791063972681615}
+  - component: {fileID: 8427772205304001868}
+  - component: {fileID: 788108155604046655}
   - component: {fileID: 3311634576480251582}
   - component: {fileID: 2630864039371971072}
   m_Layer: 7
-  m_Name: NormalMonsterBase
+  m_Name: 0_NormalMonsterBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,6 +37,69 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7072744502639607361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7271114388976837514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 721f1c858d11b2048b33d265ce6ff37f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curHp: 0
+  data:
+    id: 1
+    mName: TestMon
+    type: 0
+    maxHp: 10
+    atk: 10
+    defence: 5
+    speed: 1
+  rewardData:
+    dropItems: []
+    activeSkill: {fileID: 0}
+    passiveSkill: {fileID: 0}
+    gold: 0
+    exp: 0
+  basicAttack:
+    skill: {fileID: 11400000, guid: 78fa93b5f6464904082d7b29574d60d8, type: 2}
+    isCooltime: 0
+    currentCooltime: 0
+  skills: []
+  detection: {fileID: 2359791063972681615}
+  isBerserkerMode: 0
+--- !u!114 &2359791063972681615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7271114388976837514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b204710833d7ea47ae71ec00c47c6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectRange: 5
+  attackRange: 1.5
+  trackRange: 7
+  attackCooltime: 1.5
+  moveRange: 15
+  rayDistance: 1.5
+  detectMask:
+    serializedVersion: 2
+    m_Bits: 320
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 64
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 256
+  target: {fileID: 0}
+  viewLostThreshold: 3
 --- !u!212 &8427772205304001868
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -89,75 +153,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7072744502639607361
-MonoBehaviour:
+--- !u!95 &788108155604046655
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7271114388976837514}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 721f1c858d11b2048b33d265ce6ff37f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  curHp: 0
-  data:
-    id: 1
-    mName: TestMon
-    type: 0
-    maxHp: 50
-    atk: 10
-    defence: 5
-    speed: 1
-  rewardData:
-    dropItems:
-    - item: {fileID: 11400000, guid: ab1209aceb833c74caec1764a21f50cb, type: 2}
-      dropRate: 0
-    - item: {fileID: 11400000, guid: e5c0c20a6489223458944b218f1c6e17, type: 2}
-      dropRate: 100
-    - item: {fileID: 11400000, guid: d2f31d577992e8343a0e333eb5a037f9, type: 2}
-      dropRate: 50
-    activeSkill: {fileID: 0}
-    passiveSkill: {fileID: 0}
-    gold: 100
-    exp: 50
-  basicAttack:
-    skill: {fileID: 11400000, guid: 78fa93b5f6464904082d7b29574d60d8, type: 2}
-    isCooltime: 0
-    currentCooltime: 0
-  skills: []
-  detection: {fileID: 2359791063972681615}
-  isBerserkerMode: 0
---- !u!114 &2359791063972681615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7271114388976837514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b204710833d7ea47ae71ec00c47c6ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectRange: 5
-  attackRange: 1.5
-  trackRange: 7
-  attackCooltime: 1.5
-  moveRange: 15
-  rayDistance: 1.5
-  detectMask:
-    serializedVersion: 2
-    m_Bits: 320
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 64
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 256
-  target: {fileID: 0}
-  viewLostThreshold: 3
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!70 &3311634576480251582
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

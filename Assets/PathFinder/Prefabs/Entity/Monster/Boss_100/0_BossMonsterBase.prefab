@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3311634576480251582}
   - component: {fileID: 2630864039371971072}
   m_Layer: 7
-  m_Name: BossMonsterBase
+  m_Name: 0_BossMonsterBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -75,6 +75,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
+      propertyPath: data.atk
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: data.mName
+      value: "\uCD5C\uC885\uBCF4\uC2A4"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: data.maxHp
+      value: 8000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: data.speed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: data.defence
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
       propertyPath: endPortalPrefab
       value: 
       objectReference: {fileID: 5075027120058559211, guid: 106ef68d9c6b5534d9282f498a7389db,
@@ -82,7 +107,7 @@ PrefabInstance:
     - target: {fileID: 7271114388976837514, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
       propertyPath: m_Name
-      value: BossMonster
+      value: BossMonster_100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
