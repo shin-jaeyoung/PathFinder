@@ -80,6 +80,13 @@ public class MonsterSpawner : MonoBehaviour
         }
         returnCoroutine = null;
     }
+    private void OnDestroy()
+    {
+        if(isSpawn)
+        {
+            ReturnPool();
+        }
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
