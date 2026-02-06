@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8878051851737106572
+--- !u!1001 &3507128575975598537
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,63 +11,7 @@ PrefabInstance:
     - target: {fileID: 2839210332630857382, guid: 2474177baad37cf48a6b00d8adbba5c7,
         type: 3}
       propertyPath: m_Name
-      value: testMagic_003
-      objectReference: {fileID: 0}
-    - target: {fileID: 3519990233136014668, guid: 2474177baad37cf48a6b00d8adbba5c7,
-        type: 3}
-      propertyPath: skillID
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4690908989947376594, guid: 2474177baad37cf48a6b00d8adbba5c7,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 2.46875
-      objectReference: {fileID: 0}
-    - target: {fileID: 4690908989947376594, guid: 2474177baad37cf48a6b00d8adbba5c7,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 1.96875
-      objectReference: {fileID: 0}
-    - target: {fileID: 4690908989947376594, guid: 2474177baad37cf48a6b00d8adbba5c7,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300122, guid: c3a40e1c46727b94e959990527f8e7fa,
-        type: 3}
-    - target: {fileID: 4690908989947376594, guid: 2474177baad37cf48a6b00d8adbba5c7,
-        type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5401720615482804368, guid: 2474177baad37cf48a6b00d8adbba5c7,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5401720615482804368, guid: 2474177baad37cf48a6b00d8adbba5c7,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 2.46875
-      objectReference: {fileID: 0}
-    - target: {fileID: 5401720615482804368, guid: 2474177baad37cf48a6b00d8adbba5c7,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 1.96875
-      objectReference: {fileID: 0}
-    - target: {fileID: 5401720615482804368, guid: 2474177baad37cf48a6b00d8adbba5c7,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 2.46875
-      objectReference: {fileID: 0}
-    - target: {fileID: 5401720615482804368, guid: 2474177baad37cf48a6b00d8adbba5c7,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1.96875
-      objectReference: {fileID: 0}
-    - target: {fileID: 5401720615482804368, guid: 2474177baad37cf48a6b00d8adbba5c7,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
-      value: 0.5
+      value: SkillBase
       objectReference: {fileID: 0}
     - target: {fileID: 7121306837472325211, guid: 2474177baad37cf48a6b00d8adbba5c7,
         type: 3}
@@ -147,12 +91,12 @@ PrefabInstance:
     - target: {fileID: 7121306837472325211, guid: 2474177baad37cf48a6b00d8adbba5c7,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.22410527
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7121306837472325211, guid: 2474177baad37cf48a6b00d8adbba5c7,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 3.3231974
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7121306837472325211, guid: 2474177baad37cf48a6b00d8adbba5c7,
         type: 3}

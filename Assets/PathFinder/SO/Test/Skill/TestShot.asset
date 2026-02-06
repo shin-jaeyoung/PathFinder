@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestShot
   m_EditorClassIdentifier: 
   data:
-    id: 2
+    id: 1002
     skillName: testShot
     prefab: {fileID: 1098043156858512034, guid: 304fcf6ca036b2446b9f1536f6e9f7c9,
       type: 3}
@@ -28,3 +28,4 @@ MonoBehaviour:
   count: 3
   shotDelay: 0.2
   spawnDistance: 0.3
+  canPass: 0

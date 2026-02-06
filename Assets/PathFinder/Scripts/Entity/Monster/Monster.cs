@@ -29,7 +29,7 @@ public abstract class Monster : Entity , IPoolable
 
     protected Rigidbody2D rb;
     protected StateMachine<Monster> stateMachine;
-
+    private Animator animator;
     [SerializeField]
     protected bool isBerserkerMode;
     protected int useSkillIndex;
@@ -65,6 +65,8 @@ public abstract class Monster : Entity , IPoolable
     public List<SkillSlot> Skills => skills;
     public RewardData RewardData => rewardData;
     public bool IsDead => isDead;
+
+    public Animator Animator => animator;
     //deligate
     public event Action OnChangeHp;
 
@@ -78,6 +80,7 @@ public abstract class Monster : Entity , IPoolable
     {
         detection = GetComponent<Detection>();
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         combatSystem.Init(this);
         stateMachine = new StateMachine<Monster>(this);
         curHp = data.MaxHp;

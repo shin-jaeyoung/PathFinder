@@ -11,11 +11,16 @@ PrefabInstance:
     - target: {fileID: 2839210332630857382, guid: 2474177baad37cf48a6b00d8adbba5c7,
         type: 3}
       propertyPath: m_Name
-      value: testSlash_001
+      value: Slash_001
       objectReference: {fileID: 0}
     - target: {fileID: 3519990233136014668, guid: 2474177baad37cf48a6b00d8adbba5c7,
         type: 3}
       propertyPath: skillID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519990233136014668, guid: 2474177baad37cf48a6b00d8adbba5c7,
+        type: 3}
+      propertyPath: projectileID
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4690908989947376594, guid: 2474177baad37cf48a6b00d8adbba5c7,
