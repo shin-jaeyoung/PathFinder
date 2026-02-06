@@ -13,6 +13,8 @@ public class Skill_Shot : Skill
     private float shotDelay;
     [SerializeField]
     private float spawnDistance;
+    [SerializeField]
+    private bool canPass;
     public override void Execute(ISkillActive caster)
     {
         Vector2 fixedDir = caster.LookDir();
@@ -43,7 +45,7 @@ public class Skill_Shot : Skill
         GameObject go = PoolManager.instance.PoolDic[PoolType.Skill].Pop(data.ID, spawnPos, Quaternion.identity);
         if (go.TryGetComponent(out Projectile pj))
         {
-            pj.Init(caster.GetAttackPower() * data.DamageMultiplier, caster.GetEntity(), caster.GetEntityType(),true);
+            pj.Init(caster.GetAttackPower() * data.DamageMultiplier, caster.GetEntity(), caster.GetEntityType(), canPass);
             Debug.Log(caster.GetAttackPower());
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             pj.rb.rotation = angle + data.SpriteRotation;

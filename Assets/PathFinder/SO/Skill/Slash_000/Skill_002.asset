@@ -14,17 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     id: 2
-    skillName: 
-    prefab: {fileID: 0}
-    icon: {fileID: 0}
+    skillName: "\uC774\uC5F0\uACA9"
+    prefab: {fileID: 2839210332630857382, guid: c5a385bd949af2d47a7a43f94138a635,
+      type: 3}
+    icon: {fileID: 21300000, guid: f46c6b8204a82b34daf3502ea2779991, type: 3}
     skillType: 0
-    description: 
-    cooltime: 0
-    damageMultiplier: 0
-    duration: 0
-    spriteRotation: 0
-  spawnDistance: 0
-  spawnDelay: 0
-  otherSlashIDs: 
-  spawnCount: 0
-  spawnDelta: 0
+    description: "\uBD88 2\uC5F0\uACA9"
+    cooltime: 5
+    damageMultiplier: 0.6
+    duration: 0.7
+    spriteRotation: 135
+  spawnDistance: 0.3
+  spawnDelay: 0.2
+  otherSlashIDs: 03000000
+  spawnCount: 2
+  spawnDelta: 0.3

@@ -30,12 +30,12 @@ public class Projectile : MonoBehaviour , IPoolable
             rb = GetComponent<Rigidbody2D>();
         }
     }
-    public void Init(float damage, Entity attacker, EntityType attackerType, bool isShot = false)
+    public void Init(float damage, Entity attacker, EntityType attackerType, bool canPass = true)
     {
         this.damage = damage;
         this.attacker = attacker;
         this.attackerType = attackerType;
-        isHavetoDisapear = isShot;
+        isHavetoDisapear = !canPass;
         if (rb == null)
         {
             rb = GetComponent<Rigidbody2D>();
