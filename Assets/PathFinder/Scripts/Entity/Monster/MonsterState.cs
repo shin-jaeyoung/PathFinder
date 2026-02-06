@@ -8,7 +8,7 @@ public class MonsterIdleState : MonsterState
 {
     public override void Enter()
     {
-        //Debug.Log("monster Idle");
+        
     }
     public override void Update()
     {
@@ -31,7 +31,7 @@ public class MonsterMoveState : MonsterState
 {
     public override void Enter()
     {
-        //Debug.Log("monster Move");
+        owner.Animator.SetBool("IsMove", true);
     }
     public override void Update()
     {
@@ -87,6 +87,7 @@ public class MonsterMoveState : MonsterState
     public override void Exit()
     {
         owner.Rb.velocity = Vector2.zero;
+        owner.Animator.SetBool("IsMove", false);
     }
 }
 public class MonsterSearchState : MonsterState
@@ -125,7 +126,7 @@ public class MonsterGobackState : MonsterState
 {
     public override void Enter()
     {
-        //Debug.Log("monster Goback");
+        owner.Animator.SetBool("IsMove", true);
     }
     public override void Update()
     {
@@ -150,6 +151,7 @@ public class MonsterGobackState : MonsterState
     public override void Exit()
     {
         owner.Rb.velocity = Vector2.zero;
+        owner.Animator.SetBool("IsMove", false);
     }
 }
 public class MonsterHitState : MonsterState
@@ -158,6 +160,7 @@ public class MonsterHitState : MonsterState
     public override void Enter()
     {
         //애니메이션 연출만 하게하고
+        owner.Animator.SetTrigger("Hit");
         stateMachine.ChangeState(StateType.Idle);
     }
     public override void Update()
@@ -183,6 +186,8 @@ public class MonsterAttackState : MonsterState
         Debug.Log("몬스터 공격");
         isAttack = true;
         //발동
+        //owner.Animator.SetTrigger($"Attack{attackanimnum}";
+        owner.Animator.SetTrigger("Attack");
         owner.Active(0);
         //애니메이션 종료체크로직이후 isAttack = false; 1f대신 애니메이션 길이가 들어가야함
         attackRoutine = owner.StartCoroutine(WaitAnimCo(1.5f, AttackFalse));
@@ -220,8 +225,9 @@ public class MonsterDieState : MonsterState
     {
         owner.Rb.velocity = Vector2.zero;
         //애니메이션 작동 + action에 초기화부터 리턴풀까지 넣어주기
+        owner.Animator.SetBool("IsDead", true);
         //리턴풀? + 애니메이션 끝나면 idle상태로 만들어주기
-        owner.StartCoroutine(WaitAnimCo(2f, ReturnPool));
+        owner.StartCoroutine(WaitAnimCo(1.5f, ReturnPool));
     }
     public override void Update()
     {
@@ -233,6 +239,7 @@ public class MonsterDieState : MonsterState
     }
     public override void Exit()
     {
+        owner.Animator.SetBool("IsDead", false);
     }
     public void ReturnPool()
     {

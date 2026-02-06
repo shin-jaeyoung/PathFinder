@@ -39,12 +39,17 @@ public class PoolManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            Init();
         }
         else
         {
             Destroy(gameObject);
         }
-        foreach(var pool in pools)
+        
+    }
+    private void Init()
+    {
+        foreach (var pool in pools)
         {
             if (pool == null) continue;
             if (!poolDic.ContainsKey(pool.type))
