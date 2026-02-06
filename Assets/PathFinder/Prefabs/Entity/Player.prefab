@@ -6005,7 +6005,7 @@ MonoBehaviour:
   helmet: {fileID: 11400000, guid: 15452eff3846b7d4a8763e4081b246d5, type: 2}
   armor: {fileID: 11400000, guid: ce75807f8b836e94d9f3ab307c875283, type: 2}
   shoes: {fileID: 11400000, guid: f78c028919d5f9642be15ade4fec135f, type: 2}
-  testSkill: {fileID: 11400000, guid: ccc8d3608796998478839f8c02a80378, type: 2}
+  testSkill: {fileID: 11400000, guid: 36b0fdaa471ea7a4dacfeb7e48e175d5, type: 2}
   testSwap: {fileID: 11400000, guid: 9a2236d244fca844684137447e2f0f57, type: 2}
   extraItem: {fileID: 11400000, guid: e2e1d54367eefa94e974bf7001020193, type: 2}
   testDash: {fileID: 11400000, guid: 65d712f31a4c64044b21e5ff6d33e5d9, type: 2}

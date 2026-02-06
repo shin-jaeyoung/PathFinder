@@ -26,3 +26,6 @@ MonoBehaviour:
     spriteRotation: 0
   spawnDistance: 0.5
   spawnDelay: 0.2
+  otherSlashIDs: 
+  spawnCount: 1
+  spawnDelta: 0

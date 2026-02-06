@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour , IPoolable
 {
-    [Header("Skill ID")]
+    [Header("Projectile ID")]
     [SerializeField]
-    private int skillID;
+    private int projectileID;
     public LayerMask obstacle;
     public Rigidbody2D rb;
     private EntityType attackerType;
@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour , IPoolable
 
     public int GetID()
     {
-        return skillID;
+        return projectileID;
     }
     private void Awake()
     {
