@@ -7,13 +7,13 @@ using UnityEngine;
 public class PlayerLevelSystem 
 {
     [SerializeField]
-    private int level = 1;
+    private int level;
     [SerializeField]
-    private int curExp = 0;
+    private int curExp;
     [SerializeField]
-    private int maxExp = 100;
+    private int maxExp;
     [SerializeField]
-    private int levelPoint = 0;
+    private int levelPoint;
     [Header("Level Skill List")]
     [SerializeField]
     private List<Skill> levelSkillList;
@@ -27,6 +27,10 @@ public class PlayerLevelSystem
 
     public void Init()
     {
+        level = 1;
+        curExp = 0;
+        maxExp = 0;
+        levelPoint = 0;
         UpdateMaxExp();
     }
     public void UpdateMaxExp()
