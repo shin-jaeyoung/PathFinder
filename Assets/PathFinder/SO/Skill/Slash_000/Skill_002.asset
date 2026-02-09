@@ -21,7 +21,7 @@ MonoBehaviour:
     skillType: 0
     description: "\uBD88 2\uC5F0\uACA9"
     cooltime: 5
-    damageMultiplier: 0.6
+    damageMultiplier: 0.7
     duration: 0.7
     spriteRotation: 135
   spawnDistance: 0.3

@@ -62,13 +62,18 @@ public class HUDUI : MonoBehaviour
     {
         if (GameManager.instance.Player == null) return;
         levelValue.text = player.LevelSystem.Level.ToString();
-        expImage.fillAmount = player.LevelSystem.CurExp / player.LevelSystem.MaxExp;
+        Debug.Log(player.LevelSystem.CurExp );
+        Debug.Log( player.LevelSystem.MaxExp);
+        float curHp = player.LevelSystem.CurExp;
+        float maxHp = player.LevelSystem.MaxExp;
+        float ratio = curHp / maxHp;
+        expImage.fillAmount = ratio;
     }
 
     public void UpdateHp()
     {
         if (GameManager.instance.Player == null) return;
-        hpImage.fillAmount = player.StatusSystem.Stat[PlayerStatType.CurHp] / player.StatusSystem.Stat[PlayerStatType.MaxHp];
+        hpImage.fillAmount = player.StatusSystem.Stat[PlayerStatType.CurHp] / player.StatusSystem.FinalStat[PlayerStatType.MaxHp];
     }
 
     public void UpdateSkillUI()

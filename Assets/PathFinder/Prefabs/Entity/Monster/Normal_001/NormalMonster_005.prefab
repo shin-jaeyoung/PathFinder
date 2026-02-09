@@ -10,13 +10,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 687164530013776951, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 687164530013776951, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 687164530013776951, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.8500984
       objectReference: {fileID: 0}
     - target: {fileID: 687164530013776951, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.3324542
       objectReference: {fileID: 0}
     - target: {fileID: 687164530013776951, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
@@ -64,6 +74,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 22100000, guid: 20bf1631b28430f4aaf3b34f1c6c9674,
         type: 2}
+    - target: {fileID: 2359791063972681615, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: offset.y
+      value: -0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3311634576480251582, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3311634576480251582, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3311634576480251582, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: data.id
@@ -108,7 +138,7 @@ PrefabInstance:
         type: 3}
       propertyPath: rewardData.dropItems.Array.data[0].item
       value: 
-      objectReference: {fileID: 11400000, guid: 5565eb96b71e1954f8856cd97648599b,
+      objectReference: {fileID: 11400000, guid: bf55fad5a4b33ed49821223eb322286b,
         type: 2}
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}

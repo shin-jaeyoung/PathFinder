@@ -4,13 +4,18 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Magic", menuName = "Skill/SkillType/Magic")]
 public class Skill_Magic : Skill
 {
+    [Header("Spawn")]
+    [SerializeField]
+    private int spawnCount;
     [SerializeField]
     private float spawnDelay;
+    [SerializeField]
+    private float spawnTime;
     [Header("Explosion")]
     [SerializeField]
     private bool isExplosion;
     [SerializeField]
-    private GameObject explosionEffectPrefab;
+    private int explosionID;
     [SerializeField]
     private float damageMultiplier;
     public override void Execute(ISkillActive caster)
@@ -21,16 +26,19 @@ public class Skill_Magic : Skill
     }
     private IEnumerator SpawnDelayCo(ISkillActive caster, Vector2 spawnPos)
     {
-        yield return new WaitForSeconds(spawnDelay);
-        Magic(caster, spawnPos);
+        for(int i = 0; i < spawnCount; i++)
+        {
+            yield return new WaitForSeconds(spawnTime);
+            Magic(caster, spawnPos,data.ID);
+        }
     }
-    public void Magic(ISkillActive caster , Vector2 spawnPos)
+    public void Magic(ISkillActive caster , Vector2 spawnPos , int originID)
     {
         if (caster == null || caster.GetEntity() == null) return;
 
 
         //풀링해야할곳
-        GameObject go = PoolManager.instance.PoolDic[PoolType.Skill].Pop(data.ID, spawnPos, Quaternion.identity);
+        GameObject go = PoolManager.instance.PoolDic[PoolType.Skill].Pop(originID, spawnPos, Quaternion.identity);
         if (go.TryGetComponent(out Projectile pj))
         {
             pj.Init(caster.GetAttackPower() * data.DamageMultiplier, caster.GetEntity(), caster.GetEntityType());
@@ -44,21 +52,21 @@ public class Skill_Magic : Skill
     private IEnumerator ExplosionDelayCo(ISkillActive caster, Vector2 spawnPos)
     {
         yield return new WaitForSeconds(data.Duration);
-        Explosion(caster, spawnPos);
+        Explosion(caster, spawnPos, explosionID);
     }
-    //이거는 풀링 못했음 ㅋㅋ
-    public void Explosion(ISkillActive caster,Vector2 spawnPos)
+    
+    public void Explosion(ISkillActive caster,Vector2 spawnPos, int explosionID)
     {
         if (caster == null || caster.GetEntity() == null) return;
 
         
 
-        GameObject go = Instantiate(explosionEffectPrefab, spawnPos, Quaternion.identity);
+        GameObject go = PoolManager.instance.PoolDic[PoolType.Skill].Pop(explosionID, spawnPos, Quaternion.identity);
         if (go.TryGetComponent(out Projectile pj))
         {
             pj.Init(caster.GetAttackPower() * damageMultiplier, caster.GetEntity(), caster.GetEntityType());
 
-            pj.StartCoroutine(SkillDestroyCo(go));
+            pj.StartCoroutine(SkillReturnCo(pj));
         }
     }
 }

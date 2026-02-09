@@ -172,4 +172,21 @@ public class PlayerStatusSystem
     {
         AddStat(PlayerStatType.CurHp, (int)value);
     }
+    public int FinalDamage()
+    {
+        int finalDamage = 0;
+        float power = finalStat[PlayerStatType.Power];
+        float criRate = finalStat[PlayerStatType.CriRate];
+        float cridamage = finalStat[PlayerStatType.CriDamage];
+
+        int randomNum = UnityEngine.Random.Range(0, 100);
+        if( randomNum <criRate)
+        {
+            Debug.Log("크리티컬");
+            power *= 1 + (cridamage + 40) / 100;
+        }
+        finalDamage = Mathf.RoundToInt(power);
+
+        return finalDamage;
+    }
 }

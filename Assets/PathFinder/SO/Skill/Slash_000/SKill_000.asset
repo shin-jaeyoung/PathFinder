@@ -22,7 +22,7 @@ MonoBehaviour:
     description: "\uAE30\uBCF8\uACF5\uACA9"
     cooltime: 1
     damageMultiplier: 0.8
-    duration: 0.5
+    duration: 0.3
     spriteRotation: 0
   spawnDistance: 0.5
   spawnDelay: 0.2

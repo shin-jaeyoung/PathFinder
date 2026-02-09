@@ -24,7 +24,7 @@ public abstract class BasePool<T> : Pool where T : Component,IPoolable
                 prefabDic.Add(id, item);
                 poolDic.Add(id, new Queue<GameObject>());
 
-                CreateNewObject(id);
+                
             }
             else
             {
@@ -38,7 +38,6 @@ public abstract class BasePool<T> : Pool where T : Component,IPoolable
     {
         GameObject obj = Instantiate(prefabDic[id].gameObject, PoolManager.instance.PoolParentDic[type].transform);
         obj.SetActive(false);
-        poolDic[id].Enqueue(obj);
         return obj;
     }
 
@@ -47,10 +46,9 @@ public abstract class BasePool<T> : Pool where T : Component,IPoolable
         if (!prefabDic.ContainsKey(id)) return null;
 
         GameObject obj = (poolDic[id].Count > 0) ? poolDic[id].Dequeue() :
-                         Instantiate(prefabDic[id].gameObject);
+                         CreateNewObject(id);
 
         obj.transform.SetPositionAndRotation(position, rotation);
-        obj.transform.SetParent(PoolManager.instance.PoolParentDic[type].transform);
         obj.SetActive(true);
         return obj;
     }

@@ -5,6 +5,9 @@ using UnityEngine.EventSystems;
 
 public class Detection : MonoBehaviour
 {
+    [Header("Offset")]
+    [SerializeField]
+    private Vector3 offset;
     [Header("Perform Value")]
     [SerializeField] 
     private float detectRange;
@@ -67,8 +70,12 @@ public class Detection : MonoBehaviour
     }
     private void OnEnable()
     {
-        originVec = transform.position;
+        InitPosition(transform.position + offset);
         StartCoroutine(DectCo());
+    }
+    public void InitPosition(Vector2 pos)
+    {
+        originVec = pos;
     }
     public void Detect()
     {
@@ -80,9 +87,9 @@ public class Detection : MonoBehaviour
             return;
         }
 
-        Vector2 dir = (hit.transform.position - transform.position).normalized;
-        float distance = Vector2.Distance(hit.transform.position, transform.position);
-        RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, dir, distance, detectMask);
+        Vector2 dir = (hit.transform.position - (transform.position + offset)).normalized;
+        float distance = Vector2.Distance(hit.transform.position, (transform.position + offset));
+        RaycastHit2D raycastHit = Physics2D.Raycast((transform.position + offset), dir, distance, detectMask);
 
         if (raycastHit.collider != null && ((1 << raycastHit.collider.gameObject.layer) & targetMask) != 0)
         {
@@ -121,8 +128,8 @@ public class Detection : MonoBehaviour
             return;
         }
 
-        float distToTarget = Vector2.Distance(transform.position, target.position);
-        float distFromOrigin = Vector2.Distance(originVec, transform.position);
+        float distToTarget = Vector2.Distance((transform.position + offset), target.position);
+        float distFromOrigin = Vector2.Distance(originVec, (transform.position + offset));
 
         // 추적 거리나 이동 범위를 벗어나면 리셋
         if (distToTarget > trackRange || distFromOrigin > moveRange)
@@ -147,7 +154,7 @@ public class Detection : MonoBehaviour
         if (!isTargetVisible) return false;
 
         StartCoroutine(AttackCooltimeCo());
-        return Vector2.Distance(transform.position, target.position) <= attackRange;
+        return Vector2.Distance((transform.position + offset), target.position) <= attackRange;
     }
 
     public IEnumerator AttackCooltimeCo()
@@ -166,10 +173,10 @@ public class Detection : MonoBehaviour
             return;
         }
 
-        Vector2 dir = (target.position - (Vector3)transform.position).normalized;
+        Vector2 dir = (target.position - (transform.position + offset)).normalized;
         float dist = Vector2.Distance(transform.position, target.position);
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, dist, obstacleMask);
+        RaycastHit2D hit = Physics2D.Raycast((transform.position + offset), dir, dist, obstacleMask);
 
         if (hit.collider == null)
         {
@@ -184,7 +191,7 @@ public class Detection : MonoBehaviour
 
     public Vector2 GetAdjustedDirection(Vector3 targetPos)
     {
-        Vector2 currentPos = transform.position;
+        Vector2 currentPos = (transform.position + offset);
         Vector2 targetDir = ((Vector2)targetPos - currentPos).normalized;
 
         if (isAvoidanceMode)
@@ -290,18 +297,18 @@ public class Detection : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, detectRange);
+        Gizmos.DrawWireSphere((transform.position + offset), detectRange);
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.DrawWireSphere((transform.position + offset), attackRange);
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, trackRange);
+        Gizmos.DrawWireSphere((transform.position + offset), trackRange);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(originVec, moveRange);
 
         if (target != null)
         {
             Gizmos.color = isTargetVisible ? Color.green : Color.red;
-            Gizmos.DrawLine(transform.position, target.position);
+            Gizmos.DrawLine((transform.position + offset), target.position);
 
             if (!isTargetVisible)
             {

@@ -49,7 +49,7 @@ public class TestScript : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            player.Inventory.AddItem(extraItem);
+            player.LevelSystem.AddExp(50);
         }
         if(Input.GetKeyDown(KeyCode.Alpha8))
         {

@@ -146,8 +146,8 @@ public class Player : Entity
     public override void Hit(DamageInfo info)
     {
         if (IsInvincible) return;
-        float finalDamage = combatSystem.Hit(info.damage, statusSystem.Stat[PlayerStatType.Armor]);
-        statusSystem.ReduceStat(PlayerStatType.CurHp, (int)finalDamage);
+        int finalDamage = combatSystem.Hit(info.damage, statusSystem.Stat[PlayerStatType.Armor]);
+        statusSystem.TakeDamage(finalDamage);
         GlobalEvents.PrintDamage(finalDamage.ToString(), transform);
         if (!IsDead)
         {
@@ -160,7 +160,8 @@ public class Player : Entity
         if (IsInvincible) return;
         float finalDamage = statusSystem.FinalStat[PlayerStatType.MaxHp] * percent / 100;
 
-        statusSystem.ReduceStat(PlayerStatType.CurHp, (int)finalDamage);
+        int finalDamageToint = Mathf.CeilToInt(finalDamage);
+        statusSystem.TakeDamage(finalDamageToint);
         GlobalEvents.PrintDamage(finalDamage.ToString(), transform);
         if (!IsDead)
         {
@@ -169,7 +170,7 @@ public class Player : Entity
     }
     public override float GetAttackPower()
     {
-        return statusSystem.FinalStat[PlayerStatType.Power];
+        return statusSystem.FinalDamage();
     }
     public override EntityType GetEntityType()
     {

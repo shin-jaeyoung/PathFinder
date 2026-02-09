@@ -73,35 +73,39 @@ public class PlayerSkillInventory
     public bool AddPassiveSkill(PassiveSkill passiveSkill)
     {
         PassiveSlot emptySlot = passiveSkills.Find(s => s.IsEmpty());
-        if(emptySlot !=null)
+        if (emptySlot != null)
         {
             emptySlot.passiveSkill = passiveSkill;
             OnChangedPassiveSkill.Invoke();
-            GlobalEvents.Notify($"패시브 스킬 {passiveSkill.Data.Name}을 획득했습니다",4f);
+            GlobalEvents.Notify($"패시브 스킬 {passiveSkill.Data.Name}을 획득했습니다", 4f);
             return true;
         }
         return false;
     }
     public bool AddActiveSkill(Skill skill)
     {
-        SkillSlot slot = activeSkills.Find(s => !s.IsEmpty());
-        if(slot != null)
+
+        if (CheckDuplication(skill))
         {
-            if (CheckDuplication(slot)) return false;
+            Debug.Log("중복스킬입니다");
+            return false;
         }
+
         SkillSlot emptySlot = activeSkills.Find(s => s.IsEmpty());
         if (emptySlot != null)
         {
             emptySlot.skill = skill;
             OnChangedActiveSkill?.Invoke();
-            GlobalEvents.Notify($"액티브 스킬 {skill.Data.SkillName}을 획득했습니다",4f);
+            GlobalEvents.Notify($"액티브 스킬 {skill.Data.SkillName}을 획득했습니다", 4f);
             return true;
         }
+
+        Debug.Log("스킬창에 빈 슬롯이 없습니다");
         return false;
     }
     public bool AddDashSkill(Skill skill)
     {
-        if(dashSkill.IsEmpty())
+        if (dashSkill.IsEmpty())
         {
             dashSkill.skill = skill;
             GlobalEvents.Notify($"대쉬 스킬을 획득했습니다", 4f);
@@ -113,7 +117,7 @@ public class PlayerSkillInventory
     }
     public bool CheckDashSkill()
     {
-        if(dashSkill.IsEmpty())
+        if (dashSkill.IsEmpty())
         {
             return false;
         }
@@ -125,7 +129,7 @@ public class PlayerSkillInventory
         {
             activeSkills[i].Clear();
         }
-        for (int i =0; i<passiveCapacity; i++)
+        for (int i = 0; i < passiveCapacity; i++)
         {
             passiveSkills[i].Clear();
         }
@@ -135,20 +139,36 @@ public class PlayerSkillInventory
     public void RegistActiveSkill(SkillSlot slot, int index)
     {
         if (slot.IsEmpty()) return;
-        if (CheckDuplication(slot)) return;
+        if (CheckDuplicationEquip(slot.skill))
+        {
+            Debug.Log("중복스킬등록 불가");
+            return;
+        }
         skillequip[index].Clear();
         skillequip[index].skill = slot.skill;
         OnChangedActiveSkill?.Invoke();
     }
-    public bool CheckDuplication(SkillSlot slot)
+    public bool CheckDuplication(Skill skill)
     {
-        if (slot.skill == null) return true;
+        bool check = false;
+        for (int i = 0; i < activeSkills.Count; i++)
+        {
+            if (activeSkills[i].skill == skill)
+            {
+                check = true;
+                break;
+            }
+        }
+        return check;
+    }
+    public bool CheckDuplicationEquip(Skill skill)
+    {
         bool check = false;
         for (int i = 0; i < skillequip.Count; i++)
         {
-            if (skillequip[i].skill == slot.skill)
+            if (skillequip[i].skill == skill)
             {
-                check = true; 
+                check = true;
                 break;
             }
         }
@@ -166,7 +186,7 @@ public class PlayerSkillInventory
         addStatus.Clear();
         foreach (var s in passiveSkills)
         {
-            foreach ( var stat in s.passiveSkill.PassiveEffect)
+            foreach (var stat in s.passiveSkill.PassiveEffect)
             {
                 if (addStatus.ContainsKey(stat.Type))
                 {
@@ -178,6 +198,6 @@ public class PlayerSkillInventory
                 }
             }
         }
-        
+
     }
 }

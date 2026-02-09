@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ee8a5cbef6b5246b0fa35422664bf8, type: 3}
+  m_Name: Skill_004
+  m_EditorClassIdentifier: 
+  data:
+    id: 5
+    skillName: "\uD560\uD034\uAE30"
+    prefab: {fileID: 1715084321782570863, guid: 4feddc373785d9a458bfc495bb9deddc,
+      type: 3}
+    icon: {fileID: 21300000, guid: 64bd6fcd22dcdb1488b50b0c02849b95, type: 3}
+    skillType: 0
+    description: "\uC8FC\uC704\uB97C 4\uBC88 \uD560\uD034\uB4EF \uBCA4\uB2E4"
+    cooltime: 10
+    damageMultiplier: 0.45
+    duration: 0.3
+    spriteRotation: 0
+  spawnDistance: 0
+  spawnDelay: 0
+  otherSlashIDs: 060000000500000006000000
+  spawnCount: 4
+  spawnDelta: 0.2

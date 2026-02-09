@@ -10,13 +10,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 687164530013776951, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 687164530013776951, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 687164530013776951, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.0587754
       objectReference: {fileID: 0}
     - target: {fileID: 687164530013776951, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.6937224
       objectReference: {fileID: 0}
     - target: {fileID: 687164530013776951, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
@@ -57,6 +67,32 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 788108155604046655, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: e12ba9f074e320b4ab72133b5ef0149b,
+        type: 2}
+    - target: {fileID: 2359791063972681615, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: offset.y
+      value: -0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3311634576480251582, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3311634576480251582, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3311634576480251582, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
@@ -101,24 +137,52 @@ PrefabInstance:
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: rewardData.dropItems.Array.size
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: rewardData.dropItems.Array.data[0].item
       value: 
-      objectReference: {fileID: 11400000, guid: 642f018fc4454bb43b60ef9aace986fa,
+      objectReference: {fileID: 11400000, guid: ff6f367f6c056a34b9c42b436816a764,
+        type: 2}
+    - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: rewardData.dropItems.Array.data[1].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 8930cbb9de7b82044be672f8e1b11d67,
+        type: 2}
+    - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: rewardData.dropItems.Array.data[2].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 7bb5b66b047193d4782f1ad4d9c3afbc,
         type: 2}
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: rewardData.dropItems.Array.data[0].dropRate
-      value: 20
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: rewardData.dropItems.Array.data[1].dropRate
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: rewardData.dropItems.Array.data[2].dropRate
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7271114388976837514, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: m_Name
-      value: NormalBossMonster_051
+      value: EliteMonster_051
       objectReference: {fileID: 0}
+    - target: {fileID: 8427772205304001868, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -67261386, guid: 5547da911a3fae64ca98a04c33a7c1ca,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

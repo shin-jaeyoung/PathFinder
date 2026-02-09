@@ -10,6 +10,7 @@ public enum SkillType
 [System.Serializable]
 public struct SkillData 
 {
+    [Header("ProjectileID")]
     [SerializeField]
     private int id;
     [SerializeField]
