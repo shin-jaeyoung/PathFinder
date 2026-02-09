@@ -10,21 +10,20 @@ public class MonsterSpawner : MonoBehaviour
     [Header("SpawnPoint")]
     [SerializeField]
     private SceneType spawnerScene;
-    [SerializeField]
-    private GameObject spawnPoint;
-    private Vector2 spawnVec;
+
     [Header("Visible Size")]
     [SerializeField]
     private float visibleSizeMultiply;
-
+    [SerializeField]
     private bool isSpawn;
+    [SerializeField]
     private bool isOnCamera;
+    [SerializeField]
     private GameObject spawnObj;
     private Coroutine returnCoroutine;
 
     private void Awake()
     {
-        spawnVec = spawnPoint.transform.position;
         transform.localScale = transform.localScale * visibleSizeMultiply;
     }
     private void OnBecameVisible()
@@ -32,6 +31,7 @@ public class MonsterSpawner : MonoBehaviour
         isOnCamera = true;
         if(GameManager.instance.CurScene != spawnerScene)
         {
+            Debug.Log("현재씬과 스포너의 스폰씬이 다릅니다");
             ReturnPool();
         }
         if (returnCoroutine != null)
@@ -56,26 +56,36 @@ public class MonsterSpawner : MonoBehaviour
     public void Spawn()
     {
         isSpawn = true;
-        spawnObj = PoolManager.instance.PoolDic[PoolType.Monster].Pop(monsterID, spawnVec, Quaternion.identity);
+        spawnObj = PoolManager.instance.PoolDic[PoolType.Monster].Pop(monsterID, transform.position, Quaternion.identity);
         spawnObj.transform.SetParent(transform, true);
     }
     public IEnumerator ReturnPoolCo()
     {
         yield return new WaitForSeconds(3f);
 
-        // 대기 시간 이후에도 여전히 카메라 밖에 있다면 반납
-        ReturnPool();
+        // 대기 시간 이후에도 여전히 카메라 밖에 있다면 리턴풀
+        if (!isOnCamera)
+        {
+            if (spawnObj != null && spawnObj.activeSelf)
+            {
+                Debug.Log($"{gameObject.name}가 몬스터를 돌려보냅니다");
+                ReturnPool();
+            }
+        }
+
+        returnCoroutine = null;
 
     }
     private void ReturnPool()
     {
-        if (!isOnCamera && isSpawn)
+        if (spawnObj != null && isSpawn)
         {
             if (spawnObj.TryGetComponent<IPoolable>(out IPoolable go))
             {
-                PoolManager.instance.PoolDic[PoolType.Monster].ReturnPool(go);
-                spawnObj.transform.SetParent(PoolManager.instance.PoolParentDic[PoolType.Monster].transform, true);
                 isSpawn = false;
+                PoolManager.instance.PoolDic[PoolType.Monster].ReturnPool(go);
+                
+                spawnObj = null;
             }
         }
         returnCoroutine = null;
@@ -90,6 +100,6 @@ public class MonsterSpawner : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(spawnVec, 0.5f);
+        Gizmos.DrawWireSphere(transform.position, 0.5f);
     }
 }

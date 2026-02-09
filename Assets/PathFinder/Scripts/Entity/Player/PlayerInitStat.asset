@@ -22,7 +22,7 @@ MonoBehaviour:
   - type: 3
     statValue: 5
   - type: 4
-    statValue: 0
+    statValue: 50
   - type: 5
     statValue: 0
   - type: 6

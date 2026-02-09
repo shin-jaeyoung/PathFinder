@@ -67,8 +67,12 @@ public class Detection : MonoBehaviour
     }
     private void OnEnable()
     {
-        originVec = transform.position;
+        InitPosition(transform.position);
         StartCoroutine(DectCo());
+    }
+    public void InitPosition(Vector3 pos)
+    {
+        originVec = pos;
     }
     public void Detect()
     {

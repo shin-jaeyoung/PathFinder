@@ -108,7 +108,7 @@ PrefabInstance:
         type: 3}
       propertyPath: rewardData.dropItems.Array.data[0].item
       value: 
-      objectReference: {fileID: 11400000, guid: 5565eb96b71e1954f8856cd97648599b,
+      objectReference: {fileID: 11400000, guid: bf55fad5a4b33ed49821223eb322286b,
         type: 2}
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}

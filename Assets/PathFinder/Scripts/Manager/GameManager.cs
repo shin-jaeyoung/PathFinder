@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private Player player;
 
     [Header("Scene")]
+    [SerializeField]
     private SceneType curScene;
     private SceneType preScene;
 
