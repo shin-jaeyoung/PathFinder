@@ -6,6 +6,12 @@ using UnityEngine.Assertions.Must;
 
 public abstract class Monster : Entity , IPoolable
 {
+    [System.Serializable]
+    public struct MonsterSkillData
+    {
+        public SkillSlot skill;
+        public int animNum;
+    }
     [Header("Hp")]
     [SerializeField]
     protected float curHp;
@@ -19,7 +25,7 @@ public abstract class Monster : Entity , IPoolable
     [SerializeField]
     protected SkillSlot basicAttack;
     [SerializeField]
-    protected List<SkillSlot> skills;
+    protected List<MonsterSkillData> skills;
     [Header("Combat")]
     [SerializeField]
     protected CombatSystem combatSystem;
@@ -30,6 +36,7 @@ public abstract class Monster : Entity , IPoolable
     protected Rigidbody2D rb;
     protected StateMachine<Monster> stateMachine;
     private Animator animator;
+    private int animSkillNum;
     [SerializeField]
     protected bool isBerserkerMode;
     protected int useSkillIndex;
@@ -62,14 +69,14 @@ public abstract class Monster : Entity , IPoolable
     public Detection Detection => detection;
     public Rigidbody2D Rb => rb;
     public SkillSlot BasicAttack => basicAttack;
-    public List<SkillSlot> Skills => skills;
+    public List<MonsterSkillData> Skills => skills;
     public RewardData RewardData => rewardData;
     public bool IsDead => isDead;
-
+    public int AttackAnimNum => animSkillNum;
     public Animator Animator => animator;
     //deligate
     public event Action OnChangeHp;
-
+    public bool CanUseAnySkill => skills.Count > 0 && CheckSkillCool();
 
     private void Start()
     {
@@ -111,28 +118,37 @@ public abstract class Monster : Entity , IPoolable
     {
         if (skills.Count > 0 && CheckSkillCool())
         {
-            combatSystem.PerformSkill(ActiveNextSkill());
+            MonsterSkillData data = ActiveNextSkill();
+            animSkillNum = data.animNum;
+            if (combatSystem.PerformSkill(data.skill))
+            {
+                Debug.Log($"{data.skill.skill.Data.SkillName} 발동");
+            }
         }
         else
         {
-            combatSystem.PerformSkill(basicAttack);
+            animSkillNum = -1;
+            if(combatSystem.PerformSkill(basicAttack))
+            {
+                Debug.Log($"{basicAttack.skill.Data.SkillName} 발동");
+            }
         }
     }
     public bool CheckSkillCool()
     {
-        foreach (var skill in skills)
+        foreach (var data in skills)
         {
-            if (!skill.isCooltime)
+            if (!data.skill.isCooltime)
             {
                 return true;
             }
         }
         return false;
     }
-    public SkillSlot ActiveNextSkill()
+    public MonsterSkillData ActiveNextSkill()
     {
 
-        while (skills[useSkillIndex].isCooltime)
+        while (skills[useSkillIndex].skill.isCooltime)
         {
             ++useSkillIndex;
             if (useSkillIndex >= skills.Count)
@@ -168,6 +184,15 @@ public abstract class Monster : Entity , IPoolable
     {
         CurHp = data.MaxHp;
         isDead = false;
+
+        foreach (var skilldata in skills)
+        {
+            skilldata.skill.isCooltime = false;
+            skilldata.skill.currentCooltime = 0;
+        }
+        basicAttack.isCooltime = false;
+        basicAttack.currentCooltime = 0;
+
         PoolManager.instance.PoolDic[PoolType.Monster].ReturnPool(this);
     }
     public void FlipSprite(float xInput)
@@ -191,7 +216,7 @@ public abstract class Monster : Entity , IPoolable
     }
     public override Vector2 SkillSpawnPos()
     {
-        return Vector2.zero;
+        return detection.Target.transform.position;
     }
     public override Vector3 CasterTrasform()
     {

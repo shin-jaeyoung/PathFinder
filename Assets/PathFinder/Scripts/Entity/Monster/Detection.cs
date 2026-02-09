@@ -17,11 +17,6 @@ public class Detection : MonoBehaviour
     private float trackRange;
     private bool isDetect;
 
-    [Header("Attack Cooltime")]
-    [SerializeField] 
-    private float attackCooltime;
-    private bool canAttack = true;
-
     [Header("Move Range")]
     [SerializeField] private float moveRange;
 
@@ -58,7 +53,7 @@ public class Detection : MonoBehaviour
     public Vector2 OriginVec => originVec;
     public Transform Target => target;
     public bool IsDetect => isDetect;
-    public bool CanAttack => canAttack;
+
     public LayerMask ObstacleMask => obstacleMask;
     public Vector2 LastKnownPos => lastKnownPos;
     public bool IsTargetVisible => isTargetVisible;
@@ -149,20 +144,14 @@ public class Detection : MonoBehaviour
 
     public bool IsInAttackRange()
     {
-        if (target == null || !canAttack) return false;
-        // 공격은 타겟이 실제로 보일 때만 가능하게 설정
+        if (target == null) return false;
         if (!isTargetVisible) return false;
 
-        StartCoroutine(AttackCooltimeCo());
-        return Vector2.Distance((transform.position + offset), target.position) <= attackRange;
+        float dist = Vector2.Distance((transform.position + offset), target.position);
+        return dist <= attackRange;
     }
 
-    public IEnumerator AttackCooltimeCo()
-    {
-        canAttack = false;
-        yield return new WaitForSeconds(attackCooltime);
-        canAttack = true;
-    }
+
 
     // 매 프레임 타겟이 벽 뒤에 있는지 체크하고 마지막 위치 업데이트
     public void UpdateVisibility()
