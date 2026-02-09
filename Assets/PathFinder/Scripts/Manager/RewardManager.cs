@@ -65,7 +65,14 @@ public class RewardManager : MonoBehaviour
             }
             else
             {
-                player.Skills.AddActiveSkill(data.activeSkill);
+                if(player.Skills.AddActiveSkill(data.activeSkill))
+                {
+                    
+                }
+                else
+                {
+                    Debug.Log("스킬지급 실패");
+                }
             }
         }
         if(data.passiveSkill != null)

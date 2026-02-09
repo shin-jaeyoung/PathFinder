@@ -15,7 +15,8 @@ public enum ConditionType
 {
     HaveItem,
     TalkToTarget,
-    KillMonster
+    KillMonster,
+    Level,
 }
 [System.Serializable]
 public struct Condition
@@ -23,4 +24,5 @@ public struct Condition
     public ConditionType conditionType;
     public int targetId;
     public Item needItem;
+    public int count;
 }

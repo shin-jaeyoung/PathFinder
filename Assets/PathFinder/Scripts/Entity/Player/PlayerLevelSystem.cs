@@ -14,7 +14,9 @@ public class PlayerLevelSystem
     private int maxExp = 100;
     [SerializeField]
     private int levelPoint = 0;
-
+    [Header("Level Skill List")]
+    [SerializeField]
+    private List<Skill> levelSkillList;
     public int Level => level;
     public int CurExp => curExp;
     public int MaxExp => maxExp;
@@ -49,9 +51,23 @@ public class PlayerLevelSystem
     public void LevelUP()
     {
         level++;
-        levelPoint++;
-        UpdateMaxExp();
         GlobalEvents.Notify($"레벨 업! {level}레벨 이 되었습니다", 2f);
+        if( level == 5)
+        {
+            GameManager.instance.Player.Skills.AddActiveSkill(levelSkillList[0]);
+        }
+        else if (level == 10)
+        {
+            Debug.Log("10레벨 달성보상");
+            GameManager.instance.Player.Skills.AddActiveSkill(levelSkillList[1]);
+        }
+        else if (level == 15)
+        {
+            Debug.Log("15레벨 달성보상");
+            GameManager.instance.Player.Skills.AddActiveSkill(levelSkillList[2]);
+        }
+        levelPoint += 2;
+        UpdateMaxExp();
         OnLevelChanged?.Invoke();
     }
 

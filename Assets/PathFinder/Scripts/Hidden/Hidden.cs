@@ -43,6 +43,10 @@ public class Hidden
         {
             if (!player.Inventory.HasItem(currentCond.needItem)) return false;
         }
+        if( currentCond.conditionType == ConditionType.Level)
+        {
+            if(player.LevelSystem.Level < currentCond.count) return false;
+        }
 
         NextStep(player);
         return true;
