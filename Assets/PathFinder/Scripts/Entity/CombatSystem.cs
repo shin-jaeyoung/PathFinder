@@ -18,17 +18,20 @@ public class CombatSystem
         return true;
     }
 
-    public float Hit(float damage,float def)
+    public int Hit(float damage,float def)
     {
         float finalDamage;
         //데미지 계산식
         finalDamage = damage - def;
 
-        if(finalDamage<=0)
+        if(finalDamage<=3)
         {
             //최소 데미지
-            finalDamage = 5;
+            finalDamage = 3;
         }
-        return finalDamage;
+        int finalDamageToint = Mathf.RoundToInt(finalDamage);
+
+
+        return finalDamageToint;
     }
 }
