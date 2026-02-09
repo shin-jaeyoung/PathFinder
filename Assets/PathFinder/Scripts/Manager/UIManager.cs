@@ -27,7 +27,17 @@ public struct UIData
 }
 public class UIManager : MonoBehaviour
 {
+
     public static UIManager Instance;
+
+    //리스트를 쓰는데 contains같은 순회연산하는 거 안하려고 만든 클래스
+    private class UIStatus
+    {
+        public GameObject panel;
+        public bool isOpen;
+    }
+
+
     [Header("UI CanvasList")]
     [SerializeField]
     private List<GameObject> canvasList;
@@ -37,13 +47,14 @@ public class UIManager : MonoBehaviour
     private List<UIData> uiPanels;
 
     //내부에서 사용할 애들
-    private Dictionary<UIType, GameObject> uiPanelDic;
+    private Dictionary<UIType, UIStatus> uiPanelDic;
     private List<GameObject> instantiatedCanvases;
     //밑에스택으로 한번 해보자
     private UIType currenUIType;
     private UIType preUIType;
 
-    private Stack<UIType> UIStack;
+    //리스트를 스택처럼 써보자
+    private List<UIType> uiStack = new List<UIType>();
     //property
     public UIType CurUI => currenUIType;
     private void Awake()
@@ -64,51 +75,52 @@ public class UIManager : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(currenUIType == UIType.HUD)
+            if (uiStack.Count > 0)
+            {
+                HideUI(uiStack[uiStack.Count - 1]);
+            }
+            else
             {
                 ShowUI(UIType.Menu);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            ToggleUI(UIType.Inventory);
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            ToggleUI(UIType.Status);
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            ToggleUI(UIType.Skill);
+        }
+    }
+    private void ToggleUI(UIType type)
+    {
+        if (!uiPanelDic.TryGetValue(type, out UIStatus status)) return;
+
+        if (status.isOpen)
+        {
+            if (uiStack[uiStack.Count - 1] == type)
+            {
+                HideUI(type);
+            }
             else
             {
-                CheckCurUI();
-                if (currenUIType == UIType.HUD) return;
-                HideUI(currenUIType);
+                uiStack.Remove(type);
+                uiStack.Add(type);
+                status.panel.transform.SetAsLastSibling();
+                UpdateCurrentUIType();
             }
         }
-        if(Input.GetKeyDown(KeyCode.I))
+        else
         {
-            if (currenUIType == UIType.Inventory)
-            {
-                HideUI(UIType.Inventory);
-            }
-            else
-            {
-                ShowUI(UIType.Inventory);
-            }
-        }
-        if(Input.GetKeyDown (KeyCode.U))
-        {
-            if (currenUIType == UIType.Status)
-            {
-                HideUI(UIType.Status);
-            }
-            else
-            {
-                ShowUI(UIType.Status);
-            }
-        }
-        if(Input.GetKeyDown(KeyCode.K))
-        {
-            if (currenUIType == UIType.Skill)
-            {
-                HideUI(UIType.Skill);
-            }
-            else
-            {
-                ShowUI(UIType.Skill);
-            }
+            ShowUI(type);
         }
     }
     private IEnumerator WaitGM()
@@ -122,7 +134,7 @@ public class UIManager : MonoBehaviour
     }
     private void Init()
     {
-        uiPanelDic = new Dictionary<UIType, GameObject>();
+        uiPanelDic = new Dictionary<UIType, UIStatus>();
         instantiatedCanvases = new List<GameObject>();
 
         foreach (GameObject canvas in canvasList)
@@ -130,90 +142,83 @@ public class UIManager : MonoBehaviour
             GameObject go = Instantiate(canvas, transform);
             instantiatedCanvases.Add(go);
         }
+
         foreach (var data in uiPanels)
         {
             if (data.uiprefab == null) continue;
 
+            // HUD는 1번 캔버스, 나머지는 0번 캔버스
             Transform targetCanvas = (data.type == UIType.HUD) ?
                 instantiatedCanvases[1].transform : instantiatedCanvases[0].transform;
 
             GameObject panelGo = Instantiate(data.uiprefab, targetCanvas);
 
-            if (!uiPanelDic.ContainsKey(data.type))
-            {
-                uiPanelDic.Add(data.type, panelGo);
-                //이게 초기설정인데 GameStart씬부터 시작한다고하면 바꿔야함
-                if (data.type != UIType.HUD) panelGo.SetActive(false);
-            }
+            UIStatus status = new UIStatus { panel = panelGo, isOpen = false };
+            uiPanelDic.Add(data.type, status);
+
+            if (data.type != UIType.HUD) panelGo.SetActive(false);
         }
-        //나중엔 GameStart넣을듯?
-        UIStack = new Stack<UIType>();
-        //HUD는 그냥 항상 켜놓는게 좋을것같은데?
-        //Stack.Count가 0이면 HUD인거고 0보다 크면 다른 UI가 켜진거고
-        //preUIType = UIType.HUD;
-        uiPanelDic[UIType.HUD].SetActive(true);
+
+        // 초기 HUD 설정
+        uiPanelDic[UIType.HUD].panel.SetActive(true);
         currenUIType = UIType.HUD;
-    }
-    private UIType CheckCurUI()
-    {
-        if(UIStack.Count>0)
-        {
-            currenUIType = UIStack.Pop();
-            UIStack.Push(currenUIType);
-        }
-        else
-        {
-            currenUIType = UIType.HUD;
-        }
-        return currenUIType;
     }
     public bool CheckCurUIType(UIType type)
     {
         if(currenUIType == type) return true;
         return false;
     }
+
+
     public void ShowUI(UIType type)
     {
-        if (uiPanelDic.TryGetValue(type, out GameObject ui))
-        {
-            ui.SetActive(true);
-            //preUIType = currenUIType;
-            currenUIType = type;
-            UIStack.Push(type);
-        }
+        if (!uiPanelDic.TryGetValue(type, out UIStatus status)) return;
+        if (status.isOpen) return; 
+        status.panel.SetActive(true);
+        status.panel.transform.SetAsLastSibling();
+
+        status.isOpen = true;
+        uiStack.Add(type);
+        UpdateCurrentUIType();
     }
     public void HideUI(UIType type)
     {
-        if(uiPanelDic.TryGetValue(type,out GameObject ui))
-        {
-            ui.SetActive(false);
-            //currenUIType = preUIType;
-            UIStack.Pop();
-            CheckCurUI();
-        }
+        if (!uiPanelDic.TryGetValue(type, out UIStatus status)) return;
+        if (!status.isOpen) return;
+
+        status.panel.SetActive(false);
+        status.isOpen = false;
+        uiStack.Remove(type);
+
+        UpdateCurrentUIType();
     }
-    
+    private void UpdateCurrentUIType()
+    {
+        currenUIType = (uiStack.Count > 0) ? 
+            uiStack[uiStack.Count - 1] : UIType.HUD;
+
+    }
     public void Showonly(UIType targetType)
     {
-        foreach(var t in uiPanelDic)
+        foreach (var pair in uiPanelDic)
         {
-            if (t.Key == UIType.HUD) continue;
-            if(t.Key==targetType)
+            if (pair.Key == UIType.HUD) continue;
+
+            if (pair.Key == targetType)
             {
-                t.Value.SetActive(true);
-                preUIType = currenUIType;
-                currenUIType = targetType;
-
-                UIStack.Clear();
-
-                UIStack.Push(targetType);
-                CheckCurUI();
+                pair.Value.panel.SetActive(true);
+                pair.Value.panel.transform.SetAsLastSibling();
+                pair.Value.isOpen = true;
             }
             else
             {
-                t.Value.SetActive(false);
+                pair.Value.panel.SetActive(false);
+                pair.Value.isOpen = false;
             }
-
         }
+
+        uiStack.Clear();
+        uiStack.Add(targetType);
+        UpdateCurrentUIType();
     }
 }
