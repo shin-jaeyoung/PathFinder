@@ -97,7 +97,7 @@ PrefabInstance:
     - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
       propertyPath: data.mName
-      value: "\uCD5C\uC885\uBCF4\uC2A4"
+      value: "\uB124\uD06C\uB85C\uBA58\uC11C"
       objectReference: {fileID: 0}
     - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
@@ -116,10 +116,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
+      propertyPath: rewardData.exp
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
       propertyPath: endPortalPrefab
       value: 
       objectReference: {fileID: 5075027120058559211, guid: 106ef68d9c6b5534d9282f498a7389db,
         type: 3}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: rewardData.gold
+      value: 100000
+      objectReference: {fileID: 0}
     - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
       propertyPath: skills.Array.size

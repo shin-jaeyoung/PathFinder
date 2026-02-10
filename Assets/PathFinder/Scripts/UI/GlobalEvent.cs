@@ -25,4 +25,11 @@ public static class GlobalEvents
         OnDialogue?.Invoke(dialogue, targetNpc);
     }
     public static Action OnDialogueEnd;
+
+    public static Action<Monster> OnEncountBoss;
+    public static void EncountBoss(Monster monster)
+    {
+        OnEncountBoss?.Invoke(monster);
+    }
+
 }

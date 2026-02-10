@@ -1783,6 +1783,7 @@ MonoBehaviour:
   - {fileID: 5574913991248374271}
   hpPotion: {fileID: 50676299154719909}
   potionCount: {fileID: 1271365215252116384}
+  bossHpUI: {fileID: 0}
 --- !u!1 &7913078946517275686
 GameObject:
   m_ObjectHideFlags: 0

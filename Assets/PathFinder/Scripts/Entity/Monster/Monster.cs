@@ -41,7 +41,7 @@ public abstract class Monster : Entity , IPoolable
     protected bool isBerserkerMode;
     protected int useSkillIndex;
     protected bool isDead;
-
+    private bool isEncountered = false;
     //property
     public float CurHp
     {
@@ -108,6 +108,17 @@ public abstract class Monster : Entity , IPoolable
     private void Update()
     {
         stateMachine?.Update();
+        if (data.Type != MonsterType.Normal && detection.IsDetect && !isEncountered)
+        {
+            Debug.Log("보스가 플레이어를 감지했습니다");
+            isEncountered = true;
+            GlobalEvents.EncountBoss(this);
+        }
+        else if(data.Type != MonsterType.Normal && !detection.IsDetect)
+        {
+            isEncountered = false;
+            GlobalEvents.EncountBoss(null);
+        }
     }
     private void FixedUpdate()
     {
@@ -184,7 +195,7 @@ public abstract class Monster : Entity , IPoolable
     {
         CurHp = data.MaxHp;
         isDead = false;
-
+        isEncountered = false;
         foreach (var skilldata in skills)
         {
             skilldata.skill.isCooltime = false;
@@ -211,6 +222,8 @@ public abstract class Monster : Entity , IPoolable
     }
     public override Vector2 LookDir()
     {
+        if(detection.Target == null) return Vector2.zero;
+
         Vector2 targetDir = (detection.Target.position - transform.position).normalized;
         return targetDir;
     }
