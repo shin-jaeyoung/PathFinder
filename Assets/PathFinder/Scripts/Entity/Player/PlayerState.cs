@@ -155,6 +155,7 @@ public class PlayerDieState : PlayerStateBase
     private float reviveDelay = 4f;
     public override void Enter()
     {
+        owner.IsInvincible = true;
         owner.Rb.velocity = Vector2.zero;
         owner.Animator.SetTrigger("Death");
         owner.Animator.SetBool("isDeath", true);
@@ -164,6 +165,7 @@ public class PlayerDieState : PlayerStateBase
     public override void Exit()
     {
         owner.Animator.SetBool("isDeath", false);
+        owner.IsInvincible = false;
     }
 
     public override void Update()

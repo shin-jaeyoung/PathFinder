@@ -8,9 +8,9 @@ public class Skill_Magic : Skill
     [SerializeField]
     private int spawnCount;
     [SerializeField]
-    private float spawnDelay;
+    private float firstSpawnDelay;
     [SerializeField]
-    private float spawnTime;
+    private float spawnDelay;
     [Header("Explosion")]
     [SerializeField]
     private bool isExplosion;
@@ -24,8 +24,8 @@ public class Skill_Magic : Skill
     }
     private IEnumerator SpawnDelayCo(ISkillActive caster)
     {
-        WaitForSeconds delay = new WaitForSeconds(spawnDelay);
-        WaitForSeconds spawndelta = new WaitForSeconds(spawnTime);
+        WaitForSeconds delay = new WaitForSeconds(firstSpawnDelay);
+        WaitForSeconds spawndelta = new WaitForSeconds(spawnDelay);
 
         yield return delay;
 

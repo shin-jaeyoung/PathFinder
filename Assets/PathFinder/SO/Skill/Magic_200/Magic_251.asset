@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02300439883dce4459f1ee5e87d9ee28, type: 3}
-  m_Name: Magic_250
+  m_Name: Magic_251
   m_EditorClassIdentifier: 
   data:
-    id: 250
-    skillName: "\uC2AC\uB77C\uC784 \uBC14\uB2E5 \uC18C\uD658"
-    prefab: {fileID: 1715084321782570863, guid: 797fa149527ef604d8db657174c627fa,
+    id: 251
+    skillName: "\uB2AA\uBCF4\uC2A4 \uD3ED\uBC1C \uB3C5\uC7A5\uD310"
+    prefab: {fileID: 1715084321782570863, guid: ce2ee353ff794c149bbb62d674067573,
       type: 3}
-    icon: {fileID: -403749990, guid: a7298507374404d4980e20592141a3b6, type: 3}
+    icon: {fileID: -836197793, guid: b7a5a910ee7c2974280ffa3670972060, type: 3}
     skillType: 2
     description: 
-    cooltime: 9
-    damageMultiplier: 1.2
-    duration: 0.5
+    cooltime: 12
+    damageMultiplier: 0
+    duration: 0.7
     spriteRotation: 0
-  spawnCount: 3
-  firstSpawnDelay: 0.5
-  spawnDelay: 0.7
-  isExplosion: 0
-  explosionID: 0
-  damageMultiplier: 0
+  spawnCount: 4
+  firstSpawnDelay: 0.3
+  spawnDelay: 0.8
+  isExplosion: 1
+  explosionID: 252
+  damageMultiplier: 1.2

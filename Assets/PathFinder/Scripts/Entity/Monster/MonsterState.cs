@@ -203,7 +203,7 @@ public class MonsterAttackState : MonsterState
         }
         //애니메이션 종료체크로직이후 isAttack = false; 1f대신 애니메이션 길이가 들어가야함
 
-        attackRoutine = owner.StartCoroutine(WaitAnimCo(1.2f, AttackFalse));
+        attackRoutine = owner.StartCoroutine(WaitAnimCo(2f, AttackFalse));
     }
 
     public override void Update()

@@ -74,9 +74,9 @@ public abstract class Monster : Entity , IPoolable
     public bool IsDead => isDead;
     public int AttackAnimNum => animSkillNum;
     public Animator Animator => animator;
+    public bool CanUseAnySkill => skills.Count > 0 && CheckSkillCool();
     //deligate
     public event Action OnChangeHp;
-    public bool CanUseAnySkill => skills.Count > 0 && CheckSkillCool();
 
     private void Start()
     {

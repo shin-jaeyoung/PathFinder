@@ -10,25 +10,30 @@ public class Skill_Shot : Skill
     [SerializeField]
     private int count;
     [SerializeField]
+    private float firstSpawnDelay;
+    [SerializeField]
     private float shotDelay;
     [SerializeField]
     private float spawnDistance;
     [SerializeField]
     private bool canPass;
+    [Header("Offset")]
+    [SerializeField]
+    private Vector3 offset;
     public override void Execute(ISkillActive caster)
     {
-        Vector2 fixedDir = caster.LookDir();
-        Vector2 fixedOriginPos = caster.CasterTrasform();
-
-
-        SkillManager.instance.StartCoroutine(ShotDelayCo(caster, fixedDir,fixedOriginPos));
+        caster.GetEntity().StartCoroutine(ShotDelayCo(caster));
     }
-    private IEnumerator ShotDelayCo(ISkillActive caster, Vector2 dir, Vector2 origin)
+    private IEnumerator ShotDelayCo(ISkillActive caster)
     {
         WaitForSeconds wait = new WaitForSeconds(shotDelay);
         int curcount = count;
+        yield return new WaitForSeconds(firstSpawnDelay);
         while (curcount > 0)
         {
+            Vector2 dir = caster.LookDir();
+            Vector2 origin = caster.CasterTrasform() + offset;
+
             Shot(caster,dir,origin);
             curcount--;
             yield return wait;
