@@ -22,12 +22,13 @@ public abstract class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private void Awake()
     {
         iconRect = icon.GetComponent<RectTransform>();
-        group = icon.GetComponent<CanvasGroup>();
+        group = icon.GetComponentInChildren<CanvasGroup>();
         iconCanvas = icon.GetComponent<Canvas>();
         originPos = iconRect.anchoredPosition;
         player = GameManager.instance.Player;
 
     }
+  
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (icon.sprite == null) return;

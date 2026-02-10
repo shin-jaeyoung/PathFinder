@@ -30,6 +30,7 @@ public class SkillSlot
         return true;
     }
 }
+[System.Serializable]
 public class PassiveSlot
 {
     public PassiveSkill passiveSkill;

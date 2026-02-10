@@ -39,7 +39,7 @@ public class SkillInventoryUI : MonoBehaviour
 
     private Player player;
     private List<SkillSlotUI> activeSkillInven;
-    private List<SkillSlotUI> passiveSkillInven;
+    private List<PassiveSkillSlotUI> passiveSkillInven;
 
     private List<SkillSlotUI> equipSkill;
     public void Init()
@@ -48,7 +48,7 @@ public class SkillInventoryUI : MonoBehaviour
         {
             player = GameManager.instance.Player;
             activeSkillInven = new List<SkillSlotUI>(player.Skills.ActiveCapacity);
-            passiveSkillInven = new List<SkillSlotUI>(player.Skills.PassiveCapacity);
+            passiveSkillInven = new List<PassiveSkillSlotUI>(player.Skills.PassiveCapacity);
             equipSkill = new List<SkillSlotUI> (player.Skills.EquipCapacity);
 
             for (int i = 0; i < activeContent.transform.childCount; i++)
@@ -57,17 +57,17 @@ public class SkillInventoryUI : MonoBehaviour
                 if(slotUI != null)
                 {
                     slotUI.SetIndex(i);
-                    slotUI.GetSlotData();
+                    
                     activeSkillInven.Add(slotUI);
                 }
             }
             for(int i = 0; i < passiveContent.transform.childCount; i++)
             {
-                SkillSlotUI slotUI = passiveContent.transform.GetChild(i).GetComponent<SkillSlotUI>();
+                PassiveSkillSlotUI slotUI = passiveContent.transform.GetChild(i).GetComponent<PassiveSkillSlotUI>();
                 if (slotUI != null)
                 {
                     slotUI.SetIndex(i);
-                    slotUI.GetSlotData();
+                    
                     passiveSkillInven.Add(slotUI);
                 }
             }
@@ -77,7 +77,7 @@ public class SkillInventoryUI : MonoBehaviour
                 if (slotUI != null)
                 {
                     slotUI.SetIndex(i);
-                    slotUI.GetSlotData();
+                    
                     equipSkill.Add(slotUI);
                 }
             }

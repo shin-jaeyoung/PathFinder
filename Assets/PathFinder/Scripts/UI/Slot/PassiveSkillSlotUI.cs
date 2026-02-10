@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PassiveSkillSlotUI : SlotUI
+public class PassiveSkillSlotUI : SlotUI ,IPointerClickHandler
 {
     private int slotIndex;
     public int SlotIndex => slotIndex;
@@ -27,19 +27,24 @@ public class PassiveSkillSlotUI : SlotUI
 
     public override void UpdateUI()
     {
+        if (player == null) player = GameManager.instance.Player;
         PassiveSlot slot = player.Skills.PassiveSkills[slotIndex];
         if (!slot.IsEmpty())
         {
             icon.sprite = slot.passiveSkill.Data.Icon;
             icon.color = Color.white;
-            group.alpha = 1;
         }
         else
         {
             icon.sprite = null;
             icon.color = new Color(1, 1, 1, 0);
-            group.alpha = 0;
         }
 
+    }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (GetSlotData().IsEmpty()) return;
+        SkillInventoryUI ui = GetComponentInParent<SkillInventoryUI>();
+        ui.UpdateExplain(GetSlotData());
     }
 }

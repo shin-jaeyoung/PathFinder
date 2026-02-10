@@ -21,6 +21,7 @@ public class HiddenManager : MonoBehaviour
 
     private int endHiddenCount;
     //property
+    public Dictionary<int, Hidden> HiddenDic => hiddenDic;
     public int EndHiddenCount
     {
         get {  return endHiddenCount; }
