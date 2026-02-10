@@ -91,13 +91,11 @@ public class SkillSlotUI : SlotUI ,IPointerClickHandler
         {
             icon.sprite = slotData.skill.Data.Icon;
             icon.color = Color.white;
-            group.alpha = 1;
         }
         else
         {
             icon.sprite = null;
             icon.color = new Color(1, 1, 1, 0);
-            group.alpha = 0;
         }
     }
 

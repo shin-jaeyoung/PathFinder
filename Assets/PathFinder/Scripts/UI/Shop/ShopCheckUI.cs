@@ -18,9 +18,13 @@ public class ShopCheckUI : MonoBehaviour
     public Button yes;
     public Button no;
 
-    private void OnEnable()
+    private void Awake()
     {
         inputField.gameObject.SetActive(false);
+    }
+    private void OnEnable()
+    {
+        
         yes.onClick.RemoveAllListeners();
         no.onClick.RemoveAllListeners();
         yes.onClick.AddListener(() =>

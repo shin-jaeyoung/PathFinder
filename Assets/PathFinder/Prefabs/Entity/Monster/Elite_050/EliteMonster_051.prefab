@@ -21,12 +21,12 @@ PrefabInstance:
     - target: {fileID: 687164530013776951, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.0587754
+      value: -3.8403745
       objectReference: {fileID: 0}
     - target: {fileID: 687164530013776951, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.6937224
+      value: 0.16682597
       objectReference: {fileID: 0}
     - target: {fileID: 687164530013776951, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
@@ -106,6 +106,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
+      propertyPath: data.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
       propertyPath: data.mName
       value: "\uB2AA\uBCF4\uC2A4"
       objectReference: {fileID: 0}
@@ -136,9 +141,42 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
+      propertyPath: skills.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: skills.Array.data[0].animNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: skills.Array.data[1].animNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
       propertyPath: rewardData.dropItems.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: skills.Array.data[0].skill.skill
+      value: 
+      objectReference: {fileID: 11400000, guid: a849206305a8a0f4cb61ec9831973f0e,
+        type: 2}
+    - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: skills.Array.data[1].skill.skill
+      value: 
+      objectReference: {fileID: 11400000, guid: d10d34365caca104287851e34956bb2b,
+        type: 2}
+    - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: skills.Array.data[2].skill.skill
+      value: 
+      objectReference: {fileID: 11400000, guid: eb8fa8fe1cf5892449738b8f35ef5fee,
+        type: 2}
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: rewardData.dropItems.Array.data[0].item

@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 687164530013776951}
   - component: {fileID: 6252897837667827541}
-  - component: {fileID: 8427772205304001868}
   - component: {fileID: 2359791063972681615}
+  - component: {fileID: 8427772205304001868}
+  - component: {fileID: -9178050573599719656}
   - component: {fileID: 3311634576480251582}
   - component: {fileID: 2630864039371971072}
   m_Layer: 7
@@ -58,7 +59,7 @@ MonoBehaviour:
     defence: 5
     speed: 1.5
   rewardData:
-    items: []
+    dropItems: []
     activeSkill: {fileID: 0}
     passiveSkill: {fileID: 0}
     gold: 555
@@ -81,6 +82,36 @@ MonoBehaviour:
   spawnTotemDistance: 4
   alertTime_perTotems: 7
   aliveTotemCount: 0
+  endPortalPrefab: {fileID: 0}
+--- !u!114 &2359791063972681615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7271114388976837514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b204710833d7ea47ae71ec00c47c6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  detectRange: 5
+  attackRange: 1.5
+  trackRange: 7
+  moveRange: 9
+  rayDistance: 1.5
+  detectMask:
+    serializedVersion: 2
+    m_Bits: 320
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 64
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 256
+  target: {fileID: 0}
+  viewLostThreshold: 3
 --- !u!212 &8427772205304001868
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -134,35 +165,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2359791063972681615
-MonoBehaviour:
+--- !u!95 &-9178050573599719656
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7271114388976837514}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b204710833d7ea47ae71ec00c47c6ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectRange: 5
-  attackRange: 1.5
-  trackRange: 7
-  attackCooltime: 1.5
-  moveRange: 9
-  rayDistance: 1.5
-  detectMask:
-    serializedVersion: 2
-    m_Bits: 320
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 64
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 256
-  target: {fileID: 0}
-  viewLostThreshold: 3
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!70 &3311634576480251582
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

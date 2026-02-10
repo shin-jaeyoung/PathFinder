@@ -27,10 +27,9 @@ public class SkillManager : MonoBehaviour
         if (caster == null) return;
         if (slot.IsEmpty() || slot.isCooltime) return;
         slot.Use(caster);
-        if(caster is  Player)
-        {
-            StartCoroutine(SkillCooltime(slot));
-        }
+
+        StartCoroutine(SkillCooltime(slot));
+        
     }
 
     private IEnumerator SkillCooltime(SkillSlot slot)

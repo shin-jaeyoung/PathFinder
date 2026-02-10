@@ -186,6 +186,7 @@ public class PlayerSkillInventory
         addStatus.Clear();
         foreach (var s in passiveSkills)
         {
+            if (s == null || s.IsEmpty() || s.passiveSkill == null) continue;
             foreach (var stat in s.passiveSkill.PassiveEffect)
             {
                 if (addStatus.ContainsKey(stat.Type))

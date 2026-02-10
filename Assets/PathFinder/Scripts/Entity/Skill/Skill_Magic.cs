@@ -8,9 +8,9 @@ public class Skill_Magic : Skill
     [SerializeField]
     private int spawnCount;
     [SerializeField]
-    private float spawnDelay;
+    private float firstSpawnDelay;
     [SerializeField]
-    private float spawnTime;
+    private float spawnDelay;
     [Header("Explosion")]
     [SerializeField]
     private bool isExplosion;
@@ -20,16 +20,23 @@ public class Skill_Magic : Skill
     private float damageMultiplier;
     public override void Execute(ISkillActive caster)
     {
-        Vector2 spawnPos = caster.SkillSpawnPos();
-
-        caster.GetEntity().StartCoroutine(SpawnDelayCo(caster, spawnPos));
+        caster.GetEntity().StartCoroutine(SpawnDelayCo(caster));
     }
-    private IEnumerator SpawnDelayCo(ISkillActive caster, Vector2 spawnPos)
+    private IEnumerator SpawnDelayCo(ISkillActive caster)
     {
-        for(int i = 0; i < spawnCount; i++)
+        WaitForSeconds delay = new WaitForSeconds(firstSpawnDelay);
+        WaitForSeconds spawndelta = new WaitForSeconds(spawnDelay);
+
+        yield return delay;
+
+        for (int i = 0; i < spawnCount; i++)
         {
-            yield return new WaitForSeconds(spawnTime);
-            Magic(caster, spawnPos,data.ID);
+            Vector2 spawnPos = caster.SkillSpawnPos();
+
+            yield return spawndelta;
+
+            Magic(caster, spawnPos, data.ID);
+
         }
     }
     public void Magic(ISkillActive caster , Vector2 spawnPos , int originID)
@@ -44,7 +51,7 @@ public class Skill_Magic : Skill
             pj.Init(caster.GetAttackPower() * data.DamageMultiplier, caster.GetEntity(), caster.GetEntityType());
             if(isExplosion)
             {
-                pj.StartCoroutine(ExplosionDelayCo(caster, spawnPos));
+                caster.GetEntity().StartCoroutine(ExplosionDelayCo(caster, spawnPos));
             }
             pj.StartCoroutine(SkillReturnCo(pj));
         }

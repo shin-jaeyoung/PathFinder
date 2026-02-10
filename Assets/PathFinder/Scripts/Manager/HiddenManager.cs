@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,12 +19,28 @@ public class HiddenManager : MonoBehaviour
     //플레이어 캐싱
     private Player player;
 
+    private int endHiddenCount;
+    //property
+    public Dictionary<int, Hidden> HiddenDic => hiddenDic;
+    public int EndHiddenCount
+    {
+        get {  return endHiddenCount; }
+        set
+        {
+            endHiddenCount = value;
+            OnEndHidden?.Invoke();
+        }
+    }
+    //deligate
+    public event Action OnEndHidden;
+
     private void Awake()
     {
         if(instance == null)
         { 
             instance = this;
             DontDestroyOnLoad(gameObject);
+            endHiddenCount = 0;
         }
         else
         {
@@ -53,5 +70,21 @@ public class HiddenManager : MonoBehaviour
                 }
             }
         }
+    }
+    public int CheckEndHiddenCount()
+    {
+        int count = 0;
+        foreach ( var hidden in hiddenDic)
+        {
+            if(hidden.Value.State == HiddenState.End)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+    public int ChechkHiddenCount()
+    {
+        return hiddenDic.Count;
     }
 }

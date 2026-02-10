@@ -16,6 +16,11 @@ public class Skill_Slash : Skill
     private int spawnCount;
     [SerializeField]
     private float spawnDelta;
+    [Header("Offset")]
+    [SerializeField]
+    private Vector3 offset;
+    [SerializeField]
+    private bool isMonster;
     public override void Execute(ISkillActive caster)
     {
 
@@ -31,9 +36,16 @@ public class Skill_Slash : Skill
                             ? data.ID
                             : otherSlashIDs[(i - 1) % otherSlashIDs.Count];
             Vector2 dir = caster.LookDir();
-            Vector2 spawnPos = caster.CasterTrasform();
-            Slash(caster, dir, spawnPos, currentID);
+            Vector2 spawnPos = caster.CasterTrasform()+offset;
+            if (!isMonster)
+            {
+                Slash(caster, dir, spawnPos, currentID);
+            }
             yield return wait;
+            if (isMonster)
+            {
+                Slash(caster, dir, spawnPos, currentID);
+            }
         }
     }
     public IEnumerator SpawnDelayCo(ISkillActive caster)

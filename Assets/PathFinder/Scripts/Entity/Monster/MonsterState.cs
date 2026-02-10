@@ -40,10 +40,15 @@ public class MonsterMoveState : MonsterState
             stateMachine.ChangeState(StateType.Goback);
             return;
         }
-
+        if (owner.CanUseAnySkill)
+        {
+            stateMachine.ChangeState(StateType.Attack);
+            return;
+        }
         if (owner.Detection.IsInAttackRange())
         {
             stateMachine.ChangeState(StateType.Attack);
+            return;
         }
     }
     public override void FixedUpdate()
@@ -187,10 +192,18 @@ public class MonsterAttackState : MonsterState
         isAttack = true;
         //발동
         //owner.Animator.SetTrigger($"Attack{attackanimnum}";
-        owner.Animator.SetTrigger("Attack");
         owner.Active(0);
+        if(owner.AttackAnimNum == -1)
+        {
+            owner.Animator.SetTrigger("Attack");
+        }
+        else
+        {
+            owner.Animator.SetTrigger(($"Skill{owner.AttackAnimNum}").Trim());
+        }
         //애니메이션 종료체크로직이후 isAttack = false; 1f대신 애니메이션 길이가 들어가야함
-        attackRoutine = owner.StartCoroutine(WaitAnimCo(1.5f, AttackFalse));
+
+        attackRoutine = owner.StartCoroutine(WaitAnimCo(2f, AttackFalse));
     }
 
     public override void Update()
@@ -252,10 +265,11 @@ public class MonsterDieState : MonsterState
 //Boss용
 public class MonsterImmortalState : MonsterState
 {
-    private BossMonster boss;
+    
     public override void Enter()
     {
         Debug.Log("보스무적상태");
+        owner.Animator.SetTrigger("Skill2");
     }
     public override void Update()
     {

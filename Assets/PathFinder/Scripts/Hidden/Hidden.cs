@@ -59,6 +59,7 @@ public class Hidden
         if (curStep >= data.conditions.Count)
         {
             curState = HiddenState.End;
+            HiddenManager.instance.EndHiddenCount++;
             GiveReward(player);
         }
         else

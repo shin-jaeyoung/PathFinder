@@ -8,10 +8,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9178050573599719656, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 3aeb1103ddc2f93488ebc0470f115f72,
+        type: 2}
     - target: {fileID: 687164530013776951, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -4.06
       objectReference: {fileID: 0}
     - target: {fileID: 687164530013776951, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
@@ -73,6 +79,16 @@ PrefabInstance:
       propertyPath: detectRange
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 3311634576480251582, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3311634576480251582, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
       propertyPath: data.atk
@@ -81,7 +97,7 @@ PrefabInstance:
     - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
       propertyPath: data.mName
-      value: "\uCD5C\uC885\uBCF4\uC2A4"
+      value: "\uB124\uD06C\uB85C\uBA58\uC11C"
       objectReference: {fileID: 0}
     - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
@@ -100,15 +116,91 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
+      propertyPath: rewardData.exp
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
       propertyPath: endPortalPrefab
       value: 
       objectReference: {fileID: 5075027120058559211, guid: 106ef68d9c6b5534d9282f498a7389db,
         type: 3}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: rewardData.gold
+      value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: skills.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: bossPosduringGimmick.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: bossPosduringGimmick.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: skills.Array.data[1].animNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: skills.Array.data[2].animNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: skills.Array.data[4].animNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: skills.Array.data[0].skill.skill
+      value: 
+      objectReference: {fileID: 11400000, guid: 730929f180cd05d4db6a63455638949b,
+        type: 2}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: skills.Array.data[1].skill.skill
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d73811a66058444f95703b90c3cb82b,
+        type: 2}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: skills.Array.data[2].skill.skill
+      value: 
+      objectReference: {fileID: 11400000, guid: 9f48402e18a802d45a1d2a808ac1a1f3,
+        type: 2}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: skills.Array.data[3].skill.skill
+      value: 
+      objectReference: {fileID: 11400000, guid: eb247ad783df2ce4c8ec1396862600b4,
+        type: 2}
+    - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: skills.Array.data[4].skill.skill
+      value: 
+      objectReference: {fileID: 11400000, guid: e09bf9c5d394cc543afe3bab3f5bc7e9,
+        type: 2}
     - target: {fileID: 7271114388976837514, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
       propertyPath: m_Name
       value: BossMonster_100
       objectReference: {fileID: 0}
+    - target: {fileID: 8427772205304001868, guid: c8e137593c514d9408b7881c1bd1f9d5,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1276495622, guid: a98fb952aa1de7f4c9126171d82c8a78,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

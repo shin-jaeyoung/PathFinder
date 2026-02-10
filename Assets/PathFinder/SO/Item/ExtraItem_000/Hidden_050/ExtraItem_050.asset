@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d763dc27b2219408f5662add1e4c2d, type: 3}
+  m_Name: ExtraItem_050
+  m_EditorClassIdentifier: 
+  data:
+    id: 50
+    type: 3
+    sprite: {fileID: 702371240, guid: a134d1880ea0c1b41a06728d3ac6f3be, type: 3}
+    name: "\uC61B \uC8FC\uD654"
+    description: "\uC5B4\uB518\uAC00\uC5D0 \uC4F0\uC77C \uAC83 \uAC19\uB2E4"
+    price: 6000
+  capacityInSlot: 10

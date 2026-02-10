@@ -11,9 +11,13 @@ public class HUDUI : MonoBehaviour
     private TextMeshProUGUI levelValue;
     [SerializeField]
     private Image expImage;
+    [SerializeField]
+    private TextMeshProUGUI expText;
     [Header("Hp")]
     [SerializeField]
     private Image hpImage;
+    [SerializeField]
+    private TextMeshProUGUI hpText;
     [Header("Skill")]
     [SerializeField]
     private List<Image> skillList;
@@ -22,6 +26,8 @@ public class HUDUI : MonoBehaviour
     private Image hpPotion;
     [SerializeField]
     private TextMeshProUGUI potionCount;
+
+
 
 
     private Player player;
@@ -64,16 +70,18 @@ public class HUDUI : MonoBehaviour
         levelValue.text = player.LevelSystem.Level.ToString();
         Debug.Log(player.LevelSystem.CurExp );
         Debug.Log( player.LevelSystem.MaxExp);
-        float curHp = player.LevelSystem.CurExp;
-        float maxHp = player.LevelSystem.MaxExp;
-        float ratio = curHp / maxHp;
+        float curExp = player.LevelSystem.CurExp;
+        float maxExp = player.LevelSystem.MaxExp;
+        float ratio = curExp / maxExp;
         expImage.fillAmount = ratio;
+        expText.text = $"{curExp} / {maxExp}";
     }
 
     public void UpdateHp()
     {
         if (GameManager.instance.Player == null) return;
         hpImage.fillAmount = player.StatusSystem.Stat[PlayerStatType.CurHp] / player.StatusSystem.FinalStat[PlayerStatType.MaxHp];
+        hpText.text = $"{player.StatusSystem.Stat[PlayerStatType.CurHp]} / {player.StatusSystem.FinalStat[PlayerStatType.MaxHp]}";
     }
 
     public void UpdateSkillUI()

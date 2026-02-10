@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hidden_000
   m_EditorClassIdentifier: 
   id: 0
-  hiddenName: "\uAE30\uBCF8\uC2A4\uD0AC \uC5BB\uAE30"
+  hiddenName: "\uAE30\uBCF8\uC2A4\uD0AC\uC5BB\uAE30"
   rewardData:
     dropItems: []
     activeSkill: {fileID: 11400000, guid: 84ca8956983d7c443a49da80cc74e269, type: 2}

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02300439883dce4459f1ee5e87d9ee28, type: 3}
+  m_Name: Magic_255
+  m_EditorClassIdentifier: 
+  data:
+    id: 259
+    skillName: "\uBA54\uC778\uBCF4\uC2A4 \uBE5B \uD3ED\uBC1C"
+    prefab: {fileID: 1715084321782570863, guid: 1d06fa7e7a93f87429a82db3fc490ecc,
+      type: 3}
+    icon: {fileID: -59914499, guid: 47b9d4f65d9b14b42bacf200a9fa1eee, type: 3}
+    skillType: 2
+    description: 
+    cooltime: 21
+    damageMultiplier: 0
+    duration: 0.3
+    spriteRotation: 0
+  spawnCount: 5
+  firstSpawnDelay: 0.7
+  spawnDelay: 0.3
+  isExplosion: 1
+  explosionID: 260
+  damageMultiplier: 0.5

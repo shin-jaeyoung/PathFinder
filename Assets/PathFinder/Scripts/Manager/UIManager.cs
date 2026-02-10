@@ -15,7 +15,7 @@ public enum UIType
     Dialogue,
     Shop,
     Portal,
-
+    BossHp,
 
     Off,
 }
