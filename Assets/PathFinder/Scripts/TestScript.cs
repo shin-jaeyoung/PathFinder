@@ -23,6 +23,8 @@ public class TestScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (UIManager.Instance.CurUI != UIType.HUD) return;
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
             player.Inventory.AddItem(weapon);
@@ -54,6 +56,10 @@ public class TestScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha8))
         {
             player.Skills.AddDashSkill(testDash);
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            player.Inventory.AddItem(extraItem);
         }
     }
 }

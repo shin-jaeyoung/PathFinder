@@ -13,20 +13,21 @@ MonoBehaviour:
   m_Name: Shot_154
   m_EditorClassIdentifier: 
   data:
-    id: 0
-    skillName: 
-    prefab: {fileID: 0}
-    icon: {fileID: 0}
-    skillType: 0
+    id: 154
+    skillName: "\uD574\uBCC0\uBCF4\uC2A4 \uBB3C\uD3ED\uD0C4"
+    prefab: {fileID: 1715084321782570863, guid: d40a91c69830e8f4fa5ef4c7008a0125,
+      type: 3}
+    icon: {fileID: 409701193, guid: cfce060134aa1f0449da1887b3f2a3ae, type: 3}
+    skillType: 1
     description: 
-    cooltime: 0
-    damageMultiplier: 0
-    duration: 0
+    cooltime: 8
+    damageMultiplier: 1.2
+    duration: 6
     spriteRotation: 0
-  shotSpeed: 0
-  count: 0
-  firstSpawnDelay: 0
+  shotSpeed: 2
+  count: 1
+  firstSpawnDelay: 0.5
   shotDelay: 0
   spawnDistance: 0
   canPass: 0
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: -0.6, z: 0}
