@@ -265,10 +265,11 @@ public class MonsterDieState : MonsterState
 //Boss용
 public class MonsterImmortalState : MonsterState
 {
-    private BossMonster boss;
+    
     public override void Enter()
     {
         Debug.Log("보스무적상태");
+        owner.Animator.SetTrigger("Skill2");
     }
     public override void Update()
     {
