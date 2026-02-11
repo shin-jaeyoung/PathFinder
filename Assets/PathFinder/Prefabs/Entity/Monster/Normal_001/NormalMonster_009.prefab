@@ -132,7 +132,7 @@ PrefabInstance:
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: rewardData.dropItems.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
@@ -142,8 +142,19 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
+      propertyPath: rewardData.dropItems.Array.data[1].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 54dc47775624475429a883a3c63b030f,
+        type: 2}
+    - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
       propertyPath: rewardData.dropItems.Array.data[0].dropRate
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: rewardData.dropItems.Array.data[1].dropRate
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7271114388976837514, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}

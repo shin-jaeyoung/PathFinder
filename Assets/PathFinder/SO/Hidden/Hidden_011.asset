@@ -10,26 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 251491461fafb6b4688021ff0ce05683, type: 3}
-  m_Name: Hidden_008
+  m_Name: Hidden_011
   m_EditorClassIdentifier: 
-  id: 8
-  hiddenName: "\uC9D1\uB098\uAC04 \uC544\uB4E4\uC744 \uCC3E\uC544\uC11C"
+  id: 11
+  hiddenName: "\uACE8\uB3D9\uD488 \uC218\uC9D1\uAC002"
   rewardData:
-    dropItems: []
+    dropItems:
+    - item: {fileID: 11400000, guid: 60b41a7420673a9459e2056c2ff95014, type: 2}
+      dropRate: 100
     activeSkill: {fileID: 0}
-    passiveSkill: {fileID: 11400000, guid: bcd851160cab2f740ba7d4c68f71b0a5, type: 2}
-    gold: 2000
-    exp: 300
+    passiveSkill: {fileID: 0}
+    gold: 0
+    exp: 500
   conditions:
-  - conditionType: 1
+  - conditionType: 0
     targetId: 0
-    needItem: {fileID: 0}
-    count: 0
-  - conditionType: 1
-    targetId: 1
-    needItem: {fileID: 0}
-    count: 0
-  - conditionType: 1
-    targetId: 0
-    needItem: {fileID: 0}
+    needItem: {fileID: 11400000, guid: be01c06172885374b864a2744b4ed777, type: 2}
     count: 0
