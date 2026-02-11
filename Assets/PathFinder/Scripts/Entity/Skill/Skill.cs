@@ -47,7 +47,7 @@ public abstract class Skill : ScriptableObject
 
     public int GetID()
     {
-        return data.ID;
+        return data.ProjecitileID;
     }
 
     public GameObject GetGameObject()

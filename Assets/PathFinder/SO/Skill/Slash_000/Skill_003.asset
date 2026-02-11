@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Skill_003
   m_EditorClassIdentifier: 
   data:
-    id: 4
+    skillID: 3
+    projectileId: 4
     skillName: "\uD30C\uC774\uC5B4 \uC2AC\uB798\uC2DC"
     prefab: {fileID: 1715084321782570863, guid: 7cca90c0584a32741b4d72342be7cea8,
       type: 3}
@@ -29,3 +30,5 @@ MonoBehaviour:
   otherSlashIDs: 
   spawnCount: 1
   spawnDelta: 0
+  offset: {x: 0, y: 0, z: 0}
+  isMonster: 0

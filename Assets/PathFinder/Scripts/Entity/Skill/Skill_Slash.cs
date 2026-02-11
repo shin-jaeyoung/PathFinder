@@ -33,7 +33,7 @@ public class Skill_Slash : Skill
         {
             // 0번째는 기본 데이터 사용, 1번째부터는 리스트에서 순차적 사용
             int currentID = (i == 0 || otherSlashIDs.Count == 0)
-                            ? data.ID
+                            ? data.ProjecitileID
                             : otherSlashIDs[(i - 1) % otherSlashIDs.Count];
             Vector2 dir = caster.LookDir();
             Vector2 spawnPos = caster.CasterTrasform()+offset;

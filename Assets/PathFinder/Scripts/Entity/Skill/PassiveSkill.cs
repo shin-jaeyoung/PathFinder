@@ -7,6 +7,8 @@ using UnityEngine;
 public struct PassiveSkillData
 {
     [SerializeField]
+    private int passiveID;
+    [SerializeField]
     private string skillName;
     [SerializeField]
     private string description;
@@ -14,6 +16,7 @@ public struct PassiveSkillData
     private Sprite icon;
 
     //property
+    public int PassiveID => passiveID;
     public string Name => skillName;
     public string Description => description;
     public Sprite Icon => icon;

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Shot_150
   m_EditorClassIdentifier: 
   data:
-    id: 150
+    skillID: 150
+    projectileId: 150
     skillName: "\uC2AC\uB77C\uC784 \uC74C\uD30C\uACF5\uACA9"
     prefab: {fileID: 1715084321782570863, guid: b83c9d8117e48ec4ebea47a060f358d6,
       type: 3}
@@ -26,6 +27,7 @@ MonoBehaviour:
     spriteRotation: 0
   shotSpeed: 3
   count: 4
+  firstSpawnDelay: 0
   shotDelay: 0.5
   spawnDistance: 0
   canPass: 0

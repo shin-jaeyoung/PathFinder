@@ -47,7 +47,7 @@ public class Skill_Shot : Skill
         spawnPos = spawnPos + dir * spawnDistance;
 
 
-        GameObject go = PoolManager.instance.PoolDic[PoolType.Skill].Pop(data.ID, spawnPos, Quaternion.identity);
+        GameObject go = PoolManager.instance.PoolDic[PoolType.Skill].Pop(data.ProjecitileID, spawnPos, Quaternion.identity);
         if (go.TryGetComponent(out Projectile pj))
         {
             pj.Init(caster.GetAttackPower() * data.DamageMultiplier, caster.GetEntity(), caster.GetEntityType(), canPass);

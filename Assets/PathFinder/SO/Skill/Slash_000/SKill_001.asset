@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: SKill_001
   m_EditorClassIdentifier: 
   data:
-    id: 1
+    skillID: 1
+    projectileId: 1
     skillName: "\uBAAC\uC2A4\uD130\uAE30\uBCF8\uACF5\uACA9"
     prefab: {fileID: 9180995225039333714, guid: 7d30ed515ddab5c439f6281256e8b506,
       type: 3}
