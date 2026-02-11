@@ -79,6 +79,21 @@ PrefabInstance:
       propertyPath: offset.y
       value: -0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 2359791063972681615, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: moveRange
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2359791063972681615, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: trackRange
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2359791063972681615, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
+        type: 3}
+      propertyPath: detectRange
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3311634576480251582, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: m_Size.x
@@ -127,7 +142,7 @@ PrefabInstance:
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: rewardData.exp
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}

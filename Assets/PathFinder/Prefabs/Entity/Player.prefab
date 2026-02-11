@@ -5847,6 +5847,7 @@ MonoBehaviour:
   initStat: {fileID: 11400000, guid: 30fa5660279691f478d2f451cda272c3, type: 2}
   levelSystem:
     level: 1
+    maxLevel: 30
     curExp: 0
     maxExp: 100
     levelPoint: 0

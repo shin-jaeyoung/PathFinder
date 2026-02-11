@@ -17,12 +17,12 @@ PrefabInstance:
     - target: {fileID: 687164530013776951, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.06
+      value: 0.47634345
       objectReference: {fileID: 0}
     - target: {fileID: 687164530013776951, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 10.4732275
       objectReference: {fileID: 0}
     - target: {fileID: 687164530013776951, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
@@ -67,17 +67,17 @@ PrefabInstance:
     - target: {fileID: 2359791063972681615, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
       propertyPath: moveRange
-      value: 30
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2359791063972681615, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
       propertyPath: trackRange
-      value: 25
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2359791063972681615, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
       propertyPath: detectRange
-      value: 25
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3311634576480251582, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}

@@ -6,8 +6,11 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerLevelSystem 
 {
+    [Header("Level")]
     [SerializeField]
     private int level;
+    [SerializeField]
+    private int maxLevel;
     [SerializeField]
     private int curExp;
     [SerializeField]
@@ -54,24 +57,36 @@ public class PlayerLevelSystem
     }
     public void LevelUP()
     {
-        level++;
-        GlobalEvents.Notify($"레벨 업! {level}레벨 이 되었습니다", 2f);
-        if( level == 5)
+        if(level < maxLevel)
         {
-            GameManager.instance.Player.Skills.AddActiveSkill(levelSkillList[0]);
+            level++;
+            
+            GlobalEvents.Notify($"레벨 업! {level}레벨 이 되었습니다", 2f);
+            if( level == 5)
+            {
+                GameManager.instance.Player.Skills.AddActiveSkill(levelSkillList[0]);
+            }
+            else if (level == 10)
+            {
+                Debug.Log("10레벨 달성보상");
+                GameManager.instance.Player.Skills.AddActiveSkill(levelSkillList[1]);
+            }
+            else if (level == 15)
+            {
+                Debug.Log("15레벨 달성보상");
+                GameManager.instance.Player.Skills.AddActiveSkill(levelSkillList[2]);
+            }
+            levelPoint += 2;
+            if (level == maxLevel) 
+            {
+                maxExp = int.MaxValue;
+            }
+            else 
+            { 
+                UpdateMaxExp(); 
+            }
         }
-        else if (level == 10)
-        {
-            Debug.Log("10레벨 달성보상");
-            GameManager.instance.Player.Skills.AddActiveSkill(levelSkillList[1]);
-        }
-        else if (level == 15)
-        {
-            Debug.Log("15레벨 달성보상");
-            GameManager.instance.Player.Skills.AddActiveSkill(levelSkillList[2]);
-        }
-        levelPoint += 2;
-        UpdateMaxExp();
+        
         OnLevelChanged?.Invoke();
     }
 
