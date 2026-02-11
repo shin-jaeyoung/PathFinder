@@ -21,7 +21,7 @@ MonoBehaviour:
     skillType: 0
     description: "\uC8FC\uC704\uB97C 4\uBC88 \uD560\uD034\uB4EF \uBCA4\uB2E4"
     cooltime: 10
-    damageMultiplier: 0.45
+    damageMultiplier: 0.6
     duration: 0.3
     spriteRotation: 0
   spawnDistance: 0
@@ -29,3 +29,5 @@ MonoBehaviour:
   otherSlashIDs: 060000000500000006000000
   spawnCount: 4
   spawnDelta: 0.2
+  offset: {x: 0, y: 0, z: 0}
+  isMonster: 0
