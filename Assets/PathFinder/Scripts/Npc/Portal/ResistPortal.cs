@@ -15,11 +15,10 @@ public class ResistPortal : Portal
     public string PortalName => portalName;
     public SceneType whereScene => whereisIt;
 
-    private bool isResisted;
 
     public override void Teleport(Player player)
     {
-        if(isResisted)
+        if(GameManager.instance.isResisPortal(portalID))
         {
             UIManager.Instance.ShowUI(UIType.Portal);
         }
@@ -27,7 +26,6 @@ public class ResistPortal : Portal
         {
             if(GameManager.instance.ResistPortal(portalID, this))
             {
-                isResisted = true;
                 GlobalEvents.Notify($"전송석에 {portalName}이 등록 되었습니다.", 4f);
             }
         }

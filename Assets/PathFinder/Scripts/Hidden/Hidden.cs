@@ -41,7 +41,7 @@ public class Hidden
         if (currentCond.targetId != targetId) return false;
         if (currentCond.conditionType == ConditionType.HaveItem)
         {
-            if (!player.Inventory.HasItem(currentCond.needItem)) return false;
+            if (!player.Inventory.CheckItemAndRemove(currentCond.needItem)) return false;
         }
         if( currentCond.conditionType == ConditionType.Level)
         {

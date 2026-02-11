@@ -35,7 +35,7 @@ public class Skill_Magic : Skill
 
             yield return spawndelta;
 
-            Magic(caster, spawnPos, data.ID);
+            Magic(caster, spawnPos, data.ProjecitileID);
 
         }
     }

@@ -16,6 +16,7 @@ MonoBehaviour:
   - type: 0
     statValue: 1
   data:
+    passiveID: 302
     skillName: "\uADFC\uC721"
     description: 
     icon: {fileID: 21300000, guid: 34e6f6c3392496b43ac53611bdd9b593, type: 3}

@@ -12,7 +12,7 @@ public class PortalListView : MonoBehaviour
     {
         //GameManager.instance.resistedPortal[0];
         
-        foreach (KeyValuePair<int,ResistPortal> pair in GameManager.instance.resistedPortal)
+        foreach (KeyValuePair<int,PortalData> pair in GameManager.instance.resistedPortal)
         {
             if (FindID(pair.Key))
             {

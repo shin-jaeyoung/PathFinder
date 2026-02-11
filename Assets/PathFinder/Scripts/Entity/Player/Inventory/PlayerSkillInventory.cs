@@ -76,7 +76,8 @@ public class PlayerSkillInventory
         if (emptySlot != null)
         {
             emptySlot.passiveSkill = passiveSkill;
-            OnChangedPassiveSkill.Invoke();
+            OnChangedPassiveSkill?.Invoke();
+            
             GlobalEvents.Notify($"패시브 스킬 {passiveSkill.Data.Name}을 획득했습니다", 4f);
             return true;
         }
@@ -198,6 +199,10 @@ public class PlayerSkillInventory
                     addStatus.Add(stat.Type, stat.StatValue);
                 }
             }
+        }
+        if (GameManager.instance.Player != null)
+        {
+            GameManager.instance.Player.StatusSystem.UpdateFinalStat();
         }
 
     }

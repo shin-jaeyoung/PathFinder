@@ -18,7 +18,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 7d99a1b04132a7c469a1c960bf90f53a, type: 3}
     name: "\uC6A9\uC554"
     description: "\uC6A9\uC554\uC5D0 \uBE60\uC838\uB3C4 \uBC1C\uC740 \uAC71\uC815\uC5C6\uB2E4"
-    price: 15000
+    price: 30000
   statDatas:
   - type: 2
     statValue: 3

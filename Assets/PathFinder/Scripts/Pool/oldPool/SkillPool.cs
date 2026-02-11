@@ -20,7 +20,7 @@ public class SkillPool : Pool
         foreach (var skill in skills)
         {
             if (skill == null) continue;
-            int id = skill.Data.ID;
+            int id = skill.Data.ProjecitileID;
 
             if (!prefabDic.ContainsKey(id))
             {

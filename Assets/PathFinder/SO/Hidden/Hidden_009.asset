@@ -13,11 +13,15 @@ MonoBehaviour:
   m_Name: Hidden_009
   m_EditorClassIdentifier: 
   id: 9
-  hiddenName: 
+  hiddenName: "\uBC8C\uC368 15\uB819?"
   rewardData:
     dropItems: []
     activeSkill: {fileID: 0}
-    passiveSkill: {fileID: 0}
-    gold: 0
+    passiveSkill: {fileID: 11400000, guid: e94ab8b08822d9d409ffa255669be760, type: 2}
+    gold: 10000
     exp: 0
-  conditions: []
+  conditions:
+  - conditionType: 3
+    targetId: 0
+    needItem: {fileID: 0}
+    count: 15

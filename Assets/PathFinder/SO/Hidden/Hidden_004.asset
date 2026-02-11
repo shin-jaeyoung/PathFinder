@@ -19,7 +19,7 @@ MonoBehaviour:
     activeSkill: {fileID: 0}
     passiveSkill: {fileID: 11400000, guid: 959407b3fbe363a4fabdd2524ab802da, type: 2}
     gold: 500
-    exp: 200
+    exp: 100
   conditions:
   - conditionType: 1
     targetId: 0

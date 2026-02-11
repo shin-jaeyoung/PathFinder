@@ -13,15 +13,16 @@ MonoBehaviour:
   m_Name: Skill_005
   m_EditorClassIdentifier: 
   data:
-    id: 7
+    skillID: 5
+    projectileId: 7
     skillName: "\uBC1C\uB3C4"
     prefab: {fileID: 1715084321782570863, guid: 3b4315caae0744b478d6e460e9a54dfd,
       type: 3}
     icon: {fileID: 21300000, guid: f30d24ae22e16d847909033c850ab569, type: 3}
     skillType: 0
-    description: "\uBC1C\uB3C4 \uD6C4 5\uCC28\uB840 \uBCA4\uB2E4"
+    description: "\uBC1C\uB3C4 \uD6C4 5\uBC88 \uBCA4\uB2E4"
     cooltime: 14
-    damageMultiplier: 0.5
+    damageMultiplier: 0.7
     duration: 0.4
     spriteRotation: 0
   spawnDistance: 0
@@ -29,3 +30,5 @@ MonoBehaviour:
   otherSlashIDs: 08000000090000000a0000000b0000000c000000
   spawnCount: 6
   spawnDelta: 0.2
+  offset: {x: 0, y: 0, z: 0}
+  isMonster: 0

@@ -3,6 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[System.Serializable]
+public class PortalData
+{
+    public int ID;
+    public string Name;
+    public SceneType Scene;
+    public Vector3 Position;
+
+    public PortalData(ResistPortal portal)
+    {
+        ID = portal.PortalID;
+        Name = portal.PortalName;
+        Scene = portal.whereScene;
+        Position = portal.transform.position;
+    }
+}
 public abstract class Portal : MonoBehaviour , IInteractable
 {
     [SerializeField]

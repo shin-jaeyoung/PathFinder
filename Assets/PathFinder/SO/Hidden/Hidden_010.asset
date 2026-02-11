@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 251491461fafb6b4688021ff0ce05683, type: 3}
+  m_Name: Hidden_010
+  m_EditorClassIdentifier: 
+  id: 10
+  hiddenName: "\uACE8\uB3D9\uD488 \uC218\uC9D1\uAC00"
+  rewardData:
+    dropItems:
+    - item: {fileID: 11400000, guid: f297dfaa7ff9fd9428bfb74ca068741c, type: 2}
+      dropRate: 100
+    activeSkill: {fileID: 0}
+    passiveSkill: {fileID: 0}
+    gold: 0
+    exp: 500
+  conditions:
+  - conditionType: 0
+    targetId: 0
+    needItem: {fileID: 11400000, guid: be01c06172885374b864a2744b4ed777, type: 2}
+    count: 0

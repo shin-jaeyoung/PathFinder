@@ -3,27 +3,28 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class PortalSlot : MonoBehaviour , IPointerClickHandler
 {
     [SerializeField]
     private TextMeshProUGUI portalNameText;
 
-    private ResistPortal portal;
-
-    public void Init(ResistPortal portalData)
+    private PortalData portalData;
+    public void Init(PortalData portalData)
     {
-        portal = portalData;
-        portalNameText.text = portalData.PortalName;
+        this.portalData = portalData;
+        portalNameText.text = portalData.Name;
     }
     public int GetID()
     {
-        return portal.PortalID;
+        return portalData.ID;
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        GameManager.instance.MovePlayer(portal.arrivalTarget.position);
-        portal.ChangeScene(portal.whereScene);
+        GameManager.instance.MovePlayer(portalData.Position);
+        SceneManager.LoadScene(portalData.Scene.ToString());
+        UIManager.Instance.HideUI(UIType.Portal);
     }
 
 }

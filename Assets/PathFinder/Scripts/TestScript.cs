@@ -51,7 +51,7 @@ public class TestScript : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            player.LevelSystem.AddExp(50);
+            player.LevelSystem.AddExp(2000);
         }
         if(Input.GetKeyDown(KeyCode.Alpha8))
         {

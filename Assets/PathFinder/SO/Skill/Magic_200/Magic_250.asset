@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Magic_250
   m_EditorClassIdentifier: 
   data:
-    id: 250
+    skillID: 250
+    projectileId: 250
     skillName: "\uC2AC\uB77C\uC784 \uBC14\uB2E5 \uC18C\uD658"
     prefab: {fileID: 1715084321782570863, guid: 797fa149527ef604d8db657174c627fa,
       type: 3}

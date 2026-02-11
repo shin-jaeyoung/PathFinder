@@ -1,7 +1,11 @@
 ﻿using Cinemachine;
 using System;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -20,8 +24,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject cameraGroupPrefab; 
     private CinemachineVirtualCamera virtualCamera;
 
-    public Dictionary<int, ResistPortal> resistedPortal = new Dictionary<int, ResistPortal>();
+    private CinemachineConfiner2D confiner;
+
+    public Dictionary<int, PortalData> resistedPortal = new Dictionary<int, PortalData>();
     public event Action OnResistPortal;
+
+    [Header("Sound Settings")]
+    [SerializeField] 
+    private List<BGMData> bgmList;
+    [SerializeField] 
+    private AudioMixer mainMixer;
+    private SoundManager soundManager;
+    private AudioSource bgmSource;
+
     // property
 
     public Player Player
@@ -37,7 +52,7 @@ public class GameManager : MonoBehaviour
     }
     public SceneType CurScene => curScene;
     public SceneType PreScene => preScene;
-
+    public SoundManager SoundManager => soundManager;
 
     private void Awake()
     {
@@ -47,6 +62,18 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             InitializePlayer();
             InitializeCamera();
+            bgmSource = gameObject.AddComponent<AudioSource>();
+            if (mainMixer != null)
+            {
+                var groups = mainMixer.FindMatchingGroups("BGM");
+                if (groups.Length > 0)
+                {
+                    bgmSource.outputAudioMixerGroup = groups[0];
+                }
+            }
+            soundManager = new SoundManager();
+            soundManager.Init(bgmSource, bgmList, mainMixer);
+            SceneManager.sceneLoaded += OnSceneLoaded;
             InitialSceneSetting();
         }
         else
@@ -54,10 +81,15 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
     private void InitialSceneSetting()
     {
         curScene = SceneType.GameStart;
         preScene = SceneType.GameStart;
+        SetScene(SceneType.Town);
     }
     private void InitializePlayer()
     {
@@ -81,7 +113,7 @@ public class GameManager : MonoBehaviour
             GameObject camGo = Instantiate(cameraGroupPrefab);
             camGo.name = "CameraGroup";
             virtualCamera = camGo.GetComponentInChildren<CinemachineVirtualCamera>();
-
+            confiner = virtualCamera.GetComponent<CinemachineConfiner2D>();
             DontDestroyOnLoad(camGo);
         }
 
@@ -95,15 +127,42 @@ public class GameManager : MonoBehaviour
     {
         preScene = curScene;
         curScene = scene;
+        soundManager.OnSceneLoaded(curScene);
+    }
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
+    {
+        if (confiner == null && virtualCamera != null)
+            confiner = virtualCamera.GetComponent<CinemachineConfiner2D>();
+
+        if (confiner != null)
+        {
+            GameObject boundary = GameObject.FindGameObjectWithTag("CameraBoundery");
+            if (boundary != null)
+            {
+                confiner.m_BoundingShape2D = boundary.GetComponent<PolygonCollider2D>();
+                confiner.InvalidateCache();
+            }
+        }
+
+        
     }
 
+    
     public bool ResistPortal(int id, ResistPortal portal)
     {
         if (resistedPortal.ContainsKey(id) || portal == null) return false;
 
-        resistedPortal.Add(id, portal);
+        resistedPortal.Add(id, new PortalData(portal));
         OnResistPortal?.Invoke();
         return true;
+    }
+    public bool isResisPortal(int id)
+    {
+        if (resistedPortal.ContainsKey(id)) 
+        { 
+            return true; 
+        }
+        return false;
     }
     public void MovePlayer(Vector3 arrival)
     {

@@ -12,7 +12,9 @@ public struct SkillData
 {
     [Header("ProjectileID")]
     [SerializeField]
-    private int id;
+    private int skillID;
+    [SerializeField]
+    private int projectileId;
     [SerializeField]
     private string skillName;
     [SerializeField]
@@ -35,7 +37,8 @@ public struct SkillData
     [SerializeField]
     private float spriteRotation;
     //property
-    public int ID => id;
+    public int SkillID => skillID;
+    public int ProjecitileID => projectileId;
     public string SkillName => skillName;
     public GameObject Prefab => prefab;
     public Sprite Icon => icon;

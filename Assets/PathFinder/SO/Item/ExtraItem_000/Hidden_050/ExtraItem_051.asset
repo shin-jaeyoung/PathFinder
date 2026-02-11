@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     id: 51
-    type: 0
+    type: 3
     sprite: {fileID: 21300000, guid: c5a09b04d89c6f542a83d34ebafd647a, type: 3}
     name: "\uB9C8\uBC95\uC218\uC815\uC11D"
-    description: "\uC5B4\uB518\uAC00\uC5D0 \uC4F0\uC77C \uAC83\uAC19\uB2E4."
+    description: "\uC5B4\uB518\uAC00\uC5D0 \uC4F0\uC77C \uAC83 \uAC19\uB2E4"
     price: 6000
   capacityInSlot: 10

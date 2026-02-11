@@ -18,8 +18,8 @@ MonoBehaviour:
     dropItems: []
     activeSkill: {fileID: 0}
     passiveSkill: {fileID: 11400000, guid: cacdbd0ca4a96714d8c5758fdfd55af9, type: 2}
-    gold: 0
-    exp: 0
+    gold: 1500
+    exp: 150
   conditions:
   - conditionType: 1
     targetId: 0
