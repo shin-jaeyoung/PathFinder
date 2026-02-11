@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
@@ -26,6 +28,15 @@ public class GameManager : MonoBehaviour
 
     public Dictionary<int, PortalData> resistedPortal = new Dictionary<int, PortalData>();
     public event Action OnResistPortal;
+
+    [Header("Sound Settings")]
+    [SerializeField] 
+    private List<BGMData> bgmList;
+    [SerializeField] 
+    private AudioMixer mainMixer;
+    private SoundManager soundManager;
+    private AudioSource bgmSource;
+
     // property
 
     public Player Player
@@ -41,7 +52,7 @@ public class GameManager : MonoBehaviour
     }
     public SceneType CurScene => curScene;
     public SceneType PreScene => preScene;
-
+    public SoundManager SoundManager => soundManager;
 
     private void Awake()
     {
@@ -51,8 +62,19 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             InitializePlayer();
             InitializeCamera();
-            InitialSceneSetting();
+            bgmSource = gameObject.AddComponent<AudioSource>();
+            if (mainMixer != null)
+            {
+                var groups = mainMixer.FindMatchingGroups("BGM");
+                if (groups.Length > 0)
+                {
+                    bgmSource.outputAudioMixerGroup = groups[0];
+                }
+            }
+            soundManager = new SoundManager();
+            soundManager.Init(bgmSource, bgmList, mainMixer);
             SceneManager.sceneLoaded += OnSceneLoaded;
+            InitialSceneSetting();
         }
         else
         {
@@ -67,6 +89,7 @@ public class GameManager : MonoBehaviour
     {
         curScene = SceneType.GameStart;
         preScene = SceneType.GameStart;
+        SetScene(SceneType.Town);
     }
     private void InitializePlayer()
     {
@@ -104,8 +127,9 @@ public class GameManager : MonoBehaviour
     {
         preScene = curScene;
         curScene = scene;
+        soundManager.OnSceneLoaded(curScene);
     }
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
     {
         if (confiner == null && virtualCamera != null)
             confiner = virtualCamera.GetComponent<CinemachineConfiner2D>();
@@ -119,6 +143,8 @@ public class GameManager : MonoBehaviour
                 confiner.InvalidateCache();
             }
         }
+
+        
     }
 
     

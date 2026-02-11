@@ -2714,6 +2714,7 @@ GameObject:
   - component: {fileID: -1602438467291972668}
   - component: {fileID: 8421397667178071137}
   - component: {fileID: 8580137047324702032}
+  - component: {fileID: 8512720549986532077}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -6016,6 +6017,14 @@ MonoBehaviour:
   extraItem: {fileID: 11400000, guid: be01c06172885374b864a2744b4ed777, type: 2}
   testDash: {fileID: 11400000, guid: 65d712f31a4c64044b21e5ff6d33e5d9, type: 2}
   player: {fileID: 0}
+--- !u!81 &8512720549986532077
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5554626024084283710}
+  m_Enabled: 1
 --- !u!1 &5626902304530670762
 GameObject:
   m_ObjectHideFlags: 0
