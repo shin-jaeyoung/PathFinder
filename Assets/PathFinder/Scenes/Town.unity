@@ -343,13 +343,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1014071153009865747, guid: 61d855f03c4220d4592e14454e3fed59,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 4500485092114777792, guid: 61d855f03c4220d4592e14454e3fed59,
         type: 3}
       propertyPath: m_Name
       value: ResistPortal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6535106453365534174, guid: 61d855f03c4220d4592e14454e3fed59, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61d855f03c4220d4592e14454e3fed59, type: 3}
@@ -656,6 +662,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -659181493, guid: fdb4b955c3e2b8845853199d5f076dbc,
         type: 3}
+    - target: {fileID: 31980169455284196, guid: ef97072c1a8452147a0b2f2293d00aa5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 2665388756014546004, guid: ef97072c1a8452147a0b2f2293d00aa5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2557,16 +2568,16 @@ SceneRoots:
   - {fileID: 2175829987111277239}
   - {fileID: 7312551763662648918}
   - {fileID: 5671142450387047842}
+  - {fileID: 1325533474}
   - {fileID: 5620114470824713962}
   - {fileID: 810407684}
   - {fileID: 719344995}
   - {fileID: 1448457608}
+  - {fileID: 479123491}
+  - {fileID: 370986241}
   - {fileID: 6501010864479341090}
   - {fileID: 992266312}
   - {fileID: 1755337391}
-  - {fileID: 1325533474}
-  - {fileID: 479123491}
-  - {fileID: 370986241}
   - {fileID: 1813767907}
   - {fileID: 1650397820}
   - {fileID: 1823682059}
