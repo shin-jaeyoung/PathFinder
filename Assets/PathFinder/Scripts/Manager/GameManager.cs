@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour
     [Header("Camera Settings")]
     [SerializeField] private GameObject cameraGroupPrefab; 
     private CinemachineVirtualCamera virtualCamera;
+
+    private CinemachineConfiner2D confiner;
 
     public Dictionary<int, PortalData> resistedPortal = new Dictionary<int, PortalData>();
     public event Action OnResistPortal;
@@ -49,11 +52,16 @@ public class GameManager : MonoBehaviour
             InitializePlayer();
             InitializeCamera();
             InitialSceneSetting();
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
     private void InitialSceneSetting()
     {
@@ -82,7 +90,7 @@ public class GameManager : MonoBehaviour
             GameObject camGo = Instantiate(cameraGroupPrefab);
             camGo.name = "CameraGroup";
             virtualCamera = camGo.GetComponentInChildren<CinemachineVirtualCamera>();
-
+            confiner = virtualCamera.GetComponent<CinemachineConfiner2D>();
             DontDestroyOnLoad(camGo);
         }
 
@@ -97,7 +105,23 @@ public class GameManager : MonoBehaviour
         preScene = curScene;
         curScene = scene;
     }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (confiner == null && virtualCamera != null)
+            confiner = virtualCamera.GetComponent<CinemachineConfiner2D>();
 
+        if (confiner != null)
+        {
+            GameObject boundary = GameObject.FindGameObjectWithTag("CameraBoundery");
+            if (boundary != null)
+            {
+                confiner.m_BoundingShape2D = boundary.GetComponent<PolygonCollider2D>();
+                confiner.InvalidateCache();
+            }
+        }
+    }
+
+    
     public bool ResistPortal(int id, ResistPortal portal)
     {
         if (resistedPortal.ContainsKey(id) || portal == null) return false;

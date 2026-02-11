@@ -68,8 +68,6 @@ public class HUDUI : MonoBehaviour
     {
         if (GameManager.instance.Player == null) return;
         levelValue.text = player.LevelSystem.Level.ToString();
-        Debug.Log(player.LevelSystem.CurExp );
-        Debug.Log( player.LevelSystem.MaxExp);
         float curExp = player.LevelSystem.CurExp;
         float maxExp = player.LevelSystem.MaxExp;
         float ratio = curExp / maxExp;
