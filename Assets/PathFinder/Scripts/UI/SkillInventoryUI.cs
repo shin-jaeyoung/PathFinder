@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,6 +38,8 @@ public class SkillInventoryUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI explainDescription;
 
+
+    private StringBuilder sb = new StringBuilder();
     private Player player;
     private List<SkillSlotUI> activeSkillInven;
     private List<PassiveSkillSlotUI> passiveSkillInven;
@@ -109,6 +112,8 @@ public class SkillInventoryUI : MonoBehaviour
     {
         activePanel.SetActive(isActive);
         passivePanel.SetActive(!isActive);
+        explainName.text = "";
+        explainDescription.text = "";
     }
     
     public void UpdateAll()
@@ -128,12 +133,33 @@ public class SkillInventoryUI : MonoBehaviour
     }
     public void UpdateExplain(SkillSlot activeSlot)
     {
-        explainName.text = activeSlot.skill.Data.SkillName.ToString();
-        explainDescription.text = activeSlot.skill.Data.Description.ToString();
+        explainName.text = activeSlot.skill.Data.SkillName;
+        sb.Clear();
+        sb.Append("스킬 데미지 계수 : ").Append(activeSlot.skill.Data.DamageMultiplier * 100).Append("%").AppendLine()
+            .Append("쿨타임 : ").Append(activeSlot.skill.Data.Cooltime).Append("초").AppendLine()
+            .Append(activeSlot.skill.Data.Description);
+
+
+        explainDescription.text = sb.ToString();
     }
     public void UpdateExplain(PassiveSlot slot)
     {
-        explainName.text = slot.passiveSkill.Data.Name.ToString();
-        explainDescription.text = slot.passiveSkill.Data.Description.ToString();
+        explainName.text = slot.passiveSkill.Data.Name;
+        sb.Clear();
+        foreach ( var stat in slot.passiveSkill.PassiveEffect)
+        {
+            string stattype = null;
+            if (stat.Type == PlayerStatType.STR) { stattype = "힘"; }
+            else if (stat.Type == PlayerStatType.DEX) { stattype = "민첩"; }
+            else if (stat.Type == PlayerStatType.CON) { stattype = "활력"; }
+            else if (stat.Type == PlayerStatType.Armor) { stattype = "방어력"; }
+            else if (stat.Type == PlayerStatType.CriRate) { stattype = "크리티컬 확률"; }
+            else if (stat.Type == PlayerStatType.CriDamage) { stattype = "크리티컬 데미지"; }
+            else if (stat.Type == PlayerStatType.MaxHp) { stattype = "최대체력"; }
+            
+            sb.Append(stattype).Append(" : ").Append(stat.StatValue).AppendLine();
+        }
+        sb.Append(slot.passiveSkill.Data.Description);
+        explainDescription.text = sb.ToString();
     }
 }
