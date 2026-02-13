@@ -50,6 +50,7 @@ public class Detection : MonoBehaviour
     private bool isSearching = false;
 
     // Properties
+    public Vector2 Offset => offset;
     public Vector2 OriginVec => originVec;
     public Transform Target => target;
     public bool IsDetect => isDetect;
