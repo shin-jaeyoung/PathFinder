@@ -59,7 +59,7 @@ public class UIManager : MonoBehaviour
     public UIType CurUI => currenUIType;
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
@@ -80,6 +80,7 @@ public class UIManager : MonoBehaviour
             if (uiStack.Count > 0)
             {
                 HideUI(uiStack[uiStack.Count - 1]);
+
             }
             else
             {
@@ -99,6 +100,14 @@ public class UIManager : MonoBehaviour
         {
             ToggleUI(UIType.Skill);
         }
+        //if (Input.GetKeyDown(KeyCode.L))
+        //{
+        //    Debug.Log($"UI List 원소 개수 : {uiStack.Count}");
+        //    if (uiStack.Count > 0)
+        //    {
+        //        Debug.Log($"열린 UI{uiStack[uiStack.Count - 1].ToString()}");
+        //    }
+        //}
     }
     private void ToggleUI(UIType type)
     {
@@ -165,7 +174,7 @@ public class UIManager : MonoBehaviour
     }
     public bool CheckCurUIType(UIType type)
     {
-        if(currenUIType == type) return true;
+        if (currenUIType == type) return true;
         return false;
     }
 
@@ -173,7 +182,7 @@ public class UIManager : MonoBehaviour
     public void ShowUI(UIType type)
     {
         if (!uiPanelDic.TryGetValue(type, out UIStatus status)) return;
-        if (status.isOpen) return; 
+        if (status.isOpen) return;
         status.panel.SetActive(true);
         status.panel.transform.SetAsLastSibling();
 
@@ -194,7 +203,7 @@ public class UIManager : MonoBehaviour
     }
     private void UpdateCurrentUIType()
     {
-        currenUIType = (uiStack.Count > 0) ? 
+        currenUIType = (uiStack.Count > 0) ?
             uiStack[uiStack.Count - 1] : UIType.HUD;
 
     }
@@ -219,6 +228,11 @@ public class UIManager : MonoBehaviour
 
         uiStack.Clear();
         uiStack.Add(targetType);
+        UpdateCurrentUIType();
+    }
+    public void ShowOnlyHUD()
+    {
+        uiStack.Clear();
         UpdateCurrentUIType();
     }
 }

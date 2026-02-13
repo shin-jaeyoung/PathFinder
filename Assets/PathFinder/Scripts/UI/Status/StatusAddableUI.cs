@@ -24,12 +24,16 @@ public class StatusAddableUI : MonoBehaviour
     [SerializeField]
     private Button conButton;
 
-    public void RefreshUI(PlayerStatusSystem stat,PlayerLevelSystem levelSystem)
+    public void RefreshUI(string strValue,string dexValue, string conValue)
     {
-        strValue.text = stat.Stat[PlayerStatType.STR].ToString();
-        dexValue.text = stat.Stat[PlayerStatType.DEX].ToString();
-        conValue.text = stat.Stat[PlayerStatType.CON].ToString();
-        levelPointValue.text = levelSystem.LevelPoint.ToString();
+        this.strValue.text = strValue;
+        this.dexValue.text = dexValue;
+        this.conValue.text = conValue;
+
+    }
+    public void RefreshUILevelPoint(string levelPoint)
+    {
+        levelPointValue.text = levelPoint;
     }
     public void ResistEvent(PlayerStatusSystem stat)
     {

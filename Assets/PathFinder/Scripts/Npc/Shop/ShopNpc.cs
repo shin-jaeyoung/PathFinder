@@ -45,7 +45,7 @@ public class ShopNpc : SpecialNpc, ISpecialInteractable
     }
     public void Init()
     {
-        UIManager.Instance.Showonly(UIType.HUD);
+        UIManager.Instance.ShowOnlyHUD();
         isShopOpen = false;
         isInteractFinish = false;
     }
