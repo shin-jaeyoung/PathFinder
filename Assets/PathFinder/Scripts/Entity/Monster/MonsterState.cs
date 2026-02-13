@@ -136,23 +136,31 @@ public class MonsterGobackState : MonsterState
     }
     public override void Update()
     {
+
         if (owner.Detection.IsDetect)
         {
             stateMachine.ChangeState(StateType.Move);
             return;
         }
         float distToOrigin = Vector2.Distance(owner.transform.position, owner.Detection.OriginVec);
-        if (distToOrigin < 0.1f)
+        if (distToOrigin < 0.2f)
         {
+            owner.Rb.velocity = Vector2.zero;
             stateMachine.ChangeState(StateType.Idle);
         }
 
     }
     public override void FixedUpdate()
     {
+        float distToOrigin = Vector2.Distance(owner.transform.position, owner.Detection.OriginVec);
+        if (distToOrigin < 0.1f) return;
+
         Vector2 dir = owner.Detection.GetAdjustedDirection(owner.Detection.OriginVec);
         owner.Rb.velocity = dir * owner.Data.Speed;
-        owner.FlipSprite(dir.x);
+        if (Mathf.Abs(dir.x) > 0.01f)
+        {
+            owner.FlipSprite(dir.x);
+        }
     }
     public override void Exit()
     {
