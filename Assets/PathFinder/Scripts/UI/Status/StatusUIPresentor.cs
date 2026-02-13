@@ -35,9 +35,11 @@ public class StatusUIPresentor : MonoBehaviour
     public void RefreshStatusValueUI()
     {
         statusValueUI.RefreshUI(player.StatusSystem);
+
         statusAddableUI.RefreshUI(player.StatusSystem.Stat[PlayerStatType.STR].ToString(),
             player.StatusSystem.Stat[PlayerStatType.DEX].ToString(),
             player.StatusSystem.Stat[PlayerStatType.CON].ToString());
+
         statusAndHiddenView.RefreshHpText(player);
     }
     public void RefreshExpUI()

@@ -16,11 +16,12 @@ public class SoundManager
     private Dictionary<SceneType, AudioClip> bgmDictionary = new Dictionary<SceneType, AudioClip>();
     private AudioMixer mixer;
 
+    
     public void Init(AudioSource source, List<BGMData> bgmList, AudioMixer audioMixer)
     {
         bgmPlayer = source;
         mixer = audioMixer;
-
+        
         foreach (var data in bgmList)
         {
             if (data.audioClip == null) continue;

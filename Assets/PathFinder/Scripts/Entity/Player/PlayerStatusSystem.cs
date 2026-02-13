@@ -47,7 +47,6 @@ public class PlayerStatusSystem
     public Action OnStatChanged;
     public Action OnDead;
 
- 
 
     public void Init(PlayerStatList initData)
     {

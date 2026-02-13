@@ -36,16 +36,13 @@ public class ShopNpc : SpecialNpc, ISpecialInteractable
     public void CloseShop()
     {
         ShopManager.instance.ClearNpc();
-        if(UIManager.Instance.CheckCurUIType(UIType.Shop))
-        {
-            UIManager.Instance.HideUI(UIType.Shop);
-        }
+        UIManager.Instance.HideUI(UIType.Shop);
         isShopOpen = false;
         isInteractFinish = true;
     }
     public void Init()
     {
-        UIManager.Instance.ShowOnlyHUD();
+        UIManager.Instance.HideUI(UIType.Shop);
         isShopOpen = false;
         isInteractFinish = false;
     }
@@ -56,7 +53,7 @@ public class ShopNpc : SpecialNpc, ISpecialInteractable
         {
             if(collision.GetComponent<Player>()!=null)
             {
-                Init();
+                CloseShop();
             }
         }
     }

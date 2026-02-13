@@ -125,6 +125,12 @@ public abstract class Monster : Entity , IPoolable
         stateMachine?.FixedUpdate();
     }
 
+    private void OnDisable()
+    {
+        isEncountered = false;
+        GlobalEvents.EncountBoss(null);
+    }
+
     public override void Active(int index)
     {
         if (skills.Count > 0 && CheckSkillCool())

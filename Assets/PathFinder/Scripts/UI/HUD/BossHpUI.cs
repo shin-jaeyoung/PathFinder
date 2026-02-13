@@ -43,7 +43,12 @@ public class BossHpUI : MonoBehaviour
 
     public void UpdateHpUI()
     {
-        if (targetMonster == null) return;
+        if (targetMonster == null) 
+        {
+            CloseUI();
+            return; 
+        }
+
 
         nameText.text = targetMonster.Data.Name;
         hpImage.fillAmount = targetMonster.CurHp / targetMonster.Data.MaxHp;

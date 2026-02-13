@@ -24,7 +24,7 @@ public class Hidden
     {
         this.data = data;
         curState = HiddenState.Start;
-        curState = 0;
+        curStep = 0;
         maxStep = data.conditions.Count;
     }
 
@@ -60,6 +60,7 @@ public class Hidden
         {
             curState = HiddenState.End;
             HiddenManager.instance.EndHiddenCount++;
+            HiddenManager.instance.CompleteHidden(data.id);
             GiveReward(player);
         }
         else
