@@ -24,6 +24,7 @@ public class PortalSlot : MonoBehaviour , IPointerClickHandler
     {
         GameManager.instance.MovePlayer(portalData.Position);
         SceneManager.LoadScene(portalData.Scene.ToString());
+        GameManager.instance.SetScene(portalData.Scene);
         UIManager.Instance.HideUI(UIType.Portal);
     }
 

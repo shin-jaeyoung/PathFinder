@@ -138,12 +138,12 @@ PrefabInstance:
     - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
       propertyPath: bossPosduringGimmick.x
-      value: -4
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
       propertyPath: bossPosduringGimmick.y
-      value: 0
+      value: 10.5
       objectReference: {fileID: 0}
     - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}

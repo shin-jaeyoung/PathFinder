@@ -43,6 +43,7 @@ public class InventorySlotUI : SlotUI ,IPointerEnterHandler,IPointerExitHandler
             icon.sprite = null;
             icon.color = new Color(1, 1, 1, 0);
             group.alpha = 0;
+            countText.gameObject.SetActive(false);
         }
         else
         {
@@ -58,6 +59,7 @@ public class InventorySlotUI : SlotUI ,IPointerEnterHandler,IPointerExitHandler
                 }
                 else
                 {
+
                     countText.gameObject.SetActive(false);
                 }
             }

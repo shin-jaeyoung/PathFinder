@@ -108,10 +108,12 @@ public class MonsterSpawner : MonoBehaviour
         {
             if (spawnObj.TryGetComponent<IPoolable>(out IPoolable go))
             {
-                isSpawn = false;
-                PoolManager.instance.PoolDic[PoolType.Monster].ReturnPool(go);
-                
-                spawnObj = null;
+                if(spawnObj.TryGetComponent<Monster>(out Monster mon))
+                {
+                    isSpawn = false;
+                    mon.Refresh();
+                    spawnObj = null;
+                }
             }
         }
         returnCoroutine = null;

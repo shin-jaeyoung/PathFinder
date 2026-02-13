@@ -38,7 +38,18 @@ public class PlayerLevelSystem
     }
     public void UpdateMaxExp()
     {
-        maxExp = level * 100;
+        if (level<10)
+        {
+            maxExp = 50 * level;
+        }
+        else if( level <20)
+        {
+            maxExp = 70 * level;
+        }
+        else
+        {
+            maxExp = 100 * level;
+        }
     }
     public bool AddExp(int mount)
     {
