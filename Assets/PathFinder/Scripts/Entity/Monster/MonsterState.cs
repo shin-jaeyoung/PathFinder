@@ -35,6 +35,7 @@ public class MonsterMoveState : MonsterState
     }
     public override void Update()
     {
+        if (owner.IsDead) return;
         if (!owner.Detection.IsDetect)
         {
             stateMachine.ChangeState(StateType.Goback);

@@ -1080,6 +1080,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4262873713052934451, guid: adefdc47da7f77a479c8a52127805c7f,
         type: 3}
+      propertyPath: respawnTime
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262873713052934451, guid: adefdc47da7f77a479c8a52127805c7f,
+        type: 3}
       propertyPath: spawnerScene
       value: 3
       objectReference: {fileID: 0}
