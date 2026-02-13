@@ -10,6 +10,10 @@ public class MonsterSpawner : MonoBehaviour
     [Header("SpawnPoint")]
     [SerializeField]
     private SceneType spawnerScene;
+    [Header("Spawn Settings")]
+    [SerializeField]
+    private float respawnTime;
+    private bool isRespawning = false; 
 
     [Header("Visible Size")]
     [SerializeField]
@@ -48,6 +52,8 @@ public class MonsterSpawner : MonoBehaviour
     private void OnBecameInvisible()
     {
         isOnCamera = false;
+        isRespawning = false;
+
         if (isActiveAndEnabled&&isSpawn && returnCoroutine == null)
         {
             returnCoroutine = StartCoroutine(ReturnPoolCo());
@@ -55,13 +61,33 @@ public class MonsterSpawner : MonoBehaviour
     }
     public void Spawn()
     {
+        if (isRespawning || isSpawn) return;
         isSpawn = true;
         spawnObj = PoolManager.instance.PoolDic[PoolType.Monster].Pop(monsterID, transform.position, Quaternion.identity);
         spawnObj.transform.SetParent(transform, true);
+        if (spawnObj.TryGetComponent<Monster>(out var monster))
+        {
+            monster.OnReturnPool = () => {
+                isSpawn = false;
+                spawnObj = null;
+                StartCoroutine(RespawnTimer());
+            };
+        }
+    }
+    private IEnumerator RespawnTimer()
+    {
+        isRespawning = true;
+        yield return new WaitForSeconds(respawnTime);
+        isRespawning = false;
+
+        if (isOnCamera && GameManager.instance.CurScene == spawnerScene)
+        {
+            Spawn();
+        }
     }
     public IEnumerator ReturnPoolCo()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
 
         // 대기 시간 이후에도 여전히 카메라 밖에 있다면 리턴풀
         if (!isOnCamera)
@@ -82,10 +108,12 @@ public class MonsterSpawner : MonoBehaviour
         {
             if (spawnObj.TryGetComponent<IPoolable>(out IPoolable go))
             {
-                isSpawn = false;
-                PoolManager.instance.PoolDic[PoolType.Monster].ReturnPool(go);
-                
-                spawnObj = null;
+                if(spawnObj.TryGetComponent<Monster>(out Monster mon))
+                {
+                    isSpawn = false;
+                    mon.Refresh();
+                    spawnObj = null;
+                }
             }
         }
         returnCoroutine = null;

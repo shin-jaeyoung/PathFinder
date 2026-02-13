@@ -47,7 +47,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterID: 1
   spawnerScene: 0
+  respawnTime: 7
   visibleSizeMultiply: 1.5
+  isSpawn: 0
+  isOnCamera: 0
+  spawnObj: {fileID: 0}
 --- !u!212 &5653917640920079963
 SpriteRenderer:
   m_ObjectHideFlags: 0

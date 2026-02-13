@@ -16,28 +16,39 @@ public class StatusUIPresentor : MonoBehaviour
     {
         player = GameManager.instance.Player;
         statusAddableUI.ResistEvent(player.StatusSystem);
-        player.StatusSystem.OnStatChanged += RefreshUI;
-        player.LevelSystem.OnExpChanged += RefreshLevelUI;
+        player.StatusSystem.OnStatChanged += RefreshStatusValueUI;
+        player.LevelSystem.OnExpChanged += RefreshExpUI;
+        player.LevelSystem.OnLevelPointChanged += RefreshLevelPointUI;
         HiddenManager.instance.OnEndHidden += RefreshHiidenUI;
-        RefreshUI();
-        RefreshLevelUI();
+        RefreshStatusValueUI();
+        RefreshExpUI();
+        RefreshLevelPointUI();
         RefreshHiidenUI();
     }
     private void OnDestroy()
     {
-        player.StatusSystem.OnStatChanged -= RefreshUI;
-        player.LevelSystem.OnExpChanged -= RefreshLevelUI;
+        player.StatusSystem.OnStatChanged -= RefreshStatusValueUI;
+        player.LevelSystem.OnExpChanged -= RefreshExpUI;
+        player.LevelSystem.OnLevelPointChanged -= RefreshLevelPointUI;
         HiddenManager.instance.OnEndHidden -= RefreshHiidenUI;
     }
-    public void RefreshUI()
+    public void RefreshStatusValueUI()
     {
         statusValueUI.RefreshUI(player.StatusSystem);
-        statusAddableUI.RefreshUI(player.StatusSystem,player.LevelSystem);
+
+        statusAddableUI.RefreshUI(player.StatusSystem.Stat[PlayerStatType.STR].ToString(),
+            player.StatusSystem.Stat[PlayerStatType.DEX].ToString(),
+            player.StatusSystem.Stat[PlayerStatType.CON].ToString());
+
         statusAndHiddenView.RefreshHpText(player);
     }
-    public void RefreshLevelUI()
+    public void RefreshExpUI()
     {
         statusAndHiddenView.RefreshExpText(player);
+    }
+    public void RefreshLevelPointUI()
+    {
+        statusAddableUI.RefreshUILevelPoint(player.LevelSystem.LevelPoint.ToString());
     }
     public void RefreshHiidenUI()
     {

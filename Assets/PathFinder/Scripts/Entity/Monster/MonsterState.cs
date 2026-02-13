@@ -8,6 +8,8 @@ public class MonsterIdleState : MonsterState
 {
     public override void Enter()
     {
+        owner.FlipSprite(owner.Rb.velocity.x);
+        owner.Rb.velocity = Vector2.zero;
         
     }
     public override void Update()
@@ -35,6 +37,7 @@ public class MonsterMoveState : MonsterState
     }
     public override void Update()
     {
+        if (owner.IsDead) return;
         if (!owner.Detection.IsDetect)
         {
             stateMachine.ChangeState(StateType.Goback);
@@ -68,7 +71,7 @@ public class MonsterMoveState : MonsterState
             moveTargetPos = owner.Detection.LastKnownPos;
 
             // 마지막 위치 도착 확인
-            float distToLastPos = Vector2.Distance(owner.transform.position, moveTargetPos);
+            float distToLastPos = Vector2.Distance((Vector2)owner.transform.position + owner.Detection.Offset, moveTargetPos);
             if (distToLastPos < 0.3f)
             {
                 // 수색 상태로 전환
@@ -78,7 +81,7 @@ public class MonsterMoveState : MonsterState
         }
 
         //너무 붙으면 속도 멈추게
-        float dist = Vector2.Distance(owner.transform.position, owner.Detection.Target.position);
+        float dist = Vector2.Distance((Vector2)owner.transform.position+owner.Detection.Offset, owner.Detection.Target.position);
         if(dist < 0.8f)
         {
             owner.Rb.velocity = Vector2.zero;
@@ -135,28 +138,39 @@ public class MonsterGobackState : MonsterState
     }
     public override void Update()
     {
+
         if (owner.Detection.IsDetect)
         {
             stateMachine.ChangeState(StateType.Move);
             return;
         }
-        float distToOrigin = Vector2.Distance(owner.transform.position, owner.Detection.OriginVec);
-        if (distToOrigin < 0.1f)
-        {
-            stateMachine.ChangeState(StateType.Idle);
-        }
 
     }
     public override void FixedUpdate()
     {
+
+        float distToOrigin = Vector2.Distance((Vector2)owner.transform.position+owner.Detection.Offset, owner.Detection.OriginVec);
+        Debug.Log(distToOrigin);
+        if (distToOrigin < 0.1f)
+        {
+            owner.Rb.velocity = Vector2.zero;
+            stateMachine.ChangeState(StateType.Idle);
+            return;
+        }
+
         Vector2 dir = owner.Detection.GetAdjustedDirection(owner.Detection.OriginVec);
         owner.Rb.velocity = dir * owner.Data.Speed;
-        owner.FlipSprite(dir.x);
+
+        if (Mathf.Abs(dir.x) > 0.01f)
+        {
+            owner.FlipSprite(dir.x);
+        }
     }
     public override void Exit()
     {
         owner.Rb.velocity = Vector2.zero;
         owner.Animator.SetBool("IsMove", false);
+        Debug.Log("돌아가기상태 종료");
     }
 }
 public class MonsterHitState : MonsterState

@@ -1,25 +1,42 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BossPortalDoor : MonoBehaviour
 {
-    [SerializeField]
-    private BoxCollider2D boxcollider;
+    [SerializeField] private BoxCollider2D boxcollider;
+    [SerializeField] private int targetId = 99;
 
-    private bool isOpen = false;
-
-    private void Update()
+    private void Start()
     {
-        if (!isOpen && HiddenManager.instance.HiddenDic[99].State == HiddenState.End)
+        if (HiddenManager.instance != null && HiddenManager.instance.HiddenDic.ContainsKey(targetId))
         {
-            isOpen = true;
-            boxcollider.isTrigger = true;
+            if (HiddenManager.instance.HiddenDic[targetId].State == HiddenState.End)
+            {
+                OpenDoor();
+                return;
+            }
         }
+
+        HiddenManager.instance.OnHiddenStateChanged += HandleHiddenChanged;
+    }
+
+    private void HandleHiddenChanged(int id, HiddenState state)
+    {
+        if (id == targetId && state == HiddenState.End)
+        {
+            OpenDoor();
+            HiddenManager.instance.OnHiddenStateChanged -= HandleHiddenChanged;
+        }
+    }
+
+    private void OpenDoor()
+    {
+        gameObject.SetActive(false);
     }
     private void OnDestroy()
     {
-        isOpen = false;
-        boxcollider.isTrigger = false;
+        if (HiddenManager.instance != null)
+        {
+            HiddenManager.instance.OnHiddenStateChanged -= HandleHiddenChanged;
+        }
     }
 }

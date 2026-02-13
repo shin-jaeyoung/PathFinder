@@ -6014,7 +6014,7 @@ MonoBehaviour:
   shoes: {fileID: 11400000, guid: f78c028919d5f9642be15ade4fec135f, type: 2}
   testSkill: {fileID: 11400000, guid: 037dbfee1e73525418602cf90b12e8e7, type: 2}
   testSwap: {fileID: 11400000, guid: a3565016601b3154cb4ffca880063392, type: 2}
-  extraItem: {fileID: 11400000, guid: be01c06172885374b864a2744b4ed777, type: 2}
+  extraItem: {fileID: 11400000, guid: 8892ce9cececbaf49949593da2e64efe, type: 2}
   testDash: {fileID: 11400000, guid: 65d712f31a4c64044b21e5ff6d33e5d9, type: 2}
   player: {fileID: 0}
 --- !u!81 &8512720549986532077

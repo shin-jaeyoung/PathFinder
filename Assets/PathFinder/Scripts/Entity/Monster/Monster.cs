@@ -77,7 +77,7 @@ public abstract class Monster : Entity , IPoolable
     public bool CanUseAnySkill => skills.Count > 0 && CheckSkillCool();
     //deligate
     public event Action OnChangeHp;
-
+    public Action OnReturnPool;
     private void Start()
     {
         BaseInit();
@@ -123,6 +123,12 @@ public abstract class Monster : Entity , IPoolable
     private void FixedUpdate()
     {
         stateMachine?.FixedUpdate();
+    }
+
+    private void OnDisable()
+    {
+        isEncountered = false;
+        GlobalEvents.EncountBoss(null);
     }
 
     public override void Active(int index)
@@ -189,6 +195,7 @@ public abstract class Monster : Entity , IPoolable
     {
         if (isDead) return;
         isDead = true;
+        OnReturnPool?.Invoke();
         stateMachine.ChangeState(StateType.Die);
     }
     public void Refresh()
@@ -203,7 +210,7 @@ public abstract class Monster : Entity , IPoolable
         }
         basicAttack.isCooltime = false;
         basicAttack.currentCooltime = 0;
-
+        OnReturnPool = null;
         PoolManager.instance.PoolDic[PoolType.Monster].ReturnPool(this);
     }
     public void FlipSprite(float xInput)

@@ -25,9 +25,9 @@ public class PlayerLevelSystem
     public int MaxExp => maxExp;
     public int LevelPoint => levelPoint;
 
-    public Action OnExpChanged;
-    public Action OnLevelChanged;
-
+    public event Action OnExpChanged;
+    public event Action OnLevelChanged;
+    public event Action OnLevelPointChanged;
     public void Init()
     {
         level = 1;
@@ -38,7 +38,18 @@ public class PlayerLevelSystem
     }
     public void UpdateMaxExp()
     {
-        maxExp = level * 100;
+        if (level<10)
+        {
+            maxExp = 50 * level;
+        }
+        else if( level <20)
+        {
+            maxExp = 70 * level;
+        }
+        else
+        {
+            maxExp = 100 * level;
+        }
     }
     public bool AddExp(int mount)
     {
@@ -88,6 +99,7 @@ public class PlayerLevelSystem
         }
         
         OnLevelChanged?.Invoke();
+        OnLevelPointChanged?.Invoke();
     }
 
     public bool UseLevelPoint()
@@ -95,6 +107,7 @@ public class PlayerLevelSystem
         if(levelPoint>0)
         {
             levelPoint--;
+            OnLevelPointChanged?.Invoke();
             return true;
         }
         else

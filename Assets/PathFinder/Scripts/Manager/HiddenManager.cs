@@ -33,6 +33,8 @@ public class HiddenManager : MonoBehaviour
     }
     //deligate
     public event Action OnEndHidden;
+    public Action<int, HiddenState> OnHiddenStateChanged;
+
 
     private void Awake()
     {
@@ -86,5 +88,12 @@ public class HiddenManager : MonoBehaviour
     public int ChechkHiddenCount()
     {
         return hiddenDic.Count;
+    }
+    public void CompleteHidden(int id)
+    {
+        if (HiddenDic.ContainsKey(id))
+        {
+            OnHiddenStateChanged?.Invoke(id, HiddenState.End);
+        }
     }
 }
