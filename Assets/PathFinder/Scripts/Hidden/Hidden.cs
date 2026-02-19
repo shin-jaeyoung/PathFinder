@@ -30,7 +30,7 @@ public class Hidden
 
     //property
     public HiddenData Data => data;
-    public HiddenState State => curState;
+    public HiddenState State {get { return curState; } set { curState = value; } }
 
 
     public bool VerifyCondition(int targetId, Player player)

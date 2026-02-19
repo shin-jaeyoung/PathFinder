@@ -10,6 +10,7 @@ public enum PoolType
     UI,
     DamageText,
     Dialogue,
+    SFX,
 }
 
 public class PoolManager : MonoBehaviour

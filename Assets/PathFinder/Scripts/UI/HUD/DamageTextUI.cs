@@ -18,14 +18,14 @@ public class DamageTextUI : MonoBehaviour
         GlobalEvents.OnDamage -= SpawnDamageText;
     }
 
-    private void SpawnDamageText(string damage, Transform target)
+    private void SpawnDamageText(string damage, Transform target, bool isCritical = false)
     {
         GameObject go = PoolManager.instance.PoolDic[PoolType.DamageText].Pop(damageTextPoolID, Vector3.zero, Quaternion.identity);
 
         go.transform.SetParent(transform, false);
         if (go.TryGetComponent(out DamageText textScript))
         {
-            textScript.Init(damage, target);
+            textScript.Init(damage, target,isCritical);
         }
     }
 }

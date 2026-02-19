@@ -78,12 +78,12 @@ public abstract class Monster : Entity , IPoolable
     //deligate
     public event Action OnChangeHp;
     public Action OnReturnPool;
-    private void Start()
+    private void Awake()
     {
-        BaseInit();
-        InitStart();
+        BaseInitAwake();
+        InitAwake();
     }
-    public void BaseInit()
+    public void BaseInitAwake()
     {
         detection = GetComponent<Detection>();
         rb = GetComponent<Rigidbody2D>();
@@ -103,22 +103,19 @@ public abstract class Monster : Entity , IPoolable
 
         stateMachine.ChangeState(StateType.Idle);
     }
-    protected abstract void InitStart();
+    protected abstract void InitAwake();
 
+    private void OnEnable()
+    {
+        OnEnableSetting();
+    }
+    protected virtual void OnEnableSetting()
+    {
+
+    }
     private void Update()
     {
         stateMachine?.Update();
-        if (data.Type != MonsterType.Normal && detection.IsDetect && !isEncountered)
-        {
-            Debug.Log("보스가 플레이어를 감지했습니다");
-            isEncountered = true;
-            GlobalEvents.EncountBoss(this);
-        }
-        else if(data.Type != MonsterType.Normal && !detection.IsDetect)
-        {
-            isEncountered = false;
-            GlobalEvents.EncountBoss(null);
-        }
     }
     private void FixedUpdate()
     {
@@ -127,10 +124,26 @@ public abstract class Monster : Entity , IPoolable
 
     private void OnDisable()
     {
-        isEncountered = false;
-        GlobalEvents.EncountBoss(null);
+        stateMachine?.ChangeState(StateType.Idle);
     }
+    public void OnEncounter()
+    {
 
+        if (data.Type != MonsterType.Normal  && !isEncountered)
+        {
+            Debug.Log("보스가 플레이어를 감지했습니다");
+            isEncountered = true;
+            GlobalEvents.EncountBoss(this);
+        }
+    }
+    public void OnNoEncounter()
+    {
+        if (data.Type != MonsterType.Normal && isEncountered)
+        {   
+            isEncountered = false;
+            GlobalEvents.EncountBoss(null);
+        }
+    }
     public override void Active(int index)
     {
         if (skills.Count > 0 && CheckSkillCool())
@@ -189,7 +202,8 @@ public abstract class Monster : Entity , IPoolable
         {
             stateMachine.ChangeState(StateType.Hit);
         }
-        GlobalEvents.PrintDamage(finalDamage.ToString(), transform);
+        GameManager.instance.SoundManager.PlaySFX(1, transform.position);
+        GlobalEvents.PrintDamage(finalDamage.ToString(), transform,info.isCritical);
     }
     public virtual void Die()
     {
@@ -219,9 +233,9 @@ public abstract class Monster : Entity , IPoolable
         float yRotation = (xInput > 0) ? 0f : 180f;
         transform.rotation = Quaternion.Euler(0, yRotation, 0);
     }
-    public override float GetAttackPower()
+    public override DamageInfo GetDamageInfo()
     {
-        return data.Atk;
+        return new DamageInfo(data.Atk, this, null, false);
     }
     public override EntityType GetEntityType()
     {

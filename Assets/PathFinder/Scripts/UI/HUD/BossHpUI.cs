@@ -26,9 +26,14 @@ public class BossHpUI : MonoBehaviour
 
     public void ShowHpUI(Monster monster)
     {
+        if (targetMonster != null)
+        {
+            targetMonster.OnChangeHp -= UpdateHpUI;
+        }
         if (monster == null) 
         {
             CloseUI();
+            targetMonster = null;
             return;
         }
 

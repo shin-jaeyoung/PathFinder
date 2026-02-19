@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEngine.Rendering.VolumeComponent;
 
 public class Player : Entity
 {
@@ -59,6 +60,10 @@ public class Player : Entity
     public PlayerDashState DashState = new PlayerDashState();
     private void Awake()
     {
+        
+    }
+    public void FullInit()
+    {
         Rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
         playerController = GetComponent<PlayerController>();
@@ -66,6 +71,7 @@ public class Player : Entity
         statusSystem.Init(initStat);
         inventory.Init();
         skills.Init();
+
         combatSystem.Init(this);
 
         stateMachine = new StateMachine<Player>(this);
@@ -82,14 +88,13 @@ public class Player : Entity
 
         statusSystem.OnDead += Die;
     }
-
-    private void Update() 
-    { 
-        stateMachine.Update(); 
+    private void Update()
+    {
+        stateMachine?.Update();
     }
     private void FixedUpdate()
-    { 
-        stateMachine.FixedUpdate(); 
+    {
+        stateMachine?.FixedUpdate();
     }
 
 
@@ -112,6 +117,7 @@ public class Player : Entity
         statusSystem.Heal(statusSystem.FinalStat[PlayerStatType.MaxHp]);
         //마을씬으로 이동
         SceneManager.LoadScene(SceneType.Town.ToString());
+        GameManager.instance.SetScene(SceneType.Town);
         //마을씬 리스폰 위치로 이동
         inventory.ReduceGold((int)(inventory.Gold * 0.3f));
         GlobalEvents.Notify("사망으로 골드의 30%를 잃었습니다", 4f);
@@ -120,7 +126,7 @@ public class Player : Entity
     }
     public void BasicAttack()
     {
-        if(combatSystem.PerformSkill(skills.BasicAttack))
+        if (combatSystem.PerformSkill(skills.BasicAttack))
         {
             FlipSprite(LookDir().x);
             stateMachine.ChangeState(StateType.Attack);
@@ -128,7 +134,7 @@ public class Player : Entity
     }
     public override void Active(int index)
     {
-        if(combatSystem.PerformSkill(skills.Skillequip[index]))
+        if (combatSystem.PerformSkill(skills.Skillequip[index]))
         {
             FlipSprite(LookDir().x);
             stateMachine.ChangeState(StateType.Attack);
@@ -149,6 +155,7 @@ public class Player : Entity
         int finalDamage = combatSystem.Hit(info.damage, statusSystem.Stat[PlayerStatType.Armor]);
         statusSystem.TakeDamage(finalDamage);
         GlobalEvents.PrintDamage(finalDamage.ToString(), transform);
+        GameManager.instance.SoundManager.PlaySFX(0, transform.position);
         if (!IsDead)
         {
             stateMachine.ChangeState(StateType.Hit);
@@ -163,12 +170,13 @@ public class Player : Entity
         int finalDamageToint = Mathf.CeilToInt(finalDamage);
         statusSystem.TakeDamage(finalDamageToint);
         GlobalEvents.PrintDamage(finalDamage.ToString(), transform);
+        GameManager.instance.SoundManager.PlaySFX(0, transform.position);
         if (!IsDead)
         {
             stateMachine.ChangeState(StateType.Hit);
         }
     }
-    public override float GetAttackPower()
+    public override DamageInfo GetDamageInfo()
     {
         return statusSystem.FinalDamage();
     }
@@ -180,6 +188,8 @@ public class Player : Entity
     {
         return playerController.mouseDir;
     }
+
+
     public Vector2 GetMoveDir()
     {
         if (InputVec.sqrMagnitude > 0)
@@ -201,5 +211,31 @@ public class Player : Entity
     public override Entity GetEntity()
     {
         return this;
+    }
+
+    //세이브
+    public SaveData GetSaveData()
+    {
+        SaveData data = new SaveData();
+
+        levelSystem.Save(data);
+        statusSystem.Save(data);
+        inventory.Save(data);
+        skills.Save(data);
+
+        return data;
+    }
+
+    // 불러온 데이터를 각 시스템에 분배하는 함수
+    public void LoadGame(SaveData data)
+    {
+
+        levelSystem.Load(data);
+        statusSystem.Load(data);
+        inventory.Load(data);
+        skills.Load(data);
+
+        statusSystem.UpdateFinalStat();
+        Debug.Log("Player: 모든 서브 시스템 로드 완료.");
     }
 }

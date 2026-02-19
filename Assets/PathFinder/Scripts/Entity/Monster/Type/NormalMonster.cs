@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NormalMonster : Monster
 {
-    protected override void InitStart()
+    protected override void InitAwake()
     {
         
     }

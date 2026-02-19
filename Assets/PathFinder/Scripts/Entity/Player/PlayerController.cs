@@ -21,7 +21,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private LayerMask interactLayer;
 
-    private void Start()
+
+    public void ControllerInit()
     {
         player = GameManager.instance.Player;
         // 씬에 하나뿐인 MainCamera를 자동으로 찾아 할당
@@ -30,14 +31,13 @@ public class PlayerController : MonoBehaviour
             mainCamera = Camera.main;
         }
     }
-
     private void Update()
     {
         if (player == null) return;
         if (player.StateMachine == null)return;
 
         //죽으면 키 꺼버리기
-        if (player.StateMachine.CurState == player.StateMachine.stateDic[StateType.Die]) return;
+        if (player.IsDead) return;
 
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
@@ -130,6 +130,12 @@ public class PlayerController : MonoBehaviour
     }
     public void GetMouseTransform()
     {
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+
+            if (mainCamera == null) return;
+        }
         Vector3 mouseScreenPos = Input.mousePosition;
         mouseScreenPos.z = Mathf.Abs(mainCamera.transform.position.z - transform.position.z);
         

@@ -6,9 +6,13 @@ using UnityEngine.SceneManagement;
 public class GameStartUI : MonoBehaviour
 {
      
-    public void OnStart()
+    public void NewGame()
     {
-        SceneManager.LoadScene(SceneType.Town.ToString());
+        GameManager.instance.StartGame(false);
+    }
+    public void LoadGame()
+    {
+        GameManager.instance.StartGame(true);
     }
     public void OnEnd()
     {

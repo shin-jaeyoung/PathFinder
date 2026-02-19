@@ -132,7 +132,7 @@ PrefabInstance:
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: data.maxHp
-      value: 3000
+      value: 7500
       objectReference: {fileID: 0}
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
@@ -231,27 +231,27 @@ PrefabInstance:
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: rewardData.dropItems.Array.data[0].dropRate
-      value: 70
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: rewardData.dropItems.Array.data[1].dropRate
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: rewardData.dropItems.Array.data[2].dropRate
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: rewardData.dropItems.Array.data[3].dropRate
-      value: 70
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}
       propertyPath: rewardData.dropItems.Array.data[4].dropRate
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7072744502639607361, guid: ff1903b9b0fd50c4e924cdf04ddf1d5a,
         type: 3}

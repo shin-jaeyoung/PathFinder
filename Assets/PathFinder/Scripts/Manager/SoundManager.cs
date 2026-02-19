@@ -59,4 +59,9 @@ public class SoundManager
         float volume = Mathf.Log10(Mathf.Max(0.0001f, sliderValue)) * 20;
         mixer.SetFloat(parameterName, volume);
     }
+
+    public void PlaySFX(int id, Vector3 pos)
+    {
+        PoolManager.instance.PoolDic[PoolType.SFX].Pop(id, pos, Quaternion.identity);
+    }
 }

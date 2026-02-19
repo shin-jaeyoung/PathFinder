@@ -188,4 +188,81 @@ public class PlayerInventory
         Debug.Log("해당 아이템 없음");
         return false;
     }
+    //세이브
+
+    public void Save(SaveData data)
+    {
+        data.gold = this.gold;
+        data.invItemIDs.Clear();
+        data.invCounts.Clear();
+        data.equipItemIDs.Clear();
+
+        foreach (var slot in inventory)
+        {
+            if (!slot.IsEmpty() && slot.item != null)
+            {
+                data.invItemIDs.Add(slot.item.Data.ID); 
+                data.invCounts.Add(slot.count);
+            }
+            else
+            {
+                data.invItemIDs.Add(-1); 
+                data.invCounts.Add(0);
+            }
+        }
+
+        foreach (var slot in equipments)
+        {
+            if (!slot.IsEmpty() && slot.item != null)
+                data.equipItemIDs.Add(slot.item.Data.ID);
+            else
+                data.equipItemIDs.Add(-1);
+        }
+    }
+
+    public void Load(SaveData data)
+    {
+        this.gold = data.gold;
+
+        // 인벤토리 복구
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            if (i < data.invItemIDs.Count)
+            {
+                int id = data.invItemIDs[i];
+                if (id != -1)
+                {
+                    inventory[i].item = DataManager.instance.GetItem(id);
+                    inventory[i].count = data.invCounts[i];
+                }
+                else
+                {
+                    inventory[i].Clear();
+                }
+            }
+        }
+
+        // 장비창 복구
+        for (int i = 0; i < equipments.Count; i++)
+        {
+            if (i < data.equipItemIDs.Count)
+            {
+                int id = data.equipItemIDs[i];
+                if (id != -1)
+                {
+                    equipments[i].item = DataManager.instance.GetItem(id) as Equipment;
+                    equipments[i].count = 1;
+                }
+                else
+                {
+                    equipments[i].Clear();
+                }
+            }
+        }
+
+        // 데이터 복구 후 UI 및 스탯 갱신
+        OnInventoryChaneged?.Invoke();
+        OnEquipmentChanged?.Invoke();
+        OnGoldChanged?.Invoke();
+    }
 }

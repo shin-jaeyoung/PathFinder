@@ -116,4 +116,19 @@ public class PlayerLevelSystem
             return false;
         }
     }
+    public void Save(SaveData data)
+    {
+        data.level = level;
+        data.curExp = curExp;
+        data.maxExp = maxExp;
+        data.levelPoint = levelPoint;
+    }
+
+    public void Load(SaveData data)
+    {
+        level = data.level;
+        maxExp = data.maxExp;
+        curExp = data.curExp;
+        levelPoint = data.levelPoint;
+    }
 }

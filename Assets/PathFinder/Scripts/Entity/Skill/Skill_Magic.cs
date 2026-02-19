@@ -48,7 +48,8 @@ public class Skill_Magic : Skill
         GameObject go = PoolManager.instance.PoolDic[PoolType.Skill].Pop(originID, spawnPos, Quaternion.identity);
         if (go.TryGetComponent(out Projectile pj))
         {
-            pj.Init(caster.GetAttackPower() * data.DamageMultiplier, caster.GetEntity(), caster.GetEntityType());
+            DamageInfo info = caster.GetDamageInfo();
+            pj.Init(info.damage * data.DamageMultiplier, caster.GetEntity(), caster.GetEntityType(), info.isCritical);
             if(isExplosion)
             {
                 caster.GetEntity().StartCoroutine(ExplosionDelayCo(caster, spawnPos));
@@ -71,7 +72,8 @@ public class Skill_Magic : Skill
         GameObject go = PoolManager.instance.PoolDic[PoolType.Skill].Pop(explosionID, spawnPos, Quaternion.identity);
         if (go.TryGetComponent(out Projectile pj))
         {
-            pj.Init(caster.GetAttackPower() * damageMultiplier, caster.GetEntity(), caster.GetEntityType());
+            DamageInfo info = caster.GetDamageInfo();
+            pj.Init(info.damage * data.DamageMultiplier, caster.GetEntity(), caster.GetEntityType(), info.isCritical);
 
             pj.StartCoroutine(SkillReturnCo(pj));
         }

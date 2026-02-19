@@ -59,6 +59,7 @@ public class PlayerAttackState : PlayerStateBase
     {
         owner.Rb.velocity = Vector2.zero;
         owner.Animator.SetTrigger("Attack");
+        GameManager.instance.SoundManager.PlaySFX(2, owner.transform.position);
         float animLengh = owner.Animator.GetCurrentAnimatorStateInfo(0).length;
         attackRoutine = owner.StartCoroutine(WaitAnimCo(animLengh, () => {
             stateMachine.ChangeState(StateType.Idle);

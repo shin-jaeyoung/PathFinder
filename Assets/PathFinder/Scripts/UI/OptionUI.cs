@@ -9,7 +9,8 @@ public class OptionUI : MonoBehaviour
     private Slider masterSlider;
     [SerializeField] 
     private Slider bgmSlider;
-
+    [SerializeField]
+    private Slider sfxSlider;
     private void Start()
     {
         masterSlider.minValue = 0.0001f;
@@ -18,14 +19,20 @@ public class OptionUI : MonoBehaviour
         bgmSlider.minValue = 0.0001f;
         bgmSlider.maxValue = 1f;
 
+        sfxSlider.minValue = 0.0001f;
+        sfxSlider.maxValue = 1f;
+
         masterSlider.value = 1f;
         bgmSlider.value = 0.75f;
+        sfxSlider.value = 0.75f;
 
         masterSlider.onValueChanged.AddListener(val =>
             GameManager.instance.SoundManager.SetVolume("MasterVol", val));
 
         bgmSlider.onValueChanged.AddListener(val =>
             GameManager.instance.SoundManager.SetVolume("BGMVol", val));
+        sfxSlider.onValueChanged.AddListener(val =>
+            GameManager.instance.SoundManager.SetVolume("SFXVol", val));
     }
     private void OnDestroy()
     {

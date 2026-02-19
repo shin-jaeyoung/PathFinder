@@ -12,10 +12,10 @@ public static class GlobalEvents
         OnNotify?.Invoke(message, duration);
     }
     // 알림 보낼 때 사용할 이벤트 (데미지, 위치)
-    public static Action<string, Transform> OnDamage;
-    public static void PrintDamage(string damage, Transform target )
+    public static Action<string, Transform,bool> OnDamage;
+    public static void PrintDamage(string damage, Transform target ,bool isCritical = false)
     {
-        OnDamage?.Invoke(damage, target);
+        OnDamage?.Invoke(damage, target, isCritical);
     }
 
     //Dialogue을 Npc머리위에 출력하기 (대화내용, Npc Transform)
@@ -25,7 +25,7 @@ public static class GlobalEvents
         OnDialogue?.Invoke(dialogue, targetNpc);
     }
     public static Action OnDialogueEnd;
-
+    //보스 hp UI
     public static Action<Monster> OnEncountBoss;
     public static void EncountBoss(Monster monster)
     {

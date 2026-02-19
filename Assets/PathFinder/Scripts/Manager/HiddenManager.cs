@@ -16,8 +16,6 @@ public class HiddenManager : MonoBehaviour
     private List<Hidden> hiddens;
     //실제쓰는 데이터 
     private Dictionary<int, Hidden> hiddenDic = new Dictionary<int, Hidden>();
-    //플레이어 캐싱
-    private Player player;
 
     private int endHiddenCount;
     //property
@@ -49,15 +47,7 @@ public class HiddenManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void Start()
-    {
-        foreach (var data in datas)
-        {
-            Hidden newHidden = new Hidden(data);
-            hiddens.Add(newHidden);
-            hiddenDic.Add(data.id, newHidden);
-        }
-    }
+
     public void ProcessHidden(int hiddenId, int objId,Player player)
     {
         if (hiddenDic.TryGetValue(hiddenId, out Hidden hidden))
@@ -94,6 +84,49 @@ public class HiddenManager : MonoBehaviour
         if (HiddenDic.ContainsKey(id))
         {
             OnHiddenStateChanged?.Invoke(id, HiddenState.End);
+        }
+    }
+
+
+    public void Save(SaveData data)
+    {
+        data.hiddenStates.Clear();
+        foreach (var pair in hiddenDic)
+        {
+            data.hiddenStates.Add(new HiddenSaveEntry
+            {
+                id = pair.Key,
+                state = pair.Value.State
+            });
+        }
+        data.endHiddenCount = this.endHiddenCount;
+    }
+
+    public void Load(SaveData data)
+    {
+        if (hiddenDic.Count == 0) InitializeHiddens();
+
+        foreach (var entry in data.hiddenStates)
+        {
+            if (hiddenDic.TryGetValue(entry.id, out Hidden hidden))
+            {
+                hidden.State = entry.state; // 상태 복구
+            }
+        }
+
+        this.endHiddenCount = data.endHiddenCount;
+
+        OnEndHidden?.Invoke();
+    }
+
+    public void InitializeHiddens()
+    {
+        if (hiddenDic.Count > 0) return;
+        foreach (var data in datas)
+        {
+            Hidden newHidden = new Hidden(data);
+            hiddens.Add(newHidden);
+            hiddenDic.Add(data.id, newHidden);
         }
     }
 }

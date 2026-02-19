@@ -171,21 +171,46 @@ public class PlayerStatusSystem
     {
         AddStat(PlayerStatType.CurHp, (int)value);
     }
-    public int FinalDamage()
+    public DamageInfo FinalDamage()
     {
         int finalDamage = 0;
         float power = finalStat[PlayerStatType.Power];
         float criRate = finalStat[PlayerStatType.CriRate];
         float cridamage = finalStat[PlayerStatType.CriDamage];
-
+        bool isCritical = false;
         int randomNum = UnityEngine.Random.Range(0, 100);
         if( randomNum <criRate)
         {
             Debug.Log("크리티컬");
+            isCritical= true;
             power *= 1 + (cridamage + 40) / 100;
         }
         finalDamage = Mathf.RoundToInt(power);
 
-        return finalDamage;
+        return new DamageInfo(finalDamage,player,null, isCritical);
+    }
+
+    public void Save(SaveData data)
+    {
+        data.baseStats.Clear();
+        foreach (var stat in stat)
+        {
+            data.baseStats.Add(new StatSaveEntry
+            {
+                statType = stat.Key,
+                value = stat.Value
+            });
+        }
+    }
+
+    public void Load(SaveData data)
+    {
+        stat.Clear();
+        foreach (var entry in data.baseStats)
+        {
+            stat.Add(entry.statType, entry.value);
+        }
+        // 로드 후 공격력/방어력 등 최종 스탯 재계산 필요
+        UpdateFinalStat();
     }
 }

@@ -10,6 +10,7 @@ public class MonsterIdleState : MonsterState
     {
         owner.FlipSprite(owner.Rb.velocity.x);
         owner.Rb.velocity = Vector2.zero;
+        owner.OnNoEncounter();
         
     }
     public override void Update()
@@ -34,6 +35,7 @@ public class MonsterMoveState : MonsterState
     public override void Enter()
     {
         owner.Animator.SetBool("IsMove", true);
+        owner.OnEncounter();
     }
     public override void Update()
     {
@@ -253,6 +255,7 @@ public class MonsterDieState : MonsterState
         owner.Rb.velocity = Vector2.zero;
         //애니메이션 작동 + action에 초기화부터 리턴풀까지 넣어주기
         owner.Animator.SetBool("IsDead", true);
+        owner.OnNoEncounter();
         //리턴풀? + 애니메이션 끝나면 idle상태로 만들어주기
         owner.StartCoroutine(WaitAnimCo(1.5f, ReturnPool));
     }

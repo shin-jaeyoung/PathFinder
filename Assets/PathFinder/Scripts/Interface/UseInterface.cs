@@ -39,7 +39,7 @@ public interface ISkillActive
     public Vector2 LookDir();
     public Vector2 SkillSpawnPos();
     public Vector3 CasterTrasform();
-    public abstract float GetAttackPower();
+    public abstract DamageInfo GetDamageInfo();
     public abstract EntityType GetEntityType();
 }
 //Monster

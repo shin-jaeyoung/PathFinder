@@ -38,6 +38,15 @@ public class HUDUI : MonoBehaviour
         if(GameManager.instance.Player!=null)
         {
             player = GameManager.instance.Player;
+
+            if (player.LevelSystem == null || player.StatusSystem == null ||
+                player.Skills == null || player.Potion == null)
+            {
+                Debug.LogWarning("HUDUI: 플레이어의 서브 시스템이 아직 초기화되지 않았습니다. 재시도합니다.");
+                Invoke(nameof(Init), 0.1f); 
+                return;
+            }
+
             player.LevelSystem.OnExpChanged += UpdateLevel;
             player.StatusSystem.OnStatChanged += UpdateHp;
             player.Skills.OnChangedActiveSkill += UpdateSkillUI;
@@ -51,6 +60,14 @@ public class HUDUI : MonoBehaviour
     }
     private void Start()
     {
+        StartCoroutine(WaitPlayer());
+    }
+    private IEnumerator WaitPlayer()
+    {
+        while(GameManager.instance.Player == null)
+        {
+            yield return null;
+        }
         Init();
     }
     private void OnDestroy()

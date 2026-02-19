@@ -50,7 +50,8 @@ public class Skill_Shot : Skill
         GameObject go = PoolManager.instance.PoolDic[PoolType.Skill].Pop(data.ProjecitileID, spawnPos, Quaternion.identity);
         if (go.TryGetComponent(out Projectile pj))
         {
-            pj.Init(caster.GetAttackPower() * data.DamageMultiplier, caster.GetEntity(), caster.GetEntityType(), canPass);
+            DamageInfo info = caster.GetDamageInfo();
+            pj.Init(info.damage * data.DamageMultiplier, caster.GetEntity(), caster.GetEntityType(), info.isCritical, canPass);
             
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             pj.rb.rotation = angle + data.SpriteRotation;

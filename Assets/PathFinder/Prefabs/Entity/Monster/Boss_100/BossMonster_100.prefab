@@ -92,7 +92,7 @@ PrefabInstance:
     - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
       propertyPath: data.atk
-      value: 150
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
@@ -102,7 +102,7 @@ PrefabInstance:
     - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
       propertyPath: data.maxHp
-      value: 8000
+      value: 12000
       objectReference: {fileID: 0}
     - target: {fileID: 6252897837667827541, guid: c8e137593c514d9408b7881c1bd1f9d5,
         type: 3}
