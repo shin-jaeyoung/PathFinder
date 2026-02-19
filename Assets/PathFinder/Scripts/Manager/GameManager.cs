@@ -182,6 +182,7 @@ public class GameManager : MonoBehaviour
             }
             HiddenManager.instance.Load(data);
             OnResistPortal?.Invoke();
+            player.Inventory.OnEquipmentChanged?.Invoke();
 
             Debug.Log("GameManager: 포탈 데이터를 포함한 모든 데이터를 복구했습니다.");
         }
