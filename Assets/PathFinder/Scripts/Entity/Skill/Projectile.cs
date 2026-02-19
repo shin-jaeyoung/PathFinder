@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour , IPoolable
     private EntityType attackerType;
     private float damage;
     private Entity attacker;
+    private bool isCritical;
     private bool isHavetoDisapear;
 
     public GameObject GetGameObject()
@@ -30,11 +31,12 @@ public class Projectile : MonoBehaviour , IPoolable
             rb = GetComponent<Rigidbody2D>();
         }
     }
-    public void Init(float damage, Entity attacker, EntityType attackerType, bool canPass = true)
+    public void Init(float damage, Entity attacker, EntityType attackerType,bool isCritical = false ,bool canPass = true)
     {
         this.damage = damage;
         this.attacker = attacker;
         this.attackerType = attackerType;
+        this.isCritical = isCritical;
         isHavetoDisapear = !canPass;
         if (rb == null)
         {
@@ -62,12 +64,12 @@ public class Projectile : MonoBehaviour , IPoolable
             {
                 
                 if (targetEntity.GetEntityType() == attackerType) return;
-                DamageInfo finalInfo = new DamageInfo(damage, attacker, targetEntity);
+                DamageInfo finalInfo = new DamageInfo(damage, attacker, targetEntity,isCritical);
                 targetEntity.Hit(finalInfo);
             }
             else
             {
-                DamageInfo finalInfo = new DamageInfo(damage, attacker, null);
+                DamageInfo finalInfo = new DamageInfo(damage, attacker, null, isCritical);
                 target.Hit(finalInfo);
             }
             if (isHavetoDisapear)

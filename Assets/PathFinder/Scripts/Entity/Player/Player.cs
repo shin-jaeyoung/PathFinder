@@ -83,13 +83,13 @@ public class Player : Entity
         statusSystem.OnDead += Die;
     }
 
-    private void Update() 
-    { 
-        stateMachine.Update(); 
+    private void Update()
+    {
+        stateMachine.Update();
     }
     private void FixedUpdate()
-    { 
-        stateMachine.FixedUpdate(); 
+    {
+        stateMachine.FixedUpdate();
     }
 
 
@@ -120,7 +120,7 @@ public class Player : Entity
     }
     public void BasicAttack()
     {
-        if(combatSystem.PerformSkill(skills.BasicAttack))
+        if (combatSystem.PerformSkill(skills.BasicAttack))
         {
             FlipSprite(LookDir().x);
             stateMachine.ChangeState(StateType.Attack);
@@ -128,7 +128,7 @@ public class Player : Entity
     }
     public override void Active(int index)
     {
-        if(combatSystem.PerformSkill(skills.Skillequip[index]))
+        if (combatSystem.PerformSkill(skills.Skillequip[index]))
         {
             FlipSprite(LookDir().x);
             stateMachine.ChangeState(StateType.Attack);
@@ -168,7 +168,7 @@ public class Player : Entity
             stateMachine.ChangeState(StateType.Hit);
         }
     }
-    public override float GetAttackPower()
+    public override DamageInfo GetDamageInfo()
     {
         return statusSystem.FinalDamage();
     }
@@ -180,6 +180,8 @@ public class Player : Entity
     {
         return playerController.mouseDir;
     }
+
+
     public Vector2 GetMoveDir()
     {
         if (InputVec.sqrMagnitude > 0)

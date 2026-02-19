@@ -5850,7 +5850,7 @@ MonoBehaviour:
     level: 1
     maxLevel: 30
     curExp: 0
-    maxExp: 100
+    maxExp: 50
     levelPoint: 0
     levelSkillList:
     - {fileID: 11400000, guid: 36b0fdaa471ea7a4dacfeb7e48e175d5, type: 2}
@@ -6003,7 +6003,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5554626024084283710}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8ca95a7850763744a9765f0edcf37a0, type: 3}
   m_Name: 

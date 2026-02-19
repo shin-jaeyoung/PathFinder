@@ -53,16 +53,17 @@ public class BossMonster : Monster
         Instantiate(endPortalPrefab, bossPosduringGimmick, Quaternion.identity);
     }
 
-    protected override void InitStart()
+    protected override void InitAwake()
     {
         //보스몹의 추가 상태
         //Immortal은 무적,고정용 상태임
         stateMachine.AddState(StateType.Immortal, new MonsterImmortalState());
-
+    }
+    protected override void OnEnableSetting()
+    {
         //기믹쿨타임용 코루틴
         StartCoroutine(GimmickTimerCo());
     }
-
     private IEnumerator GimmickTimerCo()
     {
         WaitForSeconds wait = new WaitForSeconds(gimmickInterval);

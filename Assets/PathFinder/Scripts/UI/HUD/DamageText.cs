@@ -21,11 +21,20 @@ public class DamageText : MonoBehaviour, IPoolable
         return gameObject;
     }
 
-    public void Init(string damage, Transform target)
+    public void Init(string damage, Transform target, bool isCritical)
     {
         damageText.text = damage;
         damageText.alpha = 1f;
-        transform.localScale = Vector3.one;
+        if(isCritical)
+        {
+            damageText.color = Color.red;
+            transform.localScale = Vector3.one * 1.2f;
+        }
+        else
+        {
+            damageText.color = Color.black;
+            transform.localScale = Vector3.one;
+        }
 
         StopAllCoroutines();
         StartCoroutine(FollowTargetRoutine(target));
