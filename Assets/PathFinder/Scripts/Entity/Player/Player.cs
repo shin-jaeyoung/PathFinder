@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEngine.Rendering.VolumeComponent;
 
 public class Player : Entity
 {
@@ -59,6 +60,10 @@ public class Player : Entity
     public PlayerDashState DashState = new PlayerDashState();
     private void Awake()
     {
+        
+    }
+    public void FullInit()
+    {
         Rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
         playerController = GetComponent<PlayerController>();
@@ -66,6 +71,7 @@ public class Player : Entity
         statusSystem.Init(initStat);
         inventory.Init();
         skills.Init();
+
         combatSystem.Init(this);
 
         stateMachine = new StateMachine<Player>(this);
@@ -82,14 +88,13 @@ public class Player : Entity
 
         statusSystem.OnDead += Die;
     }
-
     private void Update()
     {
-        stateMachine.Update();
+        stateMachine?.Update();
     }
     private void FixedUpdate()
     {
-        stateMachine.FixedUpdate();
+        stateMachine?.FixedUpdate();
     }
 
 
@@ -206,5 +211,31 @@ public class Player : Entity
     public override Entity GetEntity()
     {
         return this;
+    }
+
+    //세이브
+    public SaveData GetSaveData()
+    {
+        SaveData data = new SaveData();
+
+        levelSystem.Save(data);
+        statusSystem.Save(data);
+        inventory.Save(data);
+        skills.Save(data);
+
+        return data;
+    }
+
+    // 불러온 데이터를 각 시스템에 분배하는 함수
+    public void LoadGame(SaveData data)
+    {
+
+        levelSystem.Load(data);
+        statusSystem.Load(data);
+        inventory.Load(data);
+        skills.Load(data);
+
+        statusSystem.UpdateFinalStat();
+        Debug.Log("Player: 모든 서브 시스템 로드 완료.");
     }
 }

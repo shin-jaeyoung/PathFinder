@@ -206,4 +206,63 @@ public class PlayerSkillInventory
         }
 
     }
+    public void Save(SaveData data)
+    {
+        data.hasDashSkill = !dashSkill.IsEmpty();
+        data.ownedActiveIDs.Clear();
+        foreach (var slot in activeSkills)
+        {
+            if (!slot.IsEmpty()) data.ownedActiveIDs.Add(slot.skill.Data.SkillID);
+        }
+
+        data.ownedPassiveIDs.Clear();
+        foreach (var slot in passiveSkills)
+        {
+            if (!slot.IsEmpty()) data.ownedPassiveIDs.Add(slot.passiveSkill.Data.PassiveID);
+        }
+
+        data.quickSlotIDs.Clear();
+        foreach (var slot in skillequip)
+        {
+            data.quickSlotIDs.Add(!slot.IsEmpty() ? slot.skill.Data.SkillID : -1);
+        }
+    }
+
+    // [LOAD]
+    public void Load(SaveData data)
+    {
+        if (data.hasDashSkill)
+        {
+            dashSkill.skill = DataManager.instance.GetSkill(1000);
+        }
+        for (int i = 0; i < activeSkills.Count; i++)
+        {
+            if (i < data.ownedActiveIDs.Count)
+            {
+                activeSkills[i].skill = DataManager.instance.GetSkill(data.ownedActiveIDs[i]);
+            }
+            else activeSkills[i].Clear();
+        }
+
+        for (int i = 0; i < passiveSkills.Count; i++)
+        {
+            if (i < data.ownedPassiveIDs.Count)
+            {
+                passiveSkills[i].passiveSkill = DataManager.instance.GetPassive(data.ownedPassiveIDs[i]);
+            }
+            else passiveSkills[i].Clear();
+        }
+
+        for (int i = 0; i < skillequip.Count; i++)
+        {
+            if (i < data.quickSlotIDs.Count)
+            {
+                int id = data.quickSlotIDs[i];
+                skillequip[i].skill = (id != -1) ? DataManager.instance.GetSkill(id) : null;
+            }
+        }
+
+        OnChangedActiveSkill?.Invoke();
+        OnChangedPassiveSkill?.Invoke(); 
+    }
 }

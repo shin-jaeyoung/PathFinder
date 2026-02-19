@@ -20,6 +20,7 @@ public struct ItemData
     private int price;
 
     //property
+    public int ID => id;
     public Sprite Sprite => sprite;
     public ItemType Type => type;
     public string Name => name;
