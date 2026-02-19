@@ -112,6 +112,7 @@ public class Player : Entity
         statusSystem.Heal(statusSystem.FinalStat[PlayerStatType.MaxHp]);
         //마을씬으로 이동
         SceneManager.LoadScene(SceneType.Town.ToString());
+        GameManager.instance.SetScene(SceneType.Town);
         //마을씬 리스폰 위치로 이동
         inventory.ReduceGold((int)(inventory.Gold * 0.3f));
         GlobalEvents.Notify("사망으로 골드의 30%를 잃었습니다", 4f);
@@ -149,6 +150,7 @@ public class Player : Entity
         int finalDamage = combatSystem.Hit(info.damage, statusSystem.Stat[PlayerStatType.Armor]);
         statusSystem.TakeDamage(finalDamage);
         GlobalEvents.PrintDamage(finalDamage.ToString(), transform);
+        GameManager.instance.SoundManager.PlaySFX(0, transform.position);
         if (!IsDead)
         {
             stateMachine.ChangeState(StateType.Hit);
@@ -163,6 +165,7 @@ public class Player : Entity
         int finalDamageToint = Mathf.CeilToInt(finalDamage);
         statusSystem.TakeDamage(finalDamageToint);
         GlobalEvents.PrintDamage(finalDamage.ToString(), transform);
+        GameManager.instance.SoundManager.PlaySFX(0, transform.position);
         if (!IsDead)
         {
             stateMachine.ChangeState(StateType.Hit);

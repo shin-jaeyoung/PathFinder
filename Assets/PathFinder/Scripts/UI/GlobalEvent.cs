@@ -25,7 +25,7 @@ public static class GlobalEvents
         OnDialogue?.Invoke(dialogue, targetNpc);
     }
     public static Action OnDialogueEnd;
-
+    //보스 hp UI
     public static Action<Monster> OnEncountBoss;
     public static void EncountBoss(Monster monster)
     {

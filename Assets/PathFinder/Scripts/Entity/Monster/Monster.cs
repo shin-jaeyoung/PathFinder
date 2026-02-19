@@ -202,7 +202,7 @@ public abstract class Monster : Entity , IPoolable
         {
             stateMachine.ChangeState(StateType.Hit);
         }
-        Debug.Log($"몬스터 크리티컬히트 : {info.isCritical}");
+        GameManager.instance.SoundManager.PlaySFX(1, transform.position);
         GlobalEvents.PrintDamage(finalDamage.ToString(), transform,info.isCritical);
     }
     public virtual void Die()

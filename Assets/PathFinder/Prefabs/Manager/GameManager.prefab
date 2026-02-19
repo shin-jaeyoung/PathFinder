@@ -52,4 +52,14 @@ MonoBehaviour:
   bgmList:
   - sceneType: 1
     audioClip: {fileID: 8300000, guid: b65de14993a2b534f8b9cbd7937047c5, type: 3}
+  - sceneType: 2
+    audioClip: {fileID: 8300000, guid: 3c4a2ce9b6c32421f8ee1fba2c3294cd, type: 3}
+  - sceneType: 3
+    audioClip: {fileID: 8300000, guid: 7f10fcd59271943528eba0596be6e943, type: 3}
+  - sceneType: 4
+    audioClip: {fileID: 8300000, guid: d53e8b49cec094f72a65f2b6d12c0f74, type: 3}
+  - sceneType: 5
+    audioClip: {fileID: 8300000, guid: 0adcce52687c846b78103f35c17af2b0, type: 3}
+  - sceneType: 6
+    audioClip: {fileID: 8300000, guid: 6c598ca8af00b4667b4f69068827f842, type: 3}
   mainMixer: {fileID: 24100000, guid: 394f28042f38fdc46ae71a442aad3d4a, type: 2}
