@@ -121,7 +121,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 8872756507747298077}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.7638307
+  m_Size: 0.6298203
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -426,9 +426,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 30
+    m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 30
     m_Bottom: 30
   m_ChildAlignment: 0
   m_Spacing: 0
@@ -676,7 +676,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 454.325, y: -249.21}
+  m_AnchoredPosition: {x: 424.325, y: -317.555}
   m_SizeDelta: {x: 848.65, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3595174987050973206
@@ -707,8 +707,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB9C8\uC744 \uC911\uC559 \uD560\uC544\uBC84\uC9C0\uC5D0\uAC8C \uAF2D
-    \uB9D0\uC744 \uAC70\uC138\uC694\n\n\uB300\uC26C\uC2A4\uD0AC\uC740 \uD788\uB4E0\uD018\uC2A4\uD2B8,\uAE30\uBBF9\uC744
+  m_text: "\uAF2D \uBA54\uB274\uC758 \uB098\uAE30\uAE30\uB85C \uB098\uAC00\uC57C
+    \uC800\uC7A5\uC774 \uB429\uB2C8\uB2E4.\n\n\uB9C8\uC744 \uC911\uC559 \uD560\uC544\uBC84\uC9C0\uC5D0\uAC8C
+    \uAF2D \uB9D0\uC744 \uAC70\uC138\uC694\n\n\uB300\uC26C\uC2A4\uD0AC\uC740 \uD788\uB4E0\uD018\uC2A4\uD2B8,\uAE30\uBBF9\uC744
     \uC704\uD55C \uD29C\uD1A0\uB9AC\uC5BC\uC785\uB2C8\uB2E4.\n\n\uC624\uB978\uCABD
     \uC0AC\uB0E5\uD130\uB85C \uAC00\uAE30\uC804 \uACBD\uBE44\uBCD12\uBA85\uC774 \uAE30\uBCF8\uC2A4\uD0AC\uC744
     \uC9C0\uAE09\uD574\uC90D\uB2C8\uB2E4.\n\n\uD788\uB4E0\uC740 \uB9D0\uAC78\uAE30,

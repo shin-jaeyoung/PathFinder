@@ -13,6 +13,7 @@ public class PlayerWeaponUpdate : MonoBehaviour
     private void Start()
     {
         p.Inventory.OnEquipmentChanged += UpdateWeapon;
+        UpdateWeapon();
     }
     private void OnDestroy()
     {
