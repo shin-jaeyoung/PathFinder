@@ -6003,17 +6003,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5554626024084283710}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8ca95a7850763744a9765f0edcf37a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: dc31bbe175b5f8a4bba29a1d855134f3, type: 2}
-  helmet: {fileID: 11400000, guid: 63d0b7467b100364095cec23202d993d, type: 2}
+  weapon: {fileID: 11400000, guid: fb00f7eb0152a4e488ca741cdc7eb1c1, type: 2}
+  helmet: {fileID: 11400000, guid: ce75807f8b836e94d9f3ab307c875283, type: 2}
   armor: {fileID: 11400000, guid: 8774280472caeed4f9fe056eff07c28a, type: 2}
   shoes: {fileID: 11400000, guid: f78c028919d5f9642be15ade4fec135f, type: 2}
-  testSkill: {fileID: 11400000, guid: 037dbfee1e73525418602cf90b12e8e7, type: 2}
-  testSwap: {fileID: 11400000, guid: a3565016601b3154cb4ffca880063392, type: 2}
+  testSkill: {fileID: 11400000, guid: 19836176e65218e47b8d2af227a9a9e4, type: 2}
+  testSwap: {fileID: 11400000, guid: 4f0f839a8fc72fd4791af50c8337bc73, type: 2}
   extraItem: {fileID: 11400000, guid: 8892ce9cececbaf49949593da2e64efe, type: 2}
   testDash: {fileID: 11400000, guid: 65d712f31a4c64044b21e5ff6d33e5d9, type: 2}
   player: {fileID: 0}

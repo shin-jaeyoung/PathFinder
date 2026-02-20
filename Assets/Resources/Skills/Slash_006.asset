@@ -10,25 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33ee8a5cbef6b5246b0fa35422664bf8, type: 3}
-  m_Name: SKill_000
+  m_Name: Slash_006
   m_EditorClassIdentifier: 
   data:
-    skillID: 0
-    projectileId: 0
-    skillName: "\uD50C\uB808\uC774\uC5B4\uAE30\uBCF8\uACF5\uACA9"
-    prefab: {fileID: 9180995225039333714, guid: 1a82301923c16544096ad9eaee1b14d5,
+    skillID: 6
+    projectileId: 13
+    skillName: "\uD68C\uC624\uB9AC\uBCA0\uAE30"
+    prefab: {fileID: 1715084321782570863, guid: 3462687bd89d74a4bbd17e82472f2642,
       type: 3}
-    icon: {fileID: -2407324949086632672, guid: 0d7d0bf8307514eaf81aa72f558d3fb4, type: 3}
+    icon: {fileID: 21300000, guid: ae2a72439316c2848b28cd3af4c774c4, type: 3}
     skillType: 0
-    description: "\uAE30\uBCF8\uACF5\uACA9"
-    cooltime: 1
-    damageMultiplier: 0.8
-    duration: 0.2
+    description: 
+    cooltime: 9
+    damageMultiplier: 1
+    duration: 0.3
     spriteRotation: 0
-  spawnDistance: 0.5
+    havetoYFlip: 1
+  spawnDistance: 0
   spawnDelay: 0.1
-  otherSlashIDs: 
-  spawnCount: 1
-  spawnDelta: 0
+  otherSlashIDs: 0e0000000f00000010000000
+  spawnCount: 4
+  spawnDelta: 0.2
   offset: {x: 0, y: 0, z: 0}
   isMonster: 0

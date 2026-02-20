@@ -22,9 +22,10 @@ MonoBehaviour:
     skillType: 0
     description: "2\uD68C \uD0C0\uACA9\uD55C\uB2E4"
     cooltime: 5
-    damageMultiplier: 0.7
+    damageMultiplier: 0.8
     duration: 0.7
     spriteRotation: 135
+    havetoYFlip: 0
   spawnDistance: 0.3
   spawnDelay: 0.2
   otherSlashIDs: 03000000

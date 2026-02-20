@@ -70,6 +70,15 @@ public class Skill_Slash : Skill
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             pj.rb.rotation = angle + data.SpriteRotation;
 
+            if (data.HavetoYFlip)
+            {
+                SpriteRenderer sr = pj.GetComponentInChildren<SpriteRenderer>();
+                if (sr != null)
+                {
+                    sr.flipY = dir.x < 0;
+                }
+            }
+
             pj.StartCoroutine(SkillReturnCo(pj));
         }
     }

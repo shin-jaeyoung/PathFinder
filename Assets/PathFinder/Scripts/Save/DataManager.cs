@@ -51,7 +51,7 @@ public class DataManager : MonoBehaviour
                 passiveDB.Add(p.Data.PassiveID, p);
         }
 
-        Debug.Log($"[DataManager] 로드 완료: 아이템({itemDB.Count}), 스킬({skillDB.Count}), 패시브({passiveDB.Count})");
+        Debug.Log($"로드 완료: 아이템({itemDB.Count}), 스킬({skillDB.Count}), 패시브({passiveDB.Count})");
     }
 
 
@@ -61,7 +61,7 @@ public class DataManager : MonoBehaviour
         if (id == -1) return null;
         if (itemDB.TryGetValue(id, out Item item)) return item;
 
-        Debug.LogWarning($"[DataManager] ID {id}에 해당하는 아이템을 찾을 수 없습니다.");
+        Debug.LogWarning($"ID {id}에 해당하는 아이템을 찾을 수 없습니다.");
         return null;
     }
 
@@ -70,7 +70,7 @@ public class DataManager : MonoBehaviour
         if (id == -1) return null;
         if (skillDB.TryGetValue(id, out Skill skill)) return skill;
 
-        Debug.LogWarning($"[DataManager] ID {id}에 해당하는 스킬을 찾을 수 없습니다.");
+        Debug.LogWarning($"ID {id}에 해당하는 스킬을 찾을 수 없습니다.");
         return null;
     }
 

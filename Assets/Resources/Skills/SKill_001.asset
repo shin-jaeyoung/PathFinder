@@ -23,10 +23,10 @@ MonoBehaviour:
     description: "\uAE30\uBCF8\uACF5\uACA9"
     cooltime: 1
     damageMultiplier: 0.7
-    duration: 0.2
+    duration: 0.1
     spriteRotation: 45
   spawnDistance: 1
-  spawnDelay: 0.7
+  spawnDelay: 0.5
   otherSlashIDs: 
   spawnCount: 1
   spawnDelta: 0.3

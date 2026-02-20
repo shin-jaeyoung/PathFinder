@@ -36,6 +36,8 @@ public struct SkillData
     [Header("Detail")]
     [SerializeField]
     private float spriteRotation;
+    [SerializeField]
+    private bool havetoYFlip;
     //property
     public int SkillID => skillID;
     public int ProjecitileID => projectileId;
@@ -48,5 +50,5 @@ public struct SkillData
     public float DamageMultiplier => damageMultiplier;
     public float Duration => duration;
     public float SpriteRotation => spriteRotation;
-
+    public bool HavetoYFlip => havetoYFlip;
 }

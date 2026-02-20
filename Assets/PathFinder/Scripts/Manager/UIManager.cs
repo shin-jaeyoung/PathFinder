@@ -16,6 +16,7 @@ public enum UIType
     Shop,
     Portal,
     BossHp,
+    Guide,
 
     Off,
 }

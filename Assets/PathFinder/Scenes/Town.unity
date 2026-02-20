@@ -209,22 +209,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1776664687642008904, guid: 1b3edb201335a06498cb1fa01457caf3,
-        type: 3}
-      propertyPath: uiPanels.Array.size
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 1776664687642008904, guid: 1b3edb201335a06498cb1fa01457caf3,
-        type: 3}
-      propertyPath: uiPanels.Array.data[10].type
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1776664687642008904, guid: 1b3edb201335a06498cb1fa01457caf3,
-        type: 3}
-      propertyPath: uiPanels.Array.data[10].uiprefab
-      value: 
-      objectReference: {fileID: 455492434804933311, guid: e03933848f81e4a4dba389dd8e1fe29c,
-        type: 3}
     - target: {fileID: 5160211670164462702, guid: 1b3edb201335a06498cb1fa01457caf3,
         type: 3}
       propertyPath: m_Name
@@ -832,12 +816,12 @@ PrefabInstance:
     - target: {fileID: 7540414951684297154, guid: 1bd43be116bae294ab8cf5d0ab88c55d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.65
+      value: -1.88
       objectReference: {fileID: 0}
     - target: {fileID: 7540414951684297154, guid: 1bd43be116bae294ab8cf5d0ab88c55d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.29
+      value: 0.27
       objectReference: {fileID: 0}
     - target: {fileID: 7540414951684297154, guid: 1bd43be116bae294ab8cf5d0ab88c55d,
         type: 3}
@@ -2108,17 +2092,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8067996518513036767, guid: 76543e41c20edd14fb44e9e56fc2393a,
-        type: 3}
-      propertyPath: pools.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8067996518513036767, guid: 76543e41c20edd14fb44e9e56fc2393a,
-        type: 3}
-      propertyPath: pools.Array.data[6]
-      value: 
-      objectReference: {fileID: 11400000, guid: 8fa4a3ee01315d74a846817d937088cd,
-        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
