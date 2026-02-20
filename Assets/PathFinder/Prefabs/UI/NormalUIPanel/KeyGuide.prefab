@@ -144,7 +144,7 @@ MonoBehaviour:
   m_text: "\uC774\uB3D9 : W,A,S,D\n\uAE30\uBCF8\uACF5\uACA9 : MouseLeft\n\uC2A4\uD0AC
     : Q,E,R,LeftShift\n\uB300\uC26C : Space , \uD3EC\uC158 : C\n\uC778\uBCA4\uD1A0\uB9AC:
     I , \uC2A4\uD0AC\uCC3D : K , \uC0C1\uD0DC\uCC3D : U\n\uC0C1\uD638\uC791\uC6A9
-    : F "
+    : F \n\uAF49\uCC44\uC6B4 \uC804\uCCB4\uD654\uBA74 : Alt + Enter"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a7af3247c858bdd42b68e23da0687fcd, type: 2}
   m_sharedMaterial: {fileID: -2496775274848615716, guid: a7af3247c858bdd42b68e23da0687fcd,
