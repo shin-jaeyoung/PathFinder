@@ -21,5 +21,5 @@ MonoBehaviour:
     price: 333
   statDatas:
   - type: 3
-    statValue: 20
+    statValue: 5000
   type: 0
