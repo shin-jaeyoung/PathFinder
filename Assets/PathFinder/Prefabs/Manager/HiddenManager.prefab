@@ -60,5 +60,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0b369f82b72bf0f44965f33ba21fdd47, type: 2}
   - {fileID: 11400000, guid: 536814726f792ef41a02b8e0094092af, type: 2}
   - {fileID: 11400000, guid: e3f3a134f8c73fd4da9f17df265f6de7, type: 2}
+  - {fileID: 11400000, guid: 767b1af4cd188df4e8d0a9130ecf894c, type: 2}
+  - {fileID: 11400000, guid: 64e8e650aabb04844ba480e81496d876, type: 2}
   - {fileID: 11400000, guid: 5d6ca3b759f219f4d96420b707cc8a3b, type: 2}
   hiddens: []
