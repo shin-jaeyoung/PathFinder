@@ -25,9 +25,10 @@ MonoBehaviour:
     damageMultiplier: 0
     duration: 0.3
     spriteRotation: 0
+    havetoYFlip: 0
   spawnCount: 1
   firstSpawnDelay: 0.7
   spawnDelay: 0.3
   isExplosion: 1
   explosionID: 258
-  damageMultiplier: 1
+  damageMultiplier: 2

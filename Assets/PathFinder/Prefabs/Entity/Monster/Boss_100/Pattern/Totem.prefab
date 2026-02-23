@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3
   curHp: 0
-  maxHp: 10
+  maxHp: 150
   isDead: 0
 --- !u!212 &3248464751825471344
 SpriteRenderer:
