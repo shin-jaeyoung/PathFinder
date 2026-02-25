@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7730054079929364519}
   - component: {fileID: 6800405209891046257}
   - component: {fileID: 3967327341570044023}
-  - component: {fileID: 9155562472262914730}
   - component: {fileID: 7932566736840354966}
   m_Layer: 5
   m_Name: Icon
@@ -77,29 +76,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!223 &9155562472262914730
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4636447296666470292}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
 --- !u!225 &7932566736840354966
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -164,6 +140,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 3967327341570044023}
+  dragParent: {fileID: 7130001884789788965, guid: 248af0fd174dede428dc941f0c7c4b34,
+    type: 3}
   isEquipslot: 0
 --- !u!222 &7036760924701524713
 CanvasRenderer:
