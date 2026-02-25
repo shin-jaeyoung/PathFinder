@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 6814276843843140124}
   - component: {fileID: 5127628096126219}
   - component: {fileID: 4197584577258175953}
+  - component: {fileID: 9139398454233183001}
   m_Layer: 5
   m_Name: Viewport
   m_TagString: Untagged
@@ -234,12 +235,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1572369791330753893}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!114 &9139398454233183001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572369791330753893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 0, y: 0}
 --- !u!1 &1599818612441514089
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,6 +1036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 1730113292787233435}
+  dragParent: {fileID: 0}
   isEquipslot: 1
 --- !u!222 &3019100754133465502
 CanvasRenderer:
@@ -2749,6 +2765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 417588787780466220}
+  dragParent: {fileID: 0}
   isEquipslot: 1
 --- !u!222 &7000652731160316538
 CanvasRenderer:
@@ -2840,6 +2857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 4378562490429050771}
+  dragParent: {fileID: 0}
   isEquipslot: 1
 --- !u!222 &2616436031357930230
 CanvasRenderer:
@@ -2891,6 +2909,7 @@ GameObject:
   - component: {fileID: 3230344920420247150}
   - component: {fileID: 4667933302432472589}
   - component: {fileID: 5176108156053005762}
+  - component: {fileID: 6135487288873258637}
   m_Layer: 5
   m_Name: Viewport
   m_TagString: Untagged
@@ -2939,7 +2958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2963,12 +2982,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6846571764516175500}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!114 &6135487288873258637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6846571764516175500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 0, y: 0}
 --- !u!1 &7163199297730554063
 GameObject:
   m_ObjectHideFlags: 0
@@ -3186,6 +3219,7 @@ GameObject:
   - component: {fileID: 4332508051351399359}
   - component: {fileID: 6699912388509210473}
   - component: {fileID: 8419461069432254011}
+  - component: {fileID: 8525941785592021617}
   m_Layer: 5
   m_Name: Viewport
   m_TagString: Untagged
@@ -3234,7 +3268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3258,12 +3292,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7499393762900185782}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!114 &8525941785592021617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7499393762900185782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 0, y: 0}
 --- !u!1 &7933848503988121214
 GameObject:
   m_ObjectHideFlags: 0
@@ -3879,7 +3927,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1980058521037394664}
   m_HandleRect: {fileID: 4357036559839677119}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4094,6 +4142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 884716878397188821}
+  dragParent: {fileID: 0}
   isEquipslot: 1
 --- !u!222 &8121433292518645947
 CanvasRenderer:
@@ -4355,6 +4404,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassiveSkillSlot (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 6498830299919259349, guid: 96a90ebb265224148aa58f2c2d2adfaf,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4479,6 +4533,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveSkillSlot (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8748992747629912042, guid: a7a015909437b354cad254a1348e72e5,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4603,6 +4662,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassiveSkillSlot (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 6498830299919259349, guid: 96a90ebb265224148aa58f2c2d2adfaf,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4727,6 +4791,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassiveSkillSlot (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 6498830299919259349, guid: 96a90ebb265224148aa58f2c2d2adfaf,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4851,6 +4920,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassiveSkillSlot (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6498830299919259349, guid: 96a90ebb265224148aa58f2c2d2adfaf,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4975,6 +5049,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassiveSkillSlot (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 6498830299919259349, guid: 96a90ebb265224148aa58f2c2d2adfaf,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5099,6 +5178,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassiveSkillSlot (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6498830299919259349, guid: 96a90ebb265224148aa58f2c2d2adfaf,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5223,6 +5307,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassiveSkillSlot (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6498830299919259349, guid: 96a90ebb265224148aa58f2c2d2adfaf,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5347,6 +5436,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassiveSkillSlot (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 6498830299919259349, guid: 96a90ebb265224148aa58f2c2d2adfaf,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5471,6 +5565,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveSkillSlot (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 8748992747629912042, guid: a7a015909437b354cad254a1348e72e5,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5595,6 +5694,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassiveSkillSlot (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 6498830299919259349, guid: 96a90ebb265224148aa58f2c2d2adfaf,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5719,6 +5823,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassiveSkillSlot (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 6498830299919259349, guid: 96a90ebb265224148aa58f2c2d2adfaf,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5843,6 +5952,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveSkillSlot (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 8748992747629912042, guid: a7a015909437b354cad254a1348e72e5,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5967,6 +6081,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveSkillSlot (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 8748992747629912042, guid: a7a015909437b354cad254a1348e72e5,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6091,6 +6210,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveSkillSlot (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 8748992747629912042, guid: a7a015909437b354cad254a1348e72e5,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6215,6 +6339,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassiveSkillSlot
       objectReference: {fileID: 0}
+    - target: {fileID: 6498830299919259349, guid: 96a90ebb265224148aa58f2c2d2adfaf,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6339,6 +6468,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveSkillSlot (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 8748992747629912042, guid: a7a015909437b354cad254a1348e72e5,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6463,6 +6597,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassiveSkillSlot (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 6498830299919259349, guid: 96a90ebb265224148aa58f2c2d2adfaf,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6587,6 +6726,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassiveSkillSlot (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 6498830299919259349, guid: 96a90ebb265224148aa58f2c2d2adfaf,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6711,6 +6855,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassiveSkillSlot (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 6498830299919259349, guid: 96a90ebb265224148aa58f2c2d2adfaf,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6835,6 +6984,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveSkillSlot (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 8748992747629912042, guid: a7a015909437b354cad254a1348e72e5,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6959,6 +7113,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveSkillSlot
       objectReference: {fileID: 0}
+    - target: {fileID: 8748992747629912042, guid: a7a015909437b354cad254a1348e72e5,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7083,6 +7242,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveSkillSlot (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 8748992747629912042, guid: a7a015909437b354cad254a1348e72e5,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7207,6 +7371,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveSkillSlot (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 8748992747629912042, guid: a7a015909437b354cad254a1348e72e5,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7331,6 +7500,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveSkillSlot (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 8748992747629912042, guid: a7a015909437b354cad254a1348e72e5,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7455,6 +7629,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveSkillSlot (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 8748992747629912042, guid: a7a015909437b354cad254a1348e72e5,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7579,6 +7758,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassiveSkillSlot (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 6498830299919259349, guid: 96a90ebb265224148aa58f2c2d2adfaf,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7703,6 +7887,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveSkillSlot (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 8748992747629912042, guid: a7a015909437b354cad254a1348e72e5,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7827,6 +8016,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveSkillSlot (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8748992747629912042, guid: a7a015909437b354cad254a1348e72e5,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7951,6 +8145,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassiveSkillSlot (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6498830299919259349, guid: 96a90ebb265224148aa58f2c2d2adfaf,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8075,6 +8274,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassiveSkillSlot (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 6498830299919259349, guid: 96a90ebb265224148aa58f2c2d2adfaf,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8199,6 +8403,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassiveSkillSlot (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6498830299919259349, guid: 96a90ebb265224148aa58f2c2d2adfaf,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8323,6 +8532,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveSkillSlot (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 8748992747629912042, guid: a7a015909437b354cad254a1348e72e5,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8447,6 +8661,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveSkillSlot (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8748992747629912042, guid: a7a015909437b354cad254a1348e72e5,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8571,6 +8790,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveSkillSlot (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 8748992747629912042, guid: a7a015909437b354cad254a1348e72e5,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8695,6 +8919,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveSkillSlot (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 8748992747629912042, guid: a7a015909437b354cad254a1348e72e5,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8819,6 +9048,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassiveSkillSlot (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6498830299919259349, guid: 96a90ebb265224148aa58f2c2d2adfaf,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8943,6 +9177,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveSkillSlot (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 8748992747629912042, guid: a7a015909437b354cad254a1348e72e5,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9067,6 +9306,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveSkillSlot (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8748992747629912042, guid: a7a015909437b354cad254a1348e72e5,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9191,6 +9435,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PassiveSkillSlot (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 6498830299919259349, guid: 96a90ebb265224148aa58f2c2d2adfaf,
+        type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 7130001884789788965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

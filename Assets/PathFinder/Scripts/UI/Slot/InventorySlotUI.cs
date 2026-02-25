@@ -8,7 +8,8 @@ public class InventorySlotUI : SlotUI ,IPointerEnterHandler,IPointerExitHandler
     [Header("Inventory Specific")]
     [SerializeField] 
     private TextMeshProUGUI countText;
-
+    [SerializeField]
+    private Sprite nullSprite;
     private int slotIndex;
     private InventoryUI ui;
 
@@ -40,7 +41,7 @@ public class InventorySlotUI : SlotUI ,IPointerEnterHandler,IPointerExitHandler
 
         if (data.IsEmpty() || data.item.Data.Sprite == null)
         {
-            icon.sprite = null;
+            icon.sprite = nullSprite;
             icon.color = new Color(1, 1, 1, 0);
             group.alpha = 0;
             countText.gameObject.SetActive(false);

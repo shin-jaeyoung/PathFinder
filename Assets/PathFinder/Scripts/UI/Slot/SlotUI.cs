@@ -13,9 +13,11 @@ public abstract class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     protected Vector2 originPos;
 
     protected CanvasGroup group;
-    protected Canvas iconCanvas;
     protected Player player;
 
+    [SerializeField]
+    protected Transform dragParent;
+    protected Transform originalParent;
     //property
     public Image Icon => icon;
 
@@ -23,9 +25,9 @@ public abstract class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         iconRect = icon.GetComponent<RectTransform>();
         group = icon.GetComponentInChildren<CanvasGroup>();
-        iconCanvas = icon.GetComponent<Canvas>();
         originPos = iconRect.anchoredPosition;
         player = GameManager.instance.Player;
+        originalParent = icon.transform.parent;
 
     }
   
@@ -33,8 +35,10 @@ public abstract class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         if (icon.sprite == null) return;
         group.blocksRaycasts = false;
-        iconCanvas.overrideSorting = true;
-        iconCanvas.sortingOrder = 999;
+        if (dragParent != null)
+            icon.transform.SetParent(dragParent);
+
+        icon.transform.SetAsLastSibling();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -49,7 +53,7 @@ public abstract class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         
         
         group.blocksRaycasts = true;
-        iconCanvas.overrideSorting = false;
+        icon.transform.SetParent(originalParent);
         iconRect.anchoredPosition = Vector2.zero;
         if (icon.sprite != null)
         {
